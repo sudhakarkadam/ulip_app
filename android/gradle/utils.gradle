@@ -1,0 +1,56 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+    Pattern pattern;
+
+    if (tskReqStr.contains("assemble"))
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else if (tskReqStr.contains("install"))
+        pattern = Pattern.compile("install(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find())
+        return matcher.group(1)
+    else {
+        println "NO MATCH FOUND"
+        return "";
+    }
+}
+
+def getCurrentAppName(String currentFlavor) {
+    if (!currentFlavor?.trim()) {
+        File file = new File("../app-context.txt")
+        if (!file.exists() || !file.text?.trim()) {
+            throw new InvalidUserDataException("Please run yarn bootstrap -- --appName=<appName> before building app")
+        }
+        return file.text
+    } else {
+        Pattern pattern;
+        pattern = Pattern.compile("(\\w+)(Prod|Preprod|Beta)(\\b)")
+        Matcher matcher = pattern.matcher(currentFlavor)
+        if (matcher.find()) {
+            def curAppName = matcher.group(1)
+            File file = new File("../app-context.txt")
+            if (!file.exists()) {
+                throw new InvalidUserDataException("Please run yarn bootstrap -- --appName=<appName> before building app")
+            }
+            if (file.text.equals(curAppName)) {
+                return curAppName
+            }
+            throw new InvalidUserDataException("App you are trying to build and app name in app-context.txt doesn't match. Please run yarn bootstrap -- --appName=<appName> with the expected app name before you build")
+        }
+        throw new InvalidUserDataException("No or incorrect environment specified! Pease check!")
+    }
+}
+
+// Export methods by turning them into closures
+ext {
+    getCurrentFlavor = this.&getCurrentFlavor
+    getCurrentAppName = this.&getCurrentAppName
+}
