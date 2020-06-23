@@ -1,57 +1,59 @@
-import React, { Component } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
-// import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
+//@ts-ignore
+import RNAndroidLocationEnabler from "react-native-android-location-enabler";
 const LATITUDE = 28.364063;
 const LONGITUDE = 797.225969;
 const screen = Dimensions.get("window");
-
 const ASPECT_RATIO = screen.width / screen.height;
-const LATITUDE_DELTA = 0.0922;
+const LATITUDE_DELTA = 0.0902;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-class MapTest extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      latitude: LATITUDE,
-      longitude: LONGITUDE,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA
-    };
-    this.mapRef = null;
-  }
 
-  //   componentWillMount = async () => {
-  //     try {
-  //       RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({ interval: 10000, fastInterval: 5000 })
-  //         .then((data) => {
-  //           navigator.geolocation.getCurrentPosition(
-  //             (position) => {
-  //               const { latitude, longitude } = position.coords;
-  //               this.setState({
-  //                 latitude: latitude,
-  //                 longitude: longitude
-  //               });
-  //             },
-  //             (error) => {
-  //               console.log(error);
-  //             },
-  //             {
-  //               enableHighAccuracy: true,
-  //               timeout: 20000,
-  //               maximumAge: 10000
-  //             }
-  //           );
-  //         })
-  //         .catch((err) => {});
-  //     } catch (err) {
-  //       console.warn('requestAndroidLocationPermission', err);
-  //     }
-  //   };
+const MapTest = () => {
+  const [latLongs, setLatLongs] = useState({
+    latitude: LATITUDE,
+    longitude: LONGITUDE,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA
+  });
+  const mapRef = useRef({});
 
-  handleRegionChange = region => {
+  useEffect(() => {
+    try {
+      RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
+        interval: 10000,
+        fastInterval: 5000
+      })
+        .then(() => {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              const { latitude, longitude } = position.coords;
+              setLatLongs(oldState => ({
+                ...oldState,
+                latitude: latitude,
+                longitude: longitude
+              }));
+            },
+            error => {
+              console.log(error);
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 20000,
+              maximumAge: 10000
+            }
+          );
+        })
+        .catch(() => {});
+    } catch (err) {
+      //Do something
+    }
+  }, []);
+
+  const handleRegionChange = (region: any) => {
     const { latitude, longitude, latitudeDelta, longitudeDelta } = region;
-    this.setState({
+    setLatLongs({
       latitude: latitude,
       longitude: longitude,
       latitudeDelta: latitudeDelta,
@@ -59,68 +61,58 @@ class MapTest extends Component {
     });
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <MapView
-          ref={ref => {
-            this.mapRef = ref;
-          }}
-          provider={PROVIDER_GOOGLE}
-          onRegionChangeComplete={this.handleRegionChange}
-          style={styles.map}
-          region={{
-            latitude: this.state.latitude,
-            longitude: this.state.longitude,
-            latitudeDelta: this.state.latitudeDelta,
-            longitudeDelta: this.state.longitudeDelta
-          }}
-          mapType="standard"
-          zoomEnabled={true}
-          pitchEnabled={true}
-          showsUserLocation
-          followsUserLocation={true}
-          showsCompass={true}
-          showsBuildings={true}
-          showsTraffic={true}
-          showsMyLocationButton
-          showsIndoors={true}
-        >
-          <Marker
-            coordinate={{
-              latitude: this.state.latitude,
-              longitude: this.state.longitude,
-              latitudeDelta: this.state.latitudeDelta,
-              longitudeDelta: this.state.longitudeDelta
-            }}
-          />
-        </MapView>
+  const { latitude, longitude, latitudeDelta, longitudeDelta } = latLongs;
 
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            width: "100%",
-            flexGrow: 1,
-            margin: 10
+  return (
+    <View style={styles.container}>
+      <MapView
+        ref={ref => {
+          //@ts-ignore
+          mapRef.current = ref;
+        }}
+        provider={PROVIDER_GOOGLE}
+        onRegionChangeComplete={handleRegionChange}
+        style={styles.map}
+        region={{
+          latitude,
+          longitude,
+          latitudeDelta,
+          longitudeDelta
+        }}
+        mapType="standard"
+        zoomEnabled={false}
+        pitchEnabled={true}
+        showsUserLocation={true}
+        followsUserLocation={true}
+        showsCompass={true}
+        showsTraffic={true}
+        showsMyLocationButton={true}
+        showsIndoors={true}
+      >
+        <Marker
+          coordinate={{
+            latitude,
+            longitude,
+            latitudeDelta: latitudeDelta as any,
+            longitudeDelta: longitudeDelta as any
           }}
-        >
-          <View style={{ width: "50%" }}>
-            <Text>Latitude: {this.state.latitude}</Text>
-          </View>
+        />
+      </MapView>
 
-          <Text>Longitude: {this.state.longitude}</Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View>
+          <Text>Latitude: {latitude}</Text>
+        </View>
+        <View>
+          <Text>Longitude: {longitude}</Text>
         </View>
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    paddingBottom: 10
-  },
   container: { ...StyleSheet.absoluteFillObject, backgroundColor: "white" },
-  map: { width: "100%", height: "70%" }
+  map: { width: "100%", height: "30%" }
 });
 export default MapTest;

@@ -7,6 +7,7 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
+import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
@@ -25,7 +26,8 @@ public class ShipperMainApplication extends Application implements ReactApplicat
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-                new MapsPackage()
+                new MapsPackage(),
+                new RNAndroidLocationEnablerPackage()
             );
         }
 
