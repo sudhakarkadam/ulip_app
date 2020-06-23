@@ -6,6 +6,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
@@ -23,7 +24,8 @@ public class ShipperMainApplication extends Application implements ReactApplicat
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
-                new MainReactPackage()
+                new MainReactPackage(),
+                new MapsPackage()
             );
         }
 
@@ -32,7 +34,6 @@ public class ShipperMainApplication extends Application implements ReactApplicat
             return "./src/apps/Shipper/index";
         }
     };
-
     @Override
     public ReactNativeHost getReactNativeHost() {
         return mReactNativeHost;
