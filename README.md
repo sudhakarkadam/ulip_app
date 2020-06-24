@@ -1,4 +1,4 @@
-# react-native-monorepo
+# react-native-monorepo ![CI](https://github.com/samvet/ULIP-APP/workflows/CI/badge.svg)
 A boilerplate for setting up mono repo architecture for react-native apps
 
 ### Command to add a new app
