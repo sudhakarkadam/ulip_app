@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 import MapComp from "../../components/MapComp";
-import Login from "./components/Login";
+import Login from "../../components/LoginComponent";
 
 import { ThemeProvider } from "styled-components/native";
 import theme from "../../theme";
