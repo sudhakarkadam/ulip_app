@@ -23,10 +23,12 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { ThemeProvider } from 'styled-components/native'
+import theme from './src/theme';
 
-const App: () => React$Node = () => {
+const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -68,7 +70,7 @@ const App: () => React$Node = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+    </ThemeProvider>
   );
 };
 
