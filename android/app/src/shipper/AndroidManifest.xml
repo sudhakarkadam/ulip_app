@@ -12,6 +12,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:label">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBtjKCqEzWbUt9yazSchzJ9G9TjZEp_igE"/>
         <activity
             android:name=".ShipperMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
