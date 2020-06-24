@@ -7,7 +7,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}'",
+    "ts": "tsc --jsx react --esModuleInterop --skipLibCheck --noEmit",
+    "check-prettier": "prettier --check 'src/**/*.{js,ts,tsx,jsx}' ",
     "create-app": "node ./scripts/create-new-app.js",
     "bootstrap": "node ./scripts/createLinks.js"
   },
