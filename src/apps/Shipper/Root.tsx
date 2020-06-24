@@ -1,7 +1,9 @@
-import React from "react";
-import { Component } from "react";
-import MapComp from "../components/MapComp";
+import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
+import { Provider } from "react-redux";
+import store from "./store";
+import MapComp from "../../components/MapComp";
+import Login from "./components/Login";
 
 interface Props {
   test: string;
@@ -9,28 +11,25 @@ interface Props {
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <MapComp />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <Login />
+        </View>
+        <View style={styles.mapContainer}>
+          <MapComp />
+        </View>
+      </Provider>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    margin: 5,
     backgroundColor: "#F5FCFF"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
+  mapContainer: {
+    width: "100%",
+    height: "30%"
   }
 });

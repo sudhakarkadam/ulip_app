@@ -101,10 +101,10 @@ const MapTest = () => {
 
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View>
-          <Text>Latitude: {latitude}</Text>
+          <Text>Lat: {latitude}</Text>
         </View>
         <View>
-          <Text>Longitude: {longitude}</Text>
+          <Text>Long: {longitude}</Text>
         </View>
       </View>
     </View>
@@ -113,6 +113,6 @@ const MapTest = () => {
 
 const styles = StyleSheet.create({
   container: { ...StyleSheet.absoluteFillObject, backgroundColor: "white" },
-  map: { width: "100%", height: "30%" }
+  map: { width: "100%", height: "100%" }
 });
 export default MapTest;
