@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
-import MapComp from "../../components/MapComp";
+// import MapComp from "../../components/MapComp";
 import Login from "../../components/LoginComponent";
 
 import { ThemeProvider } from "styled-components/native";
 import theme from "../../theme";
-import { Flex, Box } from "../../components/@styled/BaseElements";
+// import { Flex, Box } from "../../components/@styled/BaseElements";
 interface Props {
   test: string;
 }
