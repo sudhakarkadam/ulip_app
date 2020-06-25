@@ -15,12 +15,12 @@ export default class App extends Component<Props> {
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <Flex>
-            <Login />
-            <Box flexDirection="row" height={"30%"} width={"100%"}>
+          {/* <Flex> */}
+          <Login />
+          {/* <Box flexDirection="row" height={"30%"} width={"100%"}>
               <MapComp />
-            </Box>
-          </Flex>
+            </Box> */}
+          {/* </Flex> */}
         </ThemeProvider>
       </Provider>
     );

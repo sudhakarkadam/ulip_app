@@ -1,25 +1,21 @@
 import React from "react";
-import { View, KeyboardType } from "react-native";
-import { PrimaryText, PrimaryTextInput } from "../components/BasicElements";
+import { View, TextInputProps } from "react-native";
+import {
+  PrimaryTextInput,
+  UpperCasePrimaryText
+} from "../components/BasicElements";
 
 interface OwnProps {
   label: string;
-  keyboardType?: KeyboardType;
-  maxlength?: number;
 }
 
-const LoginComponent = (props: OwnProps) => {
+const InputComponent = (props: OwnProps & TextInputProps) => {
   return (
-    <View style={{ padding: 25 }}>
-      <PrimaryText>{props.label}</PrimaryText>
-      <PrimaryTextInput
-        style={{ marginTop: 10 }}
-        keyboardType={props.keyboardType}
-        maxLength={props.maxlength}
-        {...props}
-      />
+    <View>
+      <UpperCasePrimaryText>{props.label}</UpperCasePrimaryText>
+      <PrimaryTextInput style={{ marginTop: 10 }} {...props} />
     </View>
   );
 };
 
-export default LoginComponent;
+export default InputComponent;
