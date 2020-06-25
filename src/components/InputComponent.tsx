@@ -6,14 +6,16 @@ import {
 } from "../components/BasicElements";
 
 interface OwnProps {
-  label: string;
+  label?: string;
 }
 
 const InputComponent = (props: OwnProps & TextInputProps) => {
   return (
     <View>
-      <UpperCasePrimaryText>{props.label}</UpperCasePrimaryText>
-      <PrimaryTextInput style={{ marginTop: 10 }} {...props} />
+      <UpperCasePrimaryText style={{ marginBottom: 10 }}>
+        {props.label}
+      </UpperCasePrimaryText>
+      <PrimaryTextInput {...props} />
     </View>
   );
 };
