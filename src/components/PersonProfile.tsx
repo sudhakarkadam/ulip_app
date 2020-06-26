@@ -8,7 +8,7 @@ interface OwnProps {
   createProfileCallback: (data: { name: string }) => void;
 }
 
-const CreateProfile = (props: OwnProps) => {
+const PersonProfile = (props: OwnProps) => {
   const [name, setName] = useState("");
   return (
     <FlexColumn p={6} backgroundColor="white" height={320}>
@@ -42,4 +42,4 @@ const CreateProfile = (props: OwnProps) => {
   );
 };
 
-export default CreateProfile;
+export default PersonProfile;

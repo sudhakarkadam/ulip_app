@@ -1,44 +1,42 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import colors from "../../theme/colors";
-import store from "./store";
-// import MapComp from "../../components/MapComp";
-// import Login from "../../components/LoginComponent";
-// import CardComp from "../../components/CardComp";
-// import CreateProfile from "../../components/CreateProfile";
-// import CompanyProfile from "../../components/CompanyProfile";
-import CreateTrip from "./components/CreateTrip";
-// import CreateTripCard from "./components/CreateTripCard";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
+import Login from "../../components/LoginComponent";
+import AuthenticatedFlow from "./components/AuthenticatedFlow";
+
+import store from "./store";
 import theme from "../../theme";
-import { Box } from "../../components/@styled/BaseElements";
+
 interface Props {
   test: string;
 }
+
+const Stack = createStackNavigator();
+
 export default class App extends Component<Props> {
   render() {
+    const isLoggedIn = true;
     return (
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Box
-            height="100%"
-            width="100%"
-            backgroundColor={`${colors.grays[2]}`}
-          >
-            {/* <Login /> */}
-            {/* <Box flexDirection="row" height={"30%"} width={"100%"}>
-                <MapComp />
-              </Box> */}
-            {/* <CompanyProfile
-              createCompanyCallback={() => console.log("profile created")}
-            /> */}
-            {/* <CardComp/> */}
-            <CreateTrip />
-            {/* <CreateTripCard /> */}
-          </Box>
-        </ThemeProvider>
-      </Provider>
+      <NavigationContainer>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <Stack.Navigator>
+              {!isLoggedIn && (
+                <Stack.Screen
+                  name="Login"
+                  component={Login}
+                  options={{ headerShown: false }}
+                />
+              )}
+              {isLoggedIn && (
+                <Stack.Screen name="Home" component={AuthenticatedFlow} />
+              )}
+            </Stack.Navigator>
+          </ThemeProvider>
+        </Provider>
+      </NavigationContainer>
     );
   }
 }
