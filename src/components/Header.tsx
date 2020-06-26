@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  Text,
-  Flex,
-  Box,
-  Image,
-  Icon
-} from "../../components/@styled/BaseElements";
+import { Text, Flex, Box, Image, Icon } from "./@styled/BaseElements";
 import Received from "../../images/open-menu.png";
 import notification from "../../images/notification.png";
 import search from "../../images/loupe.png";
-import colors from "../../theme/colors";
+import colors from "../theme/colors";
 
 const Header = props => {
   return (

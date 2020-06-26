@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { TripStamp } from "../../components/TripStamp";
+import { TripStamp } from "../../../components/TripStamp";
 
 export default class App extends Component {
   render() {
