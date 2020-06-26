@@ -4,8 +4,16 @@ const colors: any = {
   oranges: ["#ff8b00", "#ffab00", "#fff0b3", "#fffae6"],
   blues: ["#262a34", "#172b4d", "#42526d", "#6b778b", "#7a8699"],
   greens: ["#064", "#00875a", "#36b37e", "#abf5d1", "#e2ffee"],
-  grays: ["#262626", "#c1c7d0", "#ebecf0", "#eff0f2", "#f4f5f7"],
-  black: "#000"
+  grays: [
+    "#262626",
+    "#c1c7d0",
+    "#ebecf0",
+    "#eff0f2",
+    "#f4f5f7",
+    "#6B778C",
+    "#F4F5F7"
+  ],
+  black: ["#000", "#7A869A", "#172B4D"]
 };
 
 colors.default = colors.grays[0];

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components/native";
 import {
   space,
@@ -93,7 +94,7 @@ export const StyledTextInput = styled(Input)`
   color: ${colors.primary};
   border: solid 1px ${colors.grays[1]};
   font-size: 20px;
-  width: 300;
+  width: 100%;
   padding: 10px 20px;
   border-radius: 3px;
 `;
@@ -136,8 +137,26 @@ export const FlexCenter = styled(FlexVerticallyCenter)`
 export const FlexColumn = styled(Flex)`
   flex-direction: column;
 `;
+
+export const FlexRow = styled(Flex)`
+  flex-direction: row;
+`;
 export type TInputProps = SpaceProps &
   Omit<ColorProps, "color"> &
   Omit<LayoutProps, "height" | "width" | "size"> &
   TypographyProps &
   BorderProps;
+
+export const TextWrapper = (props: {
+  children: React.ReactNode;
+  label: string;
+}) => {
+  return (
+    <Flex mt={5}>
+      <Text mb={3} color={`${colors.grays[5]}`} fontSize={1}>
+        {props.label}
+      </Text>
+      {props.children}
+    </Flex>
+  );
+};

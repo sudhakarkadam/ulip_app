@@ -10,9 +10,11 @@ interface OwnProps {
 const InputComponent = (props: OwnProps & TextInputProps) => {
   return (
     <View>
-      <PrimaryText mb={4} style={{ textTransform: "uppercase" }}>
-        {props.label}
-      </PrimaryText>
+      {props.label && (
+        <PrimaryText mb={4} style={{ textTransform: "uppercase" }}>
+          {props.label}
+        </PrimaryText>
+      )}
       <StyledTextInput {...props} />
     </View>
   );
