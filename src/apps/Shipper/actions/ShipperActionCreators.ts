@@ -8,9 +8,21 @@ import {
 } from "../../../utils/actionCreator";
 
 const ShipperActionCreators = {
-  login: createAsyncAction(
-    [actions.LOGIN_REQUEST, actions.LOGIN_SUCCESS, actions.LOGIN_ERROR],
-    api.login
+  sendOtp: createAsyncAction(
+    [
+      actions.SEND_OTP_REQUEST,
+      actions.SEND_OTP_SUCCESS,
+      actions.SEND_OTP_ERROR
+    ],
+    api.sendOtp
+  ),
+  verifyOtp: createAsyncAction(
+    [
+      actions.VERIFY_OTP_REQUEST,
+      actions.VERIFY_OTP_SUCCESS,
+      actions.VERIFY_OTP_ERROR
+    ],
+    api.verifyOtp
   ),
   logout: () => createAction(actions.LOGOUT, {}, {})
 };

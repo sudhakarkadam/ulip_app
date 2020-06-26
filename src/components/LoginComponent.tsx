@@ -8,10 +8,14 @@ import StyledButton from "../components/@styled/StyledButton";
 import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 
-const LoginComponent = () => {
+interface OwnProps {
+  getUserInfo: (otp: string) => Promise<any>;
+}
+
+const LoginComponent = (props: OwnProps) => {
   const [phoneNumber, editPhoneNumber] = useState("");
   const [phoneConfirmed, setPhoneConfirmed] = useState(false);
-  const [otpConfirmed, setOtpConfimation] = useState(false);
+  const [otpConfirmed] = useState(false);
 
   return (
     <Flex mx={6} flex={1}>
@@ -72,15 +76,7 @@ const LoginComponent = () => {
                   size={42}
                   space={6}
                   codeLength={6}
-                  onFulfill={code => {
-                    if (code === "121122") {
-                      setOtpConfimation(true);
-                      return Promise.resolve(true);
-                    } else {
-                      setOtpConfimation(false);
-                      return Promise.reject(false);
-                    }
-                  }}
+                  onFulfill={code => props.getUserInfo(code)}
                   codeInputStyle={{
                     borderWidth: 0,
                     fontSize: 18,

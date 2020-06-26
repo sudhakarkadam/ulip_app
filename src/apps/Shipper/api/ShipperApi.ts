@@ -6,21 +6,22 @@ const BuildConfig = NativeModules.RNBuildConfig || {};
 const endpoint = BuildConfig.APP_BASE_URL;
 
 const urls = {
-  login: `${endpoint}/v2/login`,
+  sendOtp: `${endpoint}/v2/sendOtp`,
+  verifyOtp: `${endpoint}/v2/verifyOtp`,
   logout: `${endpoint}/v1/logout`
 };
 
 export const getEndpoint = () => endpoint;
 
 export default {
-  login() {
-    return http.post<{}, {}>(
-      urls.login,
-      {},
-      {
-        headers: {}
-      }
-    );
+  sendOtp() {
+    return Promise.resolve({});
+  },
+  verifyOtp() {
+    return Promise.resolve({
+      user_id: 1,
+      phone_number: "8823112345"
+    });
   },
   logoutApi() {
     return http.put<{}, {}>(

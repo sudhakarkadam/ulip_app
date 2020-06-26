@@ -16,11 +16,11 @@ const containerTruckImg = require("../../../images/container-truck.png");
 const trailerTruckImg = require("../../../images/trailer-truck.png");
 const openDarkTruckImg = require("../../../images/open-dark.png");
 
-const { login } = ShipperActionCreators;
+const { verifyOtp } = ShipperActionCreators;
 const mapStateToProps = (state: ShipperAppState) => ({
-  userInfo: state.user.userInfo
+  userInfo: state.user.data
 });
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { verifyOtp };
 const connector = connect(
   mapStateToProps,
   mapDispatchToProps
@@ -150,7 +150,7 @@ const CreateTrip = (props: Props) => {
   const [lspProvider, setLspProvider] = useState("xyz");
   const [weightUnit, setWeightUnit] = useState("tonne");
   useEffect(() => {
-    props.login({});
+    props.verifyOtp({});
   }, []);
 
   const handleNextClick = () => {
