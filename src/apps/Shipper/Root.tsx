@@ -7,8 +7,8 @@ import store from "./store";
 // import CardComp from "../../components/CardComp";
 // import CreateProfile from "../../components/CreateProfile";
 // import CompanyProfile from "../../components/CompanyProfile";
-// import CreateTrip from './components/CreateTrip';
-import CreateTripCard from "./components/CreateTripCard";
+import CreateTrip from "./components/CreateTrip";
+// import CreateTripCard from "./components/CreateTripCard";
 
 import { ThemeProvider } from "styled-components/native";
 import theme from "../../theme";
@@ -34,7 +34,8 @@ export default class App extends Component<Props> {
               createCompanyCallback={() => console.log("profile created")}
             /> */}
             {/* <CardComp/> */}
-            <CreateTripCard />
+            <CreateTrip />
+            {/* <CreateTripCard /> */}
           </Box>
         </ThemeProvider>
       </Provider>
