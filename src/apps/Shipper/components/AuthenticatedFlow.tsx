@@ -19,6 +19,7 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 type Props = StackScreenProps<RootStackParamList, "CompanyProfile">;
+type CreateTripProps = StackScreenProps<RootStackParamList, "CreateTrip">;
 
 const AuthenticatedFlow = () => {
   return (
@@ -35,14 +36,20 @@ const AuthenticatedFlow = () => {
         component={(props: Props) => (
           <CompanyProfile
             createCompanyCallback={() =>
-              props.navigation.navigate("CreateTrip")
+              props.navigation.navigate("CreateProfile")
             }
           />
         )}
       />
       <Stack.Screen
         name="CreateTrip"
-        component={CreateTrip}
+        component={(props: CreateTripProps) => (
+          <CreateTrip
+            createTripCallback={() =>
+              props.navigation.navigate("CreateProfile")
+            }
+          />
+        )}
         options={{ title: "Create Trip" }}
       />
     </Stack.Navigator>

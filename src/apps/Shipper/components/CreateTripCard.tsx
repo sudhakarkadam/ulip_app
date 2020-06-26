@@ -9,7 +9,12 @@ import {
 import StyledButton from "../../../components/@styled/StyledButton";
 import RoadImg from "../../../images/road.svg";
 
-const CreateTripCard = () => {
+interface OwnProps {
+  createTripCallback: () => void;
+}
+
+const CreateTripCard = (props: OwnProps) => {
+  const { createTripCallback } = props;
   return (
     <FlexRow p={7} backgroundColor="white" height={180}>
       <FlexColumn flex={1.8}>
@@ -21,10 +26,10 @@ const CreateTripCard = () => {
         </Text>
         <Flex mt={3}>
           <StyledButton
-            width="120"
+            fontSize={14}
             height="40"
             title="start"
-            onPress={() => console.log("route to create trip")}
+            onPress={createTripCallback}
           />
         </Flex>
       </FlexColumn>

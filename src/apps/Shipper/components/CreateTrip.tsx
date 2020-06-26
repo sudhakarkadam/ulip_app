@@ -14,6 +14,7 @@ import TripProgress from "./TripProgress";
 const openTruckImg = require("../../../images/open-truck.png");
 const containerTruckImg = require("../../../images/container-truck.png");
 const trailerTruckImg = require("../../../images/trailer-truck.png");
+const openDarkTruckImg = require("../../../images/open-dark.png");
 
 const { login } = ShipperActionCreators;
 const mapStateToProps = (state: ShipperAppState) => ({
@@ -25,15 +26,20 @@ const connector = connect(
   mapDispatchToProps
 );
 
-type Props = ConnectedProps<typeof connector>;
+interface OwnProps {
+  createTripCallback: () => void;
+}
+
+type Props = ConnectedProps<typeof connector> & OwnProps;
 
 const TruckTypeComp = (props: {
   weight: string;
   lspProvider: string;
   weightUnit: string;
-  onChange: (val: string, type?: "lsp" | "unit") => void;
+  truckType: string;
+  onChange: (val: string, type?: "lsp" | "unit" | "truckType") => void;
 }) => {
-  const { weight, onChange, lspProvider, weightUnit } = props;
+  const { weight, onChange, lspProvider, weightUnit, truckType } = props;
   return (
     <Flex m={5}>
       <SelectComponent
@@ -48,13 +54,28 @@ const TruckTypeComp = (props: {
         </Text>
       </Flex>
       <FlexRow height="90" backgroundColor="white" mt={3}>
-        <Flex backgroundColor={`${colors.black[1]}`} flex={1} p={5} pl={10}>
+        <Flex
+          onTouchEnd={() => onChange("open", "truckType")}
+          backgroundColor={`${truckType === "open" ? colors.black[1] : null}`}
+          flex={1}
+          p={5}
+          pl={10}
+        >
           <Flex mb={3} ml={2}>
-            <Text color="white">Open</Text>
+            <Text color={truckType === "open" ? "white" : `${colors.black[1]}`}>
+              Open
+            </Text>
           </Flex>
-          <Image style={{ width: 49, height: 27 }} source={openTruckImg} />
+          <Image
+            style={{ width: 49, height: 27 }}
+            source={truckType === "open" ? openTruckImg : openDarkTruckImg}
+          />
         </Flex>
         <Flex
+          onTouchEnd={() => onChange("container", "truckType")}
+          backgroundColor={`${
+            truckType === "container" ? colors.black[1] : null
+          }`}
           flex={1}
           p={5}
           borderLeftWidth="1px"
@@ -62,13 +83,28 @@ const TruckTypeComp = (props: {
           borderColor={`${colors.grays[2]}`}
         >
           <Flex mb={3} ml={1}>
-            <Text color={`${colors.black[1]}`}>Container</Text>
+            <Text
+              color={truckType === "container" ? "white" : `${colors.black[1]}`}
+            >
+              Container
+            </Text>
           </Flex>
           <Image style={{ width: 66, height: 27 }} source={containerTruckImg} />
         </Flex>
-        <Flex flex={1} p={5}>
+        <Flex
+          onTouchEnd={() => onChange("trailer", "truckType")}
+          backgroundColor={`${
+            truckType === "trailer" ? colors.black[1] : null
+          }`}
+          flex={1}
+          p={5}
+        >
           <Flex mb={3} ml={3}>
-            <Text color={`${colors.black[1]}`}>Trailer</Text>
+            <Text
+              color={truckType === "trailer" ? "white" : `${colors.black[1]}`}
+            >
+              Trailer
+            </Text>
           </Flex>
           <Image style={{ width: 70, height: 28 }} source={trailerTruckImg} />
         </Flex>
@@ -109,15 +145,26 @@ const CreateTrip = (props: Props) => {
   const [toValue, setToValue] = useState("del");
   const [pickupDate, setPickUpDate] = useState(todayDate);
   const [goodsType, setGoodsType] = useState("rice");
+  const [truckType, setTruckType] = useState("container");
   const [weight, setWeight] = useState("");
   const [lspProvider, setLspProvider] = useState("xyz");
   const [weightUnit, setWeightUnit] = useState("tonne");
   useEffect(() => {
     props.login({});
   }, []);
+
+  const handleNextClick = () => {
+    if (tripStep < 3) {
+      setTripStep(step => step + 1);
+      return;
+    }
+
+    props.createTripCallback();
+    return;
+  };
   return (
     <Flex position="relative" height="100%">
-      <TripProgress />
+      <TripProgress currentStep={tripStep} />
       {tripStep === 0 ? (
         <Flex m={5}>
           <SelectComponent
@@ -166,6 +213,7 @@ const CreateTrip = (props: Props) => {
           lspProvider={lspProvider}
           weightUnit={weightUnit}
           weight={weight}
+          truckType={truckType}
           onChange={(val, type) => {
             if (!type) {
               setWeight(val);
@@ -175,6 +223,10 @@ const CreateTrip = (props: Props) => {
               setLspProvider(val);
               return;
             }
+            if (type === "truckType") {
+              setTruckType(val);
+              return;
+            }
             return setWeightUnit(val);
           }}
         />
@@ -182,8 +234,8 @@ const CreateTrip = (props: Props) => {
       <Flex width="92%" position="absolute" bottom={5} m={5}>
         <StyledButton
           height="40"
-          title="next"
-          onPress={() => setTripStep(step => step + 1)}
+          title={tripStep === 3 ? "preview" : "next"}
+          onPress={handleNextClick}
         />
       </Flex>
     </Flex>
