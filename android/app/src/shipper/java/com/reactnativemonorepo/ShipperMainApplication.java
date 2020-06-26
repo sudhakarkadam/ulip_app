@@ -23,12 +23,6 @@ public class ShipperMainApplication extends Application implements ReactApplicat
         protected List<ReactPackage> getPackages() {
             List<ReactPackage> packages = new PackageList(this).getPackages();
             return packages;
-            // return Arrays.<ReactPackage>asList(
-            //     new MainReactPackage(),
-            //     new MapsPackage(),
-            //     new RNAndroidLocationEnablerPackage(),
-            //     new SvgPackage() 
-            // );
         }
 
         @Override

@@ -11,6 +11,9 @@ import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnabler
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
+
+import com.facebook.react.PackageList;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,12 +27,8 @@ public class DriverMainApplication extends Application implements ReactApplicati
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new MapsPackage(),
-                new RNAndroidLocationEnablerPackage(),
-                new SvgPackage() 
-            );
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+            return packages;
         }
 
         @Override

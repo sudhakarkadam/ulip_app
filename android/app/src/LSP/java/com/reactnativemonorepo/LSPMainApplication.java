@@ -9,6 +9,8 @@ import com.facebook.react.ReactPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.facebook.react.PackageList;
+
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 
@@ -25,12 +27,8 @@ public class LSPMainApplication extends Application implements ReactApplication 
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new MapsPackage(),
-                new RNAndroidLocationEnablerPackage(),
-                new SvgPackage() 
-            );
+            List<ReactPackage> packages = new PackageList(this).getPackages();
+            return packages;
         }
 
         @Override
