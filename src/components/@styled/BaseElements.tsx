@@ -129,6 +129,10 @@ export const FlexSpaceAround = styled(Flex)`
   justify-content: space-around;
   align-items: center;
 `;
+export const FlexSpaceBetween = styled(Flex)`
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const FlexCenter = styled(FlexVerticallyCenter)`
   justify-content: center;
