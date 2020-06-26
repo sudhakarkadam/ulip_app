@@ -5,3 +5,7 @@ import colors from "../../theme/colors";
 export const PrimaryText = styled(Text)`
   color: ${colors.primary};
 `;
+
+export const LightText = styled(Text)`
+  color: ${colors.grays[1]};
+`;

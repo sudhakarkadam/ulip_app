@@ -5,6 +5,7 @@ import CreateTrip from "./CreateTrip";
 import ShipperCreateProfile from "./ShipperCreateProfile";
 import { StackScreenProps } from "@react-navigation/stack";
 import ShipperPersonProfile from "./ShipperPersonProfile";
+import ShipperHome from "./ShipperHome";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
@@ -12,6 +13,7 @@ export type RootStackParamList = {
   PersonProfile: undefined;
   CompanyProfile: undefined;
   CreateTrip: undefined;
+  ShipperHome: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -20,7 +22,8 @@ type Props = StackScreenProps<RootStackParamList, "CompanyProfile">;
 
 const AuthenticatedFlow = () => {
   return (
-    <Stack.Navigator initialRouteName="CreateProfile">
+    <Stack.Navigator initialRouteName="ShipperHome">
+      <Stack.Screen name="ShipperHome" component={ShipperHome} />
       <Stack.Screen
         name="CreateProfile"
         component={ShipperCreateProfile}
