@@ -1,13 +1,13 @@
 import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
-import CardComp from "./CardComp";
-import { Flex } from "./@styled/BaseElements";
+import CardComp from "../../../components/CardComp";
+import { Flex } from "../../../components/@styled/BaseElements";
 
-const personIcon = require("../icons/person-icon.png");
+const personIcon = require("../../../icons/person-icon.png");
 
 type ScreenProps = StackScreenProps<{ [key: string]: undefined }, "Profile">;
 
-const CreateProfile = (props: ScreenProps) => {
+const ShipperCreateProfile = (props: ScreenProps) => {
   return (
     <Flex>
       <CardComp
@@ -26,4 +26,4 @@ const CreateProfile = (props: ScreenProps) => {
   );
 };
 
-export default CreateProfile;
+export default ShipperCreateProfile;

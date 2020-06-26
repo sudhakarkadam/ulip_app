@@ -31,10 +31,7 @@ export default class App extends Component<Props> {
                 />
               )}
               {isLoggedIn && (
-                <Stack.Screen
-                  name="AfterAuthFlow"
-                  component={AuthenticatedFlow}
-                />
+                <Stack.Screen name="Home" component={AuthenticatedFlow} />
               )}
             </Stack.Navigator>
           </ThemeProvider>
