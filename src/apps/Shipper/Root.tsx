@@ -6,7 +6,9 @@ import store from "./store";
 // import Login from "../../components/LoginComponent";
 // import CardComp from "../../components/CardComp";
 // import CreateProfile from "../../components/CreateProfile";
-import CompanyProfile from "../../components/CompanyProfile";
+// import CompanyProfile from "../../components/CompanyProfile";
+// import CreateTrip from './components/CreateTrip';
+import CreateTripCard from "./components/CreateTripCard";
 
 import { ThemeProvider } from "styled-components/native";
 import theme from "../../theme";
@@ -28,10 +30,11 @@ export default class App extends Component<Props> {
             {/* <Box flexDirection="row" height={"30%"} width={"100%"}>
                 <MapComp />
               </Box> */}
-            <CompanyProfile
+            {/* <CompanyProfile
               createCompanyCallback={() => console.log("profile created")}
-            />
+            /> */}
             {/* <CardComp/> */}
+            <CreateTripCard />
           </Box>
         </ThemeProvider>
       </Provider>
