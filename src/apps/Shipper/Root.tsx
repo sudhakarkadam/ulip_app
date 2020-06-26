@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
+<<<<<<< HEAD
 import colors from "../../theme/colors";
+=======
+import { NavigationContainer } from "@react-navigation/native";
+>>>>>>> Makes react navigation work
 import store from "./store";
 // import MapComp from "../../components/MapComp";
 // import Login from "../../components/LoginComponent";
@@ -19,6 +23,7 @@ interface Props {
 export default class App extends Component<Props> {
   render() {
     return (
+<<<<<<< HEAD
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Box
@@ -39,6 +44,20 @@ export default class App extends Component<Props> {
           </Box>
         </ThemeProvider>
       </Provider>
+=======
+      <NavigationContainer>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            {/* <Flex> */}
+            <Login />
+            {/* <Box flexDirection="row" height={"30%"} width={"100%"}>
+              <MapComp />
+            </Box> */}
+            {/* </Flex> */}
+          </ThemeProvider>
+        </Provider>
+      </NavigationContainer>
+>>>>>>> Makes react navigation work
     );
   }
 }
