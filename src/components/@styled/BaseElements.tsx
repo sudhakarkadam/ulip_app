@@ -22,6 +22,7 @@ import {
   BackgroundProps,
   compose
 } from "styled-system";
+import colors from "../../theme/colors";
 
 export type BoxProps = SpaceProps &
   ColorProps &
@@ -33,34 +34,26 @@ export type BoxProps = SpaceProps &
   ShadowProps &
   BackgroundProps &
   TypographyProps;
-
-export const Box = styled.View<BoxProps>(
-  compose(
-    space,
-    color,
-    layout,
-    flexbox,
-    overflow,
-    border,
-    position,
-    shadow,
-    background,
-    typography
-  )
+const blockElements = compose(
+  space,
+  color,
+  layout,
+  flexbox,
+  overflow,
+  border,
+  position,
+  shadow,
+  background,
+  typography
 );
-export const ScrollView = styled.ScrollView<BoxProps>(
-  compose(
-    space,
-    color,
-    layout,
-    flexbox,
-    overflow,
-    border,
-    position,
-    shadow,
-    background,
-    typography
-  )
+export const Box = styled.View<BoxProps>(blockElements);
+
+export const ScrollView = styled.ScrollView<BoxProps>(blockElements);
+export const TouchableOpacity = styled.TouchableOpacity<BoxProps>(
+  blockElements
+);
+export const TouchableNativeFeedback = styled.TouchableNativeFeedback<BoxProps>(
+  blockElements
 );
 
 export const Flexbox = styled(Box)<FlexboxProps>(flexbox);
@@ -81,22 +74,6 @@ export const Text = styled.Text<TextProps>(
   )
 );
 
-type IconProps = SpaceProps &
-  ColorProps &
-  LayoutProps &
-  TypographyProps &
-  PositionProps;
-
-export const Icon = styled.Text<IconProps>(
-  compose(
-    space,
-    color,
-    layout,
-    typography,
-    position
-  )
-);
-
 type InputProps = SpaceProps &
   Omit<ColorProps, "color"> &
   TypographyProps &
@@ -112,35 +89,14 @@ export const Input = styled.TextInput<InputProps>(
     layout
   )
 );
-// export const Select = styled('select')<InputProps & ColorProps>(
-//   compose(space, typography, border, layout),
-// );
-
-type ButtonProps = SpaceProps &
-  TypographyProps &
-  BorderProps &
-  LayoutProps &
-  ColorProps;
-
-export const Button = styled.Button<ButtonProps>(
-  compose(
-    space,
-    typography,
-    border,
-    layout,
-    color
-  )
-);
-
-// type AnchorProps = SpaceProps &
-//   TypographyProps &
-//   BorderProps &
-//   LayoutProps &
-//   ColorProps;
-
-// export const Anchor = styled('a')<AnchorProps>(
-//   compose(space, typography, border, layout, color),
-// );
+export const StyledTextInput = styled(Input)`
+  color: ${colors.primary};
+  border: solid 1px ${colors.grays[1]};
+  font-size: 20px;
+  width: 300;
+  padding: 10px 20px;
+  border-radius: 3px;
+`;
 
 type ImageProps = SpaceProps & LayoutProps;
 
@@ -150,6 +106,11 @@ export const Image = styled.Image<ImageProps>(
     layout
   )
 );
+export const Icon = styled(Image)`
+  resize-mode: contain;
+  width: 18px;
+  height: 18px;
+`;
 
 export const Flex = styled(Flexbox)`
   display: flex;
@@ -180,7 +141,3 @@ export type TInputProps = SpaceProps &
   Omit<LayoutProps, "height" | "width" | "size"> &
   TypographyProps &
   BorderProps;
-
-// export const TextArea = styled('textarea')<TInputProps>(
-//   compose(space, color, layout, typography, border),
-// );

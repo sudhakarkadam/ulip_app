@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="259px" height="60px" viewBox="0 0 259 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>92062C05-9B11-42A9-85D3-D566BEA15FD4</title>
+    <g id="LSP-app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="opt_verified" transform="translate(-20.000000, -90.000000)">
+            <g id="Group-3" transform="translate(20.000000, 90.000000)">
+                <text id="Unified-Logistics-In" font-family="Roboto-Regular, Roboto" font-size="13" font-weight="normal" letter-spacing="-0.1625" fill="#42526E">
+                    <tspan x="0" y="50">UNIFIED LOGISTICS INTERFACE PLATFORM</tspan>
+                </text>
+                <path d="M1,0 L56,0 C72.5685425,-3.04359188e-15 86,13.4314575 86,30 L86,30 L86,30 L0,30 L0,1 C-6.76353751e-17,0.44771525 0.44771525,1.01453063e-16 1,0 Z" id="Rectangle" fill="#42526E"></path>
+                <text id="ULIP" font-family="Roboto-Black, Roboto" font-size="26" font-weight="700" letter-spacing="1" fill="#FFFFFF">
+                    <tspan x="7" y="25">ULIP</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

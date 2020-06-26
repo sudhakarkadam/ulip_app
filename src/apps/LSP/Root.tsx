@@ -1,6 +1,9 @@
 import React from "react";
 import { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
+import { Text } from "../../components/@styled/BaseElements";
+
+import Header from "../components/Header";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload. Cmd+D or shake for dev menu",
@@ -11,11 +14,14 @@ const instructions = Platform.select({
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome, I am LSP app!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <>
+        <Header title="HOME" />
+        <View style={styles.container}>
+          <Text style={styles.welcome}>Welcome, I am LSP app!</Text>
+          <Text style={styles.instructions}>To get started, edit App.js</Text>
+          <Text style={styles.instructions}>{instructions}</Text>
+        </View>
+      </>
     );
   }
 }

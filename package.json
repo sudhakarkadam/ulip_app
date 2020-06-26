@@ -21,6 +21,8 @@
     "react-native": "0.61.5",
     "react-native-android-location-enabler": "^1.2.1",
     "react-native-maps": "^0.27.1",
+    "react-native-svg": "^12.1.0",
+    "react-native-svg-transformer": "^0.14.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",

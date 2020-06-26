@@ -1,35 +1,46 @@
 import React from "react";
 import styled from "styled-components/native";
 import variants from "./StyledButton.variants";
-import { space, color, layout, border, compose } from "styled-system";
+import { Text } from "../BaseElements";
+import {
+  space,
+  color,
+  layout,
+  border,
+  typography,
+  compose
+} from "styled-system";
+import colors from "../../../theme/colors";
 
-const ButtonElem = styled.Button(
+const ButtonElem = styled.TouchableOpacity(
   compose(
     space,
     color,
     layout,
     border,
-    variants.size
+    typography
   ),
   variants.type
 );
 
-const StyledButton = ({ variant, size, appearance, ...rest }: any) => {
-  console.log(rest);
+const StyledButton = ({ title, variant, appearance, ...rest }: any) => {
   return (
-    <ButtonElem
-      variant={variant}
-      size={size}
-      appearance={appearance}
-      {...rest}
-    />
+    <ButtonElem variant={variant} appearance={appearance} {...rest}>
+      <Text
+        fontWeight={"bold"}
+        textAlign={"center"}
+        color={variant !== "default" ? appearance : rest.color || "white"}
+        style={{ textTransform: "uppercase" }}
+      >
+        {title}
+      </Text>
+    </ButtonElem>
   );
 };
 
 StyledButton.defaultProps = {
   variant: "default",
-  size: "medium",
-  appearance: "primary"
+  appearance: colors.primary
 };
 
 export default StyledButton;

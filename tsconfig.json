@@ -61,6 +61,7 @@
   },
   "exclude": ["./node_modules"],
   "include": [
+    "./src/typings",
     "./src/apps/Shipper/**/*",
     "./src/apps/Shipper/*",
     "./__tests__/*"

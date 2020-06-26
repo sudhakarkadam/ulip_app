@@ -1,30 +1,12 @@
 import React, { useState } from "react";
-import { Image, TouchableNativeFeedback, View } from "react-native";
-import { FlexColumn, Flex } from "./@styled/BaseElements";
+import { Flex, TouchableOpacity } from "./@styled/BaseElements";
 import colors from "../theme/colors";
-import {
-  PrimaryText,
-  PrimaryTouchable,
-  UpperCasePrimaryText
-} from "./BasicElements";
+import Logo from "../images/group.svg";
+import BackBtn from "../images/arrow-left-circle.svg";
+import StyledButton from "../components/@styled/StyledButton";
 import Input from "../components/InputComponent";
 import CodeInput from "../components/CodeInput";
-
-const Back = require("../icons/back.png");
-
-const BackArrow = () => (
-  <FlexColumn
-    style={{
-      backgroundColor: `${colors.primary}`,
-      height: 30,
-      width: 30,
-      borderRadius: 30,
-      alignItems: "center"
-    }}
-  >
-    <Image source={Back} style={{ marginTop: 2, height: 25, width: 25 }} />
-  </FlexColumn>
-);
+import { PrimaryText } from "../components/@styled/Text";
 
 const LoginComponent = () => {
   const [phoneNumber, editPhoneNumber] = useState("");
@@ -32,24 +14,14 @@ const LoginComponent = () => {
   const [otpConfirmed, setOtpConfimation] = useState(false);
 
   return (
-    <FlexColumn
-      style={{
-        flex: 1,
-        marginLeft: 25,
-        marginRight: 70
-      }}
-    >
+    <Flex mx={6} flex={1}>
       {phoneConfirmed && !otpConfirmed && (
-        <TouchableNativeFeedback onPress={() => setPhoneConfirmed(false)}>
-          <View style={{ marginTop: 30 }}>
-            <BackArrow />
-          </View>
-        </TouchableNativeFeedback>
+        <TouchableOpacity my={30} onPress={() => setPhoneConfirmed(false)}>
+          <BackBtn width={32} height={32} />
+        </TouchableOpacity>
       )}
-      <FlexColumn style={{ flex: 1, justifyContent: "center" }}>
-        <UpperCasePrimaryText style={{ fontWeight: "bold", marginBottom: 100 }}>
-          unified logistics interface platform
-        </UpperCasePrimaryText>
+      <Flex flex={1} justifyContent="space-evenly">
+        <Logo width={300} height={66} />
         {!phoneConfirmed && (
           <>
             <Input
@@ -61,29 +33,29 @@ const LoginComponent = () => {
               style={{ marginBottom: 10 }}
             />
             {phoneNumber.length === 10 && (
-              <Flex style={{ alignItems: "flex-end" }}>
-                <PrimaryTouchable
-                  label="Confirm"
-                  touchableProps={{ onPress: () => setPhoneConfirmed(true) }}
+              <Flex alignItems="flex-end">
+                <StyledButton
+                  title="confirm"
+                  onPress={() => {
+                    setPhoneConfirmed(true);
+                  }}
                 />
               </Flex>
             )}
           </>
         )}
         {phoneConfirmed && (
-          <FlexColumn style={{ alignItems: "center" }}>
+          <Flex alignItems="center">
             {!otpConfirmed && (
               <>
-                <PrimaryText>A OTP has been sent to</PrimaryText>
-                <PrimaryText style={{ fontWeight: "bold" }}>
-                  {phoneNumber}
-                </PrimaryText>
+                <PrimaryText fontSize={3}>A OTP has been sent to</PrimaryText>
+                <PrimaryText fontSize={6}>{phoneNumber}</PrimaryText>
                 <CodeInput
                   activeColor={colors.primary}
                   inactiveColor={colors.primary}
                   inputPosition="center"
-                  size={36}
-                  space={15}
+                  size={42}
+                  space={6}
                   codeLength={6}
                   onFulfill={code => {
                     if (code === "121122") {
@@ -96,8 +68,9 @@ const LoginComponent = () => {
                   }}
                   codeInputStyle={{
                     borderWidth: 0,
-                    borderBottomWidth: 2,
-                    fontSize: 18
+                    fontSize: 18,
+                    backgroundColor: colors.grays[2],
+                    borderRadius: 3
                   }}
                   keyboardType="numeric"
                 />
@@ -108,10 +81,10 @@ const LoginComponent = () => {
                 OTP Successfully Verified for {phoneNumber}
               </PrimaryText>
             )}
-          </FlexColumn>
+          </Flex>
         )}
-      </FlexColumn>
-    </FlexColumn>
+      </Flex>
+    </Flex>
   );
 };
 
