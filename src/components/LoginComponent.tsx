@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Flex, TouchableOpacity, FlexColumn } from "./@styled/BaseElements";
+import { Flex, TouchableOpacity } from "./@styled/BaseElements";
 import { Text, TextInput } from "react-native";
 import colors from "../theme/colors";
 import Logo from "../images/group.svg";
 import BackBtn from "../images/arrow-left-circle.svg";
 import StyledButton from "../components/@styled/StyledButton";
-import Input from "../components/InputComponent";
 import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 
