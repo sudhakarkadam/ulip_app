@@ -70,8 +70,8 @@ export default {
         role: req.role,
         user_id: req.userId
       }
-      );
-    },
+    );
+  },
   login: () => {
     return http.post<{}, {}>(
       urls.login,

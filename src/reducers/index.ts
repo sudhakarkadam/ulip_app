@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { ReducerMappedState } from "../utils/actionCreator";
 import { GetTripsResponse } from "../models/CommonModel";
 import actions from "../actions/Actions";
+import createReducer from "../utils/createReducer";
 
 const trips = createReducer<
   actions.GET_TRIPS_REQUEST,
