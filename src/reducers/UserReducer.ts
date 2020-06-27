@@ -1,23 +1,17 @@
-import actionTypes from "../actions/ShipperActions";
+import actionTypes from "../actions/Actions";
 import {
   INIT,
   LOADING,
   SUCCESS,
   ERROR,
   asyncStatusTypes
-} from "../../../utils/actionCreator";
-import { ShipperActionObjectTypes } from "../actions/ShipperActionCreators";
-
-export type UserDataModel = null | {
-  user_id: number;
-  phone_number: string;
-  personalProfile?: { name: string };
-  companyProfile?: { name: string; regNumber: string; location: string };
-};
+} from "../utils/actionCreator";
+import { UserDataModel } from "../models/CommonModel";
+import { ActionObjectTypes } from "../actions/ActionCreators";
 
 export interface ILoginStoreState {
   asyncStatus: asyncStatusTypes;
-  data: UserDataModel;
+  data: UserDataModel | null;
 }
 
 const INITIAL_STATE: ILoginStoreState = {
@@ -25,15 +19,11 @@ const INITIAL_STATE: ILoginStoreState = {
   data: null
 };
 
-type TAction = ShipperActionObjectTypes<
-  | "sendOtp"
-  | "verifyOtp"
-  | "logout"
-  | "saveCompanyProfile"
-  | "savePersonalProfile"
+type TAction = ActionObjectTypes<
+  "sendOtp" | "verifyOtp" | "saveCompanyProfile" | "savePersonalProfile"
 >;
 
-export default function LoginReducer(
+export default function UserReducer(
   state: ILoginStoreState = INITIAL_STATE,
   action: TAction
 ): ILoginStoreState {
@@ -67,35 +57,24 @@ export default function LoginReducer(
       };
 
     case actionTypes.SAVE_PROFILE_SUCCESS: {
-      let oldData = state.data;
-      if (oldData) {
-        oldData = { ...oldData };
-        oldData.personalProfile = {
-          name: action.payload.res.name
-        };
-      }
+      const profileData = Object.assign({}, state.data);
+      profileData.user_details.name = action.payload.res.name;
       return {
         ...state,
         asyncStatus: SUCCESS,
-        data: oldData
+        data: profileData
       };
     }
 
     case actionTypes.SAVE_COMPANY_PROFILE_SUCCESS: {
-      let newData = state.data;
-      if (newData) {
-        newData = { ...newData };
-        newData.companyProfile = action.payload.res;
-      }
+      const companyData = Object.assign({}, state.data);
+      companyData.business_details = action.payload.res;
       return {
         ...state,
         asyncStatus: SUCCESS,
-        data: newData
+        data: companyData
       };
     }
-
-    case actionTypes.LOGOUT:
-      return INITIAL_STATE;
 
     default:
       return state;

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../../../utils/actionCreator";
-import user from "./LoginReducer";
+import user from "../../../reducers/UserReducer";
 
 const reducers = {
   user
