@@ -16,6 +16,16 @@ export interface ReducerInitialState<T, U = any> {
   data: T;
   error?: U;
 }
+export interface IPayload<U, V> {
+  readonly req: U;
+  readonly res: V;
+}
+export interface IAction<T extends string, U, V>
+  extends AnyAction,
+    Partial<OfflineAction> {
+  readonly type: T;
+  readonly payload: IPayload<U, V>;
+}
 
 export const INIT = "INIT";
 export const LOADING = "LOADING";

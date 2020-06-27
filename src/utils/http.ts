@@ -38,11 +38,9 @@ function request<T>(res: Response): Promise<T> {
       const isContentTypeJson =
         contentType && contentType.indexOf("application/json") !== -1;
       if (response.ok) {
-        const resHeaders = response.headers;
         if (isContentTypeJson) {
           const resJson = await response.json();
-          const actualResponse = { ...resJson, responseHeader: resHeaders };
-          return Promise.resolve(actualResponse);
+          return Promise.resolve(resJson);
         }
         return Promise.resolve(response.text());
       }

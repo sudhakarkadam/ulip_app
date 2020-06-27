@@ -1,7 +1,7 @@
 import actions from "./Actions";
 import api from "../api/Api";
 
-import { createAsyncAction, GetActionTypes } from "../utils/actionCreator";
+import { createAsyncAction, GetActionTypes, createAction } from "../utils/actionCreator";
 
 const ActionCreators = {
   sendOtp: createAsyncAction(
@@ -35,7 +35,20 @@ const ActionCreators = {
       actions.SAVE_COMPANY_PROFILE_ERROR
     ],
     api.saveCompanyProfile
-  )
+  ),
+  login: createAsyncAction(
+    [actions.LOGIN_REQUEST, actions.LOGIN_SUCCESS, actions.LOGIN_ERROR],
+    api.login
+  ),
+  getTrips: createAsyncAction(
+    [
+      actions.GET_TRIPS_REQUEST,
+      actions.GET_TRIPS_SUCCESS,
+      actions.GET_TRIPS_ERROR
+    ],
+    api.getTrips
+  ),
+  logout: () => createAction(actions.LOGOUT, {}, {})
 };
 
 export default ActionCreators;
