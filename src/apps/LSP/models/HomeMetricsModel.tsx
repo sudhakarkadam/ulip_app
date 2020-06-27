@@ -1,12 +1,18 @@
+import { RequestStatus, TruckType } from "../../../models/CommonModel";
+
 export default interface Metrics {
   transport_service_request: {
-    created: number;
-    in_progress: number;
-    pending_pod: number;
+    [RequestStatus.ACCEPTED]: number;
+    [RequestStatus.COMPLETED]: number;
+    [RequestStatus.CREATED]: number;
+    [RequestStatus.IN_PROGRESS]: number;
+    [RequestStatus.PENDING_POD]: number;
+    [RequestStatus.REJECTED]: number;
   };
   trucks: {
-    type1: number;
-    type2: number;
+    [TruckType.CONTAINER]: number;
+    [TruckType.OPEN]: number;
+    [TruckType.TRAILOR]: number;
   };
   drivers: number;
 }

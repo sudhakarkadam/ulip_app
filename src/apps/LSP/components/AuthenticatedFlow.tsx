@@ -9,16 +9,15 @@ import { AllApps } from "../../../models/CommonModel";
 const personIcon = require("../../../icons/person-icon.png");
 import search from "../../../images/loupe.png";
 import notification from "../../../images/notification.png";
-import Trips from "./Trips";
+
+import Hometabs from "./HomeTabs";
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
   CreateProfile: undefined;
   PersonProfile: undefined;
   CompanyProfile: undefined;
-  TripListing: undefined;
   TripRequests: undefined;
-  Trips: undefined;
-  History: undefined;
+  HomeMetrics: "undefined";
 };
 
 const LSPPersonProfile = props => (
@@ -47,15 +46,18 @@ const LSPCreateProfile = props => (
 
 const LSPCompanyProfile = props => (
   <CompanyProfile
-    createCompanyCallback={() => props.navigation.navigate("TripRequests")}
+    createCompanyCallback={() => props.navigation.navigate("HomeMetrics")}
   />
 );
 
-const TripRequests = () => (
-  <TripList listingMode={ListingModes.PENDING_REQUESTS} from={AllApps.LSP} />
-);
-const History = () => (
-  <TripList listingMode={ListingModes.COMPLETED} from={AllApps.LSP} />
+const TripRequests = props => (
+  <TripList
+    listingMode={ListingModes.PENDING_REQUESTS}
+    from={AllApps.LSP}
+    onRowClick={id => {
+      //needs inplementation
+    }}
+  />
 );
 
 const HeaderButtons = () => (
@@ -68,7 +70,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const AuthenticatedFlow = () => {
   return (
-    <Stack.Navigator initialRouteName="Trips">
+    <Stack.Navigator initialRouteName="HomeMetrics">
       <Stack.Screen
         name="CreateProfile"
         component={LSPCreateProfile}
@@ -90,14 +92,9 @@ const AuthenticatedFlow = () => {
         options={{ title: "Home", headerRight: HeaderButtons }}
       />
       <Stack.Screen
-        name="Trips"
-        component={Trips}
-        options={{ title: "Trips", headerRight: HeaderButtons }}
-      />
-      <Stack.Screen
-        name="History"
-        component={History}
-        options={{ title: "History", headerRight: HeaderButtons }}
+        name="HomeMetrics"
+        component={Hometabs}
+        options={{ title: "Home", headerRight: HeaderButtons }}
       />
     </Stack.Navigator>
   );

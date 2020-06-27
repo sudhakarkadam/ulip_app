@@ -17,7 +17,7 @@ const trips = createReducer<
 ]);
 import user from "../reducers/UserReducer";
 
-const reducers = {
+export const reducers = {
   user,
   trips
 };

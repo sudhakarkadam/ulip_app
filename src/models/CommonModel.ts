@@ -57,6 +57,9 @@ export interface GetTripsRequest {
   status: string[];
   businessId: string;
 }
+export interface GetMetricsRequest {
+  businessId: string;
+}
 export enum AllApps {
   SHIPPER = "SHIPPER",
   LSP = "LSP"

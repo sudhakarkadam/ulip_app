@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Box, Flex, FlexRow, Text, Image } from "./@styled/BaseElements";
+import {
+  Box,
+  Flex,
+  FlexRow,
+  Text,
+  Image,
+  TouchableOpacity
+} from "./@styled/BaseElements";
 import colors from "../theme/colors";
 import profile from "../images/40px.png";
 import trailerTruck from "../images/trailerTruckColored.png";
@@ -22,6 +29,7 @@ import { FlatList } from "react-native";
 interface OwnProps {
   listingMode: ListingModes;
   from: AllApps;
+  onRowClick?: (id: string | number) => void;
 }
 export enum ListingModes {
   UPCOMING = "UPCOMING",
@@ -123,7 +131,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
   let config = listingConfig[listingMode] as any;
 
   useEffect(() => {
-    props.getTrips({ status: config.status, businessId: "1" });
+    props.getTrips({ status: config.status, businessId: "3" });
   }, [listingMode]);
 
   const data = props.trips.data || [];
@@ -165,111 +173,119 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
           data={data}
           renderItem={({ item }) => {
             return (
-              <FlexRow
-                key={item.id}
-                p={5}
-                borderBottomColor={colors.grays[2]}
-                borderBottomWidth={1}
+              <TouchableOpacity
+                onPress={() => {
+                  if (listingMode === ListingModes.PENDING && props.onRowClick)
+                    props.onRowClick(item.id);
+                  return;
+                }}
               >
-                {config.primaryWidget === IconWidget.PROFILE && (
-                  <Image
-                    source={profile}
-                    height={44}
-                    width={44}
-                    resizeMode="contain"
-                  />
-                )}
-                {config.primaryWidget === IconWidget.CALENDAR && (
-                  <Box>
-                    <CalendarComponent date={item.pickup_date} />
-                  </Box>
-                )}
-                <Flex mx={5} flex={1}>
-                  <FlexRow>
-                    {!!item.trip && (
-                      <>
-                        {config.primaryWidget === IconWidget.PROFILE &&
-                          !!item.pickup_date && (
-                            <SecondaryText>{`${
-                              item.trip.driver_name
-                            }${!!item.pickup_date &&
-                              `  •  ${moment(item.pickup_date).format(
-                                "DD/MM/YYYY"
-                              )}`}`}</SecondaryText>
-                          )}
-                        {[
-                          RequestStatus.COMPLETED,
-                          RequestStatus.PENDING_POD
-                        ].indexOf(item.status) > -1 &&
-                          config.primaryWidget !== IconWidget.PROFILE && (
-                            <SecondaryText>{`${moment(item.pickup_date).format(
-                              "DD/MM/YYYY"
-                            )}${!!item.trip &&
-                              !!item.trip.eta &&
-                              `  •  ${moment(item.trip.eta).format(
-                                "DD/MM/YYYY"
-                              )}`}`}</SecondaryText>
-                          )}
-                      </>
-                    )}
-                  </FlexRow>
-                  <FlexRow>
-                    <PrimaryLabel>{item.pickUp_location.city}</PrimaryLabel>
-                    <Text
-                      color={colors.grays[1]}
-                      px={2}
-                      fontSize={40}
-                      lineHeight={"30px"}
-                    >
-                      →
-                    </Text>
-                    <PrimaryLabel>{item.delivery_location.city}</PrimaryLabel>
-                  </FlexRow>
-                  <FlexRow>
-                    <SecondaryText fontSize={1} color={colors.grays[1]}>
-                      {`${item.good_type}  •  ${item.weight} ${item.weight_unit}`}
-                    </SecondaryText>
-                  </FlexRow>
-                </Flex>
-                {config.secondaryWidget === IconWidget.TRUCK && (
-                  <Box>
-                    <SmallCapitalText>
-                      {item.truck_type_preference}
-                    </SmallCapitalText>
+                <FlexRow
+                  key={item.id}
+                  p={5}
+                  borderBottomColor={colors.grays[2]}
+                  borderBottomWidth={1}
+                >
+                  {config.primaryWidget === IconWidget.PROFILE && (
                     <Image
-                      source={
-                        item.truck_type_preference === TruckType.TRAILOR
-                          ? trailerTruck
-                          : item.truck_type_preference === TruckType.OPEN
-                          ? openTruck
-                          : containerTruck
-                      }
-                      height={20}
+                      source={profile}
+                      height={44}
                       width={44}
                       resizeMode="contain"
                     />
-                  </Box>
-                )}
-                {config.secondaryWidget === IconWidget.LABEL && (
-                  <Box>
-                    <Text
-                      fontSize={1}
-                      color={colors.primary}
-                      py={1}
-                      px={3}
-                      bg={colors.grays[2]}
-                    >
-                      {item.status}
-                    </Text>
-                  </Box>
-                )}
-                {config.secondaryWidget === IconWidget.CALENDAR && (
-                  <Box>
-                    <SmallCapitalText>ON-TIME</SmallCapitalText>
-                    <CalendarComponent date={item.pickup_date} />
-                  </Box>
-                )}
-              </FlexRow>
+                  )}
+                  {config.primaryWidget === IconWidget.CALENDAR && (
+                    <Box>
+                      <CalendarComponent date={item.pickup_date} />
+                    </Box>
+                  )}
+                  <Flex mx={5} flex={1}>
+                    <FlexRow>
+                      {!!item.trip && (
+                        <>
+                          {config.primaryWidget === IconWidget.PROFILE &&
+                            !!item.pickup_date && (
+                              <SecondaryText>{`${
+                                item.trip.driver_name
+                              }${!!item.pickup_date &&
+                                `  •  ${moment(item.pickup_date).format(
+                                  "DD/MM/YYYY"
+                                )}`}`}</SecondaryText>
+                            )}
+                          {[
+                            RequestStatus.COMPLETED,
+                            RequestStatus.PENDING_POD
+                          ].indexOf(item.status) > -1 &&
+                            config.primaryWidget !== IconWidget.PROFILE && (
+                              <SecondaryText>{`${moment(
+                                item.pickup_date
+                              ).format("DD/MM/YYYY")}${!!item.trip &&
+                                !!item.trip.eta &&
+                                `  •  ${moment(item.trip.eta).format(
+                                  "DD/MM/YYYY"
+                                )}`}`}</SecondaryText>
+                            )}
+                        </>
+                      )}
+                    </FlexRow>
+                    <FlexRow>
+                      <PrimaryLabel>{item.pickUp_location.city}</PrimaryLabel>
+                      <Text
+                        color={colors.grays[1]}
+                        px={2}
+                        fontSize={40}
+                        lineHeight={"30px"}
+                      >
+                        →
+                      </Text>
+                      <PrimaryLabel>{item.delivery_location.city}</PrimaryLabel>
+                    </FlexRow>
+                    <FlexRow>
+                      <SecondaryText fontSize={1} color={colors.grays[1]}>
+                        {`${item.good_type}  •  ${item.weight} ${item.weight_unit}`}
+                      </SecondaryText>
+                    </FlexRow>
+                  </Flex>
+                  {config.secondaryWidget === IconWidget.TRUCK && (
+                    <Box>
+                      <SmallCapitalText>
+                        {item.truck_type_preference}
+                      </SmallCapitalText>
+                      <Image
+                        source={
+                          item.truck_type_preference === TruckType.TRAILOR
+                            ? trailerTruck
+                            : item.truck_type_preference === TruckType.OPEN
+                            ? openTruck
+                            : containerTruck
+                        }
+                        height={20}
+                        width={44}
+                        resizeMode="contain"
+                      />
+                    </Box>
+                  )}
+                  {config.secondaryWidget === IconWidget.LABEL && (
+                    <Box>
+                      <Text
+                        fontSize={1}
+                        color={colors.primary}
+                        py={1}
+                        px={3}
+                        bg={colors.grays[2]}
+                      >
+                        {item.status}
+                      </Text>
+                    </Box>
+                  )}
+                  {config.secondaryWidget === IconWidget.CALENDAR && (
+                    <Box>
+                      <SmallCapitalText>ON-TIME</SmallCapitalText>
+                      <CalendarComponent date={item.pickup_date} />
+                    </Box>
+                  )}
+                </FlexRow>
+              </TouchableOpacity>
             );
           }}
         ></FlatList>
