@@ -1,12 +1,12 @@
 import React from "react";
 import CompanyProfile from "../../../components/CompanyProfile";
 import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "./AuthenticatedFlow";
 import { connect, ConnectedProps } from "react-redux";
 import ShipperActionCreators from "../actions/ShipperActionCreators";
 import { ShipperAppState } from "../reducers";
+import { HomeStackParamList } from "./HomeStack";
 
-type Props = StackScreenProps<RootStackParamList, "CompanyProfile"> &
+type Props = StackScreenProps<HomeStackParamList, "CompanyProfile"> &
   ConnectedProps<typeof connector>;
 
 const { saveCompanyProfile } = ShipperActionCreators;
@@ -25,7 +25,7 @@ const ShipperCompanyProfile = (props: Props) => {
       createCompanyCallback={async () => {
         try {
           await props.saveCompanyProfile({});
-          props.navigation.navigate("ShipperHome");
+          props.navigation.navigate("MainTripListing");
         } catch {
           console.log("error");
         }

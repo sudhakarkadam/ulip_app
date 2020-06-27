@@ -3,11 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
 import Login from "../../components/LoginComponent";
-import AuthenticatedFlow from "./components/AuthenticatedFlow";
 import { connect, ConnectedProps } from "react-redux";
 import ShipperActionCreators from "./actions/ShipperActionCreators";
 import { ShipperAppState } from "./reducers";
 import theme from "../../theme";
+import ShipperHome from "./components/ShipperHome";
 
 interface Props {
   test: string;
@@ -40,9 +40,7 @@ class App extends Component<Props & ConnectedProps<typeof connector>> {
                 options={{ headerShown: false }}
               />
             )}
-            {isLoggedIn && (
-              <Stack.Screen name="Home" component={AuthenticatedFlow} />
-            )}
+            {isLoggedIn && <Stack.Screen name="Home" component={ShipperHome} />}
           </Stack.Navigator>
         </ThemeProvider>
       </NavigationContainer>

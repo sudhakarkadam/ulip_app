@@ -1,18 +1,20 @@
 import React from "react";
 import PersonProfile from "../../../components/PersonProfile";
 import { StackScreenProps } from "@react-navigation/stack";
-import { RootStackParamList } from "./AuthenticatedFlow";
 import { connect, ConnectedProps } from "react-redux";
 import ShipperActionCreators from "../actions/ShipperActionCreators";
 import { ShipperAppState } from "../reducers";
+import { HomeStackParamList } from "./HomeStack";
 
-type Props = StackScreenProps<RootStackParamList, "PersonProfile"> &
+type Props = StackScreenProps<HomeStackParamList, "PersonProfile"> &
   ConnectedProps<typeof connector>;
 
 const { savePersonalProfile } = ShipperActionCreators;
-const mapStateToProps = (state: ShipperAppState) => ({
-  userInfo: state.user.data
-});
+const mapStateToProps = (state: ShipperAppState) => {
+  return {
+    userInfo: state.user.data
+  };
+};
 const mapDispatchToProps = { savePersonalProfile };
 const connector = connect(
   mapStateToProps,
@@ -26,7 +28,7 @@ const ShipperPersonProfile = (props: Props) => {
       createProfileCallback={async () => {
         try {
           await props.savePersonalProfile({});
-          props.navigation.navigate("ShipperHome");
+          props.navigation.navigate("CreateProfile");
         } catch {
           console.log("error");
         }

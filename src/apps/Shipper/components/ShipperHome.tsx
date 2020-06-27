@@ -1,10 +1,11 @@
 /* eslint-disable react/display-name */
 import React from "react";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Flex } from "../../../components/@styled/BaseElements";
-
 import { PrimaryText, LightText } from "../../../components/@styled/Text";
+import HomeStack from "./HomeStack";
+import InTransitStack from "./InTransitStack";
+import HistroyListing from "./HistoryListing";
 
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
@@ -12,29 +13,28 @@ import InTransitSelected from "../../../images/intransit_selected.svg";
 import InTransitBlur from "../../../images/intransit_blur.svg";
 import HistorySelected from "../../../images/history_selected.svg";
 import HistoryBlur from "../../../images/history_blur.svg";
-import ShipperCreateProfile from "./ShipperCreateProfile";
 
 const Tab = createBottomTabNavigator();
 
 const tabs = [
   {
-    name: "LandingHome",
+    name: "HomeStack",
     label: "HOME",
-    component: ShipperCreateProfile,
+    component: HomeStack,
     activeImage: HomeSelected,
     inActiveImage: HomeBlur
   },
   {
-    name: "InTransit",
+    name: "InTransitStack",
     label: "IN-TRANSIT",
-    component: ShipperCreateProfile,
+    component: InTransitStack,
     activeImage: InTransitSelected,
     inActiveImage: InTransitBlur
   },
   {
-    name: "History",
+    name: "HistoryStack",
     label: "HISTORY",
-    component: ShipperCreateProfile,
+    component: HistroyListing,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
   }
@@ -42,7 +42,7 @@ const tabs = [
 
 const ShipperHome = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName={tabs[0].name}>
       {tabs.map(tab => (
         <Tab.Screen
           key={tab.name}
