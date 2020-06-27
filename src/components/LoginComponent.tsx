@@ -25,12 +25,16 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
 
   return (
     <Flex flex={1}>
-      <Box position="absolute" mx={6} mt={30}>
+      <Box position="absolute" mx={6} mt={80}>
         <Logo width={300} height={66} />
       </Box>
 
       {phoneConfirmed && !otpConfirmed && (
-        <TouchableOpacity my={30} onPress={() => setPhoneConfirmed(false)}>
+        <TouchableOpacity
+          my={30}
+          mx={6}
+          onPress={() => setPhoneConfirmed(false)}
+        >
           <BackBtn width={32} height={32} />
         </TouchableOpacity>
       )}
@@ -109,7 +113,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
       </Flex>
       <Flex style={{ justifyContent: "flex-end" }}>
         {phoneNumber.length === 10 && !phoneConfirmed && (
-          <Flex style={{ paddingBottom: 10 }}>
+          <Flex style={{ paddingBottom: 10 }} mx={6}>
             <StyledButton
               title="Confirm"
               onPress={async () => {
