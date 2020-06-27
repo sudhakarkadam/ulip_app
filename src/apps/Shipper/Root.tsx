@@ -27,7 +27,7 @@ class App extends Component<Props & ConnectedProps<typeof connector>> {
     return (
       <NavigationContainer>
         <ThemeProvider theme={theme}>
-          <Stack.Navigator>
+          <Stack.Navigator headerMode="none">
             {!isLoggedIn && (
               <Stack.Screen
                 name="Login"
