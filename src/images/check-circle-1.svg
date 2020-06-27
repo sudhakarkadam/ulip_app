@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>00BD9310-A173-41CC-A2C4-BDC75E1658B8</title>
+    <defs>
+        <path d="M19.6875,10 C19.6875,15.3502734 15.3502734,19.6875 10,19.6875 C4.64972656,19.6875 0.3125,15.3502734 0.3125,10 C0.3125,4.64972656 4.64972656,0.3125 10,0.3125 C15.3502734,0.3125 19.6875,4.64972656 19.6875,10 Z M8.87945312,15.1294531 L16.0669531,7.94195313 C16.3110156,7.69789063 16.3110156,7.30214844 16.0669531,7.05808594 L15.1830859,6.17421875 C14.9390234,5.93011719 14.5432812,5.93011719 14.2991797,6.17421875 L8.4375,12.0358594 L5.70082031,9.29917969 C5.45675781,9.05511719 5.06101563,9.05511719 4.81691406,9.29917969 L3.93304688,10.1830469 C3.68898437,10.4271094 3.68898437,10.8228516 3.93304688,11.0669141 L7.99554688,15.1294141 C8.23964844,15.3735156 8.63535156,15.3735156 8.87945313,15.1294531 L8.87945312,15.1294531 Z" id="path-1"></path>
+    </defs>
+    <g id="Driver-app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="post_pick_up" transform="translate(-309.000000, -318.000000)">
+            <g id="Group-7" transform="translate(0.000000, 204.000000)">
+                <g id="Group-6" transform="translate(20.000000, 24.000000)">
+                    <g id="Solid/truck-Copy" transform="translate(289.000000, 90.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Color" mask="url(#mask-2)" fill="#C1C7D0">
+                            <rect id="Turquoise" x="0" y="0" width="20" height="20"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

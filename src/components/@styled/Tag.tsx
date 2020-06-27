@@ -17,8 +17,10 @@ export const Tag: React.FC<TagProps> = ({ text, type = "default" }) => {
       color={color}
       bg={bg}
       borderRadius={2}
-      px={3}
-      py={2}
+      px={2}
+      py={1}
+      ml={1}
+      mr={1}
       fontSize={0}
       textAlign="center"
     >

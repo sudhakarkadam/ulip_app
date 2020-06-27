@@ -1,8 +1,17 @@
 import React from "react";
 import { FlatList, View } from "react-native";
-import { Box, Text, Flex, FlexSpaceBetween } from "./@styled/BaseElements";
+import {
+  Box,
+  Text,
+  Flex,
+  FlexSpaceBetween,
+  FlexRow,
+  FlexVerticallyCenter
+} from "./@styled/BaseElements";
+import Tag from "./@styled/Tag";
 import DestinationIcon from "../images/location.svg";
-import { fontSize } from "styled-system";
+import TrailerIcon from "../images/trailer.svg";
+import CheckIcon from "../images/check-circle-1.svg";
 
 interface Place {
   name: string;
@@ -10,10 +19,22 @@ interface Place {
   description?: string;
   relativeDistance: number;
   address?: string;
+  tag?: string;
 }
-interface Props {
-  places: Place[];
+
+interface CrossedPlace extends Place {
+  crossed: boolean;
 }
+
+type Props =
+  | {
+      track?: false;
+      places: Place[];
+    }
+  | {
+      track: true;
+      places: CrossedPlace[];
+    };
 
 const Dot: React.FC = ({ children }) => (
   <Box
@@ -79,11 +100,24 @@ const LightSubText: React.FC<{ fontSize?: number }> = ({
   </Text>
 );
 
-const getLabel = (index: number) =>
-  index === 0 ? <Label>From</Label> : <Label>To</Label>;
+const getLabel = (index: number, item: Place | CrossedPlace) => {
+  const label = index === 0 ? <Label>From</Label> : <Label>To</Label>;
+  return item.tag ? (
+    <>
+      <FlexVerticallyCenter flexDirection="row" justifyContent="space-around">
+        {label}
+        <Tag text={item.tag.toUpperCase()}></Tag>
+      </FlexVerticallyCenter>
+    </>
+  ) : (
+    label
+  );
+};
 
-export const TripStamp: React.FC<Props> = ({ places }) => {
+export const TripStamp: React.FC<Props> = ({ places, track }) => {
   const placesLastIndex = places.length - 1;
+  const trailerPosition =
+    track && (places as CrossedPlace[]).findIndex(p => !p.crossed) - 1;
   return (
     <Box m={20} p={10}>
       <FlatList
@@ -94,17 +128,30 @@ export const TripStamp: React.FC<Props> = ({ places }) => {
               <Box background="" position="relative" justifyContent="center">
                 {!!index && <TopLine></TopLine>}
                 <Dot>
-                  <DestinationIcon />
+                  {trailerPosition === index ? (
+                    <View style={{ position: "relative", top: -2, left: 3 }}>
+                      <TrailerIcon />
+                    </View>
+                  ) : (
+                    <DestinationIcon />
+                  )}
                 </Dot>
                 {placesLastIndex !== index && <BottomLine></BottomLine>}
+
                 <Box p={10} ml={4} position="relative">
                   <FlexSpaceBetween flexDirection="row">
                     <Flex>
-                      {getLabel(index)}
+                      {getLabel(index, item)}
                       <Name fontWeight="bold">{item.name}</Name>
                       {!!item.state && <Name fontSize={10}>{item.state}</Name>}
                     </Flex>
-                    <LightSubText>{item.relativeDistance || 0} KM</LightSubText>
+                    {(item as CrossedPlace).crossed ? (
+                      <CheckIcon />
+                    ) : (
+                      <LightSubText>
+                        {item.relativeDistance || 0} KM
+                      </LightSubText>
+                    )}
                   </FlexSpaceBetween>
                   {item.address && (
                     <LightSubText fontSize={12}>{item.address}</LightSubText>
