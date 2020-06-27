@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import CompanyProfile from "../../../components/CompanyProfile";
 import CreateTrip from "./CreateTrip";
-import ShipperCreateProfile from "./ShipperCreateProfile";
+// import ShipperCreateProfile from "./ShipperCreateProfile";
 import { StackScreenProps } from "@react-navigation/stack";
 import ShipperPersonProfile from "./ShipperPersonProfile";
 import ShipperHome from "./ShipperHome";
@@ -25,11 +25,11 @@ const AuthenticatedFlow = () => {
   return (
     <Stack.Navigator initialRouteName="ShipperHome">
       <Stack.Screen name="ShipperHome" component={ShipperHome} />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="CreateProfile"
         component={ShipperCreateProfile}
         options={{ title: "Create Profile" }}
-      />
+      /> */}
       <Stack.Screen name="PersonProfile" component={ShipperPersonProfile} />
       <Stack.Screen
         name="CompanyProfile"
