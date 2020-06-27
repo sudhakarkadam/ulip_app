@@ -32,13 +32,9 @@ class App extends Component<Props & ConnectedProps<typeof connector>> {
         <ThemeProvider theme={theme}>
           <Stack.Navigator>
             {!isLoggedIn && (
-              <Stack.Screen
-                name="Login"
-                component={() => (
-                  <Login getUserInfo={() => this.props.verifyOtp({})} />
-                )}
-                options={{ headerShown: false }}
-              />
+              <Stack.Screen name="Login" options={{ headerShown: false }}>
+                {() => <Login getUserInfo={() => this.props.verifyOtp({})} />}
+              </Stack.Screen>
             )}
             {isLoggedIn && <Stack.Screen name="Home" component={ShipperHome} />}
           </Stack.Navigator>

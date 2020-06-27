@@ -9,17 +9,15 @@ const InTransitStack = () => {
   return (
     <Stack.Navigator initialRouteName="InTransitListing">
       <Stack.Screen name="InTransitListing" component={InTransitListing} />
-      <Stack.Screen
-        name="CreateTrip"
-        component={(props: any) => (
+      <Stack.Screen name="CreateTrip" options={{ title: "Create Trip" }}>
+        {props => (
           <CreateTrip
             createTripCallback={() =>
               props.navigation.navigate("InTransitListing")
             }
           />
         )}
-        options={{ title: "Create Trip" }}
-      />
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };

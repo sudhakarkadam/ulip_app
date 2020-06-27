@@ -28,17 +28,15 @@ const HomeStack = () => {
       <Stack.Screen name="PersonProfile" component={ShipperPersonProfile} />
       <Stack.Screen name="CompanyProfile" component={ShipperCompanyProfile} />
       <Stack.Screen name="MainTripListing" component={MainTripListing} />
-      <Stack.Screen
-        name="CreateTrip"
-        component={(props: CreateTripProps) => (
+      <Stack.Screen name="CreateTrip" options={{ title: "Create Trip" }}>
+        {(props: CreateTripProps) => (
           <CreateTrip
             createTripCallback={() =>
               props.navigation.navigate("MainTripListing")
             }
           />
         )}
-        options={{ title: "Create Trip" }}
-      />
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };
