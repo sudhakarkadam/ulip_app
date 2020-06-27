@@ -3,9 +3,11 @@ import Input from "../components/InputComponent";
 import StyledButton from "../components/@styled/StyledButton";
 import colors from "../theme/colors";
 import { Text, FlexColumn, Flex, TextWrapper } from "./@styled/BaseElements";
+import { UserDataModel } from "src/apps/Shipper/reducers/LoginReducer";
 
 interface OwnProps {
   createProfileCallback: (data: { name: string }) => void;
+  userInfo: UserDataModel;
 }
 
 const PersonProfile = (props: OwnProps) => {
@@ -23,7 +25,7 @@ const PersonProfile = (props: OwnProps) => {
       <TextWrapper label="Mobile number">
         <Input
           editable={false}
-          value={"8823423412"}
+          value={props.userInfo ? props.userInfo.phone_number : ""}
           onChangeText={text => setName(text)}
         />
       </TextWrapper>
