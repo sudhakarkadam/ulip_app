@@ -6,7 +6,7 @@ import { AllObjectTypes } from "../../actions/ActionCreators";
 import { ReducerMappedState } from "../../utils/actionCreator";
 
 const reducers = { ...ParentReducers, ...AppReducers };
-type ReducerState = ReducerMappedState<typeof reducers>;
+export type ReducerState = ReducerMappedState<typeof reducers>;
 const reducer = combineReducers<ReducerState>(reducers);
 
 const logger = require("redux-logger");

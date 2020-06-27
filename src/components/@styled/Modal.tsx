@@ -76,7 +76,8 @@ export default function withModal<IOriginalProps>(
                 >
                   {this.state.content}
                   <Flex flexDirection="row" justifyContent={"flex-end"}>
-                    {actions && actions.length > 0 ? (
+                    {actions &&
+                      actions.length > 0 &&
                       this.state.actions.map((action, index) => {
                         return (
                           <StyledButton
@@ -90,15 +91,7 @@ export default function withModal<IOriginalProps>(
                             title={action.text}
                           />
                         );
-                      })
-                    ) : (
-                      <StyledButton
-                        key={"CLOSE"}
-                        onPress={this.hideModal}
-                        variant={"text"}
-                        title={"CLOSE"}
-                      />
-                    )}
+                      })}
                   </Flex>
                 </Box>
               </Box>

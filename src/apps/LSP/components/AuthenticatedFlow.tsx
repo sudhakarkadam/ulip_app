@@ -9,7 +9,7 @@ import { AllApps } from "../../../models/CommonModel";
 const personIcon = require("../../../icons/person-icon.png");
 import search from "../../../images/loupe.png";
 import notification from "../../../images/notification.png";
-
+import TripAccept from "./TripAccept";
 import Hometabs from "./HomeTabs";
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
@@ -17,7 +17,8 @@ export type RootStackParamList = {
   PersonProfile: undefined;
   CompanyProfile: undefined;
   TripRequests: undefined;
-  HomeMetrics: "undefined";
+  HomeMetrics: undefined;
+  TripAccept: undefined;
 };
 
 const LSPPersonProfile = props => (
@@ -95,6 +96,11 @@ const AuthenticatedFlow = () => {
         name="HomeMetrics"
         component={Hometabs}
         options={{ title: "Home", headerRight: HeaderButtons }}
+      />
+      <Stack.Screen
+        name="TripAccept"
+        component={TripAccept}
+        options={{ title: "Truck Request", headerRight: HeaderButtons }}
       />
     </Stack.Navigator>
   );

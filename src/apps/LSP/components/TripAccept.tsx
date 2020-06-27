@@ -7,8 +7,24 @@ import withModal, {
 import TripDetails from "../../../components/TripDetails";
 import AcceptTripModal from "./AcceptTripModal";
 import RejectTripModal from "./RejectTripModal";
+import { LSPAppState } from "../reducers";
+import { connect, ConnectedProps } from "react-redux";
+import LSPActionCreators from "../actions/LSPActionCreators";
+const { acceptTrip, rejectTrip } = LSPActionCreators;
 
-const TripAcceptPage = (props: IWithModalInjectedProps) => {
+const mapStateToProps = (state: LSPAppState) => ({
+  acceptedTripStatus: state.acceptedTripStatus,
+  rejectedTripStatus: state.rejectedTripStatus
+});
+const mapDispatchToProps = { acceptTrip, rejectTrip };
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+const TripAcceptPage = (
+  props: IWithModalInjectedProps & ConnectedProps<typeof connector>
+) => {
   return (
     <FlexColumn mt={3} backgroundColor="white" flex={1}>
       <TripDetails />
@@ -17,46 +33,58 @@ const TripAcceptPage = (props: IWithModalInjectedProps) => {
           title="Accept"
           style={{ flex: 1 }}
           onPress={() => {
-            props.showModal(<AcceptTripModal />, [
-              {
-                text: "CLOSE",
-                action: () => {
-                  console.log("clicked OK");
-                  props.hideModal();
-                  return {};
-                }
-              },
-              {
-                text: "ACCEPT",
-                action: () => {
-                  console.log("clicked NOT OK");
-                  return {};
-                }
-              }
-            ]);
+            props.showModal(
+              <AcceptTripModal
+                onAccept={props.acceptTrip}
+                onClose={props.hideModal}
+              />
+              // , [
+              // {
+              //   text: "CLOSE",
+              //   action: () => {
+              //     console.log("clicked OK");
+              //     props.hideModal();
+              //     return {};
+              //   }
+              // },
+              // {
+              //   text: "ACCEPT",
+              //   action: () => {
+              //     console.log("clicked NOT OK");
+              //     return {};
+              //   }
+              // }
+              // ]
+            );
           }}
         />
         <StyledButton
           title="Reject"
           style={{ flex: 1 }}
           onPress={() => {
-            props.showModal(<RejectTripModal />, [
-              {
-                text: "CLOSE",
-                action: () => {
-                  console.log("clicked OK");
-                  props.hideModal();
-                  return {};
-                }
-              },
-              {
-                text: "REJECT",
-                action: () => {
-                  console.log("clicked NOT OK");
-                  return {};
-                }
-              }
-            ]);
+            props.showModal(
+              <RejectTripModal
+                onReject={props.rejectTrip}
+                onClose={props.hideModal}
+              />
+              //   , [
+              //   {
+              //     text: "CLOSE",
+              //     action: () => {
+              //       console.log("clicked OK");
+              //       props.hideModal();
+              //       return {};
+              //     }
+              //   },
+              //   {
+              //     text: "REJECT",
+              //     action: () => {
+              //       console.log("clicked NOT OK");
+              //       return {};
+              //     }
+              //   }
+              // ]
+            );
           }}
         />
       </Flex>
@@ -65,4 +93,4 @@ const TripAcceptPage = (props: IWithModalInjectedProps) => {
   );
 };
 
-export default withModal(TripAcceptPage);
+export default connector(withModal(TripAcceptPage));

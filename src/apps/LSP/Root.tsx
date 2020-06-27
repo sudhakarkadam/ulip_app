@@ -1,43 +1,44 @@
 import React, { Component } from "react";
-import { Provider } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
 import Login from "../../components/LoginComponent";
 import AuthenticatedFlow from "./components/AuthenticatedFlow";
 
-import store from "./store";
 import theme from "../../theme";
-
-interface Props {
-  test: string;
-}
+import { ReducerState } from "./store";
 
 const Stack = createStackNavigator();
+const mapStateToProps = (state: ReducerState) => ({
+  userInfo: state.user.data
+});
+const connector = connect(
+  mapStateToProps,
+  {}
+);
 
-export default class App extends Component<Props> {
+class App extends Component<ConnectedProps<typeof connector>> {
   render() {
-    const isLoggedIn = true;
+    const isLoggedIn = this.props.userInfo ? true : false;
     return (
       <NavigationContainer>
-        <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            {/* <Text>hello</Text> */}
-            <Stack.Navigator headerMode={"none"}>
-              {!isLoggedIn && (
-                <Stack.Screen
-                  name="Login"
-                  component={Login}
-                  options={{ headerShown: false }}
-                />
-              )}
-              {isLoggedIn && (
-                <Stack.Screen name="Home" component={AuthenticatedFlow} />
-              )}
-            </Stack.Navigator>
-          </ThemeProvider>
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <Stack.Navigator headerMode={"none"}>
+            {!isLoggedIn && (
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
+            )}
+            {isLoggedIn && (
+              <Stack.Screen name="Home" component={AuthenticatedFlow} />
+            )}
+          </Stack.Navigator>
+        </ThemeProvider>
       </NavigationContainer>
     );
   }
 }
+export default connector(App);

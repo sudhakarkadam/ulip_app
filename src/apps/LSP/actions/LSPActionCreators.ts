@@ -3,27 +3,10 @@ import api from "../api/LSPApi";
 
 import {
   createAsyncAction,
-  GetActionTypes,
-  createAction
+  GetActionTypes
 } from "../../../utils/actionCreator";
 
 const LSPActionCreators = {
-  sendOtp: createAsyncAction(
-    [
-      actions.SEND_OTP_REQUEST,
-      actions.SEND_OTP_SUCCESS,
-      actions.SEND_OTP_ERROR
-    ],
-    api.sendOtp
-  ),
-  verifyOtp: createAsyncAction(
-    [
-      actions.VERIFY_OTP_REQUEST,
-      actions.VERIFY_OTP_SUCCESS,
-      actions.VERIFY_OTP_ERROR
-    ],
-    api.verifyOtp
-  ),
   getMetrics: createAsyncAction(
     [
       actions.HOME_METRICS_REQUEST,
@@ -32,7 +15,22 @@ const LSPActionCreators = {
     ],
     api.getMetrics
   ),
-  logout: () => createAction(actions.LOGOUT, {}, {})
+  acceptTrip: createAsyncAction(
+    [
+      actions.TRIP_ACCEPT_REQUEST,
+      actions.TRIP_ACCEPT_SUCCESS,
+      actions.TRIP_ACCEPT_ERROR
+    ],
+    api.acceptTrip
+  ),
+  rejectTrip: createAsyncAction(
+    [
+      actions.TRIP_REJECT_REQUEST,
+      actions.TRIP_REJECT_SUCCESS,
+      actions.TRIP_REJECT_ERROR
+    ],
+    api.rejectTrip
+  )
 };
 
 export default LSPActionCreators;

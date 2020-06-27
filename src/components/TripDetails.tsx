@@ -71,7 +71,7 @@ const TripDetails = (props: OwnProps) => {
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Required Weight</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {`${truckWeight} ${truckUnit}` || "2.5 Ton"}
+          {truckWeight ? `${truckWeight} ${truckUnit}` : "2.5 Ton"}
         </PrimaryText>
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>

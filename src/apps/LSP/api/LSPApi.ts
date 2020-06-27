@@ -2,6 +2,7 @@
 import http from "../../../utils/http";
 import { GetMetricsRequest } from "../../../models/CommonModel";
 import Metrics from "../models/HomeMetricsModel";
+import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
 // const mockURL = 'http://localhost:8081/src/mocks';
@@ -10,15 +11,15 @@ const endpoint = "http://10.24.7.179";
 
 const urls = {
   getMetrics: (businessId: string) =>
-    `${endpoint}/ulip/transport_service_request/business/${businessId}/view`
+    `${endpoint}/ulip/transport_service_request/business/${businessId}/view`,
+  acceptTrip: `${endpoint}/ulip/transport_service_request/accept`,
+  rejectTrip: `${endpoint}/ulip/transport_service_request/reject`
 };
 
 export const getEndpoint = () => endpoint;
 
 export default {
   getMetrics: (payload: GetMetricsRequest) => {
-    console.log(endpoint);
-    console.log(urls.getMetrics(payload.businessId));
     return http.get<{}, Metrics>(
       urls.getMetrics(payload.businessId),
       {},
@@ -26,7 +27,19 @@ export default {
         headers: {}
       }
     );
+  },
+  acceptTrip: (payload: TripAcceptRequest) => {
+    return http.post<TripAcceptRequest, {}>(urls.acceptTrip, payload, {
+      headers: {}
+    });
+  },
+
+  rejectTrip: (payload: TripRejectRequest) => {
+    return http.post<TripRejectRequest, {}>(urls.rejectTrip, payload, {
+      headers: {}
+    });
   }
+
   // getMetrics() {
   //   return Promise.resolve({
   //     transport_service_request: {
