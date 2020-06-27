@@ -3,7 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
 import Login from "../../../components/LoginComponent";
+import DriverCreateProfile from "./DriverCreateProfile";
 import AuthenticatedFlow from "./AuthenticatedFlow";
+import DriverPersonProfile from "./DriverPersonProfile";
+import TripStartPage from "./TripStartPage";
+import TripDetailsPage from "./TripDetailsPage";
+import TripPage from "./TripPage";
 import { DriverAppState } from "../reducers";
 import { connect, ConnectedProps } from "react-redux";
 
@@ -24,9 +29,17 @@ const connector = connect(
   {}
 );
 
+export interface RootStackParamList {
+  CreateProfile: undefined;
+  PersonProfile: undefined;
+  TripStart: undefined;
+  TripDetails: undefined;
+}
+
 class App extends Component<Props & ConnectedProps<typeof connector>> {
   render() {
-    const isLoggedIn = this.props.userInfo ? true : false;
+    const userInfo = this.props.userInfo;
+    const isLoggedIn = userInfo ? true : false;
     return (
       <NavigationContainer>
         <ThemeProvider theme={theme}>
@@ -39,7 +52,10 @@ class App extends Component<Props & ConnectedProps<typeof connector>> {
               />
             )}
             {isLoggedIn && (
-              <Stack.Screen name="Home" component={AuthenticatedFlow} />
+              <Stack.Screen
+                name="Home"
+                component={() => <AuthenticatedFlow userInfo={userInfo} />}
+              />
             )}
           </Stack.Navigator>
         </ThemeProvider>

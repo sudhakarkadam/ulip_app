@@ -2,7 +2,7 @@ import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import CardComp from "../../../components/CardComp";
 import { Flex } from "../../../components/@styled/BaseElements";
-import { RootStackParamList } from "./AuthenticatedFlow";
+import { RootStackParamList } from "./Root";
 
 const personIcon = require("../../../icons/person-icon.png");
 
