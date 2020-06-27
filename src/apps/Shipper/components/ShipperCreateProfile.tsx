@@ -44,10 +44,6 @@ const ShipperCreateProfile = (props: AllProps) => {
           taskClickCallback={() => props.navigation.navigate("CompanyProfile")}
         ></CardComp>
       )}
-      <Flex mt={3} />
-      <CreateTripCard
-        createTripCallback={() => props.navigation.navigate("CreateTrip")}
-      />
     </Flex>
   );
 };
