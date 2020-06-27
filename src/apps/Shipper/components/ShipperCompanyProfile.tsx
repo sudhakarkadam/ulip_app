@@ -19,13 +19,29 @@ const connector = connect(
   mapDispatchToProps
 );
 
+const location = {
+  address: "Sector 4, Rohini",
+  city: "Delhi",
+  location_code: "loc_1",
+  map_ref: "ref",
+  name: "Delhi",
+  postal_code: "560035",
+  state: "Delhi"
+};
+
 const ShipperCompanyProfile = (props: Props) => {
+  const userId = props.userInfo ? props.userInfo.user_details.user_id : 0;
   return (
     <CompanyProfile
-      createCompanyCallback={async () => {
+      createCompanyCallback={async ({ name, regNumber }) => {
         try {
-          //@ts-ignore
-          await props.saveCompanyProfile({});
+          await props.saveCompanyProfile({
+            name,
+            regNumber,
+            role: "SHIPPER",
+            location,
+            userId
+          });
           props.navigation.navigate("MainTripListing");
         } catch {
           console.log("error");

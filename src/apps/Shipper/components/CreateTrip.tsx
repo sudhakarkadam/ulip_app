@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Image } from "react-native";
-import { connect, ConnectedProps } from "react-redux";
 import colors from "../../../theme/colors";
 import { Flex, FlexRow, Text } from "../../../components/@styled/BaseElements";
 import SelectComponent from "../../../components/SelectComponent";
 import CalendarComponent from "../../../components/CalendarComponent";
 import Input from "../../../components/InputComponent";
 import StyledButton from "../../../components/@styled/StyledButton";
-import { ShipperAppState } from "../reducers";
 import TripProgress from "./TripProgress";
 
 const openTruckImg = require("../../../images/open-truck.png");
@@ -15,20 +13,11 @@ const containerTruckImg = require("../../../images/container-truck.png");
 const trailerTruckImg = require("../../../images/trailer-truck.png");
 const openDarkTruckImg = require("../../../images/open-dark.png");
 
-const mapStateToProps = (state: ShipperAppState) => ({
-  userInfo: state.user.data
-});
-
-const connector = connect(
-  mapStateToProps,
-  {} as any
-);
-
 interface OwnProps {
-  createTripCallback: () => void;
+  createTripCallback: () => any;
 }
 
-type Props = ConnectedProps<typeof connector> & OwnProps;
+type Props = OwnProps;
 
 const TruckTypeComp = (props: {
   weight: string;
@@ -147,9 +136,6 @@ const CreateTrip = (props: Props) => {
   const [weight, setWeight] = useState("");
   const [lspProvider, setLspProvider] = useState("xyz");
   const [weightUnit, setWeightUnit] = useState("tonne");
-  useEffect(() => {
-    props.verifyOtp({});
-  }, []);
 
   const handleNextClick = () => {
     if (tripStep < 3) {
@@ -240,4 +226,4 @@ const CreateTrip = (props: Props) => {
   );
 };
 
-export default connector(CreateTrip);
+export default CreateTrip;
