@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../../../utils/actionCreator";
 import user from "../../../reducers/UserReducer";
+import { trips } from "../../../reducers/";
 import actions from "../actions/ShipperActions";
 import createReducer from "../../../utils/createReducer";
 import { CreateTripRequestModel } from "../models/ShipperApiModels";
@@ -19,7 +20,8 @@ const createTrip = createReducer<
 
 const reducers = {
   user,
-  createTrip
+  createTrip,
+  trips
 };
 
 export type ShipperAppState = ReducerMappedState<typeof reducers>;

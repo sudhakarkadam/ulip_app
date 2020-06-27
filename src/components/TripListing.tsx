@@ -47,7 +47,7 @@ enum IconWidget {
   PROFILE = "PROFILE"
 }
 
-const listingConfig = {
+export const listingConfig = {
   [ListingModes.UPCOMING]: {
     default: {
       title: "Upcoming trips",

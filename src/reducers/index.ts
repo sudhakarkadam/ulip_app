@@ -4,7 +4,7 @@ import { GetTripsResponse } from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
 
-const trips = createReducer<
+export const trips = createReducer<
   actions.GET_TRIPS_REQUEST,
   actions.GET_TRIPS_SUCCESS,
   actions.GET_TRIPS_ERROR,
