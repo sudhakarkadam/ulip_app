@@ -68,7 +68,7 @@ export default function LoginReducer(
 
     case actionTypes.SAVE_PROFILE_SUCCESS: {
       const oldData = state.data;
-      if (oldData && oldData.personalProfile) {
+      if (oldData) {
         oldData.personalProfile = {
           name: action.payload.res.name
         };
@@ -82,7 +82,7 @@ export default function LoginReducer(
 
     case actionTypes.SAVE_COMPANY_PROFILE_SUCCESS: {
       const newData = state.data;
-      if (newData && newData.companyProfile) {
+      if (newData) {
         newData.companyProfile = action.payload.res;
       }
       return {

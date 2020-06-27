@@ -1,12 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import CompanyProfile from "../../../components/CompanyProfile";
 import CreateTrip from "./CreateTrip";
-// import ShipperCreateProfile from "./ShipperCreateProfile";
 import { StackScreenProps } from "@react-navigation/stack";
 import ShipperPersonProfile from "./ShipperPersonProfile";
+import ShipperCompanyProfile from "./ShipperCompanyProfile";
 import ShipperHome from "./ShipperHome";
-
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
   CreateProfile: undefined;
@@ -17,37 +15,19 @@ export type RootStackParamList = {
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
-
-type Props = StackScreenProps<RootStackParamList, "CompanyProfile">;
 type CreateTripProps = StackScreenProps<RootStackParamList, "CreateTrip">;
 
 const AuthenticatedFlow = () => {
   return (
     <Stack.Navigator initialRouteName="ShipperHome">
       <Stack.Screen name="ShipperHome" component={ShipperHome} />
-      {/* <Stack.Screen
-        name="CreateProfile"
-        component={ShipperCreateProfile}
-        options={{ title: "Create Profile" }}
-      /> */}
       <Stack.Screen name="PersonProfile" component={ShipperPersonProfile} />
-      <Stack.Screen
-        name="CompanyProfile"
-        component={(props: Props) => (
-          <CompanyProfile
-            createCompanyCallback={() =>
-              props.navigation.navigate("CreateProfile")
-            }
-          />
-        )}
-      />
+      <Stack.Screen name="CompanyProfile" component={ShipperCompanyProfile} />
       <Stack.Screen
         name="CreateTrip"
         component={(props: CreateTripProps) => (
           <CreateTrip
-            createTripCallback={() =>
-              props.navigation.navigate("CreateProfile")
-            }
+            createTripCallback={() => props.navigation.navigate("ShipperHome")}
           />
         )}
         options={{ title: "Create Trip" }}
