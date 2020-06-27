@@ -94,7 +94,7 @@ export const listingConfig = {
   }
 };
 
-const CalendarComponent = ({ date }) => {
+const CalendarComponent = ({ date }: any) => {
   const momentDate = moment(date, moment.defaultFormatUtc);
   const month = momentDate.format("MMM");
   const day = momentDate.format("D");

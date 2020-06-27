@@ -50,7 +50,7 @@ const MainTripListing = (props: Props & OwnProps) => {
 
       {!!trips.length && (
         <Flex1 bg="white">
-          <TripList listingMode={ListingModes.PENDING} from={AllApps.LSP} />
+          <TripList listingMode={ListingModes.PENDING} from={AllApps.SHIPPER} />
           <Box position="absolute" bottom="15" right="20">
             <FloatingButton
               size="large"
