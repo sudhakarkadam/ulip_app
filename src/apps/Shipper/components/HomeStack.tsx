@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/prefer-interface */
 import React from "react";
-import {
-  createStackNavigator,
-  StackScreenProps
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import ShipperPersonProfile from "./ShipperPersonProfile";
 import ShipperCompanyProfile from "./ShipperCompanyProfile";
-import CreateTrip from "./CreateTrip";
 import ShipperCreateProfile from "./ShipperCreateProfile";
 import MainTripListing from "./MainTripListing";
+import ShipperCreateTrip from "./ShipperCreateTrip";
 
 export type HomeStackParamList = {
   CreateProfile: undefined;
@@ -18,8 +15,6 @@ export type HomeStackParamList = {
   MainTripListing: undefined;
 };
 const Stack = createStackNavigator<HomeStackParamList>();
-
-type CreateTripProps = StackScreenProps<HomeStackParamList, "CreateTrip">;
 
 const HomeStack = () => {
   return (
@@ -44,15 +39,11 @@ const HomeStack = () => {
         component={MainTripListing}
         options={{ title: "Home" }}
       />
-      <Stack.Screen name="CreateTrip" options={{ title: "Create Trip" }}>
-        {(props: CreateTripProps) => (
-          <CreateTrip
-            createTripCallback={() =>
-              props.navigation.navigate("MainTripListing")
-            }
-          />
-        )}
-      </Stack.Screen>
+      <Stack.Screen
+        name="CreateTrip"
+        component={ShipperCreateTrip}
+        options={{ title: "Create Trip" }}
+      />
     </Stack.Navigator>
   );
 };

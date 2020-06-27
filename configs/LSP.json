@@ -19,7 +19,7 @@
         {
           "type": "String",
           "fieldName": "APP_BASE_URL",
-          "value": ""
+          "value": "http://10.24.7.179"
         },
         {
           "type": "String",
@@ -40,7 +40,7 @@
         {
           "type": "String",
           "fieldName": "APP_BASE_URL",
-          "value": ""
+          "value": "http://10.24.7.179"
         },
         {
           "type": "String",

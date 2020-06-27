@@ -13,7 +13,7 @@ interface OwnProps {
 const PersonProfile = (props: OwnProps) => {
   const [name, setName] = useState("");
   return (
-    <FlexColumn p={6} backgroundColor="white" height={320}>
+    <FlexColumn p={6} mt={4} backgroundColor="white" height={320}>
       <Flex>
         <Text color={`${colors.black[2]}`} fontSize={4} fontWeight={700}>
           Personal details

@@ -2,7 +2,6 @@ export interface SelectItemType {
   label: string;
   value: string;
 }
-
 export interface SendOtpRequest {
   phone_number: string;
   role: "SHIPPER";
@@ -53,4 +52,62 @@ export interface UserDataModel {
     phone_number: string;
   };
   business_details: null | ShipperBusinessProfileModel;
+}
+export interface GetTripsRequest {
+  status: string[];
+  businessId: string;
+}
+export enum AllApps {
+  SHIPPER = "SHIPPER",
+  LSP = "LSP"
+}
+export enum TruckType {
+  OPEN = "OPEN",
+  CONTAINER = "CONTAINER",
+  TRAILOR = "TRAILOR"
+}
+
+export interface GetTripsResponse {
+  id: number;
+  pickUp_location: PickUplocation;
+  delivery_location: PickUplocation;
+  pickup_date: string;
+  good_type: string;
+  weight: number;
+  weight_unit: string;
+  status: RequestStatus;
+  lsp_name: string;
+  truck_type_preference: TruckType;
+  trip?: Trip;
+}
+export enum RequestStatus {
+  CREATED = "CREATED",
+  ACCEPTED = "ACCEPTED",
+  REJECTED = "REJECTED",
+  IN_PROGRESS = "IN_PROGRESS",
+  PENDING_POD = "PENDING_POD",
+  COMPLETED = "COMPLETED"
+}
+interface Trip {
+  id: number;
+  status: RequestStatus;
+  eta: string;
+  driver_name: string;
+  truck_name?: string;
+  truck_type: TruckType;
+  delay: boolean;
+  documents: {
+    id: number;
+    type: string;
+  }[];
+}
+
+interface PickUplocation {
+  id: number;
+  code?: string;
+  address?: string;
+  city: string;
+  state?: string;
+  map_ref: { ref: string };
+  country?: string;
 }

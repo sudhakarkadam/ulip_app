@@ -2,7 +2,6 @@ import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import CardComp from "../../../components/CardComp";
 import { Flex } from "../../../components/@styled/BaseElements";
-import CreateTripCard from "./CreateTripCard";
 import { connect, ConnectedProps } from "react-redux";
 import { ShipperAppState } from "../reducers";
 import { HomeStackParamList } from "./HomeStack";
@@ -44,10 +43,6 @@ const ShipperCreateProfile = (props: AllProps) => {
           taskClickCallback={() => props.navigation.navigate("CompanyProfile")}
         ></CardComp>
       )}
-      <Flex mt={3} />
-      <CreateTripCard
-        createTripCallback={() => props.navigation.navigate("CreateTrip")}
-      />
     </Flex>
   );
 };
