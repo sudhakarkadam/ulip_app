@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../../../utils/actionCreator";
-import user from "../../Shipper/reducers/LoginReducer";
-
+import common from "../../../reducers/index";
 const reducers = {
-  user
+  common
 };
 
 export type DriverAppState = ReducerMappedState<typeof reducers>;

@@ -9,15 +9,12 @@ import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-import { CommonState } from "../reducers";
 
 const { verifyOtp, sendOtp } = ActionCreators;
-const mapStateToProps = (state: CommonState) => ({
-  userInfo: state.user.data
-});
+
 const mapDispatchToProps = { verifyOtp, sendOtp };
 const connector = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 );
 

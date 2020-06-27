@@ -4,10 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
 import Login from "../../../components/LoginComponent";
 import AuthenticatedFlow from "./AuthenticatedFlow";
-import TripPage from "./TripPage";
+import { DriverAppState } from "../reducers";
 import { connect, ConnectedProps } from "react-redux";
-import ShipperActionCreators from "../../Shipper/actions/ShipperActionCreators";
-import { ShipperAppState } from "../../Shipper/reducers";
+
 import theme from "../../../theme";
 
 interface Props {
@@ -15,14 +14,14 @@ interface Props {
 }
 
 const Stack = createStackNavigator();
-const { verifyOtp } = ShipperActionCreators;
-const mapStateToProps = (state: ShipperAppState) => ({
-  userInfo: state.user.data
+
+const mapStateToProps = (state: DriverAppState) => ({
+  userInfo: state.common.user.data
 });
-const mapDispatchToProps = { verifyOtp };
+
 const connector = connect(
   mapStateToProps,
-  mapDispatchToProps
+  {}
 );
 
 class App extends Component<Props & ConnectedProps<typeof connector>> {
@@ -35,9 +34,7 @@ class App extends Component<Props & ConnectedProps<typeof connector>> {
             {!isLoggedIn && (
               <Stack.Screen
                 name="Login"
-                component={() => (
-                  <Login getUserInfo={() => this.props.verifyOtp({})} />
-                )}
+                component={Login}
                 options={{ headerShown: false }}
               />
             )}
