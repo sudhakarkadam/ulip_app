@@ -27,9 +27,9 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
       : 0;
   return (
     <CreateTrip
-      createTripCallback={async () => {
+      createTripCallback={async data => {
         //@ts-ignore
-        await props.createTrip({ business_id: businessId });
+        await props.createTrip({ business_id: businessId, ...data });
         props.navigation.navigate("MainTripListing");
         return;
       }}

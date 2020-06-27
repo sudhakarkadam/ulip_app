@@ -15,7 +15,7 @@ const trailerTruckImg = require("../../../images/trailer-truck.png");
 const openDarkTruckImg = require("../../../images/open-dark.png");
 
 interface OwnProps {
-  createTripCallback: () => any;
+  createTripCallback: (data: any) => any;
 }
 
 type Props = OwnProps;
@@ -117,7 +117,7 @@ const TruckTypeComp = (props: {
         <Flex flex={2}>
           <SelectComponent
             getSelectedValue={val => onChange(val, "unit")}
-            data={[{ label: "Tonnes", value: "tonne" }]}
+            data={[{ label: "Tonnes", value: "TONNES" }]}
             defaultValue={weightUnit}
           />
         </Flex>
@@ -130,21 +130,49 @@ const CreateTrip = (props: Props) => {
   const todayDate = new Date().toISOString().substr(0, 10);
   const [tripStep, setTripStep] = useState(0);
   const [fromValue, setFromValue] = useState("bg");
-  const [toValue, setToValue] = useState("del");
+  const [toValue, setToValue] = useState("mum");
   const [pickupDate, setPickUpDate] = useState(todayDate);
   const [goodsType, setGoodsType] = useState("rice");
   const [truckType, setTruckType] = useState("open");
   const [weight, setWeight] = useState("");
   const [lspProvider, setLspProvider] = useState("xyz");
-  const [weightUnit, setWeightUnit] = useState("tonne");
+  const [weightUnit, setWeightUnit] = useState("TONNES");
 
   const handleNextClick = () => {
     if (tripStep < 4) {
       setTripStep(step => step + 1);
       return;
     }
+    const location = {
+      address: "Sector 4, Rohini",
+      city: "bangalore",
+      location_code: "loc_1",
+      map_ref: "ref",
+      name: "Delhi",
+      postal_code: "560035",
+      state: "Delhi"
+    };
+    const pickLocation = {
+      address: "i dont know",
+      city: "mumbai",
+      location_code: "loc_2",
+      map_ref: "rsdfsfd",
+      name: "bangalore",
+      postal_code: "561035",
+      state: "Karnataka"
+    };
+    const data = {
+      delivery_location: location,
+      good_type: goodsType,
+      lsp_id: 5,
+      pickup_date: `${pickupDate}T09:18:34.000+0000`,
+      pickup_location: pickLocation,
+      truck_type: truckType.toUpperCase(),
+      weight: Number(weight),
+      weight_unit: weightUnit
+    };
 
-    props.createTripCallback();
+    props.createTripCallback(data);
     return;
   };
   return (
@@ -161,7 +189,7 @@ const CreateTrip = (props: Props) => {
             getSelectedValue={val => setFromValue(val)}
             data={[
               { label: "Bangalore", value: "bg" },
-              { label: "Delhi", value: "del" }
+              { label: "Mumbai", value: "mum" }
             ]}
             defaultValue={fromValue}
           />
@@ -171,7 +199,7 @@ const CreateTrip = (props: Props) => {
               label="To"
               data={[
                 { label: "Bangalore", value: "bg" },
-                { label: "Delhi", value: "del" }
+                { label: "Mumbai", value: "mum" }
               ]}
               defaultValue={toValue}
             />
@@ -225,12 +253,19 @@ const CreateTrip = (props: Props) => {
           pickupDate={pickupDate}
           truckType={truckType}
           truckWeight={weight}
+          truckUnit={weightUnit}
         />
       ) : null}
       <Flex width="92%" position="absolute" bottom={5} m={5}>
         <StyledButton
           height="40"
-          title={tripStep === 3 ? "preview" : "next"}
+          title={
+            tripStep === 3
+              ? "preview"
+              : tripStep === 4
+              ? "Send Request"
+              : "next"
+          }
           onPress={handleNextClick}
         />
       </Flex>

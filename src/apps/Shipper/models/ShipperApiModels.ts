@@ -7,15 +7,15 @@ export interface CreateTripRequestModel {
   lsp_id: number;
   pickup_date: {
     date: number;
-    day: number;
+    day?: number;
     hours?: number;
     minutes?: number;
-    month: number;
+    month?: number;
     nanos?: number;
     seconds?: number;
     time?: number;
     timezoneOffset?: number;
-    year: number;
+    year?: number;
   };
   pickup_location: LocationModel;
   truck_type: "OPEN" | "CONTAINER" | "TRAILER";
