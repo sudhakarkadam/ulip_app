@@ -2,25 +2,27 @@ import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import CardComp from "../../../components/CardComp";
 import { Flex } from "../../../components/@styled/BaseElements";
-import { RootStackParamList } from "./AuthenticatedFlow";
 import CreateTripCard from "./CreateTripCard";
 import { connect, ConnectedProps } from "react-redux";
 import ShipperActionCreators from "../actions/ShipperActionCreators";
 import { ShipperAppState } from "../reducers";
+import { HomeStackParamList } from "./HomeStack";
 
 const personIcon = require("../../../icons/person-icon.png");
 
 const { savePersonalProfile } = ShipperActionCreators;
-const mapStateToProps = (state: ShipperAppState) => ({
-  userInfo: state.user.data
-});
+const mapStateToProps = (state: ShipperAppState) => {
+  return {
+    userInfo: state.user.data
+  };
+};
 const mapDispatchToProps = { savePersonalProfile };
 const connector = connect(
   mapStateToProps,
   mapDispatchToProps
 );
 
-type AllProps = StackScreenProps<RootStackParamList, "ShipperHome"> &
+type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
   ConnectedProps<typeof connector>;
 
 const ShipperCreateProfile = (props: AllProps) => {
