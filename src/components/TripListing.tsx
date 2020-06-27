@@ -8,10 +8,6 @@ import {
   TouchableOpacity
 } from "./@styled/BaseElements";
 import colors from "../theme/colors";
-import profile from "../images/40px.png";
-import trailerTruck from "../images/trailerTruckColored.png";
-import containerTruck from "../images/containerTruckColored.png";
-import openTruck from "../images/openTruckColored.png";
 import Filter from "../images/sort.svg";
 import Sort from "../images/filter.svg";
 import {
@@ -25,6 +21,11 @@ import { CommonState } from "../reducers";
 import ActionCreators from "../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { FlatList } from "react-native";
+
+const profile = require("../images/40px.png");
+const trailerTruck = require("../images/trailerTruckColored.png");
+const containerTruck = require("../images/containerTruckColored.png");
+const openTruck = require("../images/openTruckColored.png");
 
 interface OwnProps {
   listingMode: ListingModes;
