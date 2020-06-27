@@ -2,7 +2,6 @@ import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import CardComp from "../../../components/CardComp";
 import { Flex } from "../../../components/@styled/BaseElements";
-import CreateTripCard from "./CreateTripCard";
 import { connect, ConnectedProps } from "react-redux";
 import { ShipperAppState } from "../reducers";
 import { HomeStackParamList } from "./HomeStack";
