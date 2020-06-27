@@ -2,7 +2,7 @@ const colors: any = {
   white: "#fff",
   reds: ["#bf2600", "#de350b", "#ff5630", "#ffbdad", "#ffebe5"],
   oranges: ["#ff8b00", "#ffab00", "#fff0b3", "#fffae6"],
-  blues: ["#262a34", "#172b4d", "#42526d", "#6b778b", "#7a8699"],
+  blues: ["#262a34", "#172b4d", "#42526d", "#6b778b", "#7a8699", "#172B4D"],
   greens: ["#064", "#00875a", "#36b37e", "#abf5d1", "#e2ffee"],
   grays: [
     "#262626",

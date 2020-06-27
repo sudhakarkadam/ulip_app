@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { connect, ConnectedProps } from "react-redux";
-import ShipperActionCreators from "../actions/ShipperActionCreators";
+import ShipperActionCreators from "../actions/DriverActionCreators";
 import { ShipperAppState } from "../reducers";
 
 const { login } = ShipperActionCreators;
