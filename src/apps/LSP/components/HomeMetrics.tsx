@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FlexColumn,
   FlexRow,
@@ -7,6 +7,9 @@ import {
 import { PrimaryText } from "../../../components/@styled/Text";
 import colors from "../../../theme/colors";
 import styled from "styled-components";
+import { LSPAppState } from "../reducer";
+import LSPActionCreators from "../actions/LSPActionCreators";
+import { connect, ConnectedProps } from "react-redux";
 
 const MetricBox = styled(Flex)`
   background-color: white;
@@ -18,7 +21,22 @@ const MetricBox = styled(Flex)`
   padding: 10px;
 `;
 
-const HomeMetrics = () => {
+const { getMetrics } = LSPActionCreators;
+
+const mapStateToProps = (state: LSPAppState) => ({
+  HomeMetrics: state.HomeMetrics
+});
+const mapDispatchToProps = { getMetrics };
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+const HomeMetrics = (props: ConnectedProps<typeof connector>) => {
+  useEffect(() => {
+    props.getMetrics({});
+  }, []);
+  const metrics = props.HomeMetrics.data;
   return (
     <FlexColumn
       backgroundColor={colors.grays[2]}
@@ -31,7 +49,7 @@ const HomeMetrics = () => {
           <PrimaryText
             style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
           >
-            14
+            {metrics.transport_service_request.created}
           </PrimaryText>
         </MetricBox>
         <MetricBox>
@@ -39,7 +57,7 @@ const HomeMetrics = () => {
           <PrimaryText
             style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
           >
-            23
+            {metrics.trucks.type1 + metrics.trucks.type2}
           </PrimaryText>
         </MetricBox>
       </FlexRow>
@@ -49,7 +67,7 @@ const HomeMetrics = () => {
           <PrimaryText
             style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
           >
-            25
+            {metrics.transport_service_request.in_progress}
           </PrimaryText>
         </MetricBox>
         <MetricBox>
@@ -57,7 +75,7 @@ const HomeMetrics = () => {
           <PrimaryText
             style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
           >
-            7
+            {metrics.transport_service_request.pending_pod}
           </PrimaryText>
         </MetricBox>
       </FlexRow>
@@ -65,4 +83,4 @@ const HomeMetrics = () => {
   );
 };
 
-export default HomeMetrics;
+export default connector(HomeMetrics);
