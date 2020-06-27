@@ -8,7 +8,13 @@ const Stack = createStackNavigator();
 const InTransitStack = () => {
   return (
     <Stack.Navigator initialRouteName="InTransitListing">
-      <Stack.Screen name="InTransitListing" component={InTransitListing} />
+      <Stack.Screen
+        name="InTransitListing"
+        component={InTransitListing}
+        options={{
+          title: "In-transit"
+        }}
+      />
       <Stack.Screen
         name="CreateTrip"
         component={ShipperCreateTrip}
