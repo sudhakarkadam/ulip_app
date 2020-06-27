@@ -44,10 +44,7 @@ const HomeStack = () => {
         component={MainTripListing}
         options={{ title: "Home" }}
       />
-      <Stack.Screen
-        name="CreateTrip"
-        options={{ title: "Create Trip" }}
-      >
+      <Stack.Screen name="CreateTrip" options={{ title: "Create Trip" }}>
         {(props: CreateTripProps) => (
           <CreateTrip
             createTripCallback={() =>
