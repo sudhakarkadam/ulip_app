@@ -24,6 +24,22 @@ const ShipperActionCreators = {
     ],
     api.verifyOtp
   ),
+  savePersonalProfile: createAsyncAction(
+    [
+      actions.SAVE_PROFILE_REQUEST,
+      actions.SAVE_PROFILE_SUCCESS,
+      actions.SAVE_PROFILE_ERROR
+    ],
+    api.savePersonalProfile
+  ),
+  saveCompanyProfile: createAsyncAction(
+    [
+      actions.SAVE_COMPANY_PROFILE_REQUEST,
+      actions.SAVE_COMPANY_PROFILE_SUCCESS,
+      actions.SAVE_COMPANY_PROFILE_ERROR
+    ],
+    api.saveCompanyProfile
+  ),
   logout: () => createAction(actions.LOGOUT, {}, {})
 };
 
