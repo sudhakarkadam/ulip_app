@@ -5,7 +5,6 @@ import colors from "../../../theme/colors";
 import { Flex, FlexRow, Text } from "../../../components/@styled/BaseElements";
 import SelectComponent from "../../../components/SelectComponent";
 import CalendarComponent from "../../../components/CalendarComponent";
-import ShipperActionCreators from "../actions/ShipperActionCreators";
 import Input from "../../../components/InputComponent";
 import StyledButton from "../../../components/@styled/StyledButton";
 import { ShipperAppState } from "../reducers";
@@ -16,14 +15,13 @@ const containerTruckImg = require("../../../images/container-truck.png");
 const trailerTruckImg = require("../../../images/trailer-truck.png");
 const openDarkTruckImg = require("../../../images/open-dark.png");
 
-const { verifyOtp } = ShipperActionCreators;
 const mapStateToProps = (state: ShipperAppState) => ({
   userInfo: state.user.data
 });
-const mapDispatchToProps = { verifyOtp };
+
 const connector = connect(
   mapStateToProps,
-  mapDispatchToProps
+  {} as any
 );
 
 interface OwnProps {

@@ -4,22 +4,18 @@ import CardComp from "../../../components/CardComp";
 import { Flex } from "../../../components/@styled/BaseElements";
 import CreateTripCard from "./CreateTripCard";
 import { connect, ConnectedProps } from "react-redux";
-import ShipperActionCreators from "../actions/ShipperActionCreators";
 import { ShipperAppState } from "../reducers";
 import { HomeStackParamList } from "./HomeStack";
 
 const personIcon = require("../../../icons/person-icon.png");
-
-const { savePersonalProfile } = ShipperActionCreators;
 const mapStateToProps = (state: ShipperAppState) => {
   return {
     userInfo: state.user.data
   };
 };
-const mapDispatchToProps = { savePersonalProfile };
 const connector = connect(
   mapStateToProps,
-  mapDispatchToProps
+  {} as any
 );
 
 type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
@@ -27,8 +23,8 @@ type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
 
 const ShipperCreateProfile = (props: AllProps) => {
   const { userInfo } = props;
-  const personVerified = userInfo && userInfo.personalProfile ? true : false;
-  const comapnyVerified = userInfo && userInfo.companyProfile ? true : false;
+  const personVerified = userInfo && userInfo.user_details.name ? true : false;
+  const comapnyVerified = userInfo && userInfo.business_details ? true : false;
   return (
     <Flex>
       {!personVerified && (

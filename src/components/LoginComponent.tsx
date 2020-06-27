@@ -7,12 +7,21 @@ import BackBtn from "../images/arrow-left-circle.svg";
 import StyledButton from "../components/@styled/StyledButton";
 import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
+import { connect, ConnectedProps } from "react-redux";
+import ActionCreators from "../actions/ActionCreators";
+import { CommonState } from "../reducers";
 
-interface OwnProps {
-  getUserInfo: (otp: string) => Promise<any>;
-}
+const { verifyOtp, sendOtp } = ActionCreators;
+const mapStateToProps = (state: CommonState) => ({
+  userInfo: state.user.data
+});
+const mapDispatchToProps = { verifyOtp, sendOtp };
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
-const LoginComponent = (props: OwnProps) => {
+const LoginComponent = (props: ConnectedProps<typeof connector>) => {
   const [phoneNumber, editPhoneNumber] = useState("");
   const [phoneConfirmed, setPhoneConfirmed] = useState(false);
   const [otpConfirmed] = useState(false);
@@ -79,7 +88,10 @@ const LoginComponent = (props: OwnProps) => {
                   size={42}
                   space={6}
                   codeLength={6}
-                  onFulfill={code => props.getUserInfo(code)}
+                  onFulfill={async code => {
+                    await props.verifyOtp({ otp: code, phone: phoneNumber });
+                    return Promise.resolve(true);
+                  }}
                   codeInputStyle={{
                     borderWidth: 0,
                     fontSize: 18,
@@ -103,7 +115,10 @@ const LoginComponent = (props: OwnProps) => {
           <Flex style={{ paddingBottom: 10 }}>
             <StyledButton
               title="Confirm"
-              onPress={() => setPhoneConfirmed(true)}
+              onPress={async () => {
+                await props.sendOtp({ phone: phoneNumber });
+                setPhoneConfirmed(true);
+              }}
               style={{
                 textAlign: "center",
                 color: `${colors.white}`,
@@ -118,4 +133,4 @@ const LoginComponent = (props: OwnProps) => {
   );
 };
 
-export default LoginComponent;
+export default connector(LoginComponent);
