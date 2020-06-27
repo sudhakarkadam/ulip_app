@@ -1,7 +1,11 @@
 import actions from "./Actions";
 import api from "../api/Api";
 
-import { createAsyncAction, GetActionTypes, createAction } from "../utils/actionCreator";
+import {
+  createAsyncAction,
+  GetActionTypes,
+  createAction
+} from "../utils/actionCreator";
 
 const ActionCreators = {
   sendOtp: createAsyncAction(

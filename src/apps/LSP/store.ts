@@ -7,9 +7,7 @@ const logger = require("redux-logger");
 
 declare const __DEV__: boolean;
 
-const middlewares = [
-  thunk as ThunkMiddleware<CommonState, AllObjectTypes>
-];
+const middlewares = [thunk as ThunkMiddleware<CommonState, AllObjectTypes>];
 
 if (__DEV__) {
   middlewares.push(logger.createLogger());

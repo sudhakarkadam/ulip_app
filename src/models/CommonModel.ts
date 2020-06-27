@@ -52,7 +52,7 @@ export interface UserDataModel {
     phone_number: string;
   };
   business_details: null | ShipperBusinessProfileModel;
-};
+}
 export interface GetTripsRequest {
   status: string[];
   businessId: string;
