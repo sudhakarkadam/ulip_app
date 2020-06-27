@@ -5,6 +5,7 @@ import { Flex, FlexRow, Text } from "../../../components/@styled/BaseElements";
 import SelectComponent from "../../../components/SelectComponent";
 import CalendarComponent from "../../../components/CalendarComponent";
 import Input from "../../../components/InputComponent";
+import TripDetails from "../../../components/TripDetails";
 import StyledButton from "../../../components/@styled/StyledButton";
 import TripProgress from "./TripProgress";
 
@@ -132,13 +133,13 @@ const CreateTrip = (props: Props) => {
   const [toValue, setToValue] = useState("del");
   const [pickupDate, setPickUpDate] = useState(todayDate);
   const [goodsType, setGoodsType] = useState("rice");
-  const [truckType, setTruckType] = useState("container");
+  const [truckType, setTruckType] = useState("open");
   const [weight, setWeight] = useState("");
   const [lspProvider, setLspProvider] = useState("xyz");
   const [weightUnit, setWeightUnit] = useState("tonne");
 
   const handleNextClick = () => {
-    if (tripStep < 3) {
+    if (tripStep < 4) {
       setTripStep(step => step + 1);
       return;
     }
@@ -147,8 +148,12 @@ const CreateTrip = (props: Props) => {
     return;
   };
   return (
-    <Flex position="relative" height="100%">
-      <TripProgress currentStep={tripStep} />
+    <Flex
+      backgroundColor={tripStep === 4 ? "white" : ""}
+      position="relative"
+      height="100%"
+    >
+      {tripStep !== 4 && <TripProgress currentStep={tripStep} />}
       {tripStep === 0 ? (
         <Flex m={5}>
           <SelectComponent
@@ -213,6 +218,13 @@ const CreateTrip = (props: Props) => {
             }
             return setWeightUnit(val);
           }}
+        />
+      ) : null}
+      {tripStep === 4 ? (
+        <TripDetails
+          pickupDate={pickupDate}
+          truckType={truckType}
+          truckWeight={weight}
         />
       ) : null}
       <Flex width="92%" position="absolute" bottom={5} m={5}>

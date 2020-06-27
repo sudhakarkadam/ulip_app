@@ -18,7 +18,7 @@ const Stack = createStackNavigator<HomeStackParamList>();
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName="MainTripListing">
+    <Stack.Navigator initialRouteName="CreateProfile">
       <Stack.Screen
         name="CreateProfile"
         component={ShipperCreateProfile}

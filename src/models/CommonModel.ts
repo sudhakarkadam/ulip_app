@@ -25,7 +25,7 @@ export interface SendOtpResponse {
 }
 
 export interface ShipperBusinessProfileModel {
-  business_id: number;
+  business_id?: number;
   business_name: string;
   location_details: LocationModel;
   reg_info: {

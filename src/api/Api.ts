@@ -59,9 +59,8 @@ export default {
     userId: number;
   }) {
     return http.post<ShipperBusinessProfileModel, ShipperBusinessProfileModel>(
-      urls.sendOtp,
+      urls.saveCompanyProfile,
       {
-        business_id: 0,
         business_name: req.name,
         location_details: req.location,
         reg_info: {

@@ -5,7 +5,6 @@ import {
   Text,
   Flex,
   FlexSpaceBetween,
-  FlexRow,
   FlexVerticallyCenter
 } from "./@styled/BaseElements";
 import Tag from "./@styled/Tag";

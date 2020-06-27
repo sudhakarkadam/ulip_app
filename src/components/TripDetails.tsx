@@ -14,7 +14,15 @@ const Card = styled(Flex)`
   margin-horizontal: 25;
 `;
 
-const TripDetails = () => {
+interface OwnProps {
+  pickupDate?: string;
+  truckType?: string;
+  truckWeight?: string;
+  truckUnit?: string;
+}
+
+const TripDetails = (props: OwnProps) => {
+  const { pickupDate, truckType, truckWeight, truckUnit } = props;
   return (
     <>
       <Card
@@ -51,19 +59,19 @@ const TripDetails = () => {
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Pickup Date</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          30/06/2020
+          {pickupDate || "30/06/2020"}
         </PrimaryText>
       </Card>
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Truck Type</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          Open
+          {truckType || "Open"}
         </PrimaryText>
       </Card>
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Required Weight</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          2.5 Ton
+          {`${truckWeight} ${truckUnit}` || "2.5 Ton"}
         </PrimaryText>
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>

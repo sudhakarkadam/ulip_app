@@ -1,9 +1,19 @@
 import actions from "./ShipperActions";
-
-import { GetActionTypes, createAction } from "../../../utils/actionCreator";
+import api from "../api/ShipperApi";
+import {
+  GetActionTypes,
+  createAsyncAction
+} from "../../../utils/actionCreator";
 
 const ShipperActionCreators = {
-  logout: () => createAction(actions.LOGOUT, {}, {})
+  createTrip: createAsyncAction(
+    [
+      actions.CREATE_TRIP_REQUEST,
+      actions.CREATE_TRIP_SUCCESS,
+      actions.CREATE_TRIP_ERROR
+    ],
+    api.createTrip
+  )
 };
 
 export default ShipperActionCreators;
