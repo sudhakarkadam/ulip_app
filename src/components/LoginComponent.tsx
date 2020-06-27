@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, TouchableOpacity } from "./@styled/BaseElements";
+import { Flex, TouchableOpacity, Box } from "./@styled/BaseElements";
 import { Text, TextInput } from "react-native";
 import colors from "../theme/colors";
 import Logo from "../images/group.svg";
@@ -18,14 +18,17 @@ const LoginComponent = (props: OwnProps) => {
   const [otpConfirmed] = useState(false);
 
   return (
-    <Flex mx={6} flex={1}>
+    <Flex flex={1}>
+      <Box position="absolute" mx={6} mt={30}>
+        <Logo width={300} height={66} />
+      </Box>
+
       {phoneConfirmed && !otpConfirmed && (
         <TouchableOpacity my={30} onPress={() => setPhoneConfirmed(false)}>
           <BackBtn width={32} height={32} />
         </TouchableOpacity>
       )}
-      <Flex flex={1} justifyContent="space-evenly">
-        <Logo width={300} height={66} />
+      <Flex mx={6} flex={1} justifyContent="center">
         {!phoneConfirmed && (
           <Flex>
             <PrimaryText style={{ textTransform: "uppercase" }}>
