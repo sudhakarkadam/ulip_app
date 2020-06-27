@@ -25,7 +25,7 @@ export default class TripPage extends Component {
   render() {
     return (
       <ScrollView>
-        <Flex>
+        <Flex mt={4}>
           <Card>
             <FlexRow p={7} backgroundColor="white">
               <FlexColumn flex={1.8}>

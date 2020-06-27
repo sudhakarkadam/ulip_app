@@ -10,7 +10,7 @@ type ScreenProps = StackScreenProps<RootStackParamList, "CreateProfile">;
 
 const DriverCreateProfile = (props: ScreenProps) => {
   return (
-    <Flex>
+    <Flex mt={4}>
       <CardComp
         cardHeading="STEP 1"
         taskHeading="Profile set up"
