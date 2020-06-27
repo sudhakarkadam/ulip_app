@@ -7,7 +7,9 @@ import {
   UserDataModel,
   SavePersonalProfileRequest,
   ShipperBusinessProfileModel,
-  LocationModel
+  LocationModel,
+  GetTripsRequest,
+  GetTripsResponse
 } from "../models/CommonModel";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
@@ -17,7 +19,11 @@ const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
   verifyOtp: `${endpoint}/ulip/user/verify`,
   savePersonalProfile: `${endpoint}/ulip/user`,
-  saveCompanyProfile: `${endpoint}/ulip/business`
+  saveCompanyProfile: `${endpoint}/ulip/business`,
+  login: `${endpoint}/ulip/login`,
+  logout: `${endpoint}/ulip/logout`,
+  getTrips: (businessId: string) =>
+    `${endpoint}/ulip/transport_service_request/business/${businessId}`
 };
 
 export const getEndpoint = () => endpoint;
@@ -63,6 +69,33 @@ export default {
         },
         role: req.role,
         user_id: req.userId
+      }
+      );
+    },
+  login: () => {
+    return http.post<{}, {}>(
+      urls.login,
+      {},
+      {
+        headers: {}
+      }
+    );
+  },
+  logoutApi: () => {
+    return http.put<{}, {}>(
+      urls.logout,
+      {},
+      {
+        headers: {}
+      }
+    );
+  },
+  getTrips: (payload: GetTripsRequest) => {
+    return http.get<{ status: string }, GetTripsResponse[]>(
+      urls.getTrips(payload.businessId),
+      { status: payload.status.join(",") },
+      {
+        headers: {}
       }
     );
   }
