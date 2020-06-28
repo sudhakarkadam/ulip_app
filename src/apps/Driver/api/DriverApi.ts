@@ -1,34 +1,13 @@
-import { NativeModules } from "react-native";
 import http from "../../../utils/http";
+import { DriverTrips } from "../models/DriverTrips";
 
-const BuildConfig = NativeModules.RNBuildConfig || {};
-// const mockURL = 'http://localhost:8081/src/mocks';
-const endpoint = BuildConfig.APP_BASE_URL;
+const endpoint = "http://10.24.7.179";
 
 const urls = {
-  login: `${endpoint}/v2/login`,
-  logout: `${endpoint}/v1/logout`
+  getTrips: `${endpoint}/ulip/transport_service_request/search`
 };
 
-export const getEndpoint = () => endpoint;
-
-export default {
-  login() {
-    return http.post<{}, {}>(
-      urls.login,
-      {},
-      {
-        headers: {}
-      }
-    );
-  },
-  logoutApi() {
-    return http.put<{}, {}>(
-      urls.logout,
-      {},
-      {
-        headers: {}
-      }
-    );
-  }
-};
+export const getTrips = (driverPhoneNumber: string) =>
+  http.get<{}, DriverTrips>(urls.getTrips, {
+    driverPhoneNumber
+  });

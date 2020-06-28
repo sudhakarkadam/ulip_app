@@ -1,17 +1,21 @@
 import actions from "./DriverActions";
-import api from "../api/DriverApi";
+import * as api from "../api/DriverApi";
 
 import {
   createAsyncAction,
-  GetActionTypes,
-  createAction
+  GetActionTypes
 } from "../../../utils/actionCreator";
 
-const DriverActionCreators = {
-  logout: () => createAction(actions.LOGOUT, {}, {})
+export const DriverActionCreators = {
+  getTrips: createAsyncAction(
+    [
+      actions.GET_TRIPS_REQUEST,
+      actions.GET_TRIPS_SUCCESS,
+      actions.GET_TRIPS_ERROR
+    ],
+    api.getTrips
+  )
 };
-
-export default DriverActionCreators;
 
 export type DriverActionObjectTypes<
   K extends keyof typeof DriverActionCreators

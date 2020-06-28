@@ -3,12 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
 import Login from "../../../components/LoginComponent";
-import DriverCreateProfile from "./DriverCreateProfile";
 import AuthenticatedFlow from "./AuthenticatedFlow";
-import DriverPersonProfile from "./DriverPersonProfile";
-import TripStartPage from "./TripStartPage";
-import TripDetailsPage from "./TripDetailsPage";
-import TripPage from "./TripPage";
 import { DriverAppState } from "../reducers";
 import { connect, ConnectedProps } from "react-redux";
 
@@ -18,7 +13,12 @@ interface Props {
   test: string;
 }
 
-const Stack = createStackNavigator();
+// eslint-disable-next-line @typescript-eslint/prefer-interface
+type DriverRootStack = {
+  Login: undefined;
+  Home: undefined;
+};
+const Stack = createStackNavigator<DriverRootStack>();
 
 const mapStateToProps = (state: DriverAppState) => ({
   userInfo: state.common.user.data
@@ -49,10 +49,9 @@ class App extends Component<Props & ConnectedProps<typeof connector>> {
               />
             )}
             {isLoggedIn && (
-              <Stack.Screen
-                name="Home"
-                component={() => <AuthenticatedFlow userInfo={userInfo} />}
-              />
+              <Stack.Screen name="Home">
+                {() => <AuthenticatedFlow userInfo={userInfo} />}
+              </Stack.Screen>
             )}
           </Stack.Navigator>
         </ThemeProvider>

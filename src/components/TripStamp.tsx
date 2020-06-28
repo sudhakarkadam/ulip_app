@@ -12,16 +12,16 @@ import DestinationIcon from "../images/location.svg";
 import TrailerIcon from "../images/trailer.svg";
 import CheckIcon from "../images/check-circle-1.svg";
 
-interface Place {
+export interface Place {
   name: string;
   state?: string;
   description?: string;
-  relativeDistance: number;
+  relativeDistance?: number;
   address?: string;
   tag?: string;
 }
 
-interface CrossedPlace extends Place {
+export interface CrossedPlace extends Place {
   crossed: boolean;
 }
 
@@ -147,11 +147,13 @@ export const TripStamp: React.FC<Props> = ({ places, track }) => {
                       <CheckIcon />
                     ) : (
                       <LightSubText>
-                        {item.relativeDistance || 0} KM
+                        {item.relativeDistance === undefined
+                          ? null
+                          : `${item.relativeDistance} KM`}
                       </LightSubText>
                     )}
                   </FlexSpaceBetween>
-                  {item.address && (
+                  {!!item.address && (
                     <LightSubText fontSize={12}>{item.address}</LightSubText>
                   )}
                 </Box>

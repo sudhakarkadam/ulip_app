@@ -37,7 +37,7 @@ const CardComp = (props: OwnProps) => {
           </FlexRow>
           <FlexRow mt={4}>
             <StyledButton
-              width="120"
+              width={120}
               title={clickLabel || "start"}
               onPress={() => {
                 taskClickCallback();
