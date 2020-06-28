@@ -21,7 +21,7 @@ export const driverTrips: DriverTrips = [
     truck_type_preference: "OPEN",
     trip: {
       id: 5,
-      status: "COMPLETED",
+      status: "TRIP_STARTED",
       eta: "2020-06-27T21:05:53.000+0000",
       driver_name: "driver1-ph",
       truck_name: null,

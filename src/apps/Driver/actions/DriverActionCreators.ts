@@ -23,6 +23,11 @@ export const DriverActionCreators = {
       actions.GET_UPDATE_TRIP_ERROR
     ],
     api.updateTrip
+  ),
+
+  upload: createAsyncAction(
+    [actions.UPLOAD_REQUEST, actions.UPLOAD_SUCCESS, actions.UPLOAD_ERROR],
+    api.upload
   )
 };
 
