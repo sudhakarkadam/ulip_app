@@ -24,6 +24,7 @@ const Card = styled(Flex)`
 interface OwnProps {
   id?: string;
   pickupDate?: Date;
+  pickupDateString?: string;
   truckType?: string;
   truckWeight?: string;
   truckUnit?: string;
@@ -39,7 +40,8 @@ const TripDetails = (props: OwnProps) => {
     truckUnit,
     id,
     places,
-    lspProvider
+    lspProvider,
+    pickupDateString
   } = props;
 
   return (
@@ -73,7 +75,7 @@ const TripDetails = (props: OwnProps) => {
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Pickup Date</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {pickupDate}
+          {pickupDateString || pickupDate?.toLocaleDateString()}
         </PrimaryText>
       </Card>
       <Card

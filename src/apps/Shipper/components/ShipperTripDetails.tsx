@@ -17,7 +17,7 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
     <Flex height="100%" backgroundColor="white">
       <TripDetails
         id={tripData.id as any}
-        pickupDate={tripData.pickup_date as any}
+        pickupDateString={tripData.pickup_date as any}
         truckType={tripData.truck_type_preference}
         truckWeight={tripData.weight as any}
         truckUnit={tripData.weight_unit}
