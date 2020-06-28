@@ -43,21 +43,23 @@ const TripDetails = (props: OwnProps) => {
   } = props;
   return (
     <>
-      <Card
-        style={{
-          paddingVertical: 10,
-          paddingHorizontal: 25,
-          marginHorizontal: 0,
-          borderStyle: "dashed", // dashed border not coming.
-          borderRadius: 1,
-          flexDirection: "row"
-        }}
-      >
-        <PrimaryText style={{ textTransform: "uppercase" }}>
-          trip id:{" "}
-        </PrimaryText>
-        <PrimaryText style={{ fontWeight: "bold" }}>{id || "NA"}</PrimaryText>
-      </Card>
+      {id && (
+        <Card
+          style={{
+            paddingVertical: 10,
+            paddingHorizontal: 25,
+            marginHorizontal: 0,
+            borderStyle: "dashed", // dashed border not coming.
+            borderRadius: 1,
+            flexDirection: "row"
+          }}
+        >
+          <PrimaryText style={{ textTransform: "uppercase" }}>
+            trip id:{" "}
+          </PrimaryText>
+          <PrimaryText style={{ fontWeight: "bold" }}>{id}</PrimaryText>
+        </Card>
+      )}
       <Card>{!!places && <TripStamp places={places} />}</Card>
       {lspProvider && (
         <Card style={{ paddingVertical: 7 }}>

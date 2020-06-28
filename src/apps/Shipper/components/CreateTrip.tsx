@@ -132,23 +132,23 @@ const TruckTypeComp = (props: {
           />
         </Flex>
         <Flex
-          onTouchEnd={() => onChange("trailer", "truckType")}
+          onTouchEnd={() => onChange("trailor", "truckType")}
           backgroundColor={`${
-            truckType === "trailer" ? colors.black[1] : null
+            truckType === "trailor" ? colors.black[1] : null
           }`}
           flex={1}
           p={5}
         >
           <Flex mb={3} ml={3}>
             <Text
-              color={truckType === "trailer" ? "white" : `${colors.black[1]}`}
+              color={truckType === "trailor" ? "white" : `${colors.black[1]}`}
             >
               Trailer
             </Text>
           </Flex>
           <Image
             style={{ width: 70, height: 28 }}
-            source={truckType === "trailer" ? trailerLightImg : trailerTruckImg}
+            source={truckType === "trailor" ? trailerLightImg : trailerTruckImg}
           />
         </Flex>
       </FlexRow>
@@ -208,10 +208,7 @@ const CreateTrip = (props: Props) => {
       lsp_id: Number(lspProvider),
       pickup_date: `${pickupDate}`,
       pickup_location: LocationsList.filter(loc => loc.value === fromValue)[0],
-      truck_type:
-        truckType.toUpperCase() === "TRAILER"
-          ? "TRAILOR"
-          : truckType.toUpperCase(),
+      truck_type: truckType.toUpperCase(),
       weight: Number(weight),
       weight_unit: weightUnit
     };
@@ -219,6 +216,19 @@ const CreateTrip = (props: Props) => {
     props.createTripCallback(data);
     return;
   };
+
+  const allPlaces = [
+    ...LocationsList.filter(loc => loc.value === fromValue).map(loc => ({
+      name: loc.name,
+      state: loc.state,
+      address: loc.address
+    })),
+    ...LocationsList.filter(loc => loc.value === toValue).map(loc => ({
+      name: loc.name,
+      state: loc.state,
+      address: loc.address
+    }))
+  ];
   return (
     <>
       {tripStep !== 4 && (
@@ -305,18 +315,24 @@ const CreateTrip = (props: Props) => {
           <Flex height="100%" backgroundColor={tripStep === 4 ? "white" : ""}>
             <TripDetails
               pickupDate={new Date(pickupDate)}
-              truckType={truckType}
+              truckType={truckType.toUpperCase()}
               truckWeight={weight}
               truckUnit={weightUnit}
               lspProvider={
                 lspList.filter(lsp => lsp.value === lspProvider)[0].label
               }
+              places={allPlaces}
             />
             <FlexRow m={5}>
               <StyledButton
                 title="Modify Request"
                 color={`${colors.black[0]}`}
-                style={{ flex: 1, backgroundColor: "white", borderColor: "" }}
+                style={{
+                  flex: 1,
+                  backgroundColor: "white",
+                  borderColor: `${colors.black[1]}`,
+                  borderWidth: 1
+                }}
                 onPress={() => setTripStep(0)}
               />
               <StyledButton
