@@ -55,17 +55,17 @@ const TripRequests = props => (
   <TripList
     listingMode={ListingModes.PENDING_REQUESTS}
     from={AllApps.LSP}
-    onRowClick={item =>
-      props.navigation.navigate("TripAcceptPage", { tripDetails: item })
+    onRowClick={
+      () => props.navigation.navigate("TripAcceptPage")
+      // id => {
+      //needs inplementation
+      // }
     }
   />
 );
 
 const TripAcceptPage = props => (
-  <TripAccept
-    onAction={() => props.navigation.navigate("TripRequests")}
-    tripDetails={props.route.params.tripDetails}
-  />
+  <TripAccept onAction={() => props.navigation.goBack()} />
 );
 
 const HeaderButtons = () => (
