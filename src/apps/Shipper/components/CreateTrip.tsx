@@ -304,7 +304,7 @@ const CreateTrip = (props: Props) => {
         <ScrollView>
           <Flex height="100%" backgroundColor={tripStep === 4 ? "white" : ""}>
             <TripDetails
-              pickupDate={pickupDate}
+              pickupDate={new Date(pickupDate)}
               truckType={truckType}
               truckWeight={weight}
               truckUnit={weightUnit}

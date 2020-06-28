@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Flex, Box, Image } from "./@styled/BaseElements";
 import colors from "../theme/colors";
 import { PrimaryText } from "./@styled/Text";
-import { TripStamp } from "./TripStamp";
+import { TripStamp, Place } from "./TripStamp";
 import { TruckType } from "../models/CommonModel";
 import { Flex1Column } from "./@styled/Flex";
 import Tag from "./@styled/Tag";
@@ -22,15 +22,25 @@ const Card = styled(Flex)`
 `;
 
 interface OwnProps {
-  pickupDate?: string;
+  id?: string;
+  pickupDate?: Date;
   truckType?: string;
   truckWeight?: string;
   truckUnit?: string;
   lspProvider?: string;
+  places?: Place[];
 }
 
 const TripDetails = (props: OwnProps) => {
-  const { pickupDate, truckType, truckWeight, truckUnit, lspProvider } = props;
+  const {
+    pickupDate,
+    truckType,
+    truckWeight,
+    truckUnit,
+    id,
+    places,
+    lspProvider
+  } = props;
   return (
     <>
       <Card
@@ -46,24 +56,9 @@ const TripDetails = (props: OwnProps) => {
         <PrimaryText style={{ textTransform: "uppercase" }}>
           trip id:{" "}
         </PrimaryText>
-        <PrimaryText style={{ fontWeight: "bold" }}>
-          TR29182917182717
-        </PrimaryText>
+        <PrimaryText style={{ fontWeight: "bold" }}>{id || "NA"}</PrimaryText>
       </Card>
-      <Card>
-        <TripStamp
-          places={[
-            { name: "Bangalore", state: "Karnataka", relativeDistance: 0 },
-            {
-              name: "Mumbai",
-              state: "Maharashtra",
-              relativeDistance: 1239,
-              address:
-                "ICC Chambers, Saki Bihar Rd, Muranjan Wadi, Marol, Andheri East, Mumbai, Maharashtra 40072"
-            }
-          ]}
-        />
-      </Card>
+      <Card>{!!places && <TripStamp places={places} />}</Card>
       {lspProvider && (
         <Card style={{ paddingVertical: 7 }}>
           <PrimaryText>Logistics service provider</PrimaryText>
@@ -75,7 +70,7 @@ const TripDetails = (props: OwnProps) => {
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Pickup Date</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {pickupDate || "30/06/2020"}
+          {pickupDate?.toLocaleDateString()}
         </PrimaryText>
       </Card>
       <Card
@@ -89,7 +84,7 @@ const TripDetails = (props: OwnProps) => {
         <Flex1Column>
           <PrimaryText>Truck Type</PrimaryText>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-            {truckType || "Open"}
+            {truckType}
           </PrimaryText>
         </Flex1Column>
         <Box>
@@ -118,7 +113,7 @@ const TripDetails = (props: OwnProps) => {
         <Flex1Column>
           <PrimaryText>Required Weight</PrimaryText>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-            {truckWeight ? `${truckWeight} ${truckUnit}` : "2.5 Ton"}
+            {`${truckWeight} ${truckUnit}`}
           </PrimaryText>
         </Flex1Column>
         <Box>

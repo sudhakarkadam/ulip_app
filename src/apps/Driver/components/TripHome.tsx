@@ -10,24 +10,15 @@ import {
 } from "../../../components/@styled/BaseElements";
 import { PrimaryText } from "../../../components/@styled/Text";
 import StyledButton from "../../../components/@styled/StyledButton";
-import { TripStamp } from "../../../components/TripStamp";
+import { TripStamp, convert } from "../../../components/TripStamp";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
 import { DriverAppState } from "../reducers";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
-import { Location } from "../models/DriverTrips";
-import { Place } from "../../../components/TripStamp";
 import { StickyBottom } from "../../../components/StickyBottom";
 
-const convert = (loc: Location): Place => {
-  return {
-    name: loc.city,
-    address: loc.address,
-    state: loc.state
-  };
-};
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
   border-width: 1;

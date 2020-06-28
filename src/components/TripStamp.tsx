@@ -11,6 +11,7 @@ import Tag from "./@styled/Tag";
 import DestinationIcon from "../images/location.svg";
 import TrailerIcon from "../images/trailer.svg";
 import CheckIcon from "../images/check-circle-1.svg";
+import { Location } from "../apps/Driver/models/DriverTrips";
 
 export interface Place {
   name: string;
@@ -164,4 +165,12 @@ export const TripStamp: React.FC<Props> = ({ places, track }) => {
       ></FlatList>
     </Box>
   );
+};
+
+export const convert = (loc: Location): Place => {
+  return {
+    name: loc.city,
+    address: loc.address,
+    state: loc.state
+  };
 };

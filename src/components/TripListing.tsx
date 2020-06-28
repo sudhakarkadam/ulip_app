@@ -123,10 +123,7 @@ const mapStateToProps = (state: CommonState) => ({
 const { getTrips } = ActionCreators;
 const mapDispatchToProps = { getTrips };
 
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
