@@ -6,7 +6,8 @@ const endpoint = "http://10.24.7.179";
 const urls = {
   getTrips: `${endpoint}/ulip/transport_service_request/search`,
   updateTrip: `${endpoint}/ulip/transport_service_request/updateStatus`,
-  upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`
+  upload: (id: number, type: string) =>
+    `${endpoint}/ulip/trip/${id}/document/upload?type=${type}`
 };
 
 export const getTrips = (driverPhoneNumber: string) =>
@@ -26,11 +27,10 @@ export const upload = ({
   file: FormData;
   type: "POD" | "POP";
 }) =>
-  http.post<{}, {}>(
-    urls.upload(id),
-    JSON.stringify({
-      file,
-      id,
-      type
-    })
-  );
+  fetch(urls.upload(id, type), {
+    body: file,
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    method: "POST"
+  });

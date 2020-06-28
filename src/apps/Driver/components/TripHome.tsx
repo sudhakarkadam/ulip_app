@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ScrollView, ActivityIndicator, FlatList, View } from "react-native";
-import ImagePicker from "react-native-image-picker";
+import ImagePicker, { ImagePickerResponse } from "react-native-image-picker";
 import colors from "../../../theme/colors";
 import styled from "styled-components/native";
 import {
@@ -37,9 +37,16 @@ const Card = styled(Flex)`
   border-right-color: #ffffff;
 `;
 
-const capture = callback => {
-  ImagePicker.showImagePicker(options, response => {
-    callback(response.data);
+const capture = (callback: (data: FormData) => void) => {
+  ImagePicker.showImagePicker(options, data => {
+    const fd = new FormData();
+    fd.append("file", {
+      // @ts-ignore
+      uri: data.uri,
+      type: data.type,
+      name: data.fileName
+    });
+    callback(fd);
   });
 };
 
@@ -56,8 +63,10 @@ type Props = ConnectedProps<typeof connector> & {
 };
 
 const Trip: React.FC<Props> = props => {
+  const getTrips = () => props.getTrips(props.phone);
+
   useEffect(() => {
-    props.getTrips(props.phone);
+    getTrips();
   }, []);
 
   if (isLoading(props.trips) || isInit(props.trips))
@@ -80,8 +89,12 @@ const Trip: React.FC<Props> = props => {
             width="100%"
             height="40"
             title="Start Trip"
-            onPress={() => {
-              props.updateTrip({ sr_id: trip.id, status: "TRIP_STARTED" });
+            onPress={async () => {
+              await props.updateTrip({
+                sr_id: trip.id,
+                status: "TRIP_STARTED"
+              });
+              getTrips();
             }}
           />
         );
@@ -124,14 +137,13 @@ const Trip: React.FC<Props> = props => {
               title="CAPTURE POP"
               onPress={() => {
                 // upload pop
-                capture(data => {
-                  const fd = new FormData();
-                  fd.append("file", data);
-                  props.upload({
-                    file: fd,
+                capture(async d => {
+                  await props.upload({
+                    file: d,
                     id: trip.trip.id,
                     type: "POP"
                   });
+                  getTrips();
                 });
               }}
             />
@@ -160,8 +172,9 @@ const Trip: React.FC<Props> = props => {
               height="40"
               width="50%"
               title="Reached"
-              onPress={() => {
-                props.updateTrip({ sr_id: trip.id, status: "REACHED" });
+              onPress={async () => {
+                await props.updateTrip({ sr_id: trip.id, status: "REACHED" });
+                getTrips();
               }}
             />
           </FlexRow>
@@ -177,14 +190,13 @@ const Trip: React.FC<Props> = props => {
           title="Capture POD"
           onPress={() => {
             // upload pop
-            capture(data => {
-              const fd = new FormData();
-              fd.append("file", data);
-              props.upload({
-                file: fd,
+            capture(async d => {
+              await props.upload({
+                file: d,
                 id: trip.trip.id,
                 type: "POD"
               });
+              getTrips();
             });
           }}
         />
