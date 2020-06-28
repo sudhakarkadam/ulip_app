@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ScrollView, ActivityIndicator, FlatList, View } from "react-native";
+import ImagePicker from "react-native-image-picker";
 import colors from "../../../theme/colors";
 import styled from "styled-components/native";
 import {
@@ -21,7 +22,13 @@ import { driverTrips } from "../../../fixtures/DriverTrips";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
-
+const options = {
+  title: "Select proof",
+  storageOptions: {
+    skipBackup: true,
+    path: "images"
+  }
+};
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
   border-width: 1;
@@ -30,8 +37,14 @@ const Card = styled(Flex)`
   border-right-color: #ffffff;
 `;
 
-const { getTrips, updateTrip } = DriverActionCreators;
-const mapDispatchToProps = { getTrips, updateTrip };
+const capture = callback => {
+  ImagePicker.showImagePicker(options, response => {
+    callback(response.uri);
+  });
+};
+
+const { getTrips, updateTrip, upload } = DriverActionCreators;
+const mapDispatchToProps = { getTrips, updateTrip, upload };
 const mapStateToProps = (state: DriverAppState) => ({
   trips: state.trips,
   phone: state.common.user.data.user_details.phone_number
@@ -111,6 +124,15 @@ const Trip: React.FC<Props> = props => {
               title="CAPTURE POP"
               onPress={() => {
                 // upload pop
+                capture(data => {
+                  const fd = new FormData();
+                  fd.append("file", data);
+                  props.upload({
+                    file: fd,
+                    id: trip.trip.id,
+                    type: "POP"
+                  });
+                });
               }}
             />
           </FlexRow>
@@ -154,7 +176,16 @@ const Trip: React.FC<Props> = props => {
           width="100%"
           title="Capture POD"
           onPress={() => {
-            // upload pod
+            // upload pop
+            capture(data => {
+              const fd = new FormData();
+              fd.append("file", data);
+              props.upload({
+                file: fd,
+                id: trip.trip.id,
+                type: "POD"
+              });
+            });
           }}
         />
       );
