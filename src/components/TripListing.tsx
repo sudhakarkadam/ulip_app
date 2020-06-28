@@ -174,7 +174,10 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  if (listingMode === ListingModes.PENDING && props.onRowClick)
+                  if (
+                    listingMode === ListingModes.PENDING_REQUESTS &&
+                    props.onRowClick
+                  )
                     props.onRowClick(item.id);
                   return;
                 }}

@@ -19,6 +19,7 @@ interface OwnProps {
     ReduxCustomAction<LSPActionTypes.TRIP_ACCEPT_SUCCESS, TripAcceptRequest, {}>
   >;
   onClose: () => void;
+  returningScreen: () => void;
 }
 
 const AcceptTripModal = (props: OwnProps) => {
@@ -58,14 +59,19 @@ const AcceptTripModal = (props: OwnProps) => {
           title="Accept"
           style={{ flex: 1 }}
           onPress={() =>
-            props.onAccept({
-              sr_id: 1,
-              driver: {
-                name: driverName,
-                mobile_number: driverMobile
-              },
-              truck_type: truck
-            })
+            props
+              .onAccept({
+                sr_id: 1,
+                driver: {
+                  name: driverName,
+                  mobile_number: driverMobile
+                },
+                truck_type: truck
+              })
+              .then(() => {
+                props.onClose();
+                props.returningScreen();
+              })
           }
           disabled={!driverName && !driverMobile && !truck}
         />

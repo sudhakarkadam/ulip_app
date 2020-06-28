@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { Flex } from "./@styled/BaseElements";
+import { Flex, Box, Image } from "./@styled/BaseElements";
 import colors from "../theme/colors";
 import { PrimaryText } from "./@styled/Text";
 import { TripStamp } from "./TripStamp";
+import { TruckType } from "../models/CommonModel";
+import { Flex1Column } from "./@styled/Flex";
+import Tag from "./@styled/Tag";
+
+const trailerTruck = require("../images/trailerTruckColored.png");
+const containerTruck = require("../images/containerTruckColored.png");
+const openTruck = require("../images/openTruckColored.png");
 
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
@@ -62,17 +69,52 @@ const TripDetails = (props: OwnProps) => {
           {pickupDate || "30/06/2020"}
         </PrimaryText>
       </Card>
-      <Card style={{ paddingVertical: 7 }}>
-        <PrimaryText>Truck Type</PrimaryText>
-        <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {truckType || "Open"}
-        </PrimaryText>
+      <Card
+        style={{
+          paddingVertical: 7,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+        <Flex1Column>
+          <PrimaryText>Truck Type</PrimaryText>
+          <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
+            {truckType || "Open"}
+          </PrimaryText>
+        </Flex1Column>
+        <Box>
+          <Image
+            source={
+              truckType === TruckType.TRAILOR
+                ? trailerTruck
+                : truckType === TruckType.CONTAINER
+                ? containerTruck
+                : openTruck
+            }
+            height={20}
+            width={44}
+            resizeMode="contain"
+          />
+        </Box>
       </Card>
-      <Card style={{ paddingVertical: 7 }}>
-        <PrimaryText>Required Weight</PrimaryText>
-        <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {truckWeight ? `${truckWeight} ${truckUnit}` : "2.5 Ton"}
-        </PrimaryText>
+      <Card
+        style={{
+          paddingVertical: 7,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+      >
+        <Flex1Column>
+          <PrimaryText>Required Weight</PrimaryText>
+          <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
+            {truckWeight ? `${truckWeight} ${truckUnit}` : "2.5 Ton"}
+          </PrimaryText>
+        </Flex1Column>
+        <Box>
+          <Tag text={"RICE/GRAIN/WHEAT"}></Tag>
+        </Box>
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>
         <PrimaryText>Uploaded Documents</PrimaryText>

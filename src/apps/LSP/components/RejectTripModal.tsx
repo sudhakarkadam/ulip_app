@@ -18,6 +18,7 @@ interface OwnProps {
     ReduxCustomAction<LSPActionTypes.TRIP_REJECT_SUCCESS, TripRejectRequest, {}>
   >;
   onClose: () => void;
+  returningScreen: () => void;
 }
 
 const RejectTripModal = (props: OwnProps) => {
@@ -42,7 +43,12 @@ const RejectTripModal = (props: OwnProps) => {
         <StyledButton
           title="Reject"
           style={{ flex: 1 }}
-          onPress={() => props.onReject({ reason: reason, sr_id: 1 })}
+          onPress={() =>
+            props.onReject({ reason: reason, sr_id: 1 }).then(() => {
+              props.onClose();
+              props.returningScreen();
+            })
+          }
         />
       </FlexRow>
     </Flex>

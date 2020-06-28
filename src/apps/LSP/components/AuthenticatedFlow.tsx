@@ -18,7 +18,7 @@ export type RootStackParamList = {
   CompanyProfile: undefined;
   TripRequests: undefined;
   HomeMetrics: undefined;
-  TripAccept: undefined;
+  TripAcceptPage: undefined;
 };
 
 const LSPPersonProfile = props => (
@@ -55,10 +55,17 @@ const TripRequests = props => (
   <TripList
     listingMode={ListingModes.PENDING_REQUESTS}
     from={AllApps.LSP}
-    onRowClick={id => {
+    onRowClick={
+      () => props.navigation.navigate("TripAcceptPage")
+      // id => {
       //needs inplementation
-    }}
+      // }
+    }
   />
+);
+
+const TripAcceptPage = props => (
+  <TripAccept onAction={() => props.navigation.goBack()} />
 );
 
 const HeaderButtons = () => (
@@ -98,8 +105,8 @@ const AuthenticatedFlow = () => {
         options={{ title: "Home", headerRight: HeaderButtons }}
       />
       <Stack.Screen
-        name="TripAccept"
-        component={TripAccept}
+        name="TripAcceptPage"
+        component={TripAcceptPage}
         options={{ title: "Truck Request", headerRight: HeaderButtons }}
       />
     </Stack.Navigator>

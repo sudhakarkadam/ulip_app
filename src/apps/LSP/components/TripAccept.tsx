@@ -12,6 +12,10 @@ import { connect, ConnectedProps } from "react-redux";
 import LSPActionCreators from "../actions/LSPActionCreators";
 const { acceptTrip, rejectTrip } = LSPActionCreators;
 
+interface OwnProps {
+  onAction: () => void;
+}
+
 const mapStateToProps = (state: LSPAppState) => ({
   acceptedTripStatus: state.acceptedTripStatus,
   rejectedTripStatus: state.rejectedTripStatus
@@ -20,7 +24,7 @@ const mapDispatchToProps = { acceptTrip, rejectTrip };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const TripAcceptPage = (
-  props: IWithModalInjectedProps & ConnectedProps<typeof connector>
+  props: OwnProps & IWithModalInjectedProps & ConnectedProps<typeof connector>
 ) => {
   return (
     <FlexColumn mt={3} backgroundColor="white" flex={1}>
@@ -34,6 +38,7 @@ const TripAcceptPage = (
               <AcceptTripModal
                 onAccept={props.acceptTrip}
                 onClose={props.hideModal}
+                returningScreen={props.onAction}
               />
               // , [
               // {
@@ -63,6 +68,7 @@ const TripAcceptPage = (
               <RejectTripModal
                 onReject={props.rejectTrip}
                 onClose={props.hideModal}
+                returningScreen={props.onAction}
               />
               //   , [
               //   {
