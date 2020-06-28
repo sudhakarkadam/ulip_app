@@ -1,5 +1,9 @@
 import React from "react";
-import { FlexColumn, Flex } from "../../../components/@styled/BaseElements";
+import {
+  FlexColumn,
+  Flex,
+  ScrollView
+} from "../../../components/@styled/BaseElements";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import withModal, {
   IWithModalInjectedProps
@@ -42,7 +46,7 @@ const TripAcceptPage = (
     }
   ];
   return (
-    <FlexColumn mt={3} backgroundColor="white" flex={1}>
+    <ScrollView mt={3} backgroundColor="white" flex={1}>
       <TripDetails
         id={trip.id.toString()}
         pickupDate={new Date(trip.pickup_date)}
@@ -54,6 +58,21 @@ const TripAcceptPage = (
       />
       <Flex style={{ flexDirection: "row", marginHorizontal: 25 }}>
         <StyledButton
+          title="Reject"
+          variant="outline"
+          style={{ flex: 1 }}
+          onPress={() => {
+            props.showModal(
+              <RejectTripModal
+                onReject={props.rejectTrip}
+                onClose={props.hideModal}
+                returningScreen={props.onAction}
+                id={props.tripDetails.id}
+              />
+            );
+          }}
+        />
+        <StyledButton
           title="Accept"
           style={{ flex: 1 }}
           onPress={() => {
@@ -64,60 +83,11 @@ const TripAcceptPage = (
                 returningScreen={props.onAction}
                 id={props.tripDetails.id}
               />
-              // , [
-              // {
-              //   text: "CLOSE",
-              //   action: () => {
-              //     console.log("clicked OK");
-              //     props.hideModal();
-              //     return {};
-              //   }
-              // },
-              // {
-              //   text: "ACCEPT",
-              //   action: () => {
-              //     console.log("clicked NOT OK");
-              //     return {};
-              //   }
-              // }
-              // ]
-            );
-          }}
-        />
-        <StyledButton
-          title="Reject"
-          style={{ flex: 1 }}
-          onPress={() => {
-            props.showModal(
-              <RejectTripModal
-                onReject={props.rejectTrip}
-                onClose={props.hideModal}
-                returningScreen={props.onAction}
-                id={props.tripDetails.id}
-              />
-              //   , [
-              //   {
-              //     text: "CLOSE",
-              //     action: () => {
-              //       console.log("clicked OK");
-              //       props.hideModal();
-              //       return {};
-              //     }
-              //   },
-              //   {
-              //     text: "REJECT",
-              //     action: () => {
-              //       console.log("clicked NOT OK");
-              //       return {};
-              //     }
-              //   }
-              // ]
             );
           }}
         />
       </Flex>
-      {/* Add footer here */}
-    </FlexColumn>
+    </ScrollView>
   );
 };
 

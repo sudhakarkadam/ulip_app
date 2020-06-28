@@ -19,7 +19,8 @@ export const type = (props: any) =>
       outline: {
         ...common,
         backgroundColor: "transparent",
-        borderColor: props.appearance
+        borderColor: props.appearance,
+        borderWidth: 1
       },
       text: {
         ...common,
