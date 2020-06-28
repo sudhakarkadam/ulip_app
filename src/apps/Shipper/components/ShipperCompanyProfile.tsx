@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastAndroid } from "react-native";
 import CompanyProfile from "../../../components/CompanyProfile";
 import { StackScreenProps } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
@@ -40,8 +41,9 @@ const ShipperCompanyProfile = (props: Props) => {
             userId
           });
           props.navigation.navigate("MainTripListing");
+          ToastAndroid.show("Company profile Created", ToastAndroid.SHORT);
         } catch {
-          console.log("error");
+          ToastAndroid.show("Error while creating profile", ToastAndroid.SHORT);
         }
       }}
     />
