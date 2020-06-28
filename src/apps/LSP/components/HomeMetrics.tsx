@@ -36,6 +36,7 @@ interface OwnProps {
 }
 const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
   useEffect(() => {
+    console.log("props.user", props.user);
     props.getMetrics({
       businessId: props.user.data.business_details.business_id
     });
