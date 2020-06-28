@@ -3,8 +3,7 @@ import React from "react";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import HomeStack from "./HomeStack";
 import InTransitStack from "./InTransitStack";
-import HistroyListing from "./HistoryListing";
-
+import HistoryStack from "./HistoryStack";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
@@ -30,7 +29,7 @@ const tabs = [
   {
     name: "HistoryStack",
     label: "HISTORY",
-    component: HistroyListing,
+    component: HistoryStack,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
   }
