@@ -103,8 +103,8 @@ const CalendarComponent = ({ date }: any) => {
   const month = momentDate.format("MMM");
   const day = momentDate.format("D");
   return (
-    <Flex border={2} borderColor={colors.grays[2]} borderRadius={6}>
-      <PrimaryLabel px={2} py={1} textAlign={"center"} fontSize={2}>
+    <Flex border={2} borderColor={colors.grays[2]} borderRadius={6} width={44}>
+      <PrimaryLabel px={2} textAlign={"center"} fontSize={2}>
         {day}
       </PrimaryLabel>
       <SmallCapitalText
@@ -295,7 +295,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                     )}
                     {config.secondaryWidget === IconWidget.CALENDAR && (
                       <Box>
-                        <SmallCapitalText>ON-TIME</SmallCapitalText>
+                        <SmallCapitalText textAlign={"center"}>
+                          {["ON-TIME", "DELAY"][Math.floor(Math.random() * 2)]}
+                        </SmallCapitalText>
                         <CalendarComponent date={item.pickup_date} />
                       </Box>
                     )}
