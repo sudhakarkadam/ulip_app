@@ -6,7 +6,7 @@ import CreateTripCard from "./CreateTripCard";
 import { StackScreenProps } from "@react-navigation/stack";
 import { HomeStackParamList } from "./HomeStack";
 import { TripList, ListingModes } from "../../../components/TripListing";
-import { AllApps } from "../../../models/CommonModel";
+import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import { ShipperAppState } from "../reducers";
 import { ConnectedProps, connect } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
@@ -40,6 +40,9 @@ const MainTripListing = (props: Props & OwnProps) => {
 
   const requests = props.metrics.data.transport_service_request;
   const tripCount = (requests.CREATED || 0) + (requests.ACCEPTED || 0);
+  const handleRowClick = (_: any, trip: GetTripsResponse) => {
+    props.navigation.push("ShipperTripDetails", { data: JSON.stringify(trip) });
+  };
 
   return (
     <>
@@ -57,6 +60,7 @@ const MainTripListing = (props: Props & OwnProps) => {
           <TripList
             listingMode={ListingModes.UPCOMING}
             from={AllApps.SHIPPER}
+            onRowClick={handleRowClick}
           />
           <Box position="absolute" bottom="15" right="20">
             <FloatingButton
