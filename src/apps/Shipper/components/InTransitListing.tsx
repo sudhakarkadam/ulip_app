@@ -12,10 +12,10 @@ const Trips: React.FunctionComponent<{}> = () => {
     { key: "ACTIVE", title: "ACTIVE" }
   ]);
   const OnRoad = () => (
-    <TripList listingMode={ListingModes.ON_ROAD} from={AllApps.LSP} />
+    <TripList listingMode={ListingModes.ON_ROAD} from={AllApps.SHIPPER} />
   );
   const Active = () => (
-    <TripList listingMode={ListingModes.ACTIVE} from={AllApps.LSP} />
+    <TripList listingMode={ListingModes.ACTIVE} from={AllApps.SHIPPER} />
   );
 
   return (

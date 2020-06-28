@@ -12,7 +12,7 @@ const InTransitStack = () => {
         name="InTransitListing"
         component={InTransitListing}
         options={{
-          title: "In-transit"
+          title: "In-Transit"
         }}
       />
       <Stack.Screen
