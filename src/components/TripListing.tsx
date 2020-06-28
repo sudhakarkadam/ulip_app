@@ -16,12 +16,7 @@ import {
   SmallCapitalText
 } from "../components/@styled/Text";
 import moment from "moment";
-import {
-  RequestStatus,
-  AllApps,
-  TruckType,
-  GetTripsResponse
-} from "../models/CommonModel";
+import { RequestStatus, AllApps, TruckType } from "../models/CommonModel";
 import ActionCreators from "../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { FlatList } from "react-native";
@@ -37,7 +32,7 @@ const openTruck = require("../images/openTruckColored.png");
 interface OwnProps {
   listingMode: ListingModes;
   from: AllApps;
-  onRowClick?: (item: GetTripsResponse) => void;
+  onRowClick?: (id: string | number) => void;
   businessId?: any;
 }
 export enum ListingModes {
@@ -152,50 +147,51 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
   return (
     <>
       {isLoading(props.trips) && <BlockScreenLoader />}
-      <Flex flex={1} pt={5} bg={colors.grays[3]}>
-        <Flex bg={colors.white} flex={1}>
-          <FlexRow
-            justifyContent={"space-between"}
-            p={5}
-            borderBottomColor={colors.grays[3]}
-            borderBottomWidth={1}
-          >
-            <FlexRow flex={1}>
-              <PrimaryLabel>{config.title}</PrimaryLabel>
-              <Text
-                mx={4}
-                px={3}
-                bg={colors.primary}
-                color={colors.white}
-                borderRadius={20}
-              >
-                {data.length}
-              </Text>
-            </FlexRow>
-            <Filter />
-            <Box pl={8}>
-              <Sort />
-            </Box>
-          </FlexRow>
-          <FlatList
-            ListEmptyComponent={
-              <Box p={6}>
-                <SecondaryText>No entries</SecondaryText>
-              </Box>
-            }
-            data={data}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    if (
-                      listingMode === ListingModes.PENDING_REQUESTS &&
-                      props.onRowClick
-                    )
-                      props.onRowClick(item);
-                    return;
-                  }}
+      {isSuccess(props.trips) && (
+        <Flex flex={1} pt={5} bg={colors.grays[3]}>
+          <Flex bg={colors.white} flex={1}>
+            <FlexRow
+              justifyContent={"space-between"}
+              p={5}
+              borderBottomColor={colors.grays[3]}
+              borderBottomWidth={1}
+            >
+              <FlexRow flex={1}>
+                <PrimaryLabel>{config.title}</PrimaryLabel>
+                <Text
+                  mx={4}
+                  px={3}
+                  bg={colors.primary}
+                  color={colors.white}
+                  borderRadius={20}
                 >
+                  {data.length}
+                </Text>
+              </FlexRow>
+              <Filter />
+              <Box pl={8}>
+                <Sort />
+              </Box>
+            </FlexRow>
+            <FlatList
+              ListEmptyComponent={
+                <Box p={6}>
+                  <SecondaryText>No entries</SecondaryText>
+                </Box>
+              }
+              data={data}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      if (
+                        listingMode === ListingModes.PENDING_REQUESTS &&
+                        props.onRowClick
+                      )
+                        props.onRowClick(item.id);
+                      return;
+                    }}
+                  >
                     <FlexRow
                       key={item.id}
                       p={5}
