@@ -39,7 +39,7 @@ const Card = styled(Flex)`
 
 const capture = callback => {
   ImagePicker.showImagePicker(options, response => {
-    callback(response.uri);
+    callback(response.data);
   });
 };
 
@@ -63,8 +63,8 @@ const Trip: React.FC<Props> = props => {
   if (isLoading(props.trips) || isInit(props.trips))
     return <ActivityIndicator />;
 
-  const trips = driverTrips || props.trips.data;
-  // const trips = props.trips.data;
+  // const trips = driverTrips || props.trips.data;
+  const trips = props.trips.data;
 
   if (!trips) return <PrimaryText p={20}>No trips</PrimaryText>;
 
