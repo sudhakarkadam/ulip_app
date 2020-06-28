@@ -4,6 +4,7 @@ import user from "../../../reducers/UserReducer";
 import { trips } from "../../../reducers/";
 import actions from "../actions/ShipperActions";
 import createReducer from "../../../utils/createReducer";
+import metrics from "../../../reducers/HomeMetricsReducer";
 import {
   CreateTripRequestModel,
   LspListResponse
@@ -33,7 +34,8 @@ const reducers = {
   lspList,
   user,
   createTrip,
-  trips
+  trips,
+  metrics
 };
 
 export type ShipperAppState = ReducerMappedState<typeof reducers>;

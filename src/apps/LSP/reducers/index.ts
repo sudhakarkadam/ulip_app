@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../../../utils/actionCreator";
-import HomeMetrics from "./HomeMetricsReducer";
+import HomeMetrics from "../../../reducers/HomeMetricsReducer";
 import createReducer from "../../../utils/createReducer";
 import actions from "../actions/LSPActions";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";

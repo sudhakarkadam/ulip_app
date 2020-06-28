@@ -9,7 +9,9 @@ import {
   ShipperBusinessProfileModel,
   LocationModel,
   GetTripsRequest,
-  GetTripsResponse
+  GetTripsResponse,
+  Metrics,
+  GetMetricsRequest
 } from "../models/CommonModel";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
@@ -22,8 +24,10 @@ const urls = {
   saveCompanyProfile: `${endpoint}/ulip/business`,
   login: `${endpoint}/ulip/login`,
   logout: `${endpoint}/ulip/logout`,
-  getTrips: (businessId: string | number) =>
-    `${endpoint}/ulip/transport_service_request/business/${businessId}`
+  getTrips: (businessId: string) =>
+    `${endpoint}/ulip/transport_service_request/business/${businessId}`,
+  getMetrics: (businessId: string) =>
+    `${endpoint}/ulip/transport_service_request/business/${businessId}/view`
 };
 
 export const getEndpoint = () => endpoint;
@@ -79,8 +83,17 @@ export default {
   },
   getTrips: (payload: GetTripsRequest) => {
     return http.get<{ status: string }, GetTripsResponse[]>(
-      urls.getTrips(payload.businessId),
+      urls.getTrips(payload.businessId.toString()),
       { status: payload.status.join(",") }
+    );
+  },
+  getMetrics: (payload: GetMetricsRequest) => {
+    return http.get<{}, Metrics>(
+      urls.getMetrics(payload.businessId.toString()),
+      {},
+      {
+        headers: {}
+      }
     );
   }
 };

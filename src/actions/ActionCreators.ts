@@ -52,7 +52,15 @@ const ActionCreators = {
     ],
     api.getTrips
   ),
-  logout: () => createAction(actions.LOGOUT, {}, {})
+  logout: () => createAction(actions.LOGOUT, {}, {}),
+  getMetrics: createAsyncAction(
+    [
+      actions.HOME_METRICS_REQUEST,
+      actions.HOME_METRICS_SUCCESS,
+      actions.HOME_METRICS_ERROR
+    ],
+    api.getMetrics
+  )
 };
 
 export default ActionCreators;

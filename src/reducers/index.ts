@@ -3,6 +3,8 @@ import { ReducerMappedState } from "../utils/actionCreator";
 import { GetTripsResponse } from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
+import user from "../reducers/UserReducer";
+import HomeMetrics from "../reducers/HomeMetricsReducer";
 
 export const trips = createReducer<
   actions.GET_TRIPS_REQUEST,
@@ -15,11 +17,11 @@ export const trips = createReducer<
   actions.GET_TRIPS_SUCCESS,
   actions.GET_TRIPS_ERROR
 ]);
-import user from "../reducers/UserReducer";
 
 export const reducers = {
   user,
-  trips
+  trips,
+  HomeMetrics
 };
 
 export type CommonState = ReducerMappedState<typeof reducers>;

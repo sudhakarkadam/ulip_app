@@ -1,18 +1,18 @@
-import actionTypes from "../actions/LSPActions";
+import actionTypes from "../actions/Actions";
 import {
   INIT,
   LOADING,
   SUCCESS,
   ERROR,
   asyncStatusTypes
-} from "../../../utils/actionCreator";
-import { LSPActionObjectTypes } from "../actions/LSPActionCreators";
-import HomeMetricsModel from "../models/HomeMetricsModel";
-import { RequestStatus, TruckType } from "../../../models/CommonModel";
+} from "../utils/actionCreator";
+import { ActionObjectTypes } from "../actions/ActionCreators";
+import { Metrics } from "../models/CommonModel";
+import { RequestStatus, TruckType } from "../models/CommonModel";
 
 export interface HomeMetricsStoreState {
   asyncStatus: asyncStatusTypes;
-  data: HomeMetricsModel;
+  data: Metrics;
 }
 
 const initialMetrics = {
@@ -37,7 +37,7 @@ const INITIAL_STATE: HomeMetricsStoreState = {
   data: initialMetrics
 };
 
-type TAction = LSPActionObjectTypes<"getMetrics">;
+type TAction = ActionObjectTypes<"getMetrics">;
 
 export default function HomeMetricsReducer(
   state: HomeMetricsStoreState = INITIAL_STATE,

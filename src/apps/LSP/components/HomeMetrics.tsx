@@ -7,7 +7,7 @@ import {
 import { PrimaryText } from "../../../components/@styled/Text";
 import colors from "../../../theme/colors";
 import styled from "styled-components";
-import LSPActionCreators from "../actions/LSPActionCreators";
+import ActionCreators from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { ReducerState } from "../store";
 import { isLoading } from "../../../utils/actionCreator";
@@ -23,7 +23,7 @@ const MetricBox = styled(TouchableOpacity)`
   padding: 10px;
 `;
 
-const { getMetrics } = LSPActionCreators;
+const { getMetrics } = ActionCreators;
 
 const mapStateToProps = (state: ReducerState) => ({
   HomeMetrics: state.HomeMetrics,

@@ -7,14 +7,6 @@ import {
 } from "../../../utils/actionCreator";
 
 const LSPActionCreators = {
-  getMetrics: createAsyncAction(
-    [
-      actions.HOME_METRICS_REQUEST,
-      actions.HOME_METRICS_SUCCESS,
-      actions.HOME_METRICS_ERROR
-    ],
-    api.getMetrics
-  ),
   acceptTrip: createAsyncAction(
     [
       actions.TRIP_ACCEPT_REQUEST,

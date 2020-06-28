@@ -5,23 +5,21 @@ import FloatingButton from "../../../components/@styled/FloatingButton";
 import CreateTripCard from "./CreateTripCard";
 import { StackScreenProps } from "@react-navigation/stack";
 import { HomeStackParamList } from "./HomeStack";
-import {
-  TripList,
-  ListingModes,
-  listingConfig
-} from "../../../components/TripListing";
+import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps } from "../../../models/CommonModel";
 import { ShipperAppState } from "../reducers";
 import { ConnectedProps, connect } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
+import { isLoading, isInit } from "../../../utils/actionCreator";
+import BlockScreenLoader from "../../../components/BlockScreenLoader";
 
 const mapStateToProps = (state: ShipperAppState) => ({
-  trips: state.trips,
-  userInfo: state.user.data
+  userInfo: state.user.data,
+  metrics: state.metrics
 });
 
-const { getTrips } = ActionCreators;
-const mapDispatchToProps = { getTrips };
+const { getMetrics } = ActionCreators;
+const mapDispatchToProps = { getMetrics };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -30,18 +28,22 @@ type Props = StackScreenProps<HomeStackParamList, "MainTripListing">;
 type OwnProps = ConnectedProps<typeof connector>;
 
 const MainTripListing = (props: Props & OwnProps) => {
-  const config = listingConfig[ListingModes.PENDING_REQUESTS] as any;
   const businessId = props.userInfo?.business_details?.business_id;
   useEffect(() => {
-    props.getTrips({
-      status: config.status,
+    props.getMetrics({
       businessId: businessId || 1
     });
   }, []);
-  const trips = props.trips.data || [];
+  if (isLoading(props.metrics) || isInit(props.metrics)) {
+    return <BlockScreenLoader />;
+  }
+
+  const requests = props.metrics.data.transport_service_request;
+  const tripCount = (requests.CREATED || 0) + (requests.ACCEPTED || 0);
+
   return (
     <>
-      {!trips.length && (
+      {!tripCount && (
         <>
           <Flex mt="3" />
           <CreateTripCard
@@ -50,10 +52,10 @@ const MainTripListing = (props: Props & OwnProps) => {
         </>
       )}
 
-      {!!trips.length && (
+      {!!tripCount && (
         <Flex1 bg="white">
           <TripList
-            listingMode={ListingModes.PENDING_REQUESTS}
+            listingMode={ListingModes.UPCOMING}
             from={AllApps.SHIPPER}
           />
           <Box position="absolute" bottom="15" right="20">

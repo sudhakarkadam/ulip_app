@@ -1,7 +1,5 @@
 // import { NativeModules } from "react-native";
 import http from "../../../utils/http";
-import { GetMetricsRequest } from "../../../models/CommonModel";
-import Metrics from "../models/HomeMetricsModel";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
@@ -10,8 +8,6 @@ import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 const endpoint = "http://10.24.7.179";
 
 const urls = {
-  getMetrics: (businessId: string | number) =>
-    `${endpoint}/ulip/transport_service_request/business/${businessId}/view`,
   acceptTrip: `${endpoint}/ulip/transport_service_request/accept`,
   rejectTrip: `${endpoint}/ulip/transport_service_request/reject`
 };
@@ -19,15 +15,6 @@ const urls = {
 export const getEndpoint = () => endpoint;
 
 export default {
-  getMetrics: (payload: GetMetricsRequest) => {
-    return http.get<{}, Metrics>(
-      urls.getMetrics(payload.businessId),
-      {},
-      {
-        headers: {}
-      }
-    );
-  },
   acceptTrip: (payload: TripAcceptRequest) => {
     return http.post<TripAcceptRequest, {}>(urls.acceptTrip, payload, {
       headers: {}
