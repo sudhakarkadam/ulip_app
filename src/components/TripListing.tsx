@@ -280,7 +280,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                         px={3}
                         bg={colors.grays[2]}
                       >
-                        {item.status}
+                        {item.status === RequestStatus.CREATED
+                          ? "⚠ PENDING"
+                          : item.status}
                       </Text>
                     </Box>
                   )}
