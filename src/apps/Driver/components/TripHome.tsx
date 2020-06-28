@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { ScrollView, ActivityIndicator, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, ActivityIndicator, FlatList, View } from "react-native";
 import colors from "../../../theme/colors";
 import styled from "styled-components/native";
 import {
   FlexRow,
   FlexColumn,
   Text,
-  Flex
+  Flex,
+  Box
 } from "../../../components/@styled/BaseElements";
 import { PrimaryText } from "../../../components/@styled/Text";
 import StyledButton from "../../../components/@styled/StyledButton";
@@ -15,6 +16,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
 import { DriverAppState } from "../reducers";
+
+import { driverTrips } from "../../../fixtures/DriverTrips";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
@@ -27,8 +30,8 @@ const Card = styled(Flex)`
   border-right-color: #ffffff;
 `;
 
-const { getTrips } = DriverActionCreators;
-const mapDispatchToProps = { getTrips };
+const { getTrips, updateTrip } = DriverActionCreators;
+const mapDispatchToProps = { getTrips, updateTrip };
 const mapStateToProps = (state: DriverAppState) => ({
   trips: state.trips,
   phone: state.common.user.data.user_details.phone_number
@@ -47,21 +50,26 @@ const Trip: React.FC<Props> = props => {
   if (isLoading(props.trips) || isInit(props.trips))
     return <ActivityIndicator />;
 
-  const trips = props.trips.data;
+  const trips = driverTrips || props.trips.data;
+  // const trips = props.trips.data;
+
+  if (!trips) return <PrimaryText p={20}>No trips</PrimaryText>;
 
   const bottomSheetContent = () => {
-    const trip = trips.find(t => t);
+    const trip = trips?.find(t => t);
     const today = new Date().toLocaleDateString();
     const tripStartDate = new Date(trip.pickup_date).toLocaleDateString();
 
     if (trip.trip.status === "CREATED") {
-      if (today !== tripStartDate) {
+      if (today === tripStartDate) {
         return (
           <StyledButton
             width="100%"
             height="40"
             title="Start Trip"
-            onPress={() => {}}
+            onPress={() => {
+              props.updateTrip({ sr_id: trip.id, status: "TRIP_STARTED" });
+            }}
           />
         );
       } else {
@@ -72,7 +80,7 @@ const Trip: React.FC<Props> = props => {
               height="40"
               width="100%"
               title="Start Trip"
-              style={{ opacity: 0.4 }}
+              style={{ opacity: 0.6 }}
               disabled={true}
               onPress={() => {}}
             />
@@ -80,16 +88,95 @@ const Trip: React.FC<Props> = props => {
         );
       }
     }
+
+    if (trip.trip.status === "TRIP_STARTED") {
+      return (
+        <>
+          <Box textAlign="left" alignItems="flex-start">
+            <Text textAlign="left" color="#7A869A">
+              Pickup point
+            </Text>
+            <View style={{ flex: 1 }}></View>
+          </Box>
+          <FlexRow>
+            <StyledButton
+              height="40"
+              width="50%"
+              title="GO TO MAP"
+              onPress={() => {}}
+            />
+            <StyledButton
+              height="40"
+              width="50%"
+              title="CAPTURE POP"
+              onPress={() => {
+                // upload pop
+              }}
+            />
+          </FlexRow>
+        </>
+      );
+    }
+
+    if (trip.trip.status === "IN_TRANSIT") {
+      return (
+        <>
+          <Box textAlign="left" alignItems="flex-start">
+            <Text textAlign="left" color="#7A869A">
+              Destination point
+            </Text>
+            <View style={{ flex: 1 }}></View>
+          </Box>
+          <FlexRow>
+            <StyledButton
+              height="40"
+              width="50%"
+              title="GO TO MAP"
+              onPress={() => {}}
+            />
+            <StyledButton
+              height="40"
+              width="50%"
+              title="Reached"
+              onPress={() => {
+                props.updateTrip({ sr_id: trip.id, status: "REACHED" });
+              }}
+            />
+          </FlexRow>
+        </>
+      );
+    }
+
+    if (trip.trip.status === "REACHED") {
+      return (
+        <StyledButton
+          height="40"
+          width="100%"
+          title="Capture POD"
+          onPress={() => {
+            // upload pod
+          }}
+        />
+      );
+    }
   };
+
   return (
     <>
       <ScrollView>
         <FlatList
           onRefresh={() => props.getTrips(props.phone)}
           refreshing={isLoading(props.trips)}
-          data={trips.slice(1)}
+          data={[trips[0]] || []}
           renderItem={t => {
             const trip = t.item;
+            const isCreated = t.item.trip.status === "CREATED";
+            const isStarted = t.item.trip.status === "TRIP_STARTED";
+            const isInTransit = t.item.trip.status === "IN_TRANSIT";
+            const isReached =
+              t.item.trip.status === "REACHED" ||
+              t.item.trip.status === "COMPLETED";
+
             return (
               <Flex mt={4}>
                 <Card>
@@ -130,14 +217,58 @@ const Trip: React.FC<Props> = props => {
                     </FlexColumn>
                   </FlexRow>
                 </Card>
-                <FlexRow pl={7} pr={7} backgroundColor="white">
+                <Box pl={7} pr={7} backgroundColor="white">
                   <TripStamp
+                    track={isStarted || isInTransit || isReached}
                     places={[
-                      convert(trip.pickUp_location),
-                      convert(trip.delivery_location)
+                      ...(isStarted || isInTransit || isReached
+                        ? [
+                            {
+                              name: "Your location",
+                              relativeDistance: 23,
+                              // @ts-ignore
+                              crossed: true
+                            }
+                          ]
+                        : []),
+                      ...(isCreated
+                        ? [
+                            {
+                              ...convert(trip.pickUp_location)
+                            }
+                          ]
+                        : []),
+                      ...(isStarted
+                        ? [
+                            {
+                              ...convert(trip.pickUp_location),
+                              tag: "Pickup Point"
+                            }
+                          ]
+                        : []),
+                      ...(isInTransit || isReached
+                        ? [
+                            {
+                              ...convert(trip.pickUp_location),
+                              // @ts-ignore
+                              crossed: true
+                            }
+                          ]
+                        : []),
+
+                      ...(isReached
+                        ? [
+                            {
+                              ...convert(trip.delivery_location),
+                              // @ts-ignore
+                              crossed: true,
+                              tag: "Destination Point"
+                            }
+                          ]
+                        : [convert(trip.delivery_location)])
                     ]}
                   />
-                </FlexRow>
+                </Box>
               </Flex>
             );
           }}

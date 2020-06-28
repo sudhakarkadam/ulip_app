@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex } from "../../../components/@styled/BaseElements";
 import TripDetails from "../../../components/TripDetails";
-
+import { PrimaryText } from "../../../components/@styled/Text";
 import { DriverAppState } from "../reducers";
 import { connect, ConnectedProps } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -14,13 +14,13 @@ const mapStateToProps = (state: DriverAppState) => ({
 const connector = connect(mapStateToProps, null);
 
 type Props = ConnectedProps<typeof connector> & {
-  navigation: StackNavigationProp<DriverHomeStackParamList, "Trip">;
+  navigation: StackNavigationProp<DriverHomeStackParamList, "TripDetails">;
 };
 
 const TripDetailsPage: React.FC<Props> = props => {
-  const trip = props.trips.data[0];
+  const trip = props.trips.data?.[0];
 
-  if (!trip) return null;
+  if (!trip) return <PrimaryText>This does not exist</PrimaryText>;
   return (
     <Flex backgroundColor="white">
       <TripDetails
@@ -32,7 +32,7 @@ const TripDetailsPage: React.FC<Props> = props => {
         ]}
         truckType={trip.truck_type_preference}
         truckUnit={trip.weight_unit}
-        truckWeight={trip.weight}
+        truckWeight={trip.weight + ""}
       />
     </Flex>
   );

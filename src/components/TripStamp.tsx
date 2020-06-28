@@ -114,10 +114,14 @@ const getLabel = (index: number, item: Place | CrossedPlace) => {
   );
 };
 
+const getPosition = (places: CrossedPlace[]) => {
+  const index = places.findIndex(p => !p.crossed) - 1;
+  if (index < 0 && places[places.length - 1].crossed) return places.length - 1;
+  return index;
+};
 export const TripStamp: React.FC<Props> = ({ places, track }) => {
   const placesLastIndex = places.length - 1;
-  const trailerPosition =
-    track && (places as CrossedPlace[]).findIndex(p => !p.crossed) - 1;
+  const trailerPosition = track && getPosition(places as CrossedPlace[]);
   return (
     <Box>
       <FlatList
@@ -137,7 +141,7 @@ export const TripStamp: React.FC<Props> = ({ places, track }) => {
                   )}
                 </Dot>
                 {placesLastIndex !== index && <BottomLine></BottomLine>}
-                <Box p={5} ml={4} position="relative">
+                <Box p={5} ml={4}>
                   <FlexSpaceBetween flexDirection="row">
                     <Flex>
                       {getLabel(index, item)}

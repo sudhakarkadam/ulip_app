@@ -13,7 +13,7 @@ export const driverTrips: DriverTrips = [
       city: "Mumbai",
       state: "Karnataka"
     },
-    pickup_date: "2020-06-29T17:38:35.000+0000",
+    pickup_date: "2020-06-28T17:38:35.000+0000",
     good_type: "rice",
     weight: 120,
     weight_unit: "ton",
@@ -21,7 +21,7 @@ export const driverTrips: DriverTrips = [
     truck_type_preference: "OPEN",
     trip: {
       id: 5,
-      status: "CREATED",
+      status: "COMPLETED",
       eta: "2020-06-27T21:05:53.000+0000",
       driver_name: "driver1-ph",
       truck_name: null,

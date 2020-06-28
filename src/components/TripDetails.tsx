@@ -41,6 +41,7 @@ const TripDetails = (props: OwnProps) => {
     places,
     lspProvider
   } = props;
+
   return (
     <>
       {id && (

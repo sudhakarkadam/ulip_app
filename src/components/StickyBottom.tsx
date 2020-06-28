@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import { Box } from "./@styled/BaseElements";
+import { View } from "react-native";
 export const StickyBottom: React.FC = ({ children }) => {
   const [height, setHeight] = useState(100);
   return (
@@ -7,6 +9,8 @@ export const StickyBottom: React.FC = ({ children }) => {
       height={height}
       background="#fff"
       position="absolute"
+      justifyContent="center"
+      alignItems="center"
       padding={10}
       width="100%"
       bottom={0}
@@ -17,19 +21,13 @@ export const StickyBottom: React.FC = ({ children }) => {
           height: 3
         },
         shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-        elevation: 6
+        shadowRadius: 4.65
+      }}
+      onLayout={e => {
+        setHeight(e.nativeEvent.layout.height);
       }}
     >
-      <Box
-        justifyContent="center"
-        alignItems="center"
-        onLayout={e => {
-          setHeight(e.nativeEvent.layout.height);
-        }}
-      >
-        {children}
-      </Box>
+      {children}
     </Box>
   );
 };

@@ -14,6 +14,15 @@ export const DriverActionCreators = {
       actions.GET_TRIPS_ERROR
     ],
     api.getTrips
+  ),
+
+  updateTrip: createAsyncAction(
+    [
+      actions.GET_UPDATE_TRIP_REQUEST,
+      actions.GET_UPDATE_TRIP_SUCCESS,
+      actions.GET_UPDATE_TRIP_ERROR
+    ],
+    api.updateTrip
   )
 };
 

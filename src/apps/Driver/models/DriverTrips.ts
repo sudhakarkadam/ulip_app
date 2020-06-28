@@ -1,5 +1,10 @@
 export type DriverTrips = RootObject[];
-
+type Status =
+  | "CREATED"
+  | "TRIP_STARTED"
+  | "IN_TRANSIT"
+  | "REACHED"
+  | "COMPLETED";
 interface RootObject {
   id: number;
   pickUp_location: Location;
@@ -15,7 +20,7 @@ interface RootObject {
 
 interface Trip {
   id: number;
-  status: "CREATED" | "TRIP_STARTED" | "IN_TRANSIT" | "REACHED" | "COMPLETED";
+  status: Status;
   eta: string;
   driver_name: string;
   truck_name?: any;
@@ -28,4 +33,9 @@ export interface Location {
   address: string;
   city: string;
   state: string;
+}
+
+export interface UpdateTripRequest {
+  sr_id: number;
+  status: "TRIP_STARTED" | "REACHED";
 }
