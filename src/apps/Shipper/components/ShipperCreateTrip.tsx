@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { ToastAndroid } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
 import ShipperActionCreators from "../actions/ShipperActionCreators";
@@ -30,6 +31,7 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
         //@ts-ignore
         await props.createTrip({ business_id: businessId, ...data });
         props.navigation.navigate("MainTripListing");
+        ToastAndroid.show("Trip Successfully Created", ToastAndroid.SHORT);
         return;
       }}
     />

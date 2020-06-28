@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastAndroid } from "react-native";
 import PersonProfile from "../../../components/PersonProfile";
 import { StackScreenProps } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
@@ -29,8 +30,9 @@ const ShipperPersonProfile = (props: Props) => {
         try {
           await props.savePersonalProfile({ name, phone, userId });
           props.navigation.navigate("CreateProfile");
+          ToastAndroid.show("Profile Created successfully", ToastAndroid.SHORT);
         } catch {
-          console.log("error");
+          ToastAndroid.show("Error while creating profile", ToastAndroid.SHORT);
         }
       }}
     />
