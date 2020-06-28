@@ -2,15 +2,14 @@ import React, { useEffect } from "react";
 import {
   FlexColumn,
   FlexRow,
-  Flex,
   TouchableOpacity
 } from "../../../components/@styled/BaseElements";
 import { PrimaryText } from "../../../components/@styled/Text";
 import colors from "../../../theme/colors";
 import styled from "styled-components";
-import { LSPAppState } from "../reducers";
 import LSPActionCreators from "../actions/LSPActionCreators";
 import { connect, ConnectedProps } from "react-redux";
+import { ReducerState } from "../store";
 
 const MetricBox = styled(TouchableOpacity)`
   background-color: white;
@@ -24,17 +23,23 @@ const MetricBox = styled(TouchableOpacity)`
 
 const { getMetrics } = LSPActionCreators;
 
-const mapStateToProps = (state: LSPAppState) => ({
-  HomeMetrics: state.HomeMetrics
+const mapStateToProps = (state: ReducerState) => ({
+  HomeMetrics: state.HomeMetrics,
+  user: state.user
 });
 const mapDispatchToProps = { getMetrics };
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 interface OwnProps {
   onRequestClick: () => void;
 }
 const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
   useEffect(() => {
-    props.getMetrics({ businessId: 2 });
+    props.getMetrics({
+      businessId: props.user.data.business_details.business_id
+    });
   }, []);
   const metrics = props.HomeMetrics.data;
   return (

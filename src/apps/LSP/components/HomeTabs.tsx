@@ -45,7 +45,7 @@ const tabs = [
 ];
 
 const Hometabs = () => {
-  return <UlipBottomTab tabs={tabs}></UlipBottomTab>;
+  return <UlipBottomTab tabs={tabs} />;
 };
 
 export default Hometabs;

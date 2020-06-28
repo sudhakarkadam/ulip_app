@@ -35,7 +35,7 @@ const MainTripListing = (props: Props & OwnProps) => {
   useEffect(() => {
     props.getTrips({
       status: config.status,
-      businessId: (businessId || 1).toString()
+      businessId: businessId || 1
     });
   }, []);
   const trips = props.trips.data || [];
@@ -55,7 +55,6 @@ const MainTripListing = (props: Props & OwnProps) => {
           <TripList
             listingMode={ListingModes.PENDING_REQUESTS}
             from={AllApps.SHIPPER}
-            businessId={businessId}
           />
           <Box position="absolute" bottom="15" right="20">
             <FloatingButton

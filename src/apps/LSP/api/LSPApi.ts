@@ -10,7 +10,7 @@ import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 const endpoint = "http://10.24.7.179";
 
 const urls = {
-  getMetrics: (businessId: string) =>
+  getMetrics: (businessId: string | number) =>
     `${endpoint}/ulip/transport_service_request/business/${businessId}/view`,
   acceptTrip: `${endpoint}/ulip/transport_service_request/accept`,
   rejectTrip: `${endpoint}/ulip/transport_service_request/reject`

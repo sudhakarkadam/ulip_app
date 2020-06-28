@@ -17,10 +17,10 @@ import {
 } from "../components/@styled/Text";
 import moment from "moment";
 import { RequestStatus, AllApps, TruckType } from "../models/CommonModel";
-import { CommonState } from "../reducers";
 import ActionCreators from "../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { FlatList } from "react-native";
+import { ReducerState } from "../apps/LSP/store";
 
 const profile = require("../images/40px.png");
 const trailerTruck = require("../images/trailerTruckColored.png");
@@ -30,7 +30,6 @@ const openTruck = require("../images/openTruckColored.png");
 interface OwnProps {
   listingMode: ListingModes;
   from: AllApps;
-  businessId?: any;
   onRowClick?: (id: string | number) => void;
 }
 export enum ListingModes {
@@ -117,21 +116,28 @@ const CalendarComponent = ({ date }: any) => {
     </Flex>
   );
 };
-const mapStateToProps = (state: CommonState) => ({
-  trips: state.trips
+const mapStateToProps = (state: ReducerState) => ({
+  trips: state.trips,
+  user: state.user
 });
 const { getTrips } = ActionCreators;
 const mapDispatchToProps = { getTrips };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
-  const { from, listingMode, businessId } = props;
+  const { from, listingMode } = props;
   let config = listingConfig[listingMode] as any;
 
   useEffect(() => {
-    props.getTrips({ status: config.status, businessId: businessId || "3" });
+    props.getTrips({
+      status: config.status,
+      businessId: props.user.data?.business_details?.business_id || 1
+    });
   }, [listingMode]);
 
   const data = props.trips.data || [];

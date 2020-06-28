@@ -22,7 +22,7 @@ const urls = {
   saveCompanyProfile: `${endpoint}/ulip/business`,
   login: `${endpoint}/ulip/login`,
   logout: `${endpoint}/ulip/logout`,
-  getTrips: (businessId: string) =>
+  getTrips: (businessId: string | number) =>
     `${endpoint}/ulip/transport_service_request/business/${businessId}`
 };
 

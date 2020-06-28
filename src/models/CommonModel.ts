@@ -55,10 +55,10 @@ export interface UserDataModel {
 }
 export interface GetTripsRequest {
   status: string[];
-  businessId: string;
+  businessId: number;
 }
 export interface GetMetricsRequest {
-  businessId: string;
+  businessId: number;
 }
 export enum AllApps {
   SHIPPER = "SHIPPER",
