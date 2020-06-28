@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import InTransitListing from "./InTransitListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
+import TripTracking from "../../../components/TripTracking";
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,13 @@ const InTransitStack = () => {
         component={InTransitListing}
         options={{
           title: "In-Transit"
+        }}
+      />
+      <Stack.Screen
+        name="TripTracking"
+        component={TripTracking}
+        options={{
+          headerShown: false
         }}
       />
       <Stack.Screen

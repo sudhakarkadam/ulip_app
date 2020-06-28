@@ -1,21 +1,43 @@
 import React, { useState } from "react";
+import { StackScreenProps } from "@react-navigation/stack";
 import { Flex } from "../../../components/@styled/BaseElements";
 import colors from "../../../theme/colors";
 import { TabView, TabBar } from "react-native-tab-view";
 import { AllApps } from "../../../models/CommonModel";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { Dimensions } from "react-native";
-const Trips: React.FunctionComponent<{}> = () => {
+
+const Trips: React.FunctionComponent<StackScreenProps<
+  {
+    TripTracking: {
+      tripId: number;
+    };
+  },
+  "TripTracking"
+>> = props => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "ON-ROAD", title: "ON-ROAD" },
     { key: "ACTIVE", title: "ACTIVE" }
   ]);
+
   const OnRoad = () => (
-    <TripList listingMode={ListingModes.ON_ROAD} from={AllApps.SHIPPER} />
+    <TripList
+      listingMode={ListingModes.ON_ROAD}
+      from={AllApps.SHIPPER}
+      onRowClick={id => {
+        props.navigation.navigate("TripTracking", { tripId: id });
+      }}
+    />
   );
   const Active = () => (
-    <TripList listingMode={ListingModes.ACTIVE} from={AllApps.SHIPPER} />
+    <TripList
+      listingMode={ListingModes.ACTIVE}
+      from={AllApps.SHIPPER}
+      onRowClick={id => {
+        props.navigation.navigate("TripTracking", { tripId: id });
+      }}
+    />
   );
 
   return (
