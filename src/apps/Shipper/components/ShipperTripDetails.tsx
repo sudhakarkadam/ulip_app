@@ -34,6 +34,7 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
             }
           ] as any
         }
+        documents={tripData.trip?.documents || []}
       />
     </Flex>
   );

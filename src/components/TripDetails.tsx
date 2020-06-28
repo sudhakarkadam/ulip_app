@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Flex, Box, Image } from "./@styled/BaseElements";
+import {
+  Flex,
+  Box,
+  Image,
+  FlexRow,
+  ScrollView,
+  TouchableOpacity
+} from "./@styled/BaseElements";
 import colors from "../theme/colors";
 import { PrimaryText } from "./@styled/Text";
 import { TripStamp, Place } from "./TripStamp";
 import { TruckType } from "../models/CommonModel";
-import { Flex1Column } from "./@styled/Flex";
+import { Flex1Column, Flex1 } from "./@styled/Flex";
 import Tag from "./@styled/Tag";
+import { Modal } from "react-native";
+import { getEndpoint } from "../api/Api";
 
 const trailerTruck = require("../images/trailerTruckColored.png");
 const containerTruck = require("../images/containerTruckColored.png");
@@ -30,6 +39,10 @@ interface OwnProps {
   truckUnit?: string;
   lspProvider?: string;
   places?: Place[];
+  documents?: {
+    id: number;
+    type: string;
+  }[];
 }
 
 const TripDetails = (props: OwnProps) => {
@@ -41,11 +54,15 @@ const TripDetails = (props: OwnProps) => {
     id,
     places,
     lspProvider,
-    pickupDateString
+    pickupDateString,
+    documents = []
   } = props;
 
+  const [showModal, setModalState] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<number>();
+
   return (
-    <>
+    <ScrollView>
       {id && (
         <Card
           style={{
@@ -127,11 +144,63 @@ const TripDetails = (props: OwnProps) => {
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>
         <PrimaryText>Uploaded Documents</PrimaryText>
-        <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          ---
-        </PrimaryText>
+        {!documents.length && (
+          <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
+            ---
+          </PrimaryText>
+        )}
+        {!!documents.length && (
+          <FlexRow
+            flexWrap="wrap"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
+            {documents.map(document => (
+              <TouchableOpacity
+                key={document.id}
+                mx="3"
+                my="3"
+                onPress={() => {
+                  setSelectedImage(document.id);
+                  setModalState(!showModal);
+                }}
+              >
+                <Image
+                  source={{
+                    uri: `${getEndpoint()}/ulip/trip/document/${document.id}`
+                  }}
+                  resizeMethod="resize"
+                  style={{ width: 100, height: 100 }}
+                />
+              </TouchableOpacity>
+            ))}
+          </FlexRow>
+        )}
       </Card>
-    </>
+      <Modal transparent={true} visible={showModal}>
+        <Flex1 bg="white">
+          <Flex flexDirection="row-reverse">
+            <TouchableOpacity
+              p="5"
+              onPress={() => {
+                setModalState(!showModal);
+              }}
+            >
+              <PrimaryText fontSize="6">X</PrimaryText>
+            </TouchableOpacity>
+          </Flex>
+          <Flex1 width="100%">
+            <Image
+              source={{
+                uri: `${getEndpoint()}/ulip/trip/document/${selectedImage}`
+              }}
+              resizeMode="contain"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Flex1>
+        </Flex1>
+      </Modal>
+    </ScrollView>
   );
 };
 
