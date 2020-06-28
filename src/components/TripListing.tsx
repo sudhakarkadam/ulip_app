@@ -55,11 +55,12 @@ export const listingConfig = {
       title: "Upcoming trips",
       primaryWidget: IconWidget.CALENDAR,
       secondaryWidget: IconWidget.LABEL,
-      status: [RequestStatus.ACCEPTED]
+      status: [RequestStatus.ACCEPTED, RequestStatus.CREATED]
     },
     [AllApps.LSP]: {
       primaryWidget: IconWidget.PROFILE,
-      secondaryWidget: IconWidget.TRUCK
+      secondaryWidget: IconWidget.TRUCK,
+      status: [RequestStatus.ACCEPTED]
     }
   },
   [ListingModes.ON_ROAD]: {
@@ -122,7 +123,10 @@ const mapStateToProps = (state: CommonState) => ({
 const { getTrips } = ActionCreators;
 const mapDispatchToProps = { getTrips };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
