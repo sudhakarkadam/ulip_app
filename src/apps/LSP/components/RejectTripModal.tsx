@@ -10,6 +10,7 @@ import { TripRejectRequest } from "../models/TripAcceptance";
 import { ReduxCustomAction } from "../../../utils/actionCreator";
 import LSPActionTypes from "../actions/LSPActions";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
+import { ToastAndroid } from "react-native";
 
 interface OwnProps {
   onReject: (
@@ -19,6 +20,7 @@ interface OwnProps {
   >;
   onClose: () => void;
   returningScreen: () => void;
+  id: number;
 }
 
 const RejectTripModal = (props: OwnProps) => {
@@ -44,10 +46,22 @@ const RejectTripModal = (props: OwnProps) => {
           title="Reject"
           style={{ flex: 1 }}
           onPress={() =>
-            props.onReject({ reason: reason, sr_id: 1 }).then(() => {
-              props.onClose();
-              props.returningScreen();
-            })
+            props
+              .onReject({ reason: reason, sr_id: props.id })
+              .then(() => {
+                props.onClose();
+                ToastAndroid.show(
+                  "Trip Successfully Rejected",
+                  ToastAndroid.SHORT
+                );
+                props.returningScreen();
+              })
+              .catch(() => {
+                ToastAndroid.show(
+                  "Something went wrong. Please try again later.",
+                  ToastAndroid.SHORT
+                );
+              })
           }
         />
       </FlexRow>

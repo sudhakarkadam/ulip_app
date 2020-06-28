@@ -11,6 +11,7 @@ import StyledButton from "../../../components/@styled/StyledButton/StyledButton"
 import { TripAcceptRequest } from "../models/TripAcceptance";
 import { ReduxCustomAction } from "../../../utils/actionCreator";
 import LSPActionTypes from "../actions/LSPActions";
+import { ToastAndroid } from "react-native";
 
 interface OwnProps {
   onAccept: (
@@ -20,6 +21,7 @@ interface OwnProps {
   >;
   onClose: () => void;
   returningScreen: () => void;
+  id: number;
 }
 
 const AcceptTripModal = (props: OwnProps) => {
@@ -61,7 +63,7 @@ const AcceptTripModal = (props: OwnProps) => {
           onPress={() =>
             props
               .onAccept({
-                sr_id: 1,
+                sr_id: props.id,
                 driver: {
                   name: driverName,
                   mobile_number: driverMobile
@@ -70,10 +72,20 @@ const AcceptTripModal = (props: OwnProps) => {
               })
               .then(() => {
                 props.onClose();
+                ToastAndroid.show(
+                  "Trip Successfully Accepted",
+                  ToastAndroid.SHORT
+                );
                 props.returningScreen();
               })
+              .catch(() => {
+                ToastAndroid.show(
+                  "Something went wrong. Please try again later.",
+                  ToastAndroid.SHORT
+                );
+              })
           }
-          disabled={!driverName && !driverMobile && !truck}
+          disabled={!driverName || !driverMobile}
         />
       </FlexRow>
     </Flex>
