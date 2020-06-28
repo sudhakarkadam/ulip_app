@@ -73,7 +73,7 @@ const TripDetails = (props: OwnProps) => {
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Pickup Date</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {pickupDate?.toLocaleDateString()}
+          {pickupDate}
         </PrimaryText>
       </Card>
       <Card

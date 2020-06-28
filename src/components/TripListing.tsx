@@ -16,7 +16,12 @@ import {
   SmallCapitalText
 } from "../components/@styled/Text";
 import moment from "moment";
-import { RequestStatus, AllApps, TruckType } from "../models/CommonModel";
+import {
+  RequestStatus,
+  AllApps,
+  TruckType,
+  GetTripsResponse
+} from "../models/CommonModel";
 import ActionCreators from "../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { FlatList } from "react-native";
@@ -32,7 +37,7 @@ const openTruck = require("../images/openTruckColored.png");
 interface OwnProps {
   listingMode: ListingModes;
   from: AllApps;
-  onRowClick?: (id: string | number) => void;
+  onRowClick?: (id: string | number, trip: GetTripsResponse) => void;
   businessId?: any;
 }
 export enum ListingModes {
@@ -185,10 +190,11 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                   <TouchableOpacity
                     onPress={() => {
                       if (
-                        listingMode === ListingModes.PENDING_REQUESTS &&
+                        (listingMode === ListingModes.PENDING_REQUESTS ||
+                          listingMode === ListingModes.UPCOMING) &&
                         props.onRowClick
                       )
-                        props.onRowClick(item.id);
+                        props.onRowClick(item.id, item);
                       return;
                     }}
                   >

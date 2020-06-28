@@ -6,6 +6,7 @@ import { ShipperAppState } from "../reducers";
 import ShipperPersonProfile from "./ShipperPersonProfile";
 import ShipperCompanyProfile from "./ShipperCompanyProfile";
 import ShipperCreateProfile from "./ShipperCreateProfile";
+import ShipperTripDetails from "./ShipperTripDetails";
 import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 
@@ -15,6 +16,7 @@ export type HomeStackParamList = {
   CompanyProfile: undefined;
   CreateTrip: undefined;
   MainTripListing: undefined;
+  ShipperTripDetails: { data: string };
 };
 
 const mapStateToProps = (state: ShipperAppState) => ({
@@ -56,6 +58,11 @@ const HomeStack = (props: OwnProps) => {
             name="MainTripListing"
             component={MainTripListing}
             options={{ title: "Home" }}
+          />
+          <Stack.Screen
+            name="ShipperTripDetails"
+            component={ShipperTripDetails}
+            options={{ title: "Trip Details" }}
           />
           <Stack.Screen
             name="CreateTrip"
