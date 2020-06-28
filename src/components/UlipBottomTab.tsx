@@ -23,9 +23,9 @@ const UlipBottomTab: React.FC<IOwnProps> = ({ tabs }) => {
   return (
     <Tab.Navigator initialRouteName={tabs[0].name}>
       {tabs.map(tab => {
-        const TabContent = () => {
+        const TabContent = (props: any) => {
           const isFocused = useIsFocused();
-          return isFocused ? <tab.component /> : null;
+          return isFocused ? <tab.component {...props} /> : null;
         };
         return (
           <Tab.Screen
