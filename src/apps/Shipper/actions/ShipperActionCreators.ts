@@ -13,6 +13,14 @@ const ShipperActionCreators = {
       actions.CREATE_TRIP_ERROR
     ],
     api.createTrip
+  ),
+  getLspList: createAsyncAction(
+    [
+      actions.LSP_LIST_REQUEST,
+      actions.LSP_LIST_SUCCESS,
+      actions.LSP_LIST_ERROR
+    ],
+    api.getLspList
   )
 };
 

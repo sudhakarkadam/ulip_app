@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image } from "react-native";
+import { Image, ScrollView } from "react-native";
 import colors from "../../../theme/colors";
 import { Flex, FlexRow, Text } from "../../../components/@styled/BaseElements";
 import SelectComponent from "../../../components/SelectComponent";
@@ -8,31 +8,78 @@ import Input from "../../../components/InputComponent";
 import TripDetails from "../../../components/TripDetails";
 import StyledButton from "../../../components/@styled/StyledButton";
 import TripProgress from "./TripProgress";
+import { LspDetailsObj } from "../models/ShipperApiModels";
 
 const openTruckImg = require("../../../images/open-truck.png");
 const containerTruckImg = require("../../../images/container-truck.png");
+const containerLightImg = require("../../../images/container-light.png");
 const trailerTruckImg = require("../../../images/trailer-truck.png");
+const trailerLightImg = require("../../../images/trailer-light.png");
 const openDarkTruckImg = require("../../../images/open-dark.png");
 
 interface OwnProps {
   createTripCallback: (data: any) => any;
+  lspList: LspDetailsObj[];
 }
 
 type Props = OwnProps;
 
+const LocationsList = [
+  {
+    address: "Sector 4, Rohini",
+    city: "Delhi",
+    name: "Delhi",
+    state: "Delhi",
+    label: "Delhi",
+    value: "del"
+  },
+  {
+    label: "Bangalore",
+    value: "bg",
+    city: "Bangalore",
+    state: "Karnataka",
+    name: "Bangalore",
+    address: "Devrabessanhalli, Bangalore"
+  },
+  {
+    label: "Kolkata",
+    value: "kol",
+    city: "Kolkata",
+    state: "West Bengal",
+    name: "Kolkata",
+    address: "Jibantala, Kolkata"
+  },
+  {
+    label: "Mumbai",
+    value: "mum",
+    city: "Mumbai",
+    state: "Maharashtra",
+    name: "Mumbai",
+    address: "Powai, Mumbai"
+  }
+];
+
 const TruckTypeComp = (props: {
+  lspList: { label: string; value: string }[];
   weight: string;
   lspProvider: string;
   weightUnit: string;
   truckType: string;
   onChange: (val: string, type?: "lsp" | "unit" | "truckType") => void;
 }) => {
-  const { weight, onChange, lspProvider, weightUnit, truckType } = props;
+  const {
+    weight,
+    onChange,
+    lspProvider,
+    weightUnit,
+    truckType,
+    lspList
+  } = props;
   return (
     <Flex m={5}>
       <SelectComponent
         label="Logistics service provider"
-        data={[{ label: "XYZ Logistic & Transportation", value: "xyz" }]}
+        data={lspList}
         defaultValue={lspProvider}
         getSelectedValue={val => onChange(val, "lsp")}
       />
@@ -77,7 +124,12 @@ const TruckTypeComp = (props: {
               Container
             </Text>
           </Flex>
-          <Image style={{ width: 66, height: 27 }} source={containerTruckImg} />
+          <Image
+            style={{ width: 66, height: 27 }}
+            source={
+              truckType === "container" ? containerLightImg : containerTruckImg
+            }
+          />
         </Flex>
         <Flex
           onTouchEnd={() => onChange("trailer", "truckType")}
@@ -94,7 +146,10 @@ const TruckTypeComp = (props: {
               Trailer
             </Text>
           </Flex>
-          <Image style={{ width: 70, height: 28 }} source={trailerTruckImg} />
+          <Image
+            style={{ width: 70, height: 28 }}
+            source={truckType === "trailer" ? trailerLightImg : trailerTruckImg}
+          />
         </Flex>
       </FlexRow>
       <Flex mt={3}>
@@ -127,15 +182,19 @@ const TruckTypeComp = (props: {
 };
 
 const CreateTrip = (props: Props) => {
+  const lspList = props.lspList.map(lsp => ({
+    label: lsp.lsp_name,
+    value: lsp.lsp_id.toString()
+  }));
   const todayDate = new Date().toISOString().substr(0, 10);
   const [tripStep, setTripStep] = useState(0);
-  const [fromValue, setFromValue] = useState("bg");
-  const [toValue, setToValue] = useState("mum");
+  const [fromValue, setFromValue] = useState(LocationsList[0].value);
+  const [toValue, setToValue] = useState(LocationsList[1].value);
   const [pickupDate, setPickUpDate] = useState(todayDate);
   const [goodsType, setGoodsType] = useState("rice");
   const [truckType, setTruckType] = useState("open");
   const [weight, setWeight] = useState("");
-  const [lspProvider, setLspProvider] = useState("xyz");
+  const [lspProvider, setLspProvider] = useState(lspList[0].value);
   const [weightUnit, setWeightUnit] = useState("TONNES");
 
   const handleNextClick = () => {
@@ -143,28 +202,12 @@ const CreateTrip = (props: Props) => {
       setTripStep(step => step + 1);
       return;
     }
-    const location = {
-      address: "Sector 4, Rohini",
-      city: "bangalore",
-      location_code: "loc_1",
-      name: "Delhi",
-      postal_code: "560035",
-      state: "Delhi"
-    };
-    const pickLocation = {
-      address: "i dont know",
-      city: "mumbai",
-      location_code: "loc_2",
-      name: "bangalore",
-      postal_code: "561035",
-      state: "Karnataka"
-    };
     const data = {
-      delivery_location: location,
+      delivery_location: LocationsList.filter(loc => loc.value === toValue)[0],
       good_type: goodsType,
-      lsp_id: 5,
-      pickup_date: `${pickupDate}T09:18:34.000+0000`,
-      pickup_location: pickLocation,
+      lsp_id: Number(lspProvider),
+      pickup_date: `${pickupDate}`,
+      pickup_location: LocationsList.filter(loc => loc.value === fromValue)[0],
       truck_type:
         truckType.toUpperCase() === "TRAILER"
           ? "TRAILOR"
@@ -177,104 +220,115 @@ const CreateTrip = (props: Props) => {
     return;
   };
   return (
-    <Flex
-      backgroundColor={tripStep === 4 ? "white" : ""}
-      position="relative"
-      height="100%"
-    >
-      {tripStep !== 4 && <TripProgress currentStep={tripStep} />}
-      {tripStep === 0 ? (
-        <Flex m={5}>
-          <SelectComponent
-            label="From"
-            getSelectedValue={val => setFromValue(val)}
-            data={[
-              { label: "Bangalore", value: "bg" },
-              { label: "Delhi", value: "del" },
-              { label: "Kolkata", value: "kol" },
-              { label: "Mumbai", value: "mum" }
-            ]}
-            defaultValue={fromValue}
-          />
-          <Flex mt={3}>
-            <SelectComponent
-              getSelectedValue={val => setToValue(val)}
-              label="To"
-              data={[
-                { label: "Bangalore", value: "bg" },
-                { label: "Delhi", value: "del" },
-                { label: "Kolkata", value: "kol" },
-                { label: "Mumbai", value: "mum" }
-              ]}
-              defaultValue={toValue}
+    <>
+      {tripStep !== 4 && (
+        <Flex
+          backgroundColor={tripStep === 4 ? "white" : ""}
+          position="relative"
+          height="100%"
+        >
+          <TripProgress currentStep={tripStep} />
+          {tripStep === 0 ? (
+            <Flex m={5}>
+              <SelectComponent
+                label="From"
+                getSelectedValue={val => setFromValue(val)}
+                data={LocationsList}
+                defaultValue={fromValue}
+              />
+              <Flex mt={3}>
+                <SelectComponent
+                  getSelectedValue={val => setToValue(val)}
+                  label="To"
+                  data={LocationsList}
+                  defaultValue={toValue}
+                />
+              </Flex>
+            </Flex>
+          ) : null}
+          {tripStep === 1 ? (
+            <Flex m={5}>
+              <CalendarComponent
+                defaultDate={pickupDate}
+                getSelectedDate={val => setPickUpDate(val)}
+                label="Pickup date"
+              />
+            </Flex>
+          ) : null}
+          {tripStep === 2 ? (
+            <Flex m={5}>
+              <SelectComponent
+                getSelectedValue={val => setGoodsType(val)}
+                label="Select goods type"
+                data={[{ label: "Rice/Grain/Wheat", value: "rice" }]}
+                defaultValue={goodsType}
+              />
+            </Flex>
+          ) : null}
+          {tripStep === 3 ? (
+            <TruckTypeComp
+              lspList={lspList}
+              lspProvider={lspProvider.toString()}
+              weightUnit={weightUnit}
+              weight={weight}
+              truckType={truckType}
+              onChange={(val, type) => {
+                if (!type) {
+                  setWeight(val);
+                  return;
+                }
+                if (type === "lsp") {
+                  setLspProvider(val);
+                  return;
+                }
+                if (type === "truckType") {
+                  setTruckType(val);
+                  return;
+                }
+                return setWeightUnit(val);
+              }}
+            />
+          ) : null}
+
+          <Flex width="98%" position="absolute" bottom={1} m={2}>
+            <StyledButton
+              disabled={tripStep === 3 && !weight}
+              height="40"
+              title={tripStep === 3 ? "preview" : "next"}
+              onPress={handleNextClick}
             />
           </Flex>
         </Flex>
-      ) : null}
-      {tripStep === 1 ? (
-        <Flex m={5}>
-          <CalendarComponent
-            defaultDate={pickupDate}
-            getSelectedDate={val => setPickUpDate(val)}
-            label="Pickup date"
-          />
-        </Flex>
-      ) : null}
-      {tripStep === 2 ? (
-        <Flex m={5}>
-          <SelectComponent
-            getSelectedValue={val => setGoodsType(val)}
-            label="Select goods type"
-            data={[{ label: "Rice/Grain/Wheat", value: "rice" }]}
-            defaultValue={goodsType}
-          />
-        </Flex>
-      ) : null}
-      {tripStep === 3 ? (
-        <TruckTypeComp
-          lspProvider={lspProvider}
-          weightUnit={weightUnit}
-          weight={weight}
-          truckType={truckType}
-          onChange={(val, type) => {
-            if (!type) {
-              setWeight(val);
-              return;
-            }
-            if (type === "lsp") {
-              setLspProvider(val);
-              return;
-            }
-            if (type === "truckType") {
-              setTruckType(val);
-              return;
-            }
-            return setWeightUnit(val);
-          }}
-        />
-      ) : null}
-      {tripStep === 4 ? (
-        <TripDetails
-          pickupDate={pickupDate}
-          truckType={truckType}
-          truckWeight={weight}
-          truckUnit={weightUnit}
-        />
-      ) : null}
-      <Flex width="92%" position="absolute" bottom={5} m={5}>
-        <StyledButton
-          height="40"
-          title={
-            tripStep === 3
-              ? "preview"
-              : tripStep === 4
-              ? "Send Request"
-              : "next"
-          }
-          onPress={handleNextClick}
-        />
-      </Flex>
-    </Flex>
+      )}
+      {tripStep === 4 && (
+        <ScrollView>
+          <Flex height="100%" backgroundColor={tripStep === 4 ? "white" : ""}>
+            <TripDetails
+              pickupDate={pickupDate}
+              truckType={truckType}
+              truckWeight={weight}
+              truckUnit={weightUnit}
+              lspProvider={
+                lspList.filter(lsp => lsp.value === lspProvider)[0].label
+              }
+            />
+            <FlexRow m={5}>
+              <StyledButton
+                title="Modify Request"
+                color={`${colors.black[0]}`}
+                style={{ flex: 1, backgroundColor: "white", borderColor: "" }}
+                onPress={() => setTripStep(0)}
+              />
+              <StyledButton
+                title="Send Request"
+                style={{ flex: 1 }}
+                onPress={handleNextClick}
+              />
+            </FlexRow>
+          </Flex>
+        </ScrollView>
+      )}
+    </>
   );
 };
 

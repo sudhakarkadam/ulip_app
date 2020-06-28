@@ -26,10 +26,11 @@ interface OwnProps {
   truckType?: string;
   truckWeight?: string;
   truckUnit?: string;
+  lspProvider?: string;
 }
 
 const TripDetails = (props: OwnProps) => {
-  const { pickupDate, truckType, truckWeight, truckUnit } = props;
+  const { pickupDate, truckType, truckWeight, truckUnit, lspProvider } = props;
   return (
     <>
       <Card
@@ -63,6 +64,14 @@ const TripDetails = (props: OwnProps) => {
           ]}
         />
       </Card>
+      {lspProvider && (
+        <Card style={{ paddingVertical: 7 }}>
+          <PrimaryText>Logistics service provider</PrimaryText>
+          <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
+            {lspProvider}
+          </PrimaryText>
+        </Card>
+      )}
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Pickup Date</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>

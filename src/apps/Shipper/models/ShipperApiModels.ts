@@ -22,3 +22,11 @@ export interface CreateTripRequestModel {
   weight: number;
   weight_unit: string;
 }
+
+export interface LspDetailsObj {
+  lsp_id: number;
+  lsp_name: string;
+}
+export interface LspListResponse {
+  lsp_list: LspDetailsObj[];
+}
