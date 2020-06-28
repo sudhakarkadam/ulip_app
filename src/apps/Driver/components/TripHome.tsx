@@ -42,10 +42,7 @@ const mapStateToProps = (state: DriverAppState) => ({
   trips: state.trips,
   phone: state.common.user.data.user_details.phone_number
 });
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripHome">;

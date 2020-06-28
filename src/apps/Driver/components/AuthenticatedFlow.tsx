@@ -21,14 +21,11 @@ const { savePersonalProfile } = ActionCreators;
 
 const Stack = createStackNavigator<DriverHomeStackParamList>();
 const mapDispatchToProps = { savePersonalProfile };
-const connector = connect(
-  null,
-  mapDispatchToProps
-);
+const connector = connect(null, mapDispatchToProps);
 
-const AuthenticatedFlow: React.FC<
-  { userInfo: UserDataModel } & ConnectedProps<typeof connector>
-> = props => {
+const AuthenticatedFlow: React.FC<{ userInfo: UserDataModel } & ConnectedProps<
+  typeof connector
+>> = props => {
   const { user_details } = props.userInfo;
   const hasProfile = !!user_details.name;
   return (
