@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import variants from "./StyledButton.variants";
-import { Text } from "../BaseElements";
+import { Text, StyledActivityIndicator } from "../BaseElements";
 import {
   space,
   color,
@@ -11,23 +11,39 @@ import {
   compose
 } from "styled-system";
 import colors from "../../../theme/colors";
+import { FlexRowPlaceMiddle } from "../Flex";
 
 const ButtonElem = styled.TouchableOpacity(
   compose(space, color, layout, border, typography),
   variants.type
 );
 
-const StyledButton = ({ title, variant, appearance, ...rest }: any) => {
+const StyledButton = ({
+  title,
+  variant,
+  appearance,
+  loading,
+  ...rest
+}: any) => {
   return (
     <ButtonElem variant={variant} appearance={appearance} {...rest}>
-      <Text
-        fontWeight={"bold"}
-        textAlign={"center"}
-        color={variant !== "default" ? appearance : rest.color || "white"}
-        style={{ textTransform: "uppercase" }}
-      >
-        {title}
-      </Text>
+      <FlexRowPlaceMiddle>
+        <Text
+          fontWeight={"bold"}
+          textAlign={"center"}
+          color={variant !== "default" ? appearance : rest.color || "white"}
+          style={{ textTransform: "uppercase" }}
+        >
+          {title}
+        </Text>
+        {loading && (
+          <StyledActivityIndicator
+            color={variant !== "default" ? appearance : rest.color || "white"}
+            size={15}
+            marginLeft={3}
+          />
+        )}
+      </FlexRowPlaceMiddle>
     </ButtonElem>
   );
 };

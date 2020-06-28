@@ -1,7 +1,7 @@
 import { variant, VariantArgs } from "styled-system";
 const common = {
   borderRadius: 3,
-  border: "1px solid transparent",
+  border: "0px solid transparent",
   px: 4,
   py: 3,
   m: 1
@@ -13,7 +13,7 @@ export const type = (props: any) =>
     variants: {
       default: {
         ...common,
-        bg: props.appearance,
+        bg: props.disabled ? "grays.1" : props.appearance,
         borderColor: props.appearance
       },
       outline: {

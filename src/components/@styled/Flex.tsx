@@ -79,6 +79,11 @@ export const FlexPlaceMiddle = styled(Flex)`
   align-items: center;
 `;
 
+export const FlexRowPlaceMiddle = styled(FlexRow)`
+  justify-content: center;
+  align-items: center;
+`;
+
 export const FlexCenter = styled(Flex)`
   justify-content: center;
   align-items: center;

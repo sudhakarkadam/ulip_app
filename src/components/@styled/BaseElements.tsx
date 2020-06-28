@@ -69,6 +69,10 @@ export const Text = styled.Text<TextProps>(
   compose(space, color, layout, border, typography)
 );
 
+export const StyledActivityIndicator = styled.ActivityIndicator<
+  ColorProps & SpaceProps
+>(compose(color, space));
+
 type InputProps = SpaceProps &
   Omit<ColorProps, "color"> &
   TypographyProps &
@@ -78,6 +82,7 @@ type InputProps = SpaceProps &
 export const Input = styled.TextInput<InputProps>(
   compose(space, color, typography, border, layout)
 );
+
 export const StyledTextInput = styled(Input)`
   color: ${colors.primary};
   border: solid 1px ${colors.grays[1]};
