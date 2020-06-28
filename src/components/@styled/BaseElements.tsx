@@ -66,13 +66,7 @@ type TextProps = SpaceProps &
   TypographyProps;
 
 export const Text = styled.Text<TextProps>(
-  compose(
-    space,
-    color,
-    layout,
-    border,
-    typography
-  )
+  compose(space, color, layout, border, typography)
 );
 
 type InputProps = SpaceProps &
@@ -82,13 +76,7 @@ type InputProps = SpaceProps &
   LayoutProps;
 
 export const Input = styled.TextInput<InputProps>(
-  compose(
-    space,
-    color,
-    typography,
-    border,
-    layout
-  )
+  compose(space, color, typography, border, layout)
 );
 export const StyledTextInput = styled(Input)`
   color: ${colors.primary};
@@ -101,12 +89,7 @@ export const StyledTextInput = styled(Input)`
 
 type ImageProps = SpaceProps & LayoutProps;
 
-export const Image = styled.Image<ImageProps>(
-  compose(
-    space,
-    layout
-  )
-);
+export const Image = styled.Image<ImageProps>(compose(space, layout));
 export const Icon = styled(Image)`
   resize-mode: contain;
   width: 18px;

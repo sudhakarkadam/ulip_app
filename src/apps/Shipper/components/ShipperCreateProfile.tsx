@@ -12,18 +12,15 @@ const mapStateToProps = (state: ShipperAppState) => {
     userInfo: state.user.data
   };
 };
-const connector = connect(
-  mapStateToProps,
-  {} as any
-);
+const connector = connect(mapStateToProps, {} as any);
 
 type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
   ConnectedProps<typeof connector>;
 
 const ShipperCreateProfile = (props: AllProps) => {
   const { userInfo } = props;
-  const personVerified = userInfo && userInfo.user_details.name ? true : false;
-  const comapnyVerified = userInfo && userInfo.business_details ? true : false;
+  const personVerified = userInfo?.user_details?.name;
+  const comapnyVerified = userInfo?.business_details;
   return (
     <Flex>
       {!personVerified && (

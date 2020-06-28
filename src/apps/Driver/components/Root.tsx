@@ -24,10 +24,7 @@ const mapStateToProps = (state: DriverAppState) => ({
   userInfo: state.common.user.data
 });
 
-const connector = connect(
-  mapStateToProps,
-  {}
-);
+const connector = connect(mapStateToProps, {});
 
 export interface RootStackParamList {
   CreateProfile: undefined;

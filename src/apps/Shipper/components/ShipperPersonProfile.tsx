@@ -16,10 +16,7 @@ const mapStateToProps = (state: ShipperAppState) => {
   };
 };
 const mapDispatchToProps = { savePersonalProfile };
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const ShipperPersonProfile = (props: Props) => {
   const { userInfo } = props;

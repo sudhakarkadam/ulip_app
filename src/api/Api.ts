@@ -72,30 +72,15 @@ export default {
     );
   },
   login: () => {
-    return http.post<{}, {}>(
-      urls.login,
-      {},
-      {
-        headers: {}
-      }
-    );
+    return http.post<{}, {}>(urls.login, {});
   },
   logoutApi: () => {
-    return http.put<{}, {}>(
-      urls.logout,
-      {},
-      {
-        headers: {}
-      }
-    );
+    return http.put<{}, {}>(urls.logout, {});
   },
   getTrips: (payload: GetTripsRequest) => {
     return http.get<{ status: string }, GetTripsResponse[]>(
       urls.getTrips(payload.businessId),
-      { status: payload.status.join(",") },
-      {
-        headers: {}
-      }
+      { status: payload.status.join(",") }
     );
   }
 };

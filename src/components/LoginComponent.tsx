@@ -13,10 +13,7 @@ import ActionCreators from "../actions/ActionCreators";
 const { verifyOtp, sendOtp } = ActionCreators;
 
 const mapDispatchToProps = { verifyOtp, sendOtp };
-const connector = connect(
-  null,
-  mapDispatchToProps
-);
+const connector = connect(null, mapDispatchToProps);
 
 const LoginComponent = (props: ConnectedProps<typeof connector>) => {
   const [phoneNumber, editPhoneNumber] = useState("");

@@ -11,20 +11,14 @@ const mapStateToProps = (state: ShipperAppState) => ({
   userInfo: state.user.data
 });
 const mapDispatchToProps = { createTrip };
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type CreateTripProps = StackScreenProps<HomeStackParamList, "CreateTrip"> &
   ConnectedProps<typeof connector>;
 
 const ShipperCreateTrip = (props: CreateTripProps) => {
   const { userInfo } = props;
-  const businessId =
-    userInfo && userInfo.business_details
-      ? userInfo.business_details.business_id
-      : 0;
+  const businessId = userInfo?.business_details?.business_id;
   return (
     <CreateTrip
       createTripCallback={async data => {

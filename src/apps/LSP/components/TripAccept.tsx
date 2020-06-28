@@ -17,10 +17,7 @@ const mapStateToProps = (state: LSPAppState) => ({
   rejectedTripStatus: state.rejectedTripStatus
 });
 const mapDispatchToProps = { acceptTrip, rejectTrip };
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const TripAcceptPage = (
   props: IWithModalInjectedProps & ConnectedProps<typeof connector>

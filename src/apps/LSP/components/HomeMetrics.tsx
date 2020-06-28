@@ -28,10 +28,7 @@ const mapStateToProps = (state: LSPAppState) => ({
   HomeMetrics: state.HomeMetrics
 });
 const mapDispatchToProps = { getMetrics };
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 interface OwnProps {
   onRequestClick: () => void;
 }

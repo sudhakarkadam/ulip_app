@@ -13,13 +13,7 @@ import {
 import colors from "../../../theme/colors";
 
 const ButtonElem = styled.TouchableOpacity(
-  compose(
-    space,
-    color,
-    layout,
-    border,
-    typography
-  ),
+  compose(space, color, layout, border, typography),
   variants.type
 );
 

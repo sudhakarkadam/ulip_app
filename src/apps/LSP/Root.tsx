@@ -13,10 +13,7 @@ const Stack = createStackNavigator();
 const mapStateToProps = (state: ReducerState) => ({
   userInfo: state.user.data
 });
-const connector = connect(
-  mapStateToProps,
-  {}
-);
+const connector = connect(mapStateToProps, {});
 
 class App extends Component<ConnectedProps<typeof connector>> {
   render() {

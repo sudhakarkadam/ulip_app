@@ -147,7 +147,6 @@ const CreateTrip = (props: Props) => {
       address: "Sector 4, Rohini",
       city: "bangalore",
       location_code: "loc_1",
-      map_ref: "ref",
       name: "Delhi",
       postal_code: "560035",
       state: "Delhi"
@@ -156,7 +155,6 @@ const CreateTrip = (props: Props) => {
       address: "i dont know",
       city: "mumbai",
       location_code: "loc_2",
-      map_ref: "rsdfsfd",
       name: "bangalore",
       postal_code: "561035",
       state: "Karnataka"
@@ -167,7 +165,10 @@ const CreateTrip = (props: Props) => {
       lsp_id: 5,
       pickup_date: `${pickupDate}T09:18:34.000+0000`,
       pickup_location: pickLocation,
-      truck_type: truckType.toUpperCase(),
+      truck_type:
+        truckType.toUpperCase() === "TRAILER"
+          ? "TRAILOR"
+          : truckType.toUpperCase(),
       weight: Number(weight),
       weight_unit: weightUnit
     };
@@ -189,6 +190,8 @@ const CreateTrip = (props: Props) => {
             getSelectedValue={val => setFromValue(val)}
             data={[
               { label: "Bangalore", value: "bg" },
+              { label: "Delhi", value: "del" },
+              { label: "Kolkata", value: "kol" },
               { label: "Mumbai", value: "mum" }
             ]}
             defaultValue={fromValue}
@@ -199,6 +202,8 @@ const CreateTrip = (props: Props) => {
               label="To"
               data={[
                 { label: "Bangalore", value: "bg" },
+                { label: "Delhi", value: "del" },
+                { label: "Kolkata", value: "kol" },
                 { label: "Mumbai", value: "mum" }
               ]}
               defaultValue={toValue}

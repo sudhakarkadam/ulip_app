@@ -16,10 +16,7 @@ const Stack = createStackNavigator();
 const mapStateToProps = (state: ShipperAppState) => ({
   userInfo: state.user.data
 });
-const connector = connect(
-  mapStateToProps,
-  {}
-);
+const connector = connect(mapStateToProps, {});
 
 class App extends Component<Props & ConnectedProps<typeof connector>> {
   render() {

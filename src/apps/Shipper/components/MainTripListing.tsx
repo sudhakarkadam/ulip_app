@@ -16,25 +16,27 @@ import { ConnectedProps, connect } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 
 const mapStateToProps = (state: ShipperAppState) => ({
-  trips: state.trips
+  trips: state.trips,
+  userInfo: state.user.data
 });
 
 const { getTrips } = ActionCreators;
 const mapDispatchToProps = { getTrips };
 
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = StackScreenProps<HomeStackParamList, "MainTripListing">;
 
 type OwnProps = ConnectedProps<typeof connector>;
 
 const MainTripListing = (props: Props & OwnProps) => {
-  const config = listingConfig[ListingModes.PENDING] as any;
+  const config = listingConfig[ListingModes.PENDING_REQUESTS] as any;
+  const businessId = props.userInfo?.business_details?.business_id;
   useEffect(() => {
-    props.getTrips({ status: config.status, businessId: "3" });
+    props.getTrips({
+      status: config.status,
+      businessId: (businessId || 1).toString()
+    });
   }, []);
   const trips = props.trips.data || [];
   return (
@@ -50,7 +52,11 @@ const MainTripListing = (props: Props & OwnProps) => {
 
       {!!trips.length && (
         <Flex1 bg="white">
-          <TripList listingMode={ListingModes.PENDING} from={AllApps.SHIPPER} />
+          <TripList
+            listingMode={ListingModes.PENDING_REQUESTS}
+            from={AllApps.SHIPPER}
+            businessId={businessId}
+          />
           <Box position="absolute" bottom="15" right="20">
             <FloatingButton
               size="large"

@@ -30,6 +30,7 @@ const openTruck = require("../images/openTruckColored.png");
 interface OwnProps {
   listingMode: ListingModes;
   from: AllApps;
+  businessId?: any;
   onRowClick?: (id: string | number) => void;
 }
 export enum ListingModes {
@@ -121,18 +122,15 @@ const mapStateToProps = (state: CommonState) => ({
 const { getTrips } = ActionCreators;
 const mapDispatchToProps = { getTrips };
 
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
-  const { from, listingMode } = props;
+  const { from, listingMode, businessId } = props;
   let config = listingConfig[listingMode] as any;
 
   useEffect(() => {
-    props.getTrips({ status: config.status, businessId: "3" });
+    props.getTrips({ status: config.status, businessId: businessId || "3" });
   }, [listingMode]);
 
   const data = props.trips.data || [];

@@ -14,10 +14,7 @@ const mapStateToProps = (state: ShipperAppState) => ({
   userInfo: state.user.data
 });
 const mapDispatchToProps = { saveCompanyProfile };
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const location = {
   address: "Sector 4, Rohini",
@@ -30,7 +27,7 @@ const location = {
 };
 
 const ShipperCompanyProfile = (props: Props) => {
-  const userId = props.userInfo ? props.userInfo.user_details.user_id : 0;
+  const userId = props.userInfo?.user_details.user_id || 0;
   return (
     <CompanyProfile
       createCompanyCallback={async ({ name, regNumber }) => {
