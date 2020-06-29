@@ -270,7 +270,14 @@ const CreateTrip = (props: Props) => {
               <SelectComponent
                 getSelectedValue={val => setGoodsType(val)}
                 label="Select goods type"
-                data={[{ label: "Rice/Grain/Wheat", value: "rice" }]}
+                data={[
+                  { label: "Rice/Grain/Wheat", value: "rice" },
+                  { label: "Auto Parts", value: "auto" },
+                  { label: "Chemicals", value: "chem" },
+                  { label: "Coal", value: "coal" },
+                  { label: "Metals - Iron/ Copper/ Zinc", value: "metals" },
+                  { label: "FMCG", value: "fmcg" }
+                ]}
                 defaultValue={goodsType}
               />
             </Flex>
