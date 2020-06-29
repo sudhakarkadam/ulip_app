@@ -264,7 +264,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                         </FlexRow>
                       </Flex>
                       {config.secondaryWidget === IconWidget.TRUCK && (
-                        <Box>
+                        <Box alignItems="flex-end">
                           <SmallCapitalText>
                             {item.truck_type_preference}
                           </SmallCapitalText>

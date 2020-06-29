@@ -16,6 +16,7 @@ import { Flex1Column, Flex1 } from "./@styled/Flex";
 import Tag from "./@styled/Tag";
 import { Modal } from "react-native";
 import { getEndpoint } from "../api/Api";
+import moment from "moment";
 
 const trailerTruck = require("../images/trailerTruckColored.png");
 const containerTruck = require("../images/containerTruckColored.png");
@@ -92,7 +93,10 @@ const TripDetails = (props: OwnProps) => {
       <Card style={{ paddingVertical: 7 }}>
         <PrimaryText>Pickup Date</PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {pickupDateString || pickupDate?.toLocaleDateString()}
+          {moment(
+            pickupDateString || pickupDate,
+            moment.defaultFormatUtc
+          ).format("DD/MM/YYYY")}
         </PrimaryText>
       </Card>
       <Card

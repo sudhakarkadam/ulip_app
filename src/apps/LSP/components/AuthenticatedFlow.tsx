@@ -2,11 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import CompanyProfile from "../../../components/CompanyProfile";
 import PersonProfile from "../../../components/PersonProfile";
-import { Flex, Icon, Box } from "../../../components/@styled/BaseElements";
+import { Flex } from "../../../components/@styled/BaseElements";
 import CardComp from "../../../components/CardComp";
 const personIcon = require("../../../icons/person-icon.png");
-import search from "../../../images/loupe.png";
-import notification from "../../../images/notification.png";
 import Hometabs from "./HomeTabs";
 import { ReducerState } from "../store";
 import { connect } from "react-redux";
@@ -105,12 +103,6 @@ const LSPCompanyProfile = props => {
 };
 const ConnectedCompanyProfile = connector(LSPCompanyProfile);
 
-const HeaderButtons = () => (
-  <Box pr={6} flexDirection="row">
-    <Icon p={4} mx={10} source={notification} />
-    <Icon p={4} source={search} />
-  </Box>
-);
 const Stack = createStackNavigator<RootStackParamList>();
 const AuthenticatedFlow = props => {
   const { userInfo } = props;
@@ -119,12 +111,8 @@ const AuthenticatedFlow = props => {
   return (
     <>
       {profileCreated ? (
-        <Stack.Navigator initialRouteName={"HomeMetrics"}>
-          <Stack.Screen
-            name="HomeMetrics"
-            component={Hometabs}
-            options={{ title: "Home", headerRight: HeaderButtons }}
-          />
+        <Stack.Navigator initialRouteName={"HomeMetrics"} headerMode={"none"}>
+          <Stack.Screen name="HomeMetrics" component={Hometabs} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator initialRouteName={"CreateProfile"}>

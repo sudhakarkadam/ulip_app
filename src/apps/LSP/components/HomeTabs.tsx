@@ -9,33 +9,39 @@ import HistoryBlur from "../../../images/history_blur.svg";
 import HomeMetrics from "./HomeMetrics";
 import Trips from "./Trips";
 import { TripList, ListingModes } from "../../../components/TripListing";
-import { AllApps } from "../../../models/CommonModel";
+import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import TripAccept from "./TripAccept";
-import { Box, Icon } from "../../../components/@styled/BaseElements";
+import { Box, Icon, Flex } from "../../../components/@styled/BaseElements";
 import search from "../../../images/loupe.png";
 import notification from "../../../images/notification.png";
 import { createStackNavigator } from "@react-navigation/stack";
+import TripDetails from "../../../components/TripDetails";
+import colors from "../../../theme/colors";
+import TripTracking from "../../../components/TripTracking";
 
+const Stack = createStackNavigator();
 const HomeMetricsComponent = props => (
-  <HomeMetrics
-    onRequestClick={() => props.navigation.navigate("TripRequests")}
+  <HomeMetrics onRequestClick={() => props.navigation.push("TripRequests")} />
+);
+const History = props => (
+  <TripList
+    listingMode={ListingModes.COMPLETED}
+    from={AllApps.LSP}
+    onRowClick={(_id, item) =>
+      props.navigation.push("TripDetails", { tripDetails: item })
+    }
   />
 );
-const History = () => (
-  <TripList listingMode={ListingModes.COMPLETED} from={AllApps.LSP} />
-);
-const Stack = createStackNavigator();
 const TripRequests = props => (
   <TripList
     listingMode={ListingModes.PENDING_REQUESTS}
     from={AllApps.LSP}
-    onRowClick={(id, item) =>
-      props.navigation.navigate("TripAcceptPage", { tripDetails: item })
+    onRowClick={(_id, item) =>
+      props.navigation.push("TripAcceptPage", { tripDetails: item })
     }
   />
 );
-
 const TripAcceptPage = props => (
   <TripAccept
     onAction={() => props.navigation.navigate("TripRequests")}
@@ -48,7 +54,36 @@ const HeaderButtons = () => (
     <Icon p={4} source={search} />
   </Box>
 );
-const Home = () => {
+const LSPTripDetails = props => {
+  const { tripDetails } = props.route.params;
+  const tripData = tripDetails as GetTripsResponse;
+  return (
+    <Flex flex={1} bg={colors.white}>
+      <TripDetails
+        documents={tripData.trip.documents}
+        id={tripData.id as any}
+        pickupDateString={tripData.pickup_date as any}
+        truckType={tripData.truck_type_preference}
+        truckWeight={tripData.weight as any}
+        truckUnit={tripData.weight_unit}
+        lspProvider={tripData.lsp_name}
+        places={
+          [
+            {
+              name: tripData.pickUp_location.city,
+              ...tripData.pickUp_location
+            },
+            {
+              name: tripData.delivery_location.city,
+              ...tripData.delivery_location
+            }
+          ] as any
+        }
+      />
+    </Flex>
+  );
+};
+const HomeStack = () => {
   return (
     <Stack.Navigator initialRouteName={"HomeMetricsComponent"}>
       <Stack.Screen
@@ -69,25 +104,66 @@ const Home = () => {
     </Stack.Navigator>
   );
 };
+
+const TripStack = () => {
+  return (
+    <Stack.Navigator initialRouteName={"Trips"}>
+      <Stack.Screen
+        name="Trips"
+        component={Trips}
+        options={{ title: "Trips", headerRight: HeaderButtons }}
+      />
+      <Stack.Screen
+        name="TripDetails"
+        component={LSPTripDetails}
+        options={{ title: "Trip", headerRight: HeaderButtons }}
+      />
+      <Stack.Screen
+        name="TripTracking"
+        component={TripTracking}
+        options={{
+          headerShown: false
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const HistoryStack = () => {
+  return (
+    <Stack.Navigator initialRouteName={"History"}>
+      <Stack.Screen
+        name="History"
+        component={History}
+        options={{ title: "History", headerRight: HeaderButtons }}
+      />
+      <Stack.Screen
+        name="TripDetails"
+        component={LSPTripDetails}
+        options={{ title: "Trip", headerRight: HeaderButtons }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const tabs = [
   {
     name: "HomeStack",
     label: "HOME",
-    component: Home,
+    component: HomeStack,
     activeImage: HomeSelected,
     inActiveImage: HomeBlur
   },
   {
     name: "TripsStack",
     label: "TRIPS",
-    component: Trips,
+    component: TripStack,
     activeImage: InTransitSelected,
     inActiveImage: InTransitBlur
   },
   {
     name: "HistoryStack",
     label: "HISTORY",
-    component: History,
+    component: HistoryStack,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
   }

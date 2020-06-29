@@ -55,7 +55,7 @@ const TripAcceptPage = (
         truckUnit={trip.weight_unit}
         lspProvider={trip.lsp_name}
         places={places}
-        documents={trip.trip.documents}
+        documents={!!trip.trip && trip.trip.documents}
       />
       <Flex style={{ flexDirection: "row", marginHorizontal: 25 }}>
         <StyledButton

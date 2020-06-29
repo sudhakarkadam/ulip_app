@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Flex } from "../../../components/@styled/BaseElements";
 import colors from "../../../theme/colors";
-import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { TabView, TabBar } from "react-native-tab-view";
 import { AllApps } from "../../../models/CommonModel";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { Dimensions } from "react-native";
-const Trips: React.FunctionComponent<{}> = () => {
+const Trips: React.FunctionComponent<{}> = props => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "UPCOMING", title: "UPCOMING" },
@@ -13,13 +13,33 @@ const Trips: React.FunctionComponent<{}> = () => {
     { key: "PENDING", title: "PENDING" }
   ]);
   const Upcoming = () => (
-    <TripList listingMode={ListingModes.UPCOMING} from={AllApps.LSP} />
+    <TripList
+      listingMode={ListingModes.UPCOMING}
+      from={AllApps.LSP}
+      onRowClick={(_id, item) =>
+        props.navigation.push("TripDetails", { tripDetails: item })
+      }
+    />
   );
   const OnRoad = () => (
-    <TripList listingMode={ListingModes.ON_ROAD} from={AllApps.LSP} />
+    <TripList
+      listingMode={ListingModes.ON_ROAD}
+      from={AllApps.LSP}
+      onRowClick={
+        (id, _item) => props.navigation.push("TripTracking", { tripId: id })
+
+        // props.navigation.navigate("TripDetails", { tripDetails: item })
+      }
+    />
   );
   const Pending = () => (
-    <TripList listingMode={ListingModes.PENDING} from={AllApps.LSP} />
+    <TripList
+      listingMode={ListingModes.PENDING}
+      from={AllApps.LSP}
+      onRowClick={(_id, item) =>
+        props.navigation.push("TripDetails", { tripDetails: item })
+      }
+    />
   );
 
   return (
