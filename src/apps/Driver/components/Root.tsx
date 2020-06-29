@@ -47,7 +47,7 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <Stack.Navigator>
+        <Stack.Navigator headerMode={"none"}>
           {!isLoggedIn && (
             <Stack.Screen
               name="Login"

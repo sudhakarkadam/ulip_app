@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import PersonProfile from "../../../components/PersonProfile";
 import { TripHome } from "./TripHome";
@@ -8,6 +8,7 @@ import ActionCreators from "../../../actions/ActionCreators";
 
 import { connect, ConnectedProps } from "react-redux";
 import { UserDataModel } from "../../../models/CommonModel";
+import { Text } from "../../../components/@styled/BaseElements";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -28,6 +29,16 @@ const AuthenticatedFlow: React.FC<{ userInfo: UserDataModel } & ConnectedProps<
 >> = props => {
   const { user_details } = props.userInfo;
   const hasProfile = !!user_details.name;
+  const [headerTitle, setHeaderTitle] = useState("");
+  const setTitle = data => {
+    setHeaderTitle(data.id);
+  };
+  const headerTitleText = (
+    <Text fontSize={2}>
+      Trip ID:{" "}
+      <Text style={{ fontWeight: "bold", fontSize: 20 }}>{headerTitle}</Text>
+    </Text>
+  );
   return (
     <Stack.Navigator
       initialRouteName={hasProfile ? "TripHome" : "CreateProfile"}
@@ -37,9 +48,12 @@ const AuthenticatedFlow: React.FC<{ userInfo: UserDataModel } & ConnectedProps<
           <Stack.Screen
             name="CreateProfile"
             component={DriverCreateProfile}
-            options={{ title: "Create Profile" }}
+            options={{ title: "Home" }}
           />
-          <Stack.Screen name="PersonProfile">
+          <Stack.Screen
+            name="PersonProfile"
+            options={{ title: "Create Profile" }}
+          >
             {navigationProps => (
               <PersonProfile
                 userInfo={props.userInfo}
@@ -60,7 +74,14 @@ const AuthenticatedFlow: React.FC<{ userInfo: UserDataModel } & ConnectedProps<
           </Stack.Screen>
         </>
       )}
-      <Stack.Screen name="TripHome" component={TripHome} />
+      <Stack.Screen name="TripHome" options={{ title: headerTitleText }}>
+        {navigationProps => (
+          <TripHome
+            setTitle={setTitle}
+            navigation={navigationProps.navigation}
+          />
+        )}
+      </Stack.Screen>
       <Stack.Screen name="TripDetails" component={TripDetails} />
     </Stack.Navigator>
   );

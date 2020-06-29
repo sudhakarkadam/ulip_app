@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { ScrollView, ActivityIndicator, FlatList, View } from "react-native";
+import {
+  ScrollView,
+  ActivityIndicator,
+  FlatList,
+  View,
+  Animated
+} from "react-native";
 import ImagePicker, { ImagePickerResponse } from "react-native-image-picker";
 import colors from "../../../theme/colors";
 import styled from "styled-components/native";
@@ -8,7 +14,8 @@ import {
   FlexColumn,
   Text,
   Flex,
-  Box
+  Box,
+  TouchableOpacity
 } from "../../../components/@styled/BaseElements";
 import { PrimaryText } from "../../../components/@styled/Text";
 import StyledButton from "../../../components/@styled/StyledButton";
@@ -17,7 +24,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
 import { DriverAppState } from "../reducers";
-
+import Swipeable from "react-native-gesture-handler/Swipeable";
 import { driverTrips } from "../../../fixtures/DriverTrips";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
@@ -62,13 +69,46 @@ type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripHome">;
 };
 
+const SwipeActions = (progress, dragX) => {
+  const translate = dragX.interpolate({
+    inputRange: [0, 150],
+    outputRange: [0, 65]
+  });
+  return (
+    <View
+      style={{ flex: 1, backgroundColor: "#42526E", justifyContent: "center" }}
+    >
+      <Animated.Text
+        style={{
+          color: "white",
+          paddingHorizontal: 0,
+          fontWeight: "bold",
+          transform: [{ translateX: translate }]
+        }}
+      >
+        STARTING...
+      </Animated.Text>
+    </View>
+  );
+};
+
+const getStartText = () => {
+  return (
+    <Text>
+      Swipe to Start Trip <Text fontSize={5}>&#187;</Text>
+    </Text>
+  );
+};
+
 const Trip: React.FC<Props> = props => {
   const getTrips = () => props.getTrips(props.phone);
 
   useEffect(() => {
     getTrips();
   }, []);
-
+  if (props.trips && props.trips.data) {
+    props.setTitle(props.trips.data[0]);
+  }
   if (isLoading(props.trips) || isInit(props.trips))
     return <ActivityIndicator />;
 
@@ -85,18 +125,20 @@ const Trip: React.FC<Props> = props => {
     if (trip.trip.status === "CREATED") {
       if (today === tripStartDate) {
         return (
-          <StyledButton
-            width="100%"
-            height="40"
-            title="Start Trip"
-            onPress={async () => {
-              await props.updateTrip({
-                sr_id: trip.id,
-                status: "TRIP_STARTED"
-              });
-              getTrips();
-            }}
-          />
+          <Flex width="100%">
+            <Swipeable
+              renderLeftActions={SwipeActions}
+              onSwipeableLeftOpen={async () => {
+                await props.updateTrip({
+                  sr_id: trip.id,
+                  status: "TRIP_STARTED"
+                });
+                getTrips();
+              }}
+            >
+              <StyledButton width="100%" height="50" title={getStartText()} />
+            </Swipeable>
+          </Flex>
         );
       } else {
         return (
