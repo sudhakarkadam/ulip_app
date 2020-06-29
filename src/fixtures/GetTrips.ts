@@ -45,7 +45,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
       id: null,
       code: null,
       address: null,
-      city: "Bangalore",
+      city: "Mumbai",
       state: null,
       map_ref: null,
       country: null
@@ -54,7 +54,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
       id: null,
       code: null,
       address: null,
-      city: "Mumbai",
+      city: "Bangalore",
       state: null,
       map_ref: null,
       country: null
@@ -73,7 +73,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
       id: null,
       code: null,
       address: null,
-      city: "Bangalore",
+      city: "Delhi",
       state: null,
       map_ref: null,
       country: null
@@ -82,7 +82,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
       id: null,
       code: null,
       address: null,
-      city: "Mumbai",
+      city: "Bangalore",
       state: null,
       map_ref: null,
       country: null
@@ -166,7 +166,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
       id: null,
       code: null,
       address: null,
-      city: "Mumbai",
+      city: "Kolkata",
       state: null,
       map_ref: null,
       country: null

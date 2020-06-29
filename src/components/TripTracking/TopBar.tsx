@@ -8,6 +8,7 @@ import {
 import Tag from "../@styled/Tag";
 import { Flex1, FlexRow } from "../@styled/Flex";
 
+// @ts-ignore
 import backIcon from "../../icons/back-no-tail.png";
 
 interface TopBarProps {
@@ -45,7 +46,7 @@ const TopBar: React.FC<TopBarProps> = ({
         <Text color="black.1" fontSize={0}>
           TRIP ID:
         </Text>
-        <Text fontWeight="bold">{tripId}</Text>
+        <Text fontWeight="bold">TRIP-{tripId}</Text>
       </Flex1>
       <Box>
         <Tag text={status} type="primary" />

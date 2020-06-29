@@ -5,7 +5,7 @@ export interface Location {
 }
 
 export interface RouteLatLong {
-  name: string;
+  name?: string;
   latitude: number;
   longitude: number;
   latitudeDelta?: number;
@@ -29,8 +29,10 @@ export interface CurrentLocation extends RouteLatLong {
 
 export interface TripTrackingProps {
   status: "REACHED" | "COMPLETED" | "ON-TIME" | "DELAYED";
-  source: Location;
-  destination: Location;
+  pickupCity: string;
+  dropCity: string;
+  source: RouteLatLong;
+  destination: RouteLatLong;
   route?: RouteLatLong[];
   completedHops: CompletedHop[];
   currentLocation: CurrentLocation;

@@ -1,8 +1,9 @@
 import React from "react";
-import { connect, ConnectedProps } from "react-redux";
+import { Dimensions } from "react-native";
+import { connect } from "react-redux";
 import { StackScreenProps } from "@react-navigation/stack";
 
-import { Text, Box } from "../@styled/BaseElements";
+import { Text } from "../@styled/BaseElements";
 import Tag from "../@styled/Tag";
 import { Flex1, FlexRow, FlexCenter } from "../@styled/Flex";
 import ScrollBottomSheet from "react-native-scroll-bottom-sheet";
@@ -16,22 +17,25 @@ import Map from "./Map";
 import { cityLatLongs, currentLocations, hops } from "../../fixtures/MapMocks";
 import Button from "../@styled/StyledButton";
 
+const screen = Dimensions.get("window");
+const screenHeight = screen.height;
+
 const mapStateToProps = (state: CommonState, props: Props): TTDataProps => {
   const trip = (state.trips.data || []).find(
     t => t.id === props.route.params.tripId
   );
-  const pickUpCity = ((trip && trip.pickUp_location.city) || "").toLowerCase();
+  const pickupCity = ((trip && trip.pickUp_location.city) || "").toLowerCase();
   const dropCity = ((trip && trip.delivery_location.city) || "").toLowerCase();
   const delay = trip && trip.trip && trip.trip.status;
 
   // @ts-ignore
-  const source = cityLatLongs[pickUpCity];
+  const source = cityLatLongs[pickupCity];
   // @ts-ignore
   const destination = cityLatLongs[dropCity];
   // @ts-ignore
-  const currentLocation = currentLocations[`${pickUpCity}_${dropCity}`];
+  const currentLocation = currentLocations[`${pickupCity}_${dropCity}`];
   // @ts-ignore
-  const completedHops = hops[`${pickUpCity}_${dropCity}`];
+  const completedHops = hops[`${pickupCity}_${dropCity}`];
   const status = delay ? "DELAYED" : "ON-TIME";
 
   return {
@@ -39,7 +43,9 @@ const mapStateToProps = (state: CommonState, props: Props): TTDataProps => {
     destination,
     currentLocation,
     completedHops,
-    status
+    status,
+    pickupCity: pickupCity,
+    dropCity
   };
 };
 
@@ -53,11 +59,22 @@ const HeadBox: React.FC<{ bigText: string; smallText: string }> = ({
     <Text fontSize={0} color="black.1">
       {smallText}
     </Text>
-    <Text fontWeight="bold">{bigText}</Text>
+    <Text fontWeight="bold">{(bigText || "").toUpperCase()}</Text>
   </Flex1>
 );
 
-const TripHead: React.FC<{}> = () => {
+interface TripHead {
+  pickupCity: string;
+  dropCity: string;
+  pickUpEta: string;
+  dropEta: string;
+}
+const TripHead: React.FC<TripHead> = ({
+  pickupCity,
+  dropCity,
+  pickUpEta,
+  dropEta
+}) => {
   return (
     <FlexRow
       bg="white"
@@ -73,13 +90,13 @@ const TripHead: React.FC<{}> = () => {
       borderBottomWidth={1}
       borderBottomColor={colors.grays[2]}
     >
-      <HeadBox bigText="BANGALORE" smallText="21 JUN, 3:00 AM" />
+      <HeadBox bigText={pickupCity} smallText={pickUpEta} />
       <FlexCenter>
         <Text color="black.0" px={2} fontSize={40} lineHeight="40px">
           →
         </Text>
       </FlexCenter>
-      <HeadBox bigText="MUMBAI" smallText="30 JUN, 6:00 PM" />
+      <HeadBox bigText={dropCity} smallText={dropEta} />
     </FlexRow>
   );
 };
@@ -87,13 +104,18 @@ const TripHead: React.FC<{}> = () => {
 type Props = StackScreenProps<
   {
     TripTracking: {
-      tripId: string;
+      tripId: number;
     };
   },
   "TripTracking"
 >;
 
-const TripTracking: React.FC<Props & TTDataProps> = ({ status, ...props }) => {
+const TripTracking: React.FC<Props & TTDataProps> = ({
+  status,
+  pickupCity,
+  dropCity,
+  ...props
+}) => {
   const { navigation, route } = props;
   const { tripId } = route.params;
 
@@ -108,7 +130,9 @@ const TripTracking: React.FC<Props & TTDataProps> = ({ status, ...props }) => {
   if (isTripNotTrackable) {
     return (
       <Flex1 alignItems="center" justifyContent="center">
-        <Text mb={3}>Trip Tracking is not Avaible at the Momment!</Text>
+        <Text mb={3} style={{ flexWrap: "wrap" }}>
+          Trip Tracking is not Avaible at the Momment!
+        </Text>
         <Button onPress={onBackPress} title="Go Back" />
       </Flex1>
     );
@@ -117,18 +141,25 @@ const TripTracking: React.FC<Props & TTDataProps> = ({ status, ...props }) => {
   return (
     <>
       <Flex1>
-        <TopBar {...{ onBackPress, tripId, status }} />
+        <TopBar {...{ onBackPress, tripId: tripId.toString(), status }} />
         <Map
           hops={props.completedHops}
-          source={props.source.name}
-          destination={props.destination.name}
+          source={props.source}
+          destination={props.destination}
           currentLocation={props.currentLocation}
         />
         <ScrollBottomSheet
           componentType="FlatList"
-          snapPoints={["30%", "50%", "75%"]}
+          snapPoints={["30%", "60%", screenHeight - 80]}
           initialSnapIndex={2}
-          renderHandle={() => <TripHead />}
+          renderHandle={() => (
+            <TripHead
+              pickupCity={pickupCity}
+              pickUpEta="21 JUN, 3:00 AM"
+              dropCity={dropCity}
+              dropEta="30 JUN, 6:00 PM"
+            />
+          )}
           ListHeaderComponent={
             <FlexRow bg="white" pt={4} px={3}>
               <Tag text="LOCATIONS" />
@@ -149,7 +180,8 @@ const TripTracking: React.FC<Props & TTDataProps> = ({ status, ...props }) => {
             zIndex: 2
           }}
           contentContainerStyle={{
-            backgroundColor: "white"
+            backgroundColor: "white",
+            flex: 1
           }}
         />
       </Flex1>

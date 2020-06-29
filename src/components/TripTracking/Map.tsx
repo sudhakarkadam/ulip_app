@@ -1,9 +1,10 @@
-import React, { useRef, useCallback } from "react";
-import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
+import React, { useRef } from "react";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
 
 import { Icon } from "../@styled/BaseElements";
+// @ts-ignore
 import trackTruck from "../../icons/truck-black.png";
 
 import MapStyle from "./MapStyle";
@@ -21,8 +22,8 @@ const LATITUDE_DELTA = 0.0902;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 export interface MapProps {
-  source: string | RouteLatLong;
-  destination: string | RouteLatLong;
+  source: RouteLatLong;
+  destination: RouteLatLong;
   hops: CompletedHop[];
   currentLocation: CurrentLocation;
 }
@@ -40,6 +41,7 @@ const Map: React.FC<MapProps> = ({
     longitudeDelta: LONGITUDE_DELTA
   };
 
+  // @ts-ignore
   const mapView = useRef<MapView>({});
 
   // const fitToScreen = useCallback(() => {
@@ -64,7 +66,7 @@ const Map: React.FC<MapProps> = ({
           longitudeDelta
         }}
         mapType="standard"
-        zoomEnabled={false}
+        zoomEnabled
         pitchEnabled={false}
         showsUserLocation={false}
         followsUserLocation={false}
@@ -76,24 +78,37 @@ const Map: React.FC<MapProps> = ({
         //onLayout={fitToScreen}
       >
         {currentLocation && (
-          <Marker coordinate={currentLocation} title="Current Truck Location">
-            <Icon source={trackTruck} />
+          <Marker coordinate={currentLocation} title="Truck Current Location">
+            <Icon source={trackTruck} style={{ height: 22, width: 22 }} />
           </Marker>
         )}
-        {/* {hops.map((route) => (
+
+        {source && (
+          <Marker coordinate={source} title={source.name} pinColor="#000" />
+        )}
+
+        {destination && (
+          <Marker
+            coordinate={destination}
+            title={destination.name}
+            pinColor="#000"
+          />
+        )}
+
+        {hops.map(route => (
           <Marker
             key={route.name}
-            anchor={{ x: 0, y: 0 }}
-            title={route.name || "NA"}
+            // @ts-ignore
             coordinate={route}
+            anchor={{ x: 0, y: 0 }}
           >
             <Text>{route.name}</Text>
           </Marker>
-        ))} */}
+        ))}
         <MapViewDirections
           origin={source}
           destination={destination}
-          apikey="AIzaSyBtjKCqEzWbUt9yazSchzJ9G9TjZEp_igE"
+          apikey="AIzaSyD4xiKN6XL_h_bbreIaH5Q-Qcwb7NUrjt8"
           strokeWidth={3}
           optimizeWaypoints
           onStart={params =>
@@ -108,12 +123,13 @@ const Map: React.FC<MapProps> = ({
             mapView.current.fitToCoordinates(result.coordinates, {
               edgePadding: {
                 right: screen.width / 20,
-                bottom: screen.height / 20,
+                bottom: 220,
                 left: screen.width / 20,
-                top: screen.height / 20
+                top: 240
               }
             });
           }}
+          onError={e => console.log(e)}
         />
       </MapView>
     </View>

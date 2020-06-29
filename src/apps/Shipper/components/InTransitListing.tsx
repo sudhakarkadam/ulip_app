@@ -26,7 +26,7 @@ const Trips: React.FunctionComponent<StackScreenProps<
       listingMode={ListingModes.ON_ROAD}
       from={AllApps.SHIPPER}
       onRowClick={id => {
-        props.navigation.navigate("TripTracking", { tripId: id });
+        props.navigation.navigate("TripTracking", { tripId: +id });
       }}
     />
   );
@@ -35,7 +35,7 @@ const Trips: React.FunctionComponent<StackScreenProps<
       listingMode={ListingModes.ACTIVE}
       from={AllApps.SHIPPER}
       onRowClick={id => {
-        props.navigation.navigate("TripTracking", { tripId: id });
+        props.navigation.navigate("TripTracking", { tripId: +id });
       }}
     />
   );
