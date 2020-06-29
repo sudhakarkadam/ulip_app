@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,6 +8,7 @@ import AuthenticatedFlow from "./components/AuthenticatedFlow";
 
 import theme from "../../theme";
 import { ReducerState } from "./store";
+import SplashScreen from "../../components/SplashScreen";
 
 const Stack = createStackNavigator();
 const mapStateToProps = (state: ReducerState) => ({
@@ -15,27 +16,32 @@ const mapStateToProps = (state: ReducerState) => ({
 });
 const connector = connect(mapStateToProps, {});
 
-class App extends Component<ConnectedProps<typeof connector>> {
-  render() {
-    const isLoggedIn = this.props.userInfo ? true : false;
-    return (
-      <NavigationContainer>
-        <ThemeProvider theme={theme}>
-          <Stack.Navigator headerMode={"none"}>
-            {!isLoggedIn && (
-              <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{ headerShown: false }}
-              />
-            )}
-            {isLoggedIn && (
-              <Stack.Screen name="Home" component={AuthenticatedFlow} />
-            )}
-          </Stack.Navigator>
-        </ThemeProvider>
-      </NavigationContainer>
-    );
-  }
-}
+const App: React.FC<ConnectedProps<typeof connector>> = props => {
+  const [showSplash, toggleSplash] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => toggleSplash(!showSplash), 2000);
+  }, []);
+
+  if (showSplash) return <SplashScreen></SplashScreen>;
+  const isLoggedIn = props.userInfo ? true : false;
+  return (
+    <NavigationContainer>
+      <ThemeProvider theme={theme}>
+        <Stack.Navigator headerMode={"none"}>
+          {!isLoggedIn && (
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+          )}
+          {isLoggedIn && (
+            <Stack.Screen name="Home" component={AuthenticatedFlow} />
+          )}
+        </Stack.Navigator>
+      </ThemeProvider>
+    </NavigationContainer>
+  );
+};
 export default connector(App);
