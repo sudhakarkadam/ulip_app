@@ -1,2 +1,2 @@
-import App from "./src/apps/Shipper";
+import App from "./src/apps/Driver";
 export default App;
