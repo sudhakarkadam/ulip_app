@@ -8,6 +8,22 @@ import {
 } from "../utils/actionCreator";
 
 const ActionCreators = {
+  createTrip: createAsyncAction(
+    [
+      actions.CREATE_TRIP_REQUEST,
+      actions.CREATE_TRIP_SUCCESS,
+      actions.CREATE_TRIP_ERROR
+    ],
+    api.createTrip
+  ),
+  getLspList: createAsyncAction(
+    [
+      actions.LSP_LIST_REQUEST,
+      actions.LSP_LIST_SUCCESS,
+      actions.LSP_LIST_ERROR
+    ],
+    api.getLspList
+  ),
   sendOtp: createAsyncAction(
     [
       actions.SEND_OTP_REQUEST,

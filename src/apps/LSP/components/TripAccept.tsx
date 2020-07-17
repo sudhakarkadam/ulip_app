@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  FlexColumn,
-  Flex,
-  ScrollView
-} from "../../../components/@styled/BaseElements";
+import { Flex, ScrollView } from "../../../components/@styled/BaseElements";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import withModal, {
   IWithModalInjectedProps

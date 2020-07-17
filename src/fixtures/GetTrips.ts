@@ -1,4 +1,8 @@
-import { GetTripsResponse } from "../models/CommonModel";
+import {
+  GetTripsResponse,
+  RequestStatus,
+  TruckType
+} from "../models/CommonModel";
 
 export const GetTripsResponseJson: GetTripsResponse[] = [
   {
@@ -25,16 +29,15 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "IN_PROGRESS",
+    status: RequestStatus.IN_PROGRESS,
     lsp_name: "ssd",
-    truck_type_preference: "TRUCK",
+    truck_type_preference: TruckType.CONTAINER,
     trip: {
       id: 1,
-      status: "TRIP_STARTED",
+      status: RequestStatus.IN_PROGRESS,
       eta: "2020-06-26T11:35:51.000+0000",
       driver_name: "X",
-      truck_name: null,
-      truck_type: "TRUCK",
+      truck_type: TruckType.CONTAINER,
       delay: true,
       documents: []
     }
@@ -63,9 +66,9 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "CREATED",
+    status: RequestStatus.CREATED,
     lsp_name: "ssd",
-    truck_type_preference: "TRUCK"
+    truck_type_preference: TruckType.CONTAINER
   },
   {
     id: 3,
@@ -91,9 +94,9 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "REJECTED",
+    status: RequestStatus.REJECTED,
     lsp_name: "ssd",
-    truck_type_preference: "TRUCK"
+    truck_type_preference: TruckType.CONTAINER
   },
   {
     id: 4,
@@ -119,9 +122,9 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "CREATED",
+    status: RequestStatus.CREATED,
     lsp_name: "ssd",
-    truck_type_preference: "TRUCK"
+    truck_type_preference: TruckType.CONTAINER
   },
   {
     id: 5,
@@ -147,9 +150,9 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "CREATED",
+    status: RequestStatus.CREATED,
     lsp_name: "ssd",
-    truck_type_preference: "TRUCK"
+    truck_type_preference: TruckType.CONTAINER
   },
   {
     id: 7,
@@ -175,9 +178,9 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "CREATED",
+    status: RequestStatus.CREATED,
     lsp_name: "ssd",
-    truck_type_preference: "OPEN"
+    truck_type_preference: TruckType.OPEN
   },
   {
     id: 8,
@@ -203,9 +206,9 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "CREATED",
+    status: RequestStatus.CREATED,
     lsp_name: "ssd",
-    truck_type_preference: "OPEN"
+    truck_type_preference: TruckType.OPEN
   },
   {
     id: 9,
@@ -231,8 +234,8 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     good_type: "graim",
     weight: 23.9,
     weight_unit: "tonns",
-    status: "CREATED",
+    status: RequestStatus.CREATED,
     lsp_name: "ssd",
-    truck_type_preference: "OPEN"
+    truck_type_preference: TruckType.OPEN
   }
 ];

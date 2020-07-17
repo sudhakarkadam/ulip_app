@@ -106,13 +106,13 @@ interface Trip {
 }
 
 interface PickUplocation {
-  id: number;
-  code?: string;
-  address?: string;
+  id: number | null;
+  code?: string | null;
+  address?: string | null;
   city: string;
-  state?: string;
-  map_ref: { ref: string };
-  country?: string;
+  state?: string | null;
+  map_ref: { ref: string } | null;
+  country?: string | null;
 }
 
 export interface Metrics {

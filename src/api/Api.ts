@@ -13,6 +13,10 @@ import {
   Metrics,
   GetMetricsRequest
 } from "../models/CommonModel";
+import {
+  CreateTripRequestModel,
+  LspListResponse
+} from "../models/ShipperApiModels";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
 const endpoint = "http://10.24.7.179";
@@ -24,12 +28,17 @@ const urls = {
   saveCompanyProfile: `${endpoint}/ulip/business`,
   login: `${endpoint}/ulip/login`,
   logout: `${endpoint}/ulip/logout`,
+  createTrip: `${endpoint}/ulip/transport_service_request`,
+  getLspList: `${endpoint}/ulip/business`,
   getTrips: (businessId: string) =>
     `${endpoint}/ulip/transport_service_request/business/${businessId}`,
   getMetrics: (businessId: string) =>
     `${endpoint}/ulip/transport_service_request/business/${businessId}/view`
 };
 
+interface BusinessRole {
+  type: "SHIPPER" | "LSP";
+}
 export const getEndpoint = () => endpoint;
 
 export default {
@@ -94,6 +103,17 @@ export default {
       {
         headers: {}
       }
+    );
+  },
+  getLspList(req: BusinessRole) {
+    return http.get<BusinessRole, LspListResponse>(urls.getLspList, {
+      type: req.type
+    });
+  },
+  createTrip(req: CreateTripRequestModel) {
+    return http.post<CreateTripRequestModel, CreateTripRequestModel>(
+      urls.createTrip,
+      req
     );
   }
 };

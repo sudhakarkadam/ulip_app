@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { Box } from "./@styled/BaseElements";
-import { View } from "react-native";
 export const StickyBottom: React.FC = ({ children }) => {
   const [height, setHeight] = useState(100);
   return (

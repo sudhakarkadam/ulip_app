@@ -120,13 +120,9 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 apply from: '../gradle/utils.gradle'
 
-def flavorWithEnvironment = getCurrentFlavor()
-println "Current Flavor:" + flavorWithEnvironment
-def currentFlavor = getCurrentAppName(flavorWithEnvironment)
-println "Current App:" + currentFlavor
 def jsonFile
 try {
-    def inputFile = new File("" + projectDir.getAbsolutePath() + "/../../configs/" + currentFlavor + ".json")
+    def inputFile = new File("" + projectDir.getAbsolutePath() + "/../../configs/Config.json")
     jsonFile = new groovy.json.JsonSlurper().parseText(inputFile.text)
     println "Current File:" + inputFile.getAbsolutePath()
 }
@@ -196,21 +192,8 @@ android {
         }
     }
 
-    flavorDimensions "app", "environment"
+    flavorDimensions "environment"
     productFlavors {
-        def flavorName = jsonFile.appName.toLowerCase()
-        "$flavorName" {
-            versionCode jsonFile.versionCode
-            versionName "$jsonFile.versionName"
-            def appId = "$jsonFile.applicationId"
-            if (!appId?.trim()) {
-                def suffixId = "$jsonFile.appName"
-                applicationIdSuffix suffixId.toLowerCase()
-            } else {
-                applicationId "$jsonFile.applicationId"
-            }
-            dimension "app"
-        }
 
         jsonFile.environment.each {
             println "prodct flavor: " + it.name
@@ -274,7 +257,7 @@ dependencies {
 }
 
 project.ext.react = [
-        entryFile: projectDir.getAbsolutePath() + "../../../src/apps/" + jsonFile.appName + "/index.js"
+        entryFile: projectDir.getAbsolutePath() + "../../../src/index.js"
 ]
 
 // Run this once to be able to run the application with BUCK

@@ -3,8 +3,32 @@ import { ReducerMappedState } from "../utils/actionCreator";
 import { GetTripsResponse } from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
-import user from "../reducers/UserReducer";
-import HomeMetrics from "../reducers/HomeMetricsReducer";
+import user from "./UserReducer";
+import HomeMetrics from "./HomeMetricsReducer";
+import {
+  CreateTripRequestModel,
+  LspListResponse
+} from "../models/ShipperApiModels";
+
+const createTrip = createReducer<
+  actions.CREATE_TRIP_REQUEST,
+  actions.CREATE_TRIP_SUCCESS,
+  actions.CREATE_TRIP_ERROR,
+  CreateTripRequestModel,
+  {}
+>([
+  actions.CREATE_TRIP_REQUEST,
+  actions.CREATE_TRIP_SUCCESS,
+  actions.CREATE_TRIP_ERROR
+]);
+
+const lspList = createReducer<
+  actions.LSP_LIST_REQUEST,
+  actions.LSP_LIST_SUCCESS,
+  actions.LSP_LIST_ERROR,
+  { type: "SHIPPER" | "LSP" },
+  LspListResponse
+>([actions.LSP_LIST_REQUEST, actions.LSP_LIST_SUCCESS, actions.LSP_LIST_ERROR]);
 
 export const trips = createReducer<
   actions.GET_TRIPS_REQUEST,
@@ -21,7 +45,9 @@ export const trips = createReducer<
 export const reducers = {
   user,
   trips,
-  HomeMetrics
+  HomeMetrics,
+  lspList,
+  createTrip
 };
 
 export type CommonState = ReducerMappedState<typeof reducers>;

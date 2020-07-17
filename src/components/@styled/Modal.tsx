@@ -78,7 +78,7 @@ export default function withModal<IOriginalProps>(
                   <Flex flexDirection="row" justifyContent={"flex-end"}>
                     {actions &&
                       actions.length > 0 &&
-                      this.state.actions.map((action, index) => {
+                      (this.state.actions || []).map((action, index) => {
                         return (
                           <StyledButton
                             key={action.text}
