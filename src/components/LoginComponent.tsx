@@ -26,7 +26,6 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
       <Box position="absolute" mx={6} mt={80}>
         <Logo width={300} height={66} />
       </Box>
-
       {phoneConfirmed && !otpConfirmed && (
         <TouchableOpacity
           my={30}
@@ -41,6 +40,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
           <Flex>
             <PrimaryText style={{ textTransform: "uppercase" }}>
               {t("mobile")}
+              {t("bye")}
             </PrimaryText>
             <Flex
               style={{

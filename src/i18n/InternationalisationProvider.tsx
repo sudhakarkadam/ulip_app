@@ -18,12 +18,14 @@ const createI18nContext = (lang: Language = "hindi") => {
   };
   return {
     lang,
-    t
+    t,
+    changeLanguage: (_: Language) => ""
   };
 };
 interface InternationalisationProvider {
   lang: Language;
   t: T;
+  changeLanguage: (lang: Language) => void;
 }
 
 export const I18nContext = React.createContext<InternationalisationProvider>(
@@ -33,5 +35,15 @@ export const I18nContext = React.createContext<InternationalisationProvider>(
 export const i18n = I18nContext;
 export const InternationalisationProvider: React.FC = ({ children }) => {
   const [lang, setLang] = useState(createI18nContext());
-  return <I18nContext.Provider value={lang}>{children}</I18nContext.Provider>;
+
+  return (
+    <I18nContext.Provider
+      value={{
+        ...lang,
+        changeLanguage: (lang: Language) => setLang(createI18nContext(lang))
+      }}
+    >
+      {children}
+    </I18nContext.Provider>
+  );
 };
