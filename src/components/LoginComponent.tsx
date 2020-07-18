@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Flex, TouchableOpacity, Box } from "./@styled/BaseElements";
 import { Text, TextInput } from "react-native";
 import colors from "../theme/colors";
@@ -9,13 +9,14 @@ import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-
+import { I18nContext } from "../i18n/InternationalisationProvider";
 const { verifyOtp, sendOtp } = ActionCreators;
 
 const mapDispatchToProps = { verifyOtp, sendOtp };
 const connector = connect(null, mapDispatchToProps);
 
 const LoginComponent = (props: ConnectedProps<typeof connector>) => {
+  const { t } = useContext(I18nContext);
   const [phoneNumber, editPhoneNumber] = useState("");
   const [phoneConfirmed, setPhoneConfirmed] = useState(false);
   const [otpConfirmed] = useState(false);
@@ -39,7 +40,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
         {!phoneConfirmed && (
           <Flex>
             <PrimaryText style={{ textTransform: "uppercase" }}>
-              Mobile Number
+              {t("mobile")}
             </PrimaryText>
             <Flex
               style={{
