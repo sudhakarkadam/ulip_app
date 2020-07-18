@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
-import { Flex } from "./@styled/BaseElements";
-import colors from "../theme/colors";
+import { Flex } from "../../../components/@styled/BaseElements";
+import colors from "../../../theme/colors";
 import { TabView, TabBar } from "react-native-tab-view";
-import { AllApps } from "../models/CommonModel";
-import { TripList, ListingModes } from "./TripListing";
+import { AllApps } from "../../../models/CommonModel";
+import { TripList, ListingModes } from "../../../components/TripListing";
 import { Dimensions } from "react-native";
 
 const Trips: React.FunctionComponent<StackScreenProps<

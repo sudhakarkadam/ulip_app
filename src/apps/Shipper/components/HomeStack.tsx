@@ -2,7 +2,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
-import { CommonState } from "../reducers";
+import { CommonState } from "../../../reducers";
 import ShipperPersonProfile from "./ShipperPersonProfile";
 import ShipperCompanyProfile from "./ShipperCompanyProfile";
 import ShipperCreateProfile from "./ShipperCreateProfile";

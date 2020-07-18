@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-import { Text, Box, Flex } from "./@styled/BaseElements";
-import { Flex1 } from "./@styled/Flex";
-import FloatingButton from "./@styled/FloatingButton";
-import CreateTripCard from "./CreateTripCard";
 import { StackScreenProps } from "@react-navigation/stack";
+import { Text, Box, Flex } from "../../../components/@styled/BaseElements";
+import { Flex1 } from "../../../components/@styled/Flex";
+import FloatingButton from "../../../components/@styled/FloatingButton";
+import CreateTripCard from "../../../components/CreateTripCard";
 import { HomeStackParamList } from "./HomeStack";
-import { TripList, ListingModes } from "./TripListing";
-import { AllApps, GetTripsResponse } from "../models/CommonModel";
-import { CommonState } from "../reducers";
+import { TripList, ListingModes } from "../../../components/TripListing";
+import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
+import { CommonState } from "../../../reducers";
 import { ConnectedProps, connect } from "react-redux";
-import ActionCreators from "../actions/ActionCreators";
-import { isLoading, isInit } from "../utils/actionCreator";
-import BlockScreenLoader from "./BlockScreenLoader";
+import ActionCreators from "../../../actions/ActionCreators";
+import { isLoading, isInit } from "../../../utils/actionCreator";
+import BlockScreenLoader from "../../../components/BlockScreenLoader";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,

@@ -1,10 +1,10 @@
 import React from "react";
-import { ToastAndroid } from "react-native";
-import PersonProfile from "./PersonProfile";
 import { StackScreenProps } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
-import ActionCreators from "../actions/ActionCreators";
-import { CommonState } from "../reducers";
+import { ToastAndroid } from "react-native";
+import PersonProfile from "../../../components/PersonProfile";
+import ActionCreators from "../../../actions/ActionCreators";
+import { CommonState } from "../../../reducers";
 import { HomeStackParamList } from "./HomeStack";
 
 type Props = StackScreenProps<HomeStackParamList, "PersonProfile"> &

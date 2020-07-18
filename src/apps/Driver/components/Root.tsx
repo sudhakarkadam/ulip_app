@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components/native";
 import Login from "../../../components/LoginComponent";
 import AuthenticatedFlow from "./AuthenticatedFlow";
-import { DriverAppState } from "../reducers";
+import { CommonState } from "../../../reducers";
 import { connect, ConnectedProps } from "react-redux";
 
 import theme from "../../../theme";
@@ -21,8 +21,8 @@ type DriverRootStack = {
 };
 const Stack = createStackNavigator<DriverRootStack>();
 
-const mapStateToProps = (state: DriverAppState) => ({
-  userInfo: state.common.user.data
+const mapStateToProps = (state: CommonState) => ({
+  userInfo: state.user.data
 });
 
 const connector = connect(mapStateToProps, {});

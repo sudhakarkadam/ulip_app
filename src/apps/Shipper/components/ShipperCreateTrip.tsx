@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { ToastAndroid } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
-import ActionCreators from "../actions/ActionCreators";
-import { CommonState } from "../reducers";
-import CreateTrip from "./CreateTrip";
+import ActionCreators from "../../../actions/ActionCreators";
+import { CommonState } from "../../../reducers";
+import CreateTrip from "../../../components/CreateTrip";
 import { HomeStackParamList } from "./HomeStack";
 
 const { createTrip, getLspList } = ActionCreators;
