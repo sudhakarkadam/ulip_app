@@ -1,21 +1,34 @@
 import React, { useState } from "react";
+import {
+  AllTranslationKeys,
+  GetTranslationTextType
+} from "src/typings/translation";
 
 type Language = "en" | "hindi";
 
-import * as EnglishStrings from "./en.json";
-import * as HindiStrings from "./hindi.json";
+import * as EnglishStrings from "../../i18n/en.json";
+import * as HindiStrings from "../../i18n/hindi.json";
 
 type Keys = keyof typeof EnglishStrings;
-type T = (id: Keys) => string;
+type Translation<
+  T extends AllTranslationKeys = AllTranslationKeys
+> = GetTranslationTextType<T>;
 const createI18nContext = (lang: Language = "hindi") => {
   const translations: Record<Language, typeof EnglishStrings> = {
     en: EnglishStrings,
     hindi: HindiStrings
   };
 
-  const t: T = (id: Keys) => {
-    return translations[lang][id];
-  };
+  function t(id: Keys, ...keys) {
+    let message = translations[lang][id];
+    const interpolations = message && message.match(/{{[a-z]+}}/g);
+    if (interpolations) {
+      interpolations.forEach((interpolation, index) => {
+        message = message.replace(interpolation, keys[index]);
+      });
+    }
+    return message;
+  }
   return {
     lang,
     t,
@@ -24,7 +37,7 @@ const createI18nContext = (lang: Language = "hindi") => {
 };
 interface InternationalisationProvider {
   lang: Language;
-  t: T;
+  t: Translation;
   changeLanguage: (lang: Language) => void;
 }
 

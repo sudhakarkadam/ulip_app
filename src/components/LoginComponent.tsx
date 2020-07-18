@@ -9,7 +9,7 @@ import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-import { I18nContext } from "../i18n/InternationalisationProvider";
+import { I18nContext } from "./InternationalisationProvider";
 const { verifyOtp, sendOtp } = ActionCreators;
 
 const mapDispatchToProps = { verifyOtp, sendOtp };
@@ -39,8 +39,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
         {!phoneConfirmed && (
           <Flex>
             <PrimaryText style={{ textTransform: "uppercase" }}>
-              {t("mobile")}
-              {t("bye")}
+              {t("hi")}
             </PrimaryText>
             <Flex
               style={{

@@ -6,7 +6,7 @@ import App from "./Root";
 import store, { persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
 import SplashScreen from "./components/SplashScreen";
-import { InternationalisationProvider } from "./i18n/InternationalisationProvider";
+import { InternationalisationProvider } from "./components/InternationalisationProvider";
 
 const ConnectedApp = () => {
   return (
