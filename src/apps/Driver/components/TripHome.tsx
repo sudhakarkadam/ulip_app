@@ -29,6 +29,7 @@ import { driverTrips } from "../../../fixtures/DriverTrips";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
+import { CommonState } from "../../../reducers";
 const options = {
   title: "Select proof",
   storageOptions: {
@@ -59,9 +60,9 @@ const capture = (callback: (data: FormData) => void) => {
 
 const { getTrips, updateTrip, upload } = DriverActionCreators;
 const mapDispatchToProps = { getTrips, updateTrip, upload };
-const mapStateToProps = (state: DriverAppState) => ({
+const mapStateToProps = (state: CommonState & DriverAppState) => ({
   trips: state.trips,
-  phone: state.common.user.data.user_details.phone_number
+  phone: state.user.data?.user_details?.phone_number
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

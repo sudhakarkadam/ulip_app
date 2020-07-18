@@ -4,6 +4,7 @@ import UlipBottomTab from "./UlipBottomTab";
 import HomeStack from "./HomeStack";
 import InTransitStack from "./InTransitStack";
 import HistoryStack from "./HistoryStack";
+import AccountsStack from "./AccountsStack";
 import HomeSelected from "../images/home_selected.svg";
 import HomeBlur from "../images/home_blur.svg";
 import InTransitSelected from "../images/intransit_selected.svg";
@@ -32,6 +33,13 @@ const tabs = [
     component: HistoryStack,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
+  },
+  {
+    name: "Account",
+    label: "ACCOUNT",
+    component: AccountsStack,
+    activeImage: InTransitSelected,
+    inActiveImage: InTransitBlur
   }
 ];
 

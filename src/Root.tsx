@@ -9,7 +9,9 @@ import theme from "./theme";
 import ShipperHome from "./components/ShipperHome";
 import { useEffect } from "react";
 import { HeaderProvider } from "./api/Headers";
-import UserPerosna from "./components/UserPersona";
+import UserPersona from "./components/UserPersona";
+import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
+import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
 
 interface Props {
   test: string;
@@ -23,7 +25,7 @@ const connector = connect(mapStateToProps, {});
 
 const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
   const isLoggedIn = props.userInfo ? true : false;
-  const userPerosna = props.userInfo?.userPersona;
+  const userPersona = props.userInfo?.userPersona;
   useEffect(() => {
     HeaderProvider.setToken("token");
   }, [props.userInfo]);
@@ -40,15 +42,21 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
           )}
           {isLoggedIn && (
             <>
-              {!userPerosna && (
+              {!userPersona && (
                 <Stack.Screen
-                  name="UserPerosna"
-                  component={UserPerosna}
+                  name="UserPersona"
+                  component={UserPersona}
                   options={{ headerShown: false }}
                 />
               )}
-              {userPerosna && (
+              {userPersona === "shipper" && (
                 <Stack.Screen name="Home" component={ShipperHome} />
+              )}
+              {userPersona === "lsp" && (
+                <Stack.Screen name="Home" component={AuthenticatedFlowLSP} />
+              )}
+              {userPersona === "driver" && (
+                <Stack.Screen name="Home" component={AuthenticatedFlowDriver} />
               )}
             </>
           )}

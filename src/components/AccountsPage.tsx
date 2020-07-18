@@ -1,24 +1,33 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { Image } from "react-native";
+import { Image, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { Text, Flex, FlexRow } from "./@styled/BaseElements";
 import { UserDataModel } from "../models/CommonModel";
 const personIcon = require("../images/sample-profile.png");
 const driverIcon = require("../icons/driver-icon.png");
-import { DriverAppState } from "../apps/Driver/reducers";
+import ActionCreators from "../actions/ActionCreators";
+import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
 
-const mapStateToProps = (state: DriverAppState) => ({
-  userInfo: state.common.user.data
+const mapStateToProps = (state: CommonState) => ({
+  userInfo: state.user.data
 });
 
-const connector = connect(mapStateToProps, {});
+const { setUserPersona } = ActionCreators;
+const mapDispatchToProps = { setUserPersona };
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface OwnProps {
-  navigation: { navigate: Function };
   userInfo?: UserDataModel | null;
   persona: "driver" | "lsp" | "shipper";
+  selectedOtherPersona?: (user: string) => void;
+}
+
+interface ProfileProps {
+  persona: "driver" | "lsp" | "shipper";
+  selectedOtherPersona: (user: string) => void;
 }
 
 const Wrapper = styled(Flex)`
@@ -33,6 +42,12 @@ const ProfileWrapper = styled(Flex)`
 `;
 
 export const personaMapping: any = {
+  shipper: {
+    text: "I am a shipper",
+    icon: driverIcon,
+    navigationScreen: "CreateProfile",
+    businessKey: "shipper_details"
+  },
   driver: {
     text: "I am a driver",
     icon: driverIcon,
@@ -44,18 +59,12 @@ export const personaMapping: any = {
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "lsp_details"
-  },
-  shipper: {
-    text: "I am a shipper",
-    icon: driverIcon,
-    navigationScreen: "CreateProfile",
-    businessKey: "shipper_details"
   }
 };
 
-const ProfileSection = ({ persona, navigation }: OwnProps) => {
+const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
   return (
-    <>
+    <ScrollView>
       <ProfileWrapper>
         <Text>Current Profile</Text>
         <AccountsProfileCard
@@ -75,30 +84,19 @@ const ProfileSection = ({ persona, navigation }: OwnProps) => {
               text={personaMapping[otherPersona].text}
               subText={"SETUP REQUIRED"}
               icon={personaMapping[otherPersona].icon}
-              onPress={() =>
-                navigation.navigate(
-                  personaMapping[otherPersona].navigationScreen
-                )
-              }
+              onPress={() => selectedOtherPersona(otherPersona)}
             />
           ) : null
         )}
       </ProfileWrapper>
-    </>
+    </ScrollView>
   );
 };
 
-const AccountsPage: React.FC<OwnProps & ConnectedProps<typeof connector>> = (
-  props: OwnProps
-) => {
-  const personName =
-    props.userInfo &&
-    props.userInfo.user_details &&
-    props.userInfo.user_details.name;
-  const contactNumber =
-    props.userInfo &&
-    props.userInfo.user_details &&
-    props.userInfo.user_details.phone_number;
+const AccountsPage: React.FC<OwnProps &
+  ConnectedProps<typeof connector>> = props => {
+  const personName = props.userInfo?.user_details?.name;
+  const contactNumber = props.userInfo?.user_details?.phone_number;
   return contactNumber && personName ? (
     <Wrapper>
       <FlexRow mb={20}>
@@ -111,8 +109,7 @@ const AccountsPage: React.FC<OwnProps & ConnectedProps<typeof connector>> = (
       <Text>{`+91-${contactNumber}`}</Text>
       <ProfileSection
         persona={props.persona}
-        navigation={props.navigation}
-        userInfo={props.userInfo}
+        selectedOtherPersona={user => props.setUserPersona({ user })}
       />
     </Wrapper>
   ) : null;

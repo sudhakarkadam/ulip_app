@@ -6,7 +6,11 @@ import colors from "../theme/colors";
 import { personaMapping } from "../components/AccountsPage";
 import AccountsProfileCard from "./AccountsProfileCard";
 
-const ChoosePersona = () => {
+interface OwnProps {
+  selectedUser: (user: string) => void;
+}
+
+const ChoosePersona = (props: OwnProps) => {
   return (
     <Flex flex={1}>
       <Box position="absolute" mx={6} mt={80}>
@@ -22,6 +26,7 @@ const ChoosePersona = () => {
         {Object.keys(personaMapping).map(persona => {
           return (
             <AccountsProfileCard
+              onPress={() => props.selectedUser(persona)}
               isBigCard
               key={persona}
               text={personaMapping[persona].text}

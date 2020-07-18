@@ -41,20 +41,11 @@ const HomeStack = () => {
   );
 };
 
-const HistoryStack = () => {
-  return null;
-};
-
 const AccountsStack = () => {
   return (
     <Stack.Navigator initialRouteName={"AccountsPage"}>
       <Stack.Screen name="AccountsPage" options={{ title: "Home" }}>
-        {navigationProps => (
-          <AccountsPage
-            persona={"driver"}
-            navigation={navigationProps.navigation}
-          />
-        )}
+        {() => <AccountsPage persona={"driver"} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
@@ -67,13 +58,6 @@ const tabs = [
     component: HomeStack,
     activeImage: HomeSelected,
     inActiveImage: HomeBlur
-  },
-  {
-    name: "HistoryStack",
-    label: "HISTORY",
-    component: HistoryStack,
-    activeImage: HistorySelected,
-    inActiveImage: HistoryBlur
   },
   {
     name: "Account",

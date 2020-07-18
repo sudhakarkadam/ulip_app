@@ -149,13 +149,8 @@ const HistoryStack = () => {
 const AccountsStack = () => {
   return (
     <Stack.Navigator initialRouteName={"AccountsPage"}>
-      <Stack.Screen name="AccountsPage" options={{ title: "Home" }}>
-        {navigationProps => (
-          <AccountsPage
-            persona={"lsp"}
-            navigation={navigationProps.navigation}
-          />
-        )}
+      <Stack.Screen name="AccountsPage" options={{ title: "Accounts" }}>
+        {() => <AccountsPage persona={"lsp"} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
