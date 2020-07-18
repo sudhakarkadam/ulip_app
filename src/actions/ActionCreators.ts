@@ -76,7 +76,9 @@ const ActionCreators = {
       actions.HOME_METRICS_ERROR
     ],
     api.getMetrics
-  )
+  ),
+  setUserPersona: (args: { user: string }) =>
+    createAction(actions.SET_USER_PERSONA, args, {})
 };
 
 export default ActionCreators;

@@ -52,6 +52,7 @@ export interface UserDataModel {
     phone_number: string;
   };
   business_details: null | ShipperBusinessProfileModel;
+  userPersona?: string;
 }
 export interface GetTripsRequest {
   status: string[];

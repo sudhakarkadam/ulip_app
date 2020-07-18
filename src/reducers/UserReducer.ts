@@ -20,7 +20,11 @@ const INITIAL_STATE: ILoginStoreState = {
 };
 
 type TAction = ActionObjectTypes<
-  "sendOtp" | "verifyOtp" | "saveCompanyProfile" | "savePersonalProfile"
+  | "sendOtp"
+  | "verifyOtp"
+  | "saveCompanyProfile"
+  | "savePersonalProfile"
+  | "setUserPersona"
 >;
 
 export default function UserReducer(
@@ -73,6 +77,15 @@ export default function UserReducer(
         ...state,
         asyncStatus: SUCCESS,
         data: companyData
+      };
+    }
+
+    case actionTypes.SET_USER_PERSONA: {
+      const userData = Object.assign({}, state.data);
+      userData.userPersona = action.payload.req.user;
+      return {
+        ...state,
+        data: userData
       };
     }
 

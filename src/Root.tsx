@@ -9,6 +9,7 @@ import theme from "./theme";
 import ShipperHome from "./components/ShipperHome";
 import { useEffect } from "react";
 import { HeaderProvider } from "./api/Headers";
+import UserPerosna from "./components/UserPersona";
 
 interface Props {
   test: string;
@@ -22,6 +23,7 @@ const connector = connect(mapStateToProps, {});
 
 const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
   const isLoggedIn = props.userInfo ? true : false;
+  const userPerosna = props.userInfo?.userPersona;
   useEffect(() => {
     HeaderProvider.setToken("token");
   }, [props.userInfo]);
@@ -36,7 +38,20 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
               options={{ headerShown: false }}
             />
           )}
-          {isLoggedIn && <Stack.Screen name="Home" component={ShipperHome} />}
+          {isLoggedIn && (
+            <>
+              {!userPerosna && (
+                <Stack.Screen
+                  name="UserPerosna"
+                  component={UserPerosna}
+                  options={{ headerShown: false }}
+                />
+              )}
+              {userPerosna && (
+                <Stack.Screen name="Home" component={ShipperHome} />
+              )}
+            </>
+          )}
         </Stack.Navigator>
       </ThemeProvider>
     </NavigationContainer>
