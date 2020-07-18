@@ -1,0 +1,91 @@
+/* eslint-disable react/display-name */
+import React, { useState } from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import AccountsPage from "../../../components/AccountsPage";
+import { TripHome } from "./TripHome";
+import TripDetails from "./TripDetails";
+import { Text } from "../../../components/@styled/BaseElements";
+import HomeSelected from "../../../images/home_selected.svg";
+import HomeBlur from "../../../images/home_blur.svg";
+import InTransitSelected from "../../../images/intransit_selected.svg";
+import InTransitBlur from "../../../images/intransit_blur.svg";
+import HistorySelected from "../../../images/history_selected.svg";
+import HistoryBlur from "../../../images/history_blur.svg";
+import UlipBottomTab from "../../../components/UlipBottomTab";
+
+const Stack = createStackNavigator();
+
+const HomeStack = () => {
+  const [headerTitle, setHeaderTitle] = useState("");
+  const setTitle = data => {
+    setHeaderTitle(data.id);
+  };
+  const headerTitleText = (
+    <Text fontSize={2}>
+      Trip ID:{" "}
+      <Text style={{ fontWeight: "bold", fontSize: 20 }}>{headerTitle}</Text>
+    </Text>
+  );
+  return (
+    <Stack.Navigator initialRouteName={"TripHome"}>
+      <Stack.Screen name="TripHome" options={{ title: headerTitleText }}>
+        {navigationProps => (
+          <TripHome
+            setTitle={setTitle}
+            navigation={navigationProps.navigation}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="TripDetails" component={TripDetails} />
+    </Stack.Navigator>
+  );
+};
+
+const HistoryStack = () => {
+  return null;
+};
+
+const AccountsStack = () => {
+  return (
+    <Stack.Navigator initialRouteName={"AccountsPage"}>
+      <Stack.Screen name="AccountsPage" options={{ title: "Home" }}>
+        {navigationProps => (
+          <AccountsPage
+            persona={"driver"}
+            navigation={navigationProps.navigation}
+          />
+        )}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+};
+
+const tabs = [
+  {
+    name: "HomeStack",
+    label: "HOME",
+    component: HomeStack,
+    activeImage: HomeSelected,
+    inActiveImage: HomeBlur
+  },
+  {
+    name: "HistoryStack",
+    label: "HISTORY",
+    component: HistoryStack,
+    activeImage: HistorySelected,
+    inActiveImage: HistoryBlur
+  },
+  {
+    name: "Account",
+    label: "ACCOUNT",
+    component: AccountsStack,
+    activeImage: InTransitSelected,
+    inActiveImage: InTransitBlur
+  }
+];
+
+const Hometabs = () => {
+  return <UlipBottomTab tabs={tabs} />;
+};
+
+export default Hometabs;

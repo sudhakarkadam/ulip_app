@@ -19,6 +19,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import colors from "../../../theme/colors";
 import TripTracking from "../../../components/TripTracking";
+import AccountsPage from "../../../components/AccountsPage";
 
 const Stack = createStackNavigator();
 const HomeMetricsComponent = props => (
@@ -145,6 +146,21 @@ const HistoryStack = () => {
   );
 };
 
+const AccountsStack = () => {
+  return (
+    <Stack.Navigator initialRouteName={"AccountsPage"}>
+      <Stack.Screen name="AccountsPage" options={{ title: "Home" }}>
+        {navigationProps => (
+          <AccountsPage
+            persona={"lsp"}
+            navigation={navigationProps.navigation}
+          />
+        )}
+      </Stack.Screen>
+    </Stack.Navigator>
+  );
+};
+
 const tabs = [
   {
     name: "HomeStack",
@@ -166,6 +182,13 @@ const tabs = [
     component: HistoryStack,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
+  },
+  {
+    name: "Account",
+    label: "ACCOUNT",
+    component: AccountsStack,
+    activeImage: InTransitSelected,
+    inActiveImage: InTransitBlur
   }
 ];
 
