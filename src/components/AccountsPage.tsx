@@ -32,7 +32,7 @@ const ProfileWrapper = styled(Flex)`
   margin-top: 30px;
 `;
 
-const personaMapping: any = {
+export const personaMapping: any = {
   driver: {
     text: "I am a driver",
     icon: driverIcon,

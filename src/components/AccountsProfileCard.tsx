@@ -7,6 +7,7 @@ import {
   GestureResponderEvent
 } from "react-native";
 import { Text, FlexColumn, FlexRow } from "./@styled/BaseElements";
+import colors from "../theme/colors";
 const tick = require("../icons/tick.png");
 
 interface ProfileCardTypes {
@@ -44,7 +45,7 @@ const AccountsProfileCard = ({
 }: OwnProps) => (
   <TouchableOpacity disabled={disabled} onPress={onPress}>
     <ProfileCard isBigCard={isBigCard}>
-      <FlexColumn flex={0.3}>
+      <FlexColumn flex={0.2}>
         <Image
           style={{
             width: isBigCard ? 50 : 35,
@@ -55,7 +56,9 @@ const AccountsProfileCard = ({
         />
       </FlexColumn>
       <FlexColumn flex={1.7} ml={isBigCard ? 10 : 0} justifyContent={"center"}>
-        <Text fontSize={isBigCard ? 20 : 16}>{text}</Text>
+        <Text fontSize={isBigCard ? 20 : 16} color={colors.primary}>
+          {text}
+        </Text>
         {subText && <Text fontSize={10}>{subText}</Text>}
       </FlexColumn>
       {showTick && (
