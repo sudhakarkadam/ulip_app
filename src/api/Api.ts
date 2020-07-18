@@ -17,6 +17,7 @@ import {
   CreateTripRequestModel,
   LspListResponse
 } from "../models/ShipperApiModels";
+import { HeaderProvider } from "./Headers";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
 const endpoint = "http://10.24.7.179";
@@ -81,6 +82,9 @@ export default {
         },
         role: req.role,
         user_id: req.userId
+      },
+      {
+        headers: HeaderProvider.getHeaders()
       }
     );
   },
