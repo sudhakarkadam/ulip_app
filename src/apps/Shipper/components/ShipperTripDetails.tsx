@@ -1,9 +1,9 @@
 import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
-import { Flex } from "./@styled/BaseElements";
-import TripDetails from "./TripDetails";
+import { Flex } from "../../../components/@styled/BaseElements";
+import TripDetails from "../../../components/TripDetails";
 import { HomeStackParamList } from "./HomeStack";
-import { GetTripsResponse } from "../models/CommonModel";
+import { GetTripsResponse } from "../../../models/CommonModel";
 
 type ShipperTripDetailsProps = StackScreenProps<
   HomeStackParamList,

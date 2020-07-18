@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import InTransitListing from "./InTransitListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
-import TripTracking from "./TripTracking";
+import TripTracking from "../../../components/TripTracking";
 
 const Stack = createStackNavigator();
 

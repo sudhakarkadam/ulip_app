@@ -1,16 +1,16 @@
 /* eslint-disable react/display-name */
 import React from "react";
-import UlipBottomTab from "./UlipBottomTab";
+import UlipBottomTab from "../../../components/UlipBottomTab";
 import HomeStack from "./HomeStack";
 import InTransitStack from "./InTransitStack";
 import HistoryStack from "./HistoryStack";
-import AccountsStack from "./AccountsStack";
-import HomeSelected from "../images/home_selected.svg";
-import HomeBlur from "../images/home_blur.svg";
-import InTransitSelected from "../images/intransit_selected.svg";
-import InTransitBlur from "../images/intransit_blur.svg";
-import HistorySelected from "../images/history_selected.svg";
-import HistoryBlur from "../images/history_blur.svg";
+import AccountsStack from "../../../components/AccountsStack";
+import HomeSelected from "../../../images/home_selected.svg";
+import HomeBlur from "../../../images/home_blur.svg";
+import InTransitSelected from "../../../images/intransit_selected.svg";
+import InTransitBlur from "../../../images/intransit_blur.svg";
+import HistorySelected from "../../../images/history_selected.svg";
+import HistoryBlur from "../../../images/history_blur.svg";
 
 const tabs = [
   {

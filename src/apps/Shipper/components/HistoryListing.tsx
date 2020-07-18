@@ -1,8 +1,8 @@
 import React from "react";
-import { Flex1 } from "./@styled/Flex";
-import { TripList, ListingModes } from "./TripListing";
-import { AllApps, GetTripsResponse } from "../models/CommonModel";
-import { CommonState } from "../reducers";
+import { Flex1 } from "../../../components/@styled/Flex";
+import { TripList, ListingModes } from "../../../components/TripListing";
+import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
+import { CommonState } from "../../../reducers";
 import { ConnectedProps, connect } from "react-redux";
 
 const mapStateToProps = (state: CommonState) => ({

@@ -6,10 +6,10 @@ import Login from "./components/LoginComponent";
 import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "./reducers";
 import theme from "./theme";
-import ShipperHome from "./components/ShipperHome";
 import { useEffect } from "react";
 import { HeaderProvider } from "./api/Headers";
 import UserPersona from "./components/UserPersona";
+import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
 
@@ -50,7 +50,10 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
                 />
               )}
               {userPersona === "shipper" && (
-                <Stack.Screen name="Home" component={ShipperHome} />
+                <Stack.Screen
+                  name="Home"
+                  component={AuthenticatedFlowShipper}
+                />
               )}
               {userPersona === "lsp" && (
                 <Stack.Screen name="Home" component={AuthenticatedFlowLSP} />
