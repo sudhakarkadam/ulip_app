@@ -32,7 +32,7 @@ interface ProfileProps {
 
 const Wrapper = styled(Flex)`
   align-items: center;
-  margin: 30px 50px;
+  margin: 40px;
 `;
 
 const ProfileWrapper = styled(Flex)`
@@ -64,7 +64,7 @@ export const personaMapping: any = {
 
 const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
   return (
-    <ScrollView>
+    <ScrollView style={{ width: "100%" }}>
       <ProfileWrapper>
         <Text>Current Profile</Text>
         <AccountsProfileCard
