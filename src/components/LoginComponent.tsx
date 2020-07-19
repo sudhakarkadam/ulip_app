@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Flex, TouchableOpacity, Box } from "./@styled/BaseElements";
-import { Text, TextInput } from "react-native";
+import { Text, TextInput, Button } from "react-native";
 import colors from "../theme/colors";
 import Logo from "../images/group.svg";
 import BackBtn from "../images/arrow-left-circle.svg";
@@ -9,7 +9,7 @@ import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-import { TranslationText } from "./InternationalisationProvider";
+import { I18nContext, TranslationText } from "./InternationalisationProvider";
 
 const { verifyOtp, sendOtp } = ActionCreators;
 
@@ -17,6 +17,7 @@ const mapDispatchToProps = { verifyOtp, sendOtp };
 const connector = connect(null, mapDispatchToProps);
 
 const LoginComponent = (props: ConnectedProps<typeof connector>) => {
+  const { changeLanguage, lang } = useContext(I18nContext);
   const [phoneNumber, editPhoneNumber] = useState("");
   const [phoneConfirmed, setPhoneConfirmed] = useState(false);
   const [otpConfirmed] = useState(false);
@@ -35,18 +36,25 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
           <BackBtn width={32} height={32} />
         </TouchableOpacity>
       )}
+
       <Flex mx={6} flex={1} justifyContent="center">
+        <Button
+          title="change lang :P"
+          onPress={() => {
+            if (lang === "en") changeLanguage("hindi");
+            else changeLanguage("en");
+          }}
+        />
         {!phoneConfirmed && (
           <Flex>
-            <PrimaryText style={{ textTransform: "uppercase" }}>
-              <Box>
-                <TranslationText id="hi" />
-              </Box>
-              <TranslationText id="mobile" />
-              <Box>
-                <TranslationText id="bye" interpolations={{ name: "ankeet" }} />
-              </Box>
-            </PrimaryText>
+            <TranslationText
+              id="bye"
+              interpolations={{ name: "Mathan - The Leader" }}
+            />
+
+            <TranslationText id="hi" />
+
+            <TranslationText id="mobile" />
             <Flex
               style={{
                 height: 50,
