@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { PropsWithChildren, useContext, useState } from "react";
+import { Text } from "react-native";
+import { GetTranslationTextType, Keys } from "src/typings/translation";
 import * as EnglishStrings from "../../i18n/en.json";
 import * as HindiStrings from "../../i18n/hindi.json";
 
@@ -31,20 +33,14 @@ function createI18nContext(lang: Language = "hindi") {
     hindi: HindiStrings
   };
 
-  // auto-generated-defs-start
-type Keys = 'hi' | 'mobile' | 'bye';
-type GetTranslationTextType<T> =
-T extends "hi" ? (id: AllTranslationKeys) => string :
-T extends "mobile" ? (id: AllTranslationKeys) => string :
-T extends "bye" ? (id: AllTranslationKeys, name: string) => string :
-never;
-  // auto-generated-defs-end
-  function t(id: Keys, ...keys: string[]) {
+  function t(id: Keys, keys: Record<string, string>) {
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
     if (interpolations) {
       interpolations.forEach((interpolation, index) => {
-        message = message.replace(interpolation, keys[index]);
+        const varName = interpolation.slice(2, -2);
+
+        message = message.replace(interpolation, keys[varName]);
       });
     }
     return message;
@@ -55,11 +51,19 @@ never;
     changeLanguage: (_: Language) => {}
   };
 }
-
-interface Props<T> {
-	id: T,
-	interpolations:
+interface Props<T extends Keys> {
+  id: T;
 }
-function TranslationText() {
+
+export function TranslationText<T extends Keys>({
+  id,
+  interpolations
+}: GetTranslationTextType<T> extends never
+  ? Props<T> & { interpolations?: never }
+  : Props<T> & { interpolations: GetTranslationTextType<T> }) {
   const { t } = useContext(I18nContext);
+  if (interpolations) {
+    return <Text>{t(id, interpolations)}</Text>;
+  }
+  return <Text>{t(id, {})}</Text>;
 }
