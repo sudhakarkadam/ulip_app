@@ -40,6 +40,8 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
           <Flex>
             <PrimaryText style={{ textTransform: "uppercase" }}>
               {t("hi")}
+              {t("mobile")}
+              {t("bye", "hero")}
             </PrimaryText>
             <Flex
               style={{

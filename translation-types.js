@@ -2,23 +2,17 @@ const base = require("./i18n/en.json");
 const fs = require("fs");
 const path = require("path");
 
-const types = [
-  "// this file is auto generated",
-  "// please don't edit manually"
-];
+const types = [];
 const allKeys = Object.keys(base);
 
-types.push(
-  `export type AllTranslationKeys = ${allKeys.map(k => `'${k}'`).join(" | ")};`
-);
+types.push(`type Keys = ${allKeys.map(k => `'${k}'`).join(" | ")};`);
 
-types.push(`export type GetTranslationTextType<T> = `);
 Object.keys(base).map(key => {
   const message = base[key];
   const occurrences = message.match(/{{[a-z]+}}/g);
   const count = occurrences ? occurrences.length : 0;
   if (count === 0) {
-    types.push(`T extends "${key}" ? (id: AllTranslationKeys) => string :`);
+    types.push(`function t(id: '${key}'): string`);
   } else {
     // remove {{ }}
     const varNames = occurrences
@@ -26,14 +20,23 @@ Object.keys(base).map(key => {
       .map(n => `${n}: string`)
       .join(",");
 
-    types.push(
-      `T extends "${key}" ? (id: AllTranslationKeys, ${varNames}) => string :`
-    );
+    types.push(`function t(id: '${key}', ${varNames}): string`);
   }
 });
-types.push(`never;`);
 
-fs.writeFileSync(
-  path.resolve(__dirname, "src", "typings", "translation.ts"),
-  types.join("\n")
+const srcPath = path.resolve(
+  __dirname,
+  "src",
+  "components",
+  "InternationalisationProvider.tsx"
 );
+const contents = fs
+  .readFileSync(srcPath)
+  .toString()
+  .replace(
+    /\/\/\sauto\-generated\-defs\-start*.auto\-generated\-defs\-end/,
+    ""
+  );
+
+const src = contents.replace(" // replace this", types.join("\n"));
+fs.writeFileSync(srcPath, src);
