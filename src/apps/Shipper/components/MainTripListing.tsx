@@ -41,6 +41,7 @@ const MainTripListing = (props: Props & OwnProps) => {
   const requests = props.metrics.data.transport_service_request;
   const tripCount = (requests.CREATED || 0) + (requests.ACCEPTED || 0);
   const handleRowClick = (_: any, trip: GetTripsResponse) => {
+    return props.navigation.push("TrackTrip");
     props.navigation.push("ShipperTripDetails", { data: JSON.stringify(trip) });
   };
 

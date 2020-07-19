@@ -9,6 +9,7 @@ import ShipperCreateProfile from "./ShipperCreateProfile";
 import ShipperTripDetails from "./ShipperTripDetails";
 import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
+import TripTracking from "./TripTracking";
 
 export type HomeStackParamList = {
   CreateProfile: undefined;
@@ -16,6 +17,7 @@ export type HomeStackParamList = {
   CompanyProfile: undefined;
   CreateTrip: undefined;
   MainTripListing: undefined;
+  TrackTrip: undefined;
   ShipperTripDetails: { data: string };
 };
 
@@ -58,6 +60,11 @@ const HomeStack = (props: OwnProps) => {
             name="MainTripListing"
             component={MainTripListing}
             options={{ title: "Home" }}
+          />
+          <Stack.Screen
+            name="TrackTrip"
+            component={TripTracking}
+            options={{ title: "Tracking" }}
           />
           <Stack.Screen
             name="ShipperTripDetails"

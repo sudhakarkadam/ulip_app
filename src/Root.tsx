@@ -13,6 +13,8 @@ import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
 
+const MapmyIndia = require("mmi-widget");
+
 interface Props {
   test: string;
 }
@@ -28,6 +30,9 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
   const userPersona = props.userInfo?.userPersona;
   useEffect(() => {
     HeaderProvider.setToken("token");
+    const test = MapmyIndia;
+    const trackingInitialize = MapmyIndia.default.initialize;
+    trackingInitialize();
   }, [props.userInfo]);
   return (
     <NavigationContainer>
