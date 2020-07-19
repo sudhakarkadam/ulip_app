@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import * as EnglishStrings from "../../i18n/en.json";
 import * as HindiStrings from "../../i18n/hindi.json";
 
@@ -32,11 +32,14 @@ function createI18nContext(lang: Language = "hindi") {
   };
 
   // auto-generated-defs-start
-  function t(id: "hi"): string;
-  function t(id: "mobile"): string;
-  function t(id: "bye", name: string): string;
+type Keys = 'hi' | 'mobile' | 'bye';
+type GetTranslationTextType<T> =
+T extends "hi" ? (id: AllTranslationKeys) => string :
+T extends "mobile" ? (id: AllTranslationKeys) => string :
+T extends "bye" ? (id: AllTranslationKeys, name: string) => string :
+never;
+  // auto-generated-defs-end
   function t(id: Keys, ...keys: string[]) {
-    // auto-generated-defs-end
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
     if (interpolations) {
@@ -51,4 +54,12 @@ function createI18nContext(lang: Language = "hindi") {
     t,
     changeLanguage: (_: Language) => {}
   };
+}
+
+interface Props<T> {
+	id: T,
+	interpolations:
+}
+function TranslationText() {
+  const { t } = useContext(I18nContext);
 }
