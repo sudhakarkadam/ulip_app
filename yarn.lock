@@ -964,14 +964,6 @@
   resolved "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
-"@gimenete/type-writer@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@gimenete/type-writer/-/type-writer-0.1.5.tgz#279efe2cfbd93947a4fb0288b3b55a730cb3fdc3"
-  integrity sha512-ZeVljCBixwIU4MG3Kqy/3Dc7zfIMCj9kXyCQ6hiutwFqZkTWggrhqNSEc+NfN2ztLjUG+ssdFe7PUcCIXv67aA==
-  dependencies:
-    camelcase "^5.0.0"
-    prettier "^1.19.1"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.npmjs.org/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -6673,7 +6665,7 @@ prettier@1.16.4:
   resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
   integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
 
-prettier@1.19, prettier@^1.19.1:
+prettier@1.19:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
