@@ -9,6 +9,7 @@ const driverIcon = require("../icons/driver-icon.png");
 import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
+import { TranslationText } from "./InternationalisationProvider";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
@@ -66,7 +67,7 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
   return (
     <ScrollView style={{ width: "100%" }}>
       <ProfileWrapper>
-        <Text>Current Profile</Text>
+        <TranslationText id="curent.profile" />
         <AccountsProfileCard
           disabled
           isBigCard
@@ -76,13 +77,13 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
         />
       </ProfileWrapper>
       <ProfileWrapper>
-        <Text>Other Profiles</Text>
+        <TranslationText id="other.profiles" />
         {Object.keys(personaMapping).map(otherPersona =>
           otherPersona !== persona ? (
             <AccountsProfileCard
               key={otherPersona}
               text={personaMapping[otherPersona].text}
-              subText={"SETUP REQUIRED"}
+              subText={<TranslationText id="setup.required" />}
               icon={personaMapping[otherPersona].icon}
               onPress={() => selectedOtherPersona(otherPersona)}
             />

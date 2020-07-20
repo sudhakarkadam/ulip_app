@@ -97,7 +97,7 @@ const SwipeActions = (progress, dragX) => {
 const getStartText = () => {
   return (
     <Text>
-      Swipe to Start Trip <Text fontSize={5}>&#187;</Text>
+      <TranslationText id="swipe.to.start" /> <Text fontSize={5}>&#187;</Text>
     </Text>
   );
 };
@@ -150,11 +150,16 @@ const Trip: React.FC<Props> = props => {
       } else {
         return (
           <>
-            <Text color="#7A869A">It will be enabled on {tripStartDate}</Text>
+            <Text color="#7A869A">
+              <TranslationText
+                id="it.will.be.enabled"
+                interpolations={{ date: tripStartDate }}
+              />
+            </Text>
             <StyledButton
               height="40"
               width="100%"
-              title="Start Trip"
+              title={<TranslationText id="start.trip"></TranslationText>}
               style={{ opacity: 0.6 }}
               disabled={true}
               onPress={() => {}}
@@ -169,7 +174,7 @@ const Trip: React.FC<Props> = props => {
         <>
           <Box textAlign="left" alignItems="flex-start">
             <Text textAlign="left" color="#7A869A">
-              Pickup point
+              <TranslationText id="pick.up.point"></TranslationText>
             </Text>
             <View style={{ flex: 1 }}></View>
           </Box>
@@ -177,13 +182,13 @@ const Trip: React.FC<Props> = props => {
             <StyledButton
               height="40"
               width="50%"
-              title="GO TO MAP"
+              title={<TranslationText id="go.to.map"></TranslationText>}
               onPress={() => {}}
             />
             <StyledButton
               height="40"
               width="50%"
-              title="CAPTURE POP"
+              title={<TranslationText id="capture.pop"></TranslationText>}
               onPress={() => {
                 // upload pop
                 capture(async d => {
@@ -206,7 +211,7 @@ const Trip: React.FC<Props> = props => {
         <>
           <Box textAlign="left" alignItems="flex-start">
             <Text textAlign="left" color="#7A869A">
-              Destination point
+              {<TranslationText id="destination.point"></TranslationText>}
             </Text>
             <View style={{ flex: 1 }}></View>
           </Box>
@@ -214,13 +219,13 @@ const Trip: React.FC<Props> = props => {
             <StyledButton
               height="40"
               width="50%"
-              title="GO TO MAP"
+              title={<TranslationText id="go.to.map"></TranslationText>}
               onPress={() => {}}
             />
             <StyledButton
               height="40"
               width="50%"
-              title="Reached"
+              title={<TranslationText id="reached"></TranslationText>}
               onPress={async () => {
                 await props.updateTrip({ sr_id: trip.id, status: "REACHED" });
                 getTrips();
