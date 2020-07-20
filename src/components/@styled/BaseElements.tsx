@@ -141,7 +141,7 @@ export type TInputProps = SpaceProps &
 
 export const TextWrapper = (props: {
   children: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
 }) => {
   return (
     <Flex mt={5}>

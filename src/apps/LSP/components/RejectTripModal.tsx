@@ -11,6 +11,7 @@ import { ReduxCustomAction } from "../../../utils/actionCreator";
 import LSPActionTypes from "../actions/LSPActions";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import { ToastAndroid } from "react-native";
+import { TranslationText } from "src/components/InternationalisationProvider";
 
 interface OwnProps {
   onReject: (
@@ -27,8 +28,10 @@ const RejectTripModal = (props: OwnProps) => {
   const [reason, setReason] = useState("");
   return (
     <Flex>
-      <PrimaryText>Are you sure?</PrimaryText>
-      <TextWrapper label="Choose Reason">
+      <PrimaryText>
+        <TranslationText id="are.you.sure" />
+      </PrimaryText>
+      <TextWrapper label={<TranslationText id="choose.reason" />}>
         <SelectComponent
           data={[{ label: "Drivers Unavailable", value: "xyz" }]}
           defaultValue={"xyz"}
@@ -37,13 +40,13 @@ const RejectTripModal = (props: OwnProps) => {
       </TextWrapper>
       <FlexRow mt={4}>
         <StyledButton
-          title="Close"
+          title={<TranslationText id="close" />}
           style={{ flex: 1 }}
           variant={"outline"}
           onPress={props.onClose}
         />
         <StyledButton
-          title="Reject"
+          title={<TranslationText id="reject" />}
           style={{ flex: 1 }}
           onPress={() =>
             props

@@ -13,7 +13,7 @@ types.push(`export type Keys = ${allKeys.map(k => `'${k}'`).join(" | ")};`);
 types.push(`export type GetTranslationTextType<T> = `);
 Object.keys(base).map(key => {
   const message = base[key];
-  const occurrences = message.match(/{{[a-z]+}}/g);
+  const occurrences = message.match(/{{[a-zA-Z0-9]+}}/g);
   const count = occurrences ? occurrences.length : 0;
   if (count === 0) {
     types.push(`T extends "${key}" ? never :`);

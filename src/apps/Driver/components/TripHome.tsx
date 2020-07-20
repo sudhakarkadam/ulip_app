@@ -30,6 +30,7 @@ import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
+import { TranslationText } from "src/components/InternationalisationProvider";
 const options = {
   title: "Select proof",
   storageOptions: {
@@ -116,7 +117,12 @@ const Trip: React.FC<Props> = props => {
   // const trips = driverTrips || props.trips.data;
   const trips = props.trips.data;
 
-  if (!trips) return <PrimaryText p={20}>No trips</PrimaryText>;
+  if (!trips)
+    return (
+      <PrimaryText p={20}>
+        <TranslationText id="no.trips"></TranslationText>
+      </PrimaryText>
+    );
 
   const bottomSheetContent = () => {
     const trip = trips?.find(t => t);
@@ -276,11 +282,20 @@ const Trip: React.FC<Props> = props => {
                         Trip Details
                       </Text>
                       <Flex style={{ paddingVertical: 25 }}>
-                        <PrimaryText>Pickup Date</PrimaryText>
+                        <PrimaryText>
+                          <TranslationText id="pick.up.date" />
+                        </PrimaryText>
                         <PrimaryText
                           style={{ fontWeight: "bold", fontSize: 20 }}
                         >
-                          {new Date(trip.pickup_date).toLocaleDateString()}
+                          <TranslationText
+                            id="placeholder"
+                            interpolations={{
+                              value: new Date(
+                                trip.pickup_date
+                              ).toLocaleDateString()
+                            }}
+                          />
                         </PrimaryText>
                       </Flex>
                     </FlexColumn>

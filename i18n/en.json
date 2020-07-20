@@ -1,5 +1,22 @@
 {
-  "hi": "hello",
-  "mobile": "Mobile Number",
-  "bye": "see you {{name}}"
+  "are.you.sure": "Are you sure?",
+  "choose.reason": "Choose Reason",
+  "choose.truck": "Choose Truck",
+  "close": "Close",
+  "confirm": "Confirm",
+  "driver.details": "Driver Details",
+  "driver.name": "Driver's name",
+  "does.not.exist": "This does not exist",
+  "india.prefix": "+91 - ",
+  "mobile.number": "Mobile Number",
+  "no.trips": "No trips",
+  "on.road": "On road",
+  "otp.sent": "An OTP has been sent to",
+  "otp.verified": "OTP successfully verified for {{phoneNumber}}",
+  "pending": "Pending",
+  "pick.up.date": "Pickup Date",
+  "placeholder": "{{value}}",
+  "requests": "Requests",
+  "reject": "Reject",
+  "trucks": "Trucks"
 }

@@ -7,6 +7,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { convert } from "../../../components/TripStamp";
+import { TranslationText } from "src/components/InternationalisationProvider";
 
 const mapStateToProps = (state: DriverAppState) => ({
   trips: state.trips
@@ -20,7 +21,12 @@ type Props = ConnectedProps<typeof connector> & {
 const TripDetailsPage: React.FC<Props> = props => {
   const trip = props.trips.data?.[0];
 
-  if (!trip) return <PrimaryText>This does not exist</PrimaryText>;
+  if (!trip)
+    return (
+      <PrimaryText>
+        <TranslationText id="does.not.exist" />
+      </PrimaryText>
+    );
   return (
     <Flex backgroundColor="white">
       <TripDetails

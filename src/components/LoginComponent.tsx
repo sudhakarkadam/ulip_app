@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Flex, TouchableOpacity, Box } from "./@styled/BaseElements";
-import { Text, TextInput, Button } from "react-native";
+import { Text, TextInput } from "react-native";
 import colors from "../theme/colors";
 import Logo from "../images/group.svg";
 import BackBtn from "../images/arrow-left-circle.svg";
@@ -9,15 +9,13 @@ import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-import { I18nContext, TranslationText } from "./InternationalisationProvider";
-
+import { TranslationText } from "src/components/InternationalisationProvider";
 const { verifyOtp, sendOtp } = ActionCreators;
 
 const mapDispatchToProps = { verifyOtp, sendOtp };
 const connector = connect(null, mapDispatchToProps);
 
 const LoginComponent = (props: ConnectedProps<typeof connector>) => {
-  const { changeLanguage, lang } = useContext(I18nContext);
   const [phoneNumber, editPhoneNumber] = useState("");
   const [phoneConfirmed, setPhoneConfirmed] = useState(false);
   const [otpConfirmed] = useState(false);
@@ -27,6 +25,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
       <Box position="absolute" mx={6} mt={80}>
         <Logo width={300} height={66} />
       </Box>
+
       {phoneConfirmed && !otpConfirmed && (
         <TouchableOpacity
           my={30}
@@ -36,25 +35,12 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
           <BackBtn width={32} height={32} />
         </TouchableOpacity>
       )}
-
       <Flex mx={6} flex={1} justifyContent="center">
-        <Button
-          title="change lang :P"
-          onPress={() => {
-            if (lang === "en") changeLanguage("hindi");
-            else changeLanguage("en");
-          }}
-        />
         {!phoneConfirmed && (
           <Flex>
-            <TranslationText
-              id="bye"
-              interpolations={{ name: "Mathan - The Leader" }}
-            />
-
-            <TranslationText id="hi" />
-
-            <TranslationText id="mobile" />
+            <PrimaryText style={{ textTransform: "uppercase" }}>
+              <TranslationText id="mobile.number" />
+            </PrimaryText>
             <Flex
               style={{
                 height: 50,
@@ -70,7 +56,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
               }}
             >
               <Text style={{ fontSize: 18, color: colors.primary }}>
-                +91 -{" "}
+                <TranslationText id="india.prefix" />
               </Text>
               <TextInput
                 keyboardType="numeric"
@@ -91,8 +77,15 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
           <Flex alignItems="center">
             {!otpConfirmed && (
               <>
-                <PrimaryText fontSize={3}>A OTP has been sent to</PrimaryText>
-                <PrimaryText fontSize={6}>{phoneNumber}</PrimaryText>
+                <PrimaryText fontSize={3}>
+                  <TranslationText id="otp.sent" />
+                </PrimaryText>
+                <PrimaryText fontSize={6}>
+                  <TranslationText
+                    id="placeholder"
+                    interpolations={{ value: phoneNumber }}
+                  />
+                </PrimaryText>
                 <CodeInput
                   activeColor={colors.primary}
                   inactiveColor={colors.primary}
@@ -115,9 +108,10 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
               </>
             )}
             {otpConfirmed && (
-              <PrimaryText>
-                OTP Successfully Verified for {phoneNumber}
-              </PrimaryText>
+              <TranslationText
+                id="otp.verified"
+                interpolations={{ phoneNumber }}
+              />
             )}
           </Flex>
         )}
@@ -126,7 +120,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
         {phoneNumber.length === 10 && !phoneConfirmed && (
           <Flex style={{ paddingBottom: 10 }} mx={6}>
             <StyledButton
-              title="Confirm"
+              title={<TranslationText id="confirm" />}
               onPress={async () => {
                 await props.sendOtp({ phone: phoneNumber });
                 setPhoneConfirmed(true);
