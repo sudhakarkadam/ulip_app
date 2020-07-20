@@ -1,10 +1,11 @@
-import React, { PropsWithChildren, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Text } from "react-native";
 import { GetTranslationTextType, Keys } from "src/typings/translation";
 import * as EnglishStrings from "../../i18n/en.json";
 import * as HindiStrings from "../../i18n/hindi.json";
+import * as TamilStrings from "../../i18n/tamil.json";
 
-type Language = "en" | "hindi";
+type Language = "en" | "hindi" | "tamil";
 type InternationalisationProvider = ReturnType<typeof createI18nContext>;
 
 export const I18nContext = React.createContext<InternationalisationProvider>(
@@ -28,9 +29,10 @@ export const InternationalisationProvider: React.FC = ({ children }) => {
 };
 
 function createI18nContext(lang: Language = "hindi") {
-  const translations: Record<Language, typeof EnglishStrings> = {
+  const translations: Record<Language, Record<Keys, string>> = {
     en: EnglishStrings,
-    hindi: HindiStrings
+    hindi: HindiStrings,
+    tamil: TamilStrings
   };
 
   function t(id: Keys, keys: Record<string, string>) {
