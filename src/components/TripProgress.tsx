@@ -9,6 +9,7 @@ import GoodsImgDark from "../images/goods-dark.svg";
 import TruckImg from "../images/solid-truck.svg";
 import TruckImgDark from "../images/truck-dark.svg";
 import colors from "../theme/colors";
+import { TranslationText } from "../InternationalisationProvider";
 
 interface OwnProps {
   currentStep: number;
@@ -21,7 +22,7 @@ const TripProgress = (props: OwnProps) => {
   return (
     <FlexColumn p={5} backgroundColor="white" height={120}>
       <Text fontSize={3} fontWeight={700}>
-        Trip details
+        <TranslationText id="trip.details" />
       </Text>
       <FlexRow justifyContent="space-around" mt={4}>
         <Flex>

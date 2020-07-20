@@ -10,6 +10,7 @@
   "driver.details": "Driver Details",
   "driver.name": "Driver's name",
   "does.not.exist": "This does not exist",
+  "go.back": "Go back",
   "go.to.map": "Go to map",
   "india.prefix": "+91 - ",
   "it.will.be.enabled": "It will be enabled on {{date}}",
@@ -35,6 +36,8 @@
   "trucks": "Trucks",
   "truck.type": "Truck Type",
   "trip.id": "Trip ID: ",
-	"uploaded.docs": "Uploaded Documents",
-	"verifying": "Verifying"
+  "trip.details": "Trip Details",
+  "trip.tracking.not.available": "Trip tracking is not available at the moment",
+  "uploaded.docs": "Uploaded Documents",
+  "verifying": "Verifying"
 }

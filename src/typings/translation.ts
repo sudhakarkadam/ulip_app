@@ -12,6 +12,7 @@ export type Keys =
   | "driver.details"
   | "driver.name"
   | "does.not.exist"
+  | "go.back"
   | "go.to.map"
   | "india.prefix"
   | "it.will.be.enabled"
@@ -37,6 +38,8 @@ export type Keys =
   | "trucks"
   | "truck.type"
   | "trip.id"
+  | "trip.details"
+  | "trip.tracking.not.available"
   | "uploaded.docs"
   | "verifying";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
@@ -60,6 +63,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "driver.name"
   ? never
   : T extends "does.not.exist"
+  ? never
+  : T extends "go.back"
   ? never
   : T extends "go.to.map"
   ? never
@@ -110,6 +115,10 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "truck.type"
   ? never
   : T extends "trip.id"
+  ? never
+  : T extends "trip.details"
+  ? never
+  : T extends "trip.tracking.not.available"
   ? never
   : T extends "uploaded.docs"
   ? never
