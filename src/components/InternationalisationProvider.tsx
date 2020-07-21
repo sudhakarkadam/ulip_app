@@ -35,7 +35,29 @@ function createI18nContext(lang: Language = "hindi") {
     tamil: TamilStrings
   };
 
-  function t(id: Keys, keys: Record<string, string>) {
+  function translate<T extends Keys>(
+    id: T
+  ): GetTranslationTextType<T> extends never
+    ? string
+    : (attrs: GetTranslationTextType<T>) => string {
+    let message: string = translations[lang][id];
+    const interpolations = message && message.match(/{{[a-z]+}}/g);
+    if (interpolations) {
+      // @ts-ignore
+      return (attrs: GetTranslationTextType<T>) => {
+        interpolations.forEach((interpolation, index) => {
+          const varName = interpolation.slice(2, -2);
+          // @ts-ignore
+          message = message.replace(interpolation, attrs[varName]);
+        });
+        return message;
+      };
+    }
+    // @ts-ignore
+    return message;
+  }
+
+  function __t(id: Keys, keys: Record<string, string>) {
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
     if (interpolations) {
@@ -49,7 +71,8 @@ function createI18nContext(lang: Language = "hindi") {
   }
   return {
     lang,
-    t,
+    translate,
+    __t: __t,
     changeLanguage: (_: Language) => {}
   };
 }
@@ -63,7 +86,7 @@ export function TranslationText<T extends Keys>({
 }: GetTranslationTextType<T> extends never
   ? Props<T> & { interpolations?: never }
   : Props<T> & { interpolations: GetTranslationTextType<T> }) {
-  const { t } = useContext(I18nContext);
+  const { __t: t } = useContext(I18nContext);
   if (interpolations) {
     return <Text>{t(id, interpolations)}</Text>;
   }

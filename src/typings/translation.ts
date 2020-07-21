@@ -16,6 +16,9 @@ export type Keys =
   | "go.to.map"
   | "india.prefix"
   | "it.will.be.enabled"
+  | "i.am.shipper"
+  | "i.am.driver"
+  | "i.am.lsp"
   | "lsp"
   | "mobile.number"
   | "no.trips"
@@ -72,6 +75,12 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "it.will.be.enabled"
   ? { date: string }
+  : T extends "i.am.shipper"
+  ? never
+  : T extends "i.am.driver"
+  ? never
+  : T extends "i.am.lsp"
+  ? never
   : T extends "lsp"
   ? never
   : T extends "mobile.number"

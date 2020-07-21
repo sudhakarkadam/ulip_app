@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Image, ScrollView } from "react-native";
 import styled from "styled-components/native";
@@ -9,7 +9,7 @@ const driverIcon = require("../icons/driver-icon.png");
 import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
-import { TranslationText } from "./InternationalisationProvider";
+import { TranslationText, I18nContext } from "./InternationalisationProvider";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
@@ -42,21 +42,21 @@ const ProfileWrapper = styled(Flex)`
   margin-top: 30px;
 `;
 
-export const personaMapping: any = {
+export const personaMapping = {
   shipper: {
-    text: "I am a shipper",
+    text: "i.am.shipper",
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "shipper_details"
   },
   driver: {
-    text: "I am a driver",
+    text: "i.am.driver",
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "driver_details"
   },
   lsp: {
-    text: "I am a logistic service provider",
+    text: "i.am.lsp",
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "lsp_details"
@@ -64,15 +64,16 @@ export const personaMapping: any = {
 };
 
 const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
+  const { translate } = useContext(I18nContext);
   return (
     <ScrollView style={{ width: "100%" }}>
       <ProfileWrapper>
-        <TranslationText id="curent.profile" />
+        <TranslationText id="current.profile" />
         <AccountsProfileCard
           disabled
           isBigCard
           showTick
-          text={personaMapping[persona].text}
+          text={translate(personaMapping[persona].text as "i.am.shipper")}
           icon={personaMapping[persona].icon}
         />
       </ProfileWrapper>
@@ -82,7 +83,7 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
           otherPersona !== persona ? (
             <AccountsProfileCard
               key={otherPersona}
-              text={personaMapping[otherPersona].text}
+              text={translate(personaMapping[otherPersona].text)}
               subText={<TranslationText id="setup.required" />}
               icon={personaMapping[otherPersona].icon}
               onPress={() => selectedOtherPersona(otherPersona)}
