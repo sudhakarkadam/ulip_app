@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TextInputProps } from "react-native";
-import { PrimaryText } from "./@styled/Text";
-import { StyledTextInput } from "./@styled/BaseElements";
+import { PrimaryLabel } from "./@styled/Text";
+import { StyledTextInput, Box } from "./@styled/BaseElements";
 
 interface OwnProps {
   label?: string;
@@ -9,14 +9,10 @@ interface OwnProps {
 
 const InputComponent = (props: OwnProps & TextInputProps) => {
   return (
-    <View>
-      {props.label && (
-        <PrimaryText mb={4} style={{ textTransform: "uppercase" }}>
-          {props.label}
-        </PrimaryText>
-      )}
+    <Box mb={5}>
+      {props.label && <PrimaryLabel mb={4}>{props.label}</PrimaryLabel>}
       <StyledTextInput {...props} />
-    </View>
+    </Box>
   );
 };
 

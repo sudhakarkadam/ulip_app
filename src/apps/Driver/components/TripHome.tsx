@@ -146,7 +146,6 @@ const Trip: React.FC<Props> = props => {
           <>
             <Text color="#7A869A">It will be enabled on {tripStartDate}</Text>
             <StyledButton
-              height="40"
               width="100%"
               title="Start Trip"
               style={{ opacity: 0.6 }}
@@ -168,14 +167,8 @@ const Trip: React.FC<Props> = props => {
             <View style={{ flex: 1 }}></View>
           </Box>
           <FlexRow>
+            <StyledButton width="50%" title="GO TO MAP" onPress={() => {}} />
             <StyledButton
-              height="40"
-              width="50%"
-              title="GO TO MAP"
-              onPress={() => {}}
-            />
-            <StyledButton
-              height="40"
               width="50%"
               title="CAPTURE POP"
               onPress={() => {
@@ -205,14 +198,8 @@ const Trip: React.FC<Props> = props => {
             <View style={{ flex: 1 }}></View>
           </Box>
           <FlexRow>
+            <StyledButton width="50%" title="GO TO MAP" onPress={() => {}} />
             <StyledButton
-              height="40"
-              width="50%"
-              title="GO TO MAP"
-              onPress={() => {}}
-            />
-            <StyledButton
-              height="40"
               width="50%"
               title="Reached"
               onPress={async () => {
@@ -228,7 +215,6 @@ const Trip: React.FC<Props> = props => {
     if (trip.trip.status === "REACHED") {
       return (
         <StyledButton
-          height="40"
           width="100%"
           title="Capture POD"
           onPress={() => {

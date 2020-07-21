@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from "react";
 import styled from "styled-components/native";
 import {
@@ -24,6 +25,7 @@ import {
   compose
 } from "styled-system";
 import colors from "../../theme/colors";
+import BackIcon from "../../images/back.svg";
 
 export type BoxProps = SpaceProps &
   ColorProps &
@@ -85,11 +87,11 @@ export const Input = styled.TextInput<InputProps>(
 
 export const StyledTextInput = styled(Input)`
   color: ${colors.primary};
-  border: solid 1px ${colors.grays[1]};
-  font-size: 20px;
+  border: solid 1px ${colors.grays[2]};
+  font-size: 16px;
   width: 100%;
-  padding: 10px 20px;
-  border-radius: 3px;
+  padding: 8px 20px;
+  border-radius: 2px;
 `;
 
 type ImageProps = SpaceProps & LayoutProps;
@@ -151,4 +153,10 @@ export const TextWrapper = (props: {
       {props.children}
     </Flex>
   );
+};
+
+export const HeaderOptions = {
+  headerStyle: { backgroundColor: colors.bg, elevation: 0 },
+  headerTitleStyle: { color: colors.primary },
+  headerBackImage: () => <BackIcon />
 };

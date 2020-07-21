@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Input from "../components/InputComponent";
 import StyledButton from "../components/@styled/StyledButton";
-import colors from "../theme/colors";
-import { Text, FlexColumn, Flex, TextWrapper } from "./@styled/BaseElements";
+import { Flex } from "./@styled/BaseElements";
 import { UserDataModel } from "../models/CommonModel";
+import { PrimaryHeaderText } from "./@styled/Text";
+import { Flex1 } from "./@styled/Flex";
+import { Page, PageContent } from "./@styled/Page";
 
 interface OwnProps {
   createProfileCallback: (data: { name: string }) => void;
@@ -13,34 +15,38 @@ interface OwnProps {
 const PersonProfile = (props: OwnProps) => {
   const [name, setName] = useState("");
   return (
-    <FlexColumn p={6} mt={4} backgroundColor="white" height={320}>
-      <Flex>
-        <Text color={`${colors.black[2]}`} fontSize={4} fontWeight={700}>
-          Personal details
-        </Text>
-      </Flex>
-      <TextWrapper label="Full name">
-        <Input value={name} onChangeText={text => setName(text)} />
-      </TextWrapper>
-      <TextWrapper label="Mobile number">
-        <Input
-          editable={false}
-          value={props.userInfo ? props.userInfo.user_details.phone_number : ""}
-          onChangeText={text => setName(text)}
-        />
-      </TextWrapper>
-      <Flex mt={5}>
-        <StyledButton
-          disabled={!name}
-          title="Save profile"
-          height={40}
-          fontSize={14}
-          onPress={() => {
-            props.createProfileCallback({ name });
-          }}
-        />
-      </Flex>
-    </FlexColumn>
+    <Page>
+      <PageContent>
+        <Flex1 p={6} mt={4} backgroundColor="white">
+          <Flex mb={5}>
+            <PrimaryHeaderText>Personal details</PrimaryHeaderText>
+          </Flex>
+          <Input
+            value={name}
+            onChangeText={text => setName(text)}
+            label="Full name"
+          />
+          <Input
+            label="Mobile number"
+            editable={false}
+            value={
+              props.userInfo ? props.userInfo.user_details.phone_number : ""
+            }
+            onChangeText={text => setName(text)}
+          />
+          <Flex mt={5}>
+            <StyledButton
+              disabled={!name}
+              title="Save profile"
+              fontSize={14}
+              onPress={() => {
+                props.createProfileCallback({ name });
+              }}
+            />
+          </Flex>
+        </Flex1>
+      </PageContent>
+    </Page>
   );
 };
 

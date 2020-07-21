@@ -9,7 +9,9 @@ import {
   FlexRow
 } from "./@styled/BaseElements";
 import colors from "../theme/colors";
+import { PrimaryHeaderText } from "./@styled/Text";
 const tick = require("../icons/tick.png");
+import DriverIcon from "../images/driver.svg";
 
 interface ProfileCardTypes {
   isBigCard?: boolean;
@@ -22,18 +24,18 @@ interface OwnProps {
   showTick?: boolean;
   subText?: string | boolean;
   text: string;
-  icon: ImageSourcePropType;
+  icon: JSX.Element;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
 const ProfileCard = styled(FlexRow)`
   background-color: white;
-  padding: ${(props: ProfileCardTypes) => (props.isBigCard ? "15px" : "10px")};
-  border-radius: 10px;
+  padding: ${(props: ProfileCardTypes) => (props.isBigCard ? "12px" : "10px")};
+  border-radius: 2px;
   width: 100%;
-  margin: 6px 0;
+  margin: 15px 0;
   justify-content: center;
-  border: 2px solid ${colors.grays[2]};
+  elevation: 5;
 `;
 
 const AccountsProfileCard = ({
@@ -47,17 +49,14 @@ const AccountsProfileCard = ({
 }: OwnProps) => (
   <TouchableOpacity disabled={disabled} onPress={onPress}>
     <ProfileCard isBigCard={isBigCard} alignItems={"center"}>
-      <Image
-        width={isBigCard ? 50 : 35}
-        height={isBigCard ? 50 : 35}
-        borderRadius={50}
-        source={icon}
-        mr={2}
-      />
+      <Flex width={60}>{icon}</Flex>
       <Flex flex={1} ml={2} justifyContent={"center"}>
-        <Text fontSize={isBigCard ? 18 : 16} color={colors.primary}>
+        <PrimaryHeaderText
+          fontSize={isBigCard ? 18 : 16}
+          color={colors.primary}
+        >
           {text}
-        </Text>
+        </PrimaryHeaderText>
         {subText && (
           <Text mt={1} color={colors.grays[5]} fontSize={10}>
             {subText}

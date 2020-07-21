@@ -12,6 +12,7 @@ import { ConnectedProps, connect } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import BlockScreenLoader from "../../../components/BlockScreenLoader";
+import { PageContent, Page } from "../../../components/@styled/Page";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,
@@ -45,36 +46,38 @@ const MainTripListing = (props: Props & OwnProps) => {
   };
 
   return (
-    <>
-      {!tripCount && (
-        <>
-          <Flex mt="3" />
-          <CreateTripCard
-            createTripCallback={() => props.navigation.push("CreateTrip")}
-          />
-        </>
-      )}
+    <Page>
+      <PageContent>
+        {!tripCount && (
+          <>
+            <Flex mt="3" />
+            <CreateTripCard
+              createTripCallback={() => props.navigation.push("CreateTrip")}
+            />
+          </>
+        )}
 
-      {!!tripCount && (
-        <Flex1 bg="white">
-          <TripList
-            listingMode={ListingModes.UPCOMING}
-            from={AllApps.SHIPPER}
-            onRowClick={handleRowClick}
-          />
-          <Box position="absolute" bottom="15" right="20">
-            <FloatingButton
-              size="large"
-              onPress={() => props.navigation.push("CreateTrip")}
-            >
-              <Text color="white" fontSize="7">
-                +
-              </Text>
-            </FloatingButton>
-          </Box>
-        </Flex1>
-      )}
-    </>
+        {!!tripCount && (
+          <Flex1 bg="white">
+            <TripList
+              listingMode={ListingModes.UPCOMING}
+              from={AllApps.SHIPPER}
+              onRowClick={handleRowClick}
+            />
+            <Box position="absolute" bottom="15" right="20">
+              <FloatingButton
+                size="large"
+                onPress={() => props.navigation.push("CreateTrip")}
+              >
+                <Text color="white" fontSize="7">
+                  +
+                </Text>
+              </FloatingButton>
+            </Box>
+          </Flex1>
+        )}
+      </PageContent>
+    </Page>
   );
 };
 

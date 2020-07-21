@@ -5,7 +5,10 @@ import styled from "styled-components/native";
 import { Text, Flex, FlexRow } from "./@styled/BaseElements";
 import { UserDataModel } from "../models/CommonModel";
 const personIcon = require("../images/sample-profile.png");
-const driverIcon = require("../icons/driver-icon.png");
+//const driverIcon = require("../images/driver.svg");
+import DriverIcon from "../images/driver.svg";
+import LSPIcon from "../images/lsp.svg";
+import ShipperIcon from "../images/shipper.svg";
 import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
@@ -42,23 +45,23 @@ const ProfileWrapper = styled(Flex)`
 `;
 
 export const personaMapping: any = {
-  shipper: {
-    text: "I am a shipper",
-    icon: driverIcon,
-    navigationScreen: "CreateProfile",
-    businessKey: "shipper_details"
-  },
   driver: {
     text: "I am a driver",
-    icon: driverIcon,
+    icon: <DriverIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "driver_details"
   },
   lsp: {
-    text: "I am a logistic service provider",
-    icon: driverIcon,
+    text: "I am a logistics provider",
+    icon: <LSPIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "lsp_details"
+  },
+  shipper: {
+    text: "I am a shipper",
+    icon: <ShipperIcon />,
+    navigationScreen: "CreateProfile",
+    businessKey: "shipper_details"
   }
 };
 
