@@ -28,7 +28,7 @@ export const InternationalisationProvider: React.FC = ({ children }) => {
   );
 };
 
-function createI18nContext(lang: Language = "hindi") {
+function createI18nContext(lang: Language = "en") {
   const translations: Record<Language, Record<Keys, string>> = {
     en: EnglishStrings,
     hindi: HindiStrings,
