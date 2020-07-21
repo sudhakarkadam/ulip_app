@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StackScreenProps } from "@react-navigation/stack";
 import CardComp from "../../../components/CardComp";
 import { Flex } from "../../../components/@styled/BaseElements";
 import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
 import { HomeStackParamList } from "./HomeStack";
-
+import { I18nContext } from "../../../components/InternationalisationProvider";
 const personIcon = require("../../../icons/person-icon.png");
 const mapStateToProps = (state: CommonState) => {
   return {
@@ -18,6 +18,7 @@ type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
   ConnectedProps<typeof connector>;
 
 const ShipperCreateProfile = (props: AllProps) => {
+  const { translate } = useContext(I18nContext);
   const { userInfo } = props;
   const personVerified = userInfo?.user_details?.name;
   const comapnyVerified = userInfo?.business_details;
@@ -26,7 +27,7 @@ const ShipperCreateProfile = (props: AllProps) => {
       {!personVerified && (
         <CardComp
           cardHeading="STEP 1"
-          taskHeading="Profile set up"
+          taskHeading={translate("profile.setup")}
           imgSrc={personIcon}
           taskClickCallback={() => props.navigation.navigate("PersonProfile")}
         ></CardComp>
@@ -35,7 +36,7 @@ const ShipperCreateProfile = (props: AllProps) => {
       {!comapnyVerified && (
         <CardComp
           cardHeading="STEP 2"
-          taskHeading="Company set up"
+          taskHeading={translate("company.setup")}
           imgSrc={personIcon}
           taskClickCallback={() => props.navigation.navigate("CompanyProfile")}
         ></CardComp>

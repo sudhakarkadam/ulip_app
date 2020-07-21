@@ -8,6 +8,7 @@ export type Keys =
   | "current.profile"
   | "close"
   | "confirm"
+  | "company.setup"
   | "destination.point"
   | "driver.details"
   | "driver.name"
@@ -30,6 +31,7 @@ export type Keys =
   | "pick.up.date"
   | "pick.up.point"
   | "placeholder"
+  | "profile.setup"
   | "reached"
   | "requests"
   | "required.weight"
@@ -60,6 +62,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "close"
   ? never
   : T extends "confirm"
+  ? never
+  : T extends "company.setup"
   ? never
   : T extends "destination.point"
   ? never
@@ -105,6 +109,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "placeholder"
   ? { value: string }
+  : T extends "profile.setup"
+  ? never
   : T extends "reached"
   ? never
   : T extends "requests"
