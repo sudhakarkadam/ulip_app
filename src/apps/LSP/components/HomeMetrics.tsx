@@ -12,6 +12,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { ReducerState } from "../store";
 import { isLoading } from "../../../utils/actionCreator";
 import BlockScreenLoader from "../../../components/BlockScreenLoader";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 const MetricBox = styled(TouchableOpacity)`
   background-color: white;
@@ -51,39 +52,69 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
       >
         <FlexRow height={100} mb={20}>
           <MetricBox onPress={props.onRequestClick}>
-            <PrimaryText>REQUESTS</PrimaryText>
+            <PrimaryText>
+              <TranslationText id="requests" />
+            </PrimaryText>
             <PrimaryText
               style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
             >
-              {metrics.transport_service_request.CREATED}
+              <TranslationText
+                id="placeholder"
+                interpolations={{
+                  value: metrics.transport_service_request.CREATED + ""
+                }}
+              />
             </PrimaryText>
           </MetricBox>
           <MetricBox>
-            <PrimaryText>TRUCKS</PrimaryText>
+            <PrimaryText>
+              <TranslationText id="trucks" />
+            </PrimaryText>
             <PrimaryText
               style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
             >
-              {Object.keys(metrics.trucks).reduce((total, type) => {
-                return total + metrics.trucks[type];
-              }, 0)}
+              <TranslationText
+                id="placeholder"
+                interpolations={{
+                  value:
+                    Object.keys(metrics.trucks).reduce((total, type) => {
+                      return total + metrics.trucks[type];
+                    }, 0) + ""
+                }}
+              />
             </PrimaryText>
           </MetricBox>
         </FlexRow>
         <FlexRow height={100} mb={20}>
           <MetricBox>
-            <PrimaryText>ON-ROAD</PrimaryText>
+            <PrimaryText>
+              {" "}
+              <TranslationText id="on.road" />
+            </PrimaryText>
             <PrimaryText
               style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
             >
-              {metrics.transport_service_request.IN_PROGRESS}
+              <TranslationText
+                id="placeholder"
+                interpolations={{
+                  value: metrics.transport_service_request.IN_PROGRESS + ""
+                }}
+              />
             </PrimaryText>
           </MetricBox>
           <MetricBox>
-            <PrimaryText>PENDING</PrimaryText>
+            <PrimaryText>
+              <TranslationText id="pending" />
+            </PrimaryText>
             <PrimaryText
               style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
             >
-              {metrics.transport_service_request.PENDING_POD}
+              <TranslationText
+                id="placeholder"
+                interpolations={{
+                  value: metrics.transport_service_request.PENDING_POD + ""
+                }}
+              />
             </PrimaryText>
           </MetricBox>
         </FlexRow>

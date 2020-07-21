@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Flex, Box } from "./@styled/BaseElements";
 import { PrimaryHeaderText, PrimaryText } from "./@styled/Text";
 import colors from "../theme/colors";
 import { personaMapping } from "../components/AccountsPage";
 import AccountsProfileCard from "./AccountsProfileCard";
-
+import { TranslationText, I18nContext } from "./InternationalisationProvider";
 interface OwnProps {
   selectedUser: (user: string) => void;
 }
 
 const ChoosePersona = (props: OwnProps) => {
+  const { translate } = useContext(I18nContext);
   return (
     <Flex flex={1} px={6} bg={colors.bg} justifyContent={"space-between"}>
       <Box my={7} mt={70} justifyContent="center">
-        <PrimaryHeaderText mb={3}>Tell us about yourself...</PrimaryHeaderText>
-        <PrimaryText>This helps us to personalize your experience</PrimaryText>
+        <PrimaryHeaderText mb={3}>
+          <TranslationText id="tell.us.about" />
+          ....
+        </PrimaryHeaderText>
+        <PrimaryText>
+          <TranslationText id="this.helps.to.personalize" />
+        </PrimaryText>
       </Box>
       <Flex flex={1} my={4}>
         {Object.keys(personaMapping).map(persona => {
@@ -23,7 +29,7 @@ const ChoosePersona = (props: OwnProps) => {
               onPress={() => props.selectedUser(persona)}
               isBigCard
               key={persona}
-              text={personaMapping[persona].text}
+              text={translate(personaMapping[persona].text)}
               icon={personaMapping[persona].icon}
             />
           );

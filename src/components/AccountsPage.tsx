@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Image, ScrollView } from "react-native";
 import styled from "styled-components/native";
@@ -12,6 +12,7 @@ import ShipperIcon from "../images/shipper.svg";
 import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
+import { TranslationText, I18nContext } from "./InternationalisationProvider";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
@@ -44,48 +45,59 @@ const ProfileWrapper = styled(Flex)`
   margin-top: 30px;
 `;
 
-export const personaMapping: any = {
+type Actors = "shipper" | "driver" | "lsp";
+type Text = "i.am.shipper" | "i.am.driver" | "i.am.lsp";
+interface Payload {
+  text: Text;
+  icon: any;
+  navigationScreen: string;
+  businessKey: string;
+}
+export const personaMapping: Record<Actors, Payload> = {
+  shipper: {
+    text: "i.am.shipper" as "i.am.shipper",
+    icon: <ShipperIcon />,
+    navigationScreen: "CreateProfile",
+    businessKey: "shipper_details"
+  },
   driver: {
-    text: "I am a driver",
+    text: "i.am.driver" as "i.am.driver",
     icon: <DriverIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "driver_details"
   },
   lsp: {
-    text: "I am a logistics provider",
+    text: "i.am.lsp" as "i.am.lsp",
     icon: <LSPIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "lsp_details"
-  },
-  shipper: {
-    text: "I am a shipper",
-    icon: <ShipperIcon />,
-    navigationScreen: "CreateProfile",
-    businessKey: "shipper_details"
   }
 };
 
 const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
+  const { translate } = useContext(I18nContext);
+  console.log("dfdfsdfsdfdfdsf");
+  console.log(translate("i.am.shipper"));
   return (
     <ScrollView style={{ width: "100%" }}>
       <ProfileWrapper>
-        <Text>Current Profile</Text>
+        <TranslationText id="current.profile" />
         <AccountsProfileCard
           disabled
           isBigCard
           showTick
-          text={personaMapping[persona].text}
+          text={translate(personaMapping[persona].text)}
           icon={personaMapping[persona].icon}
         />
       </ProfileWrapper>
       <ProfileWrapper>
-        <Text>Other Profiles</Text>
+        <TranslationText id="other.profiles" />
         {Object.keys(personaMapping).map(otherPersona =>
           otherPersona !== persona ? (
             <AccountsProfileCard
               key={otherPersona}
-              text={personaMapping[otherPersona].text}
-              subText={"SETUP REQUIRED"}
+              text={translate(personaMapping[otherPersona].text)}
+              subText={translate("setup.required")}
               icon={personaMapping[otherPersona].icon}
               onPress={() => selectedOtherPersona(otherPersona)}
             />

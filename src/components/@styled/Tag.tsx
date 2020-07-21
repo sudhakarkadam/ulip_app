@@ -3,7 +3,7 @@ import { Text } from "./BaseElements";
 import colors from "../../theme/colors";
 
 export interface TagProps {
-  text: string;
+  text: React.ReactNode;
   icon?: any;
   type?: "default" | "primary";
 }

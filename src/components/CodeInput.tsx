@@ -9,6 +9,7 @@ import {
   TextInputKeyPressEventData,
   TextInputProps
 } from "react-native";
+import { TranslationText } from "./InternationalisationProvider";
 
 type CallBackFn = (val: any, i: number, ar: any[]) => boolean;
 function baseFindIndex(
@@ -344,7 +345,9 @@ export default class ConfirmationCodeInput extends Component<
       >
         {// TODO: add animation/overlay for verifying text.
         this.state.isVerifyingInput ? (
-          <TextInput>Verifying</TextInput>
+          <TextInput>
+            <TranslationText id="verifying"></TranslationText>
+          </TextInput>
         ) : (
           codeInputs
         )}

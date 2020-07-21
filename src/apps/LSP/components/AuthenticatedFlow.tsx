@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import CompanyProfile from "../../../components/CompanyProfile";
 import PersonProfile from "../../../components/PersonProfile";
@@ -9,6 +9,7 @@ import Hometabs from "./HomeTabs";
 import { ReducerState } from "../store";
 import { connect } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
   CreateProfile: undefined;
@@ -44,6 +45,7 @@ const LSPPersonProfile = props => (
 const ConnectedLSPPersonProfile = connector(LSPPersonProfile);
 
 const LSPCreateProfile = props => {
+  const { translate } = useContext(I18nContext);
   const { userInfo } = props;
   const personVerified = userInfo?.user_details?.name;
   const comapnyVerified = userInfo?.business_details;
@@ -52,7 +54,7 @@ const LSPCreateProfile = props => {
       {!personVerified && (
         <CardComp
           cardHeading="STEP 1"
-          taskHeading="Profile set up"
+          taskHeading={translate("profile.setup")}
           imgSrc={personIcon}
           taskClickCallback={() => props.navigation.navigate("PersonProfile")}
         ></CardComp>
@@ -61,7 +63,7 @@ const LSPCreateProfile = props => {
       {!comapnyVerified && (
         <CardComp
           cardHeading="STEP 2"
-          taskHeading="Company set up"
+          taskHeading={translate("company.setup")}
           imgSrc={personIcon}
           taskClickCallback={() => props.navigation.navigate("CompanyProfile")}
         ></CardComp>

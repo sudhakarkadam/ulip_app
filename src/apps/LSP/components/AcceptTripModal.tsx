@@ -12,6 +12,7 @@ import { TripAcceptRequest } from "../models/TripAcceptance";
 import { ReduxCustomAction } from "../../../utils/actionCreator";
 import LSPActionTypes from "../actions/LSPActions";
 import { ToastAndroid } from "react-native";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 interface OwnProps {
   onAccept: (
@@ -31,11 +32,13 @@ const AcceptTripModal = (props: OwnProps) => {
 
   return (
     <Flex>
-      <PrimaryText>Driver Details</PrimaryText>
-      <TextWrapper label="Driver's Name">
+      <PrimaryText>
+        <TranslationText id="driver.details" />
+      </PrimaryText>
+      <TextWrapper label={<TranslationText id="driver.name" />}>
         <Input value={driverName} onChangeText={text => setDriverName(text)} />
       </TextWrapper>
-      <TextWrapper label="Mobile Number">
+      <TextWrapper label={<TranslationText id="mobile.number" />}>
         <Input
           value={driverMobile}
           keyboardType={"numeric"}
@@ -43,7 +46,7 @@ const AcceptTripModal = (props: OwnProps) => {
           onChangeText={text => setDriverMobile(text)}
         />
       </TextWrapper>
-      <TextWrapper label="Choose Truck">
+      <TextWrapper label={<TranslationText id="choose.truck" />}>
         <SelectComponent
           data={[{ label: "EICHER 19 FEET", value: "xyz" }]}
           defaultValue={"xyz"}

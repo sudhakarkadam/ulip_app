@@ -17,6 +17,7 @@ import Tag from "./@styled/Tag";
 import { Modal } from "react-native";
 import { getEndpoint } from "../api/Api";
 import moment from "moment";
+import { TranslationText } from "./InternationalisationProvider";
 
 const trailerTruck = require("../images/trailerTruckColored.png");
 const containerTruck = require("../images/containerTruckColored.png");
@@ -76,7 +77,7 @@ const TripDetails = (props: OwnProps) => {
           }}
         >
           <PrimaryText style={{ textTransform: "uppercase" }}>
-            trip id:{" "}
+            <TranslationText id="trip.id"></TranslationText>
           </PrimaryText>
           <PrimaryText style={{ fontWeight: "bold" }}>{id}</PrimaryText>
         </Card>
@@ -84,19 +85,31 @@ const TripDetails = (props: OwnProps) => {
       <Card>{!!places && <TripStamp places={places} />}</Card>
       {lspProvider && (
         <Card style={{ paddingVertical: 7 }}>
-          <PrimaryText>Logistics service provider</PrimaryText>
+          <PrimaryText>
+            <TranslationText id="lsp"></TranslationText>
+          </PrimaryText>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-            {lspProvider}
+            <TranslationText
+              id="placeholder"
+              interpolations={{ value: lspProvider }}
+            ></TranslationText>
           </PrimaryText>
         </Card>
       )}
       <Card style={{ paddingVertical: 7 }}>
-        <PrimaryText>Pickup Date</PrimaryText>
+        <PrimaryText>
+          <TranslationText id="pick.up.date"></TranslationText>
+        </PrimaryText>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-          {moment(
-            pickupDateString || pickupDate,
-            moment.defaultFormatUtc
-          ).format("DD/MM/YYYY")}
+          <TranslationText
+            id="placeholder"
+            interpolations={{
+              value: moment(
+                pickupDateString || pickupDate,
+                moment.defaultFormatUtc
+              ).format("DD/MM/YYYY")
+            }}
+          ></TranslationText>
         </PrimaryText>
       </Card>
       <Card
@@ -108,9 +121,16 @@ const TripDetails = (props: OwnProps) => {
         }}
       >
         <Flex1Column>
-          <PrimaryText>Truck Type</PrimaryText>
+          <PrimaryText>
+            <TranslationText id="truck.type"></TranslationText>
+          </PrimaryText>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-            {truckType}
+            <TranslationText
+              id="placeholder"
+              interpolations={{
+                value: truckType + ""
+              }}
+            ></TranslationText>
           </PrimaryText>
         </Flex1Column>
         <Box>
@@ -137,17 +157,26 @@ const TripDetails = (props: OwnProps) => {
         }}
       >
         <Flex1Column>
-          <PrimaryText>Required Weight</PrimaryText>
+          <PrimaryText>
+            <TranslationText id="required.weight"></TranslationText>
+          </PrimaryText>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-            {`${truckWeight} ${truckUnit}`}
+            <TranslationText
+              id="placeholder"
+              interpolations={{
+                value: `${truckWeight} ${truckUnit}`
+              }}
+            ></TranslationText>
           </PrimaryText>
         </Flex1Column>
         <Box>
-          <Tag text={"RICE/GRAIN/WHEAT"}></Tag>
+          <Tag text={<TranslationText id="rice.grain.wheat" />}></Tag>
         </Box>
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>
-        <PrimaryText>Uploaded Documents</PrimaryText>
+        <PrimaryText>
+          <TranslationText id="uploaded.docs" />
+        </PrimaryText>
         {!documents.length && (
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
             ---

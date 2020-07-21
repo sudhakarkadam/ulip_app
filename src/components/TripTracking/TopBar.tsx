@@ -7,6 +7,7 @@ import {
 } from "../@styled/BaseElements";
 import Tag from "../@styled/Tag";
 import { Flex1, FlexRow } from "../@styled/Flex";
+import { TranslationText } from "../InternationalisationProvider";
 
 // @ts-ignore
 import backIcon from "../../icons/back-no-tail.png";
@@ -44,7 +45,7 @@ const TopBar: React.FC<TopBarProps> = ({
     >
       <Flex1>
         <Text color="black.1" fontSize={0}>
-          TRIP ID:
+          <TranslationText id="trip.id" />
         </Text>
         <Text fontWeight="bold">TRIP-{tripId}</Text>
       </Flex1>

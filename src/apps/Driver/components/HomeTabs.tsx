@@ -12,6 +12,7 @@ import InTransitBlur from "../../../images/intransit_blur.svg";
 import HistorySelected from "../../../images/history_selected.svg";
 import HistoryBlur from "../../../images/history_blur.svg";
 import UlipBottomTab from "../../../components/UlipBottomTab";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +23,7 @@ const HomeStack = () => {
   };
   const headerTitleText = (
     <Text fontSize={2}>
-      Trip ID:{" "}
+      <TranslationText id="trip.id" />
       <Text style={{ fontWeight: "bold", fontSize: 20 }}>{headerTitle}</Text>
     </Text>
   );

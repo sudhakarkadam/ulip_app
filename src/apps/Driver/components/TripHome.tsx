@@ -30,6 +30,7 @@ import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 const options = {
   title: "Select proof",
   storageOptions: {
@@ -96,7 +97,7 @@ const SwipeActions = (progress, dragX) => {
 const getStartText = () => {
   return (
     <Text>
-      Swipe to Start Trip <Text fontSize={5}>&#187;</Text>
+      <TranslationText id="swipe.to.start" /> <Text fontSize={5}>&#187;</Text>
     </Text>
   );
 };
@@ -116,7 +117,12 @@ const Trip: React.FC<Props> = props => {
   // const trips = driverTrips || props.trips.data;
   const trips = props.trips.data;
 
-  if (!trips) return <PrimaryText p={20}>No trips</PrimaryText>;
+  if (!trips)
+    return (
+      <PrimaryText p={20}>
+        <TranslationText id="no.trips"></TranslationText>
+      </PrimaryText>
+    );
 
   const bottomSheetContent = () => {
     const trip = trips?.find(t => t);
@@ -144,10 +150,15 @@ const Trip: React.FC<Props> = props => {
       } else {
         return (
           <>
-            <Text color="#7A869A">It will be enabled on {tripStartDate}</Text>
+            <Text color="#7A869A">
+              <TranslationText
+                id="it.will.be.enabled"
+                interpolations={{ date: tripStartDate }}
+              />
+            </Text>
             <StyledButton
               width="100%"
-              title="Start Trip"
+              title={<TranslationText id="start.trip"></TranslationText>}
               style={{ opacity: 0.6 }}
               disabled={true}
               onPress={() => {}}
@@ -162,15 +173,21 @@ const Trip: React.FC<Props> = props => {
         <>
           <Box textAlign="left" alignItems="flex-start">
             <Text textAlign="left" color="#7A869A">
-              Pickup point
+              <TranslationText id="pick.up.point"></TranslationText>
             </Text>
             <View style={{ flex: 1 }}></View>
           </Box>
           <FlexRow>
-            <StyledButton width="50%" title="GO TO MAP" onPress={() => {}} />
             <StyledButton
+              height="40"
               width="50%"
-              title="CAPTURE POP"
+              title={<TranslationText id="go.to.map"></TranslationText>}
+              onPress={() => {}}
+            />
+            <StyledButton
+              height="40"
+              width="50%"
+              title={<TranslationText id="capture.pop"></TranslationText>}
               onPress={() => {
                 // upload pop
                 capture(async d => {
@@ -193,15 +210,21 @@ const Trip: React.FC<Props> = props => {
         <>
           <Box textAlign="left" alignItems="flex-start">
             <Text textAlign="left" color="#7A869A">
-              Destination point
+              {<TranslationText id="destination.point"></TranslationText>}
             </Text>
             <View style={{ flex: 1 }}></View>
           </Box>
           <FlexRow>
-            <StyledButton width="50%" title="GO TO MAP" onPress={() => {}} />
             <StyledButton
+              height="40"
               width="50%"
-              title="Reached"
+              title={<TranslationText id="go.to.map"></TranslationText>}
+              onPress={() => {}}
+            />
+            <StyledButton
+              height="40"
+              width="50%"
+              title={<TranslationText id="reached"></TranslationText>}
               onPress={async () => {
                 await props.updateTrip({ sr_id: trip.id, status: "REACHED" });
                 getTrips();
@@ -262,11 +285,20 @@ const Trip: React.FC<Props> = props => {
                         Trip Details
                       </Text>
                       <Flex style={{ paddingVertical: 25 }}>
-                        <PrimaryText>Pickup Date</PrimaryText>
+                        <PrimaryText>
+                          <TranslationText id="pick.up.date" />
+                        </PrimaryText>
                         <PrimaryText
                           style={{ fontWeight: "bold", fontSize: 20 }}
                         >
-                          {new Date(trip.pickup_date).toLocaleDateString()}
+                          <TranslationText
+                            id="placeholder"
+                            interpolations={{
+                              value: new Date(
+                                trip.pickup_date
+                              ).toLocaleDateString()
+                            }}
+                          />
                         </PrimaryText>
                       </Flex>
                     </FlexColumn>

@@ -16,6 +16,7 @@ import Map from "./Map";
 
 import { cityLatLongs, currentLocations, hops } from "../../fixtures/MapMocks";
 import Button from "../@styled/StyledButton";
+import { TranslationText } from "../InternationalisationProvider";
 
 const screen = Dimensions.get("window");
 const screenHeight = screen.height;
@@ -131,9 +132,12 @@ const TripTracking: React.FC<Props & TTDataProps> = ({
     return (
       <Flex1 alignItems="center" justifyContent="center">
         <Text mb={3} style={{ flexWrap: "wrap" }}>
-          Trip Tracking is not Avaible at the Momment!
+          <TranslationText id="trip.tracking.not.available" />
         </Text>
-        <Button onPress={onBackPress} title="Go Back" />
+        <Button
+          onPress={onBackPress}
+          title={<TranslationText id="go.back" />}
+        />
       </Flex1>
     );
   }
