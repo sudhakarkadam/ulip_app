@@ -2,9 +2,26 @@ import styled from "styled-components/native";
 import { Text } from "./BaseElements";
 import colors from "../../theme/colors";
 
+// export const PrimaryText = styled(Text)`
+//   color: ${colors.blues[0]};
+// `;
+
 export const PrimaryText = styled(Text)`
-  color: ${colors.blues[0]};
+  color: ${colors.lighter.primary};
+  font-size: 16px;
 `;
+
+export const PrimaryLabel = styled(Text)`
+  color: ${colors.lighter.primary};
+  font-size: 14px;
+`;
+
+export const PrimaryHeaderText = styled(Text)`
+  color: ${colors.primary};
+  font-size: 20px;
+  font-weight: bold;
+`;
+
 export const SecondaryText = styled(Text)`
   color: ${colors.grays[5]};
   text-transform: capitalize;
@@ -14,12 +31,12 @@ export const SmallCapitalText = styled(Text)`
   text-transform: uppercase;
   font-size: 12px;
 `;
-export const PrimaryLabel = styled(PrimaryText)`
-  color: ${colors.primary};
-  font-weight: bold;
-  font-size: 16px;
-  text-transform: capitalize;
-`;
+// export const PrimaryLabel = styled(PrimaryText)`
+//   color: ${colors.primary};
+//   font-weight: bold;
+//   font-size: 16px;
+//   text-transform: capitalize;
+// `;
 
 export const LightText = styled(Text)`
   color: ${colors.grays[1]};

@@ -22,7 +22,6 @@ const CreateTripCard = (props: OwnProps) => {
         <Flex mt={3}>
           <StyledButton
             fontSize={14}
-            height="40"
             title="start"
             onPress={createTripCallback}
           />

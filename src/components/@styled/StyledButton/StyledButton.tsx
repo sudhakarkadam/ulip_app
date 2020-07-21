@@ -31,14 +31,15 @@ const StyledButton = ({
         <Text
           fontWeight={"bold"}
           textAlign={"center"}
-          color={variant !== "default" ? appearance : rest.color || "white"}
+          fontSize={16}
+          color={colors.primary}
           style={{ textTransform: "uppercase" }}
         >
           {title}
         </Text>
         {loading && (
           <StyledActivityIndicator
-            color={variant !== "default" ? appearance : rest.color || "white"}
+            color={colors.primary}
             size={15}
             marginLeft={3}
           />
@@ -50,7 +51,7 @@ const StyledButton = ({
 
 StyledButton.defaultProps = {
   variant: "default",
-  appearance: colors.primary
+  appearance: colors.secondary
 };
 
 export default StyledButton;

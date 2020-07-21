@@ -5,7 +5,10 @@ import styled from "styled-components/native";
 import { Text, Flex, FlexRow } from "./@styled/BaseElements";
 import { UserDataModel } from "../models/CommonModel";
 const personIcon = require("../images/sample-profile.png");
-const driverIcon = require("../icons/driver-icon.png");
+//const driverIcon = require("../images/driver.svg");
+import DriverIcon from "../images/driver.svg";
+import LSPIcon from "../images/lsp.svg";
+import ShipperIcon from "../images/shipper.svg";
 import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
@@ -41,30 +44,31 @@ const ProfileWrapper = styled(Flex)`
   align-items: flex-start;
   margin-top: 30px;
 `;
+
 type Actors = "shipper" | "driver" | "lsp";
 type Text = "i.am.shipper" | "i.am.driver" | "i.am.lsp";
 interface Payload {
   text: Text;
-  icon: typeof driverIcon;
+  icon: any;
   navigationScreen: string;
   businessKey: string;
 }
 export const personaMapping: Record<Actors, Payload> = {
   shipper: {
     text: "i.am.shipper" as "i.am.shipper",
-    icon: driverIcon,
+    icon: <ShipperIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "shipper_details"
   },
   driver: {
     text: "i.am.driver" as "i.am.driver",
-    icon: driverIcon,
+    icon: <DriverIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "driver_details"
   },
   lsp: {
     text: "i.am.lsp" as "i.am.lsp",
-    icon: driverIcon,
+    icon: <LSPIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "lsp_details"
   }

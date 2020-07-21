@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/prefer-interface */
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,6 +10,9 @@ import ShipperCreateProfile from "./ShipperCreateProfile";
 import ShipperTripDetails from "./ShipperTripDetails";
 import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
+import colors from "../../../theme/colors";
+import BackIcon from "../../../images/back.svg";
+import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
 export type HomeStackParamList = {
   CreateProfile: undefined;
@@ -35,7 +39,10 @@ const HomeStack = (props: OwnProps) => {
   return (
     <>
       {!profileCreated ? (
-        <Stack.Navigator initialRouteName="CreateProfile">
+        <Stack.Navigator
+          initialRouteName="CreateProfile"
+          screenOptions={HeaderOptions}
+        >
           <Stack.Screen
             name="CreateProfile"
             component={ShipperCreateProfile}
@@ -53,7 +60,10 @@ const HomeStack = (props: OwnProps) => {
           />
         </Stack.Navigator>
       ) : (
-        <Stack.Navigator initialRouteName="MainTripListing">
+        <Stack.Navigator
+          initialRouteName="MainTripListing"
+          screenOptions={HeaderOptions}
+        >
           <Stack.Screen
             name="MainTripListing"
             component={MainTripListing}

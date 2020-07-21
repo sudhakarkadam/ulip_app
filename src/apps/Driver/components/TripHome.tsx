@@ -157,7 +157,6 @@ const Trip: React.FC<Props> = props => {
               />
             </Text>
             <StyledButton
-              height="40"
               width="100%"
               title={<TranslationText id="start.trip"></TranslationText>}
               style={{ opacity: 0.6 }}
@@ -239,7 +238,6 @@ const Trip: React.FC<Props> = props => {
     if (trip.trip.status === "REACHED") {
       return (
         <StyledButton
-          height="40"
           width="100%"
           title="Capture POD"
           onPress={() => {

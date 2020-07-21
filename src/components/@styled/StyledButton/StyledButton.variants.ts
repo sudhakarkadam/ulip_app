@@ -1,9 +1,9 @@
 import { variant, VariantArgs } from "styled-system";
 const common = {
-  borderRadius: 3,
+  borderRadius: 2,
   border: "0px solid transparent",
   px: 4,
-  py: 3,
+  py: 5,
   m: 1
 };
 

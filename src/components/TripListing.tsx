@@ -13,7 +13,8 @@ import Sort from "../images/filter.svg";
 import {
   SecondaryText,
   PrimaryLabel,
-  SmallCapitalText
+  SmallCapitalText,
+  PrimaryHeaderText
 } from "../components/@styled/Text";
 import moment from "moment";
 import {
@@ -153,7 +154,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
     <>
       {isLoading(props.trips) && <BlockScreenLoader />}
       {isSuccess(props.trips) && (
-        <Flex flex={1} pt={5} bg={colors.grays[3]}>
+        <Flex flex={1} pt={5} bg={colors.white}>
           <Flex bg={colors.white} flex={1}>
             <FlexRow
               justifyContent={"space-between"}
@@ -162,16 +163,19 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
               borderBottomWidth={1}
             >
               <FlexRow flex={1}>
-                <PrimaryLabel>{config.title}</PrimaryLabel>
-                <Text
-                  mx={4}
-                  px={3}
+                <PrimaryHeaderText>{config.title}</PrimaryHeaderText>
+                <Box
+                  alignItems="center"
+                  justifyContent="center"
+                  alignSelf="center"
                   bg={colors.primary}
-                  color={colors.white}
-                  borderRadius={20}
+                  mx={5}
+                  height={26}
+                  width={26}
+                  borderRadius={13}
                 >
-                  {data.length}
-                </Text>
+                  <Text color={colors.white}>{data.length}</Text>
+                </Box>
               </FlexRow>
               <Filter />
               <Box pl={8}>
