@@ -11,7 +11,7 @@ import { ReduxCustomAction } from "../../../utils/actionCreator";
 import LSPActionTypes from "../actions/LSPActions";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import { ToastAndroid } from "react-native";
-import { TranslationText } from "src/components/InternationalisationProvider";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 interface OwnProps {
   onReject: (

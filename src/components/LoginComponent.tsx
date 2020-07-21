@@ -9,7 +9,7 @@ import CodeInput from "../components/CodeInput";
 import { PrimaryText } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-import { TranslationText } from "src/components/InternationalisationProvider";
+import { TranslationText } from "./InternationalisationProvider";
 const { verifyOtp, sendOtp } = ActionCreators;
 
 const mapDispatchToProps = { verifyOtp, sendOtp };

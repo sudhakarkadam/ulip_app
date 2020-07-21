@@ -41,22 +41,29 @@ const ProfileWrapper = styled(Flex)`
   align-items: flex-start;
   margin-top: 30px;
 `;
-
-export const personaMapping = {
+type Actors = "shipper" | "driver" | "lsp";
+type Text = "i.am.shipper" | "i.am.driver" | "i.am.lsp";
+interface Payload {
+  text: Text;
+  icon: typeof driverIcon;
+  navigationScreen: string;
+  businessKey: string;
+}
+export const personaMapping: Record<Actors, Payload> = {
   shipper: {
-    text: "i.am.shipper",
+    text: "i.am.shipper" as "i.am.shipper",
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "shipper_details"
   },
   driver: {
-    text: "i.am.driver",
+    text: "i.am.driver" as "i.am.driver",
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "driver_details"
   },
   lsp: {
-    text: "i.am.lsp",
+    text: "i.am.lsp" as "i.am.lsp",
     icon: driverIcon,
     navigationScreen: "CreateProfile",
     businessKey: "lsp_details"
@@ -65,6 +72,8 @@ export const personaMapping = {
 
 const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
   const { translate } = useContext(I18nContext);
+  console.log("dfdfsdfsdfdfdsf");
+  console.log(translate("i.am.shipper"));
   return (
     <ScrollView style={{ width: "100%" }}>
       <ProfileWrapper>
@@ -73,7 +82,7 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
           disabled
           isBigCard
           showTick
-          text={translate(personaMapping[persona].text as "i.am.shipper")}
+          text={translate(personaMapping[persona].text)}
           icon={personaMapping[persona].icon}
         />
       </ProfileWrapper>
@@ -84,7 +93,7 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
             <AccountsProfileCard
               key={otherPersona}
               text={translate(personaMapping[otherPersona].text)}
-              subText={<TranslationText id="setup.required" />}
+              subText={translate("setup.required")}
               icon={personaMapping[otherPersona].icon}
               onPress={() => selectedOtherPersona(otherPersona)}
             />

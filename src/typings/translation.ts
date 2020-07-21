@@ -38,6 +38,8 @@ export type Keys =
   | "start.trip"
   | "setup.required"
   | "swipe.to.start"
+  | "tell.us.about"
+  | "this.helps.to.personalize"
   | "trucks"
   | "truck.type"
   | "trip.id"
@@ -118,6 +120,10 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "setup.required"
   ? never
   : T extends "swipe.to.start"
+  ? never
+  : T extends "tell.us.about"
+  ? never
+  : T extends "this.helps.to.personalize"
   ? never
   : T extends "trucks"
   ? never

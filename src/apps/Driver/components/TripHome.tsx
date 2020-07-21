@@ -30,7 +30,7 @@ import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
-import { TranslationText } from "src/components/InternationalisationProvider";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 const options = {
   title: "Select proof",
   storageOptions: {

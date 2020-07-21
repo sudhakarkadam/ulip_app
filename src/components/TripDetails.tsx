@@ -17,7 +17,7 @@ import Tag from "./@styled/Tag";
 import { Modal } from "react-native";
 import { getEndpoint } from "../api/Api";
 import moment from "moment";
-import { TranslationText } from "src/components/InternationalisationProvider";
+import { TranslationText } from "./InternationalisationProvider";
 
 const trailerTruck = require("../images/trailerTruckColored.png");
 const containerTruck = require("../images/containerTruckColored.png");

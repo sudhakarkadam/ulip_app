@@ -9,7 +9,7 @@ import GoodsImgDark from "../images/goods-dark.svg";
 import TruckImg from "../images/solid-truck.svg";
 import TruckImgDark from "../images/truck-dark.svg";
 import colors from "../theme/colors";
-import { TranslationText } from "../InternationalisationProvider";
+import { TranslationText } from "./InternationalisationProvider";
 
 interface OwnProps {
   currentStep: number;

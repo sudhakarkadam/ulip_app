@@ -12,7 +12,7 @@ import { TripAcceptRequest } from "../models/TripAcceptance";
 import { ReduxCustomAction } from "../../../utils/actionCreator";
 import LSPActionTypes from "../actions/LSPActions";
 import { ToastAndroid } from "react-native";
-import { TranslationText } from "src/components/InternationalisationProvider";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 interface OwnProps {
   onAccept: (

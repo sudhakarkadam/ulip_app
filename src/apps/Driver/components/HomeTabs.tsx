@@ -12,7 +12,7 @@ import InTransitBlur from "../../../images/intransit_blur.svg";
 import HistorySelected from "../../../images/history_selected.svg";
 import HistoryBlur from "../../../images/history_blur.svg";
 import UlipBottomTab from "../../../components/UlipBottomTab";
-import { TranslationText } from "src/components/InternationalisationProvider";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 const Stack = createStackNavigator();
 
