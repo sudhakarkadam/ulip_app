@@ -5,7 +5,8 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "watch": "node watch.js",
+    "start": "yarn watch & react-native start",
     "test": "jest",
     "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}'",
     "ts": "tsc --jsx react --esModuleInterop --skipLibCheck --noEmit",
@@ -77,6 +78,7 @@
     "jest": "^24.9.0",
     "lint-staged": "^8.1.7",
     "metro-react-native-babel-preset": "^0.56.0",
+    "node-watch": "^0.6.4",
     "prettier": "1.19",
     "react-native-typescript-transformer": "^1.2.12",
     "react-test-renderer": "16.9.0",
