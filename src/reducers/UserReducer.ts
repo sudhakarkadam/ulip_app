@@ -25,6 +25,7 @@ type TAction = ActionObjectTypes<
   | "saveCompanyProfile"
   | "savePersonalProfile"
   | "setUserPersona"
+  | "setUserLanguage"
 >;
 
 export default function UserReducer(
@@ -83,6 +84,16 @@ export default function UserReducer(
     case actionTypes.SET_USER_PERSONA: {
       const userData = Object.assign({}, state.data);
       userData.userPersona = action.payload.req.user;
+      return {
+        ...state,
+        data: userData
+      };
+    }
+
+    case actionTypes.SET_USER_LANGUAGE: {
+      const userData = Object.assign({}, state.data, {
+        language: action.payload.req.language
+      });
       return {
         ...state,
         data: userData

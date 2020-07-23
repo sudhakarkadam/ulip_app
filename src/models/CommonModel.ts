@@ -1,3 +1,4 @@
+import { Languages } from "../components/InternationalisationProvider";
 export interface SelectItemType {
   label: string;
   value: string;
@@ -53,6 +54,7 @@ export interface UserDataModel {
   };
   business_details: null | ShipperBusinessProfileModel;
   userPersona?: string;
+  language?: Languages;
 }
 export interface GetTripsRequest {
   status: string[];

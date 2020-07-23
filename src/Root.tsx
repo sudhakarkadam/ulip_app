@@ -12,6 +12,8 @@ import UserPersona from "./components/UserPersona";
 import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
+import { SelectLanguage } from "./components/SelectLanguage";
+import { View, Text } from "react-native";
 
 interface Props {
   test: string;
@@ -26,6 +28,8 @@ const connector = connect(mapStateToProps, {});
 const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
   const isLoggedIn = props.userInfo ? true : false;
   const userPersona = props.userInfo?.userPersona;
+  const isLanguageSelected = props.userInfo?.language;
+
   useEffect(() => {
     HeaderProvider.setToken("token");
   }, [props.userInfo]);
@@ -42,6 +46,18 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
           )}
           {isLoggedIn && (
             <>
+              {/* {!isLanguageSelected && (
+                <Stack.Screen
+                  name="LanguageSelect"
+                  options={{ headerShown: false }}
+                >
+                  {() => (
+                    <View style={{ width: 200, backgroundColor: "tomato" }}>
+                      <Text>fffdfdfdf</Text>
+                    </View>
+                  )}
+                </Stack.Screen>
+              )} */}
               {!userPersona && (
                 <Stack.Screen
                   name="UserPersona"

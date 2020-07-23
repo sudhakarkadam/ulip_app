@@ -24,7 +24,7 @@ interface OwnProps {
   showTick?: boolean;
   subText?: string | boolean;
   text: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 }
 
@@ -49,7 +49,7 @@ const AccountsProfileCard = ({
 }: OwnProps) => (
   <TouchableOpacity disabled={disabled} onPress={onPress}>
     <ProfileCard isBigCard={isBigCard} alignItems={"center"}>
-      <Flex width={60}>{icon}</Flex>
+      {!!icon && <Flex width={60}>{icon}</Flex>}
       <Flex flex={1} ml={2} justifyContent={"center"}>
         <PrimaryHeaderText
           fontSize={isBigCard ? 18 : 16}
