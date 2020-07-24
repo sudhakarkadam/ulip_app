@@ -1,5 +1,6 @@
 {
   "are.you.sure": "நீ சொல்வது உறுதியா?",
+  "choose.language": "உங்கள் மொழியைத் தேர்வுசெய்க",
   "capture.pop": "பிடிப்பு POP",
   "choose.reason": "காரணத்தைத் தேர்வுசெய்க",
   "choose.truck": "டிரக்கைத் தேர்வுசெய்க",
@@ -46,5 +47,6 @@
   "trip.details": "பயண விவரங்கள்",
   "trip.tracking.not.available": "பயண கண்காணிப்பு தற்போது கிடைக்கவில்லை",
   "uploaded.docs": "பதிவேற்றிய ஆவணங்கள்",
-  "verifying": "சரிபார்க்கிறது"
+  "verifying": "சரிபார்க்கிறது",
+  "continue": "தொடரவும்"
 }

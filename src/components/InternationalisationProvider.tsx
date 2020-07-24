@@ -5,7 +5,12 @@ import * as EnglishStrings from "../../i18n/en.json";
 import * as HindiStrings from "../../i18n/hindi.json";
 import * as TamilStrings from "../../i18n/tamil.json";
 
-type Language = "en" | "hindi" | "tamil";
+export type Languages = "en" | "hindi" | "tamil";
+export const ALL_LANGUAGES: { key: Languages; value: string }[] = [
+  { key: "en", value: "English" },
+  { key: "hindi", value: "Hindi" },
+  { key: "tamil", value: "Tamil" }
+];
 type InternationalisationProvider = ReturnType<typeof createI18nContext>;
 
 export const I18nContext = React.createContext<InternationalisationProvider>(
@@ -20,7 +25,7 @@ export const InternationalisationProvider: React.FC = ({ children }) => {
     <I18nContext.Provider
       value={{
         ...lang,
-        changeLanguage: (lang: Language) => setLang(createI18nContext(lang))
+        changeLanguage: (lang: Languages) => setLang(createI18nContext(lang))
       }}
     >
       {children}
@@ -28,8 +33,8 @@ export const InternationalisationProvider: React.FC = ({ children }) => {
   );
 };
 
-function createI18nContext(lang: Language = "en") {
-  const translations: Record<Language, Record<Keys, string>> = {
+function createI18nContext(lang: Languages = "en") {
+  const translations: Record<Languages, Record<Keys, string>> = {
     en: EnglishStrings,
     hindi: HindiStrings,
     tamil: TamilStrings
@@ -73,7 +78,7 @@ function createI18nContext(lang: Language = "en") {
     lang,
     translate,
     __t: __t,
-    changeLanguage: (_: Language) => {}
+    changeLanguage: (_: Languages) => {}
   };
 }
 interface Props<T extends Keys> {

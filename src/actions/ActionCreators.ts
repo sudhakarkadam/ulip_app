@@ -6,6 +6,7 @@ import {
   GetActionTypes,
   createAction
 } from "../utils/actionCreator";
+import { Languages } from "src/components/InternationalisationProvider";
 
 const ActionCreators = {
   createTrip: createAsyncAction(
@@ -78,7 +79,10 @@ const ActionCreators = {
     api.getMetrics
   ),
   setUserPersona: (args: { user: string }) =>
-    createAction(actions.SET_USER_PERSONA, args, {})
+    createAction(actions.SET_USER_PERSONA, args, {}),
+
+  setUserLanguage: (args: { language: Languages }) =>
+    createAction(actions.SET_USER_LANGUAGE, args, {})
 };
 
 export default ActionCreators;

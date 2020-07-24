@@ -5,21 +5,21 @@ export type Keys =
   | "capture.pop"
   | "choose.reason"
   | "choose.truck"
-  | "current.profile"
   | "close"
-  | "confirm"
   | "company.setup"
+  | "confirm"
+  | "current.profile"
   | "destination.point"
+  | "does.not.exist"
   | "driver.details"
   | "driver.name"
-  | "does.not.exist"
   | "go.back"
   | "go.to.map"
-  | "india.prefix"
-  | "it.will.be.enabled"
-  | "i.am.shipper"
   | "i.am.driver"
   | "i.am.lsp"
+  | "i.am.shipper"
+  | "india.prefix"
+  | "it.will.be.enabled"
   | "lsp"
   | "mobile.number"
   | "no.trips"
@@ -33,22 +33,24 @@ export type Keys =
   | "placeholder"
   | "profile.setup"
   | "reached"
+  | "reject"
   | "requests"
   | "required.weight"
-  | "reject"
   | "rice.grain.wheat"
-  | "start.trip"
   | "setup.required"
+  | "start.trip"
   | "swipe.to.start"
   | "tell.us.about"
   | "this.helps.to.personalize"
-  | "trucks"
-  | "truck.type"
-  | "trip.id"
   | "trip.details"
+  | "trip.id"
   | "trip.tracking.not.available"
+  | "truck.type"
+  | "trucks"
   | "uploaded.docs"
-  | "verifying";
+  | "verifying"
+  | "choose.language"
+  | "continue";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -57,36 +59,36 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "choose.truck"
   ? never
-  : T extends "current.profile"
-  ? never
   : T extends "close"
-  ? never
-  : T extends "confirm"
   ? never
   : T extends "company.setup"
   ? never
+  : T extends "confirm"
+  ? never
+  : T extends "current.profile"
+  ? never
   : T extends "destination.point"
+  ? never
+  : T extends "does.not.exist"
   ? never
   : T extends "driver.details"
   ? never
   : T extends "driver.name"
   ? never
-  : T extends "does.not.exist"
-  ? never
   : T extends "go.back"
   ? never
   : T extends "go.to.map"
-  ? never
-  : T extends "india.prefix"
-  ? never
-  : T extends "it.will.be.enabled"
-  ? { date: string }
-  : T extends "i.am.shipper"
   ? never
   : T extends "i.am.driver"
   ? never
   : T extends "i.am.lsp"
   ? never
+  : T extends "i.am.shipper"
+  ? never
+  : T extends "india.prefix"
+  ? never
+  : T extends "it.will.be.enabled"
+  ? { date: string }
   : T extends "lsp"
   ? never
   : T extends "mobile.number"
@@ -113,17 +115,17 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "reached"
   ? never
+  : T extends "reject"
+  ? never
   : T extends "requests"
   ? never
   : T extends "required.weight"
   ? never
-  : T extends "reject"
-  ? never
   : T extends "rice.grain.wheat"
   ? never
-  : T extends "start.trip"
-  ? never
   : T extends "setup.required"
+  ? never
+  : T extends "start.trip"
   ? never
   : T extends "swipe.to.start"
   ? never
@@ -131,18 +133,22 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "this.helps.to.personalize"
   ? never
-  : T extends "trucks"
-  ? never
-  : T extends "truck.type"
+  : T extends "trip.details"
   ? never
   : T extends "trip.id"
   ? never
-  : T extends "trip.details"
-  ? never
   : T extends "trip.tracking.not.available"
+  ? never
+  : T extends "truck.type"
+  ? never
+  : T extends "trucks"
   ? never
   : T extends "uploaded.docs"
   ? never
   : T extends "verifying"
+  ? never
+  : T extends "choose.language"
+  ? never
+  : T extends "continue"
   ? never
   : never;

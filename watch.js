@@ -1,4 +1,5 @@
 var watch = require("node-watch");
+const fs = require("fs");
 const execFile = require("child_process").execFile;
 const spawn = require("child_process").spawn;
 const path = require("path");

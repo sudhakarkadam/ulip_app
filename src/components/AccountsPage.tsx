@@ -72,8 +72,7 @@ export const personaMapping: Record<Actors, Payload> = {
 
 const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
   const { translate } = useContext(I18nContext);
-  console.log("dfdfsdfsdfdfdsf");
-  console.log(translate("i.am.shipper"));
+
   return (
     <>
       <ProfileWrapper>
