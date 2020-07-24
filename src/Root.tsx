@@ -12,7 +12,7 @@ import UserPersona from "./components/UserPersona";
 import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
-import { SelectLanguage } from "./components/SelectLanguage";
+import SelectLanguage from "./components/SelectLanguage";
 
 interface Props {
   test: string;
