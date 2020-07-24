@@ -14,7 +14,8 @@ import {
   SecondaryText,
   PrimaryLabel,
   SmallCapitalText,
-  PrimaryHeaderText
+  PrimaryHeaderText,
+  PrimaryText
 } from "../components/@styled/Text";
 import moment from "moment";
 import {
@@ -168,13 +169,16 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                   alignItems="center"
                   justifyContent="center"
                   alignSelf="center"
-                  bg={colors.primary}
+                  bg="blues.5"
                   mx={5}
-                  height={26}
-                  width={26}
-                  borderRadius={13}
+                  mt={2}
+                  px={3}
+                  py={1}
+                  borderRadius={10}
                 >
-                  <Text color={colors.white}>{data.length}</Text>
+                  <Text color={colors.white} fontSize={10}>
+                    {data.length}
+                  </Text>
                 </Box>
               </FlexRow>
               <Filter />
@@ -246,9 +250,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                           )}
                         </FlexRow>
                         <FlexRow>
-                          <PrimaryLabel>
-                            {item.pickUp_location.city}
-                          </PrimaryLabel>
+                          <PrimaryText>{item.pickUp_location.city}</PrimaryText>
                           <Text
                             color={colors.grays[1]}
                             px={2}
@@ -257,9 +259,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                           >
                             →
                           </Text>
-                          <PrimaryLabel>
+                          <PrimaryText>
                             {item.delivery_location.city}
-                          </PrimaryLabel>
+                          </PrimaryText>
                         </FlexRow>
                         <FlexRow>
                           <SecondaryText fontSize={1} color={colors.grays[1]}>

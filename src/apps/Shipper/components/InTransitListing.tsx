@@ -5,7 +5,9 @@ import colors from "../../../theme/colors";
 import { TabView, TabBar } from "react-native-tab-view";
 import { AllApps } from "../../../models/CommonModel";
 import { TripList, ListingModes } from "../../../components/TripListing";
+import { renderTabBarLable } from "../../../components/NavHelper";
 import { Dimensions } from "react-native";
+import { PageContent, Page } from "../../../components/@styled/Page";
 
 const Trips: React.FunctionComponent<StackScreenProps<
   {
@@ -22,22 +24,30 @@ const Trips: React.FunctionComponent<StackScreenProps<
   ]);
 
   const OnRoad = () => (
-    <TripList
-      listingMode={ListingModes.ON_ROAD}
-      from={AllApps.SHIPPER}
-      onRowClick={id => {
-        props.navigation.navigate("TripTracking", { tripId: +id });
-      }}
-    />
+    <Page>
+      <PageContent>
+        <TripList
+          listingMode={ListingModes.ON_ROAD}
+          from={AllApps.SHIPPER}
+          onRowClick={id => {
+            props.navigation.navigate("TripTracking", { tripId: +id });
+          }}
+        />
+      </PageContent>
+    </Page>
   );
   const Active = () => (
-    <TripList
-      listingMode={ListingModes.ACTIVE}
-      from={AllApps.SHIPPER}
-      onRowClick={id => {
-        props.navigation.navigate("TripTracking", { tripId: +id });
-      }}
-    />
+    <Page>
+      <PageContent>
+        <TripList
+          listingMode={ListingModes.ACTIVE}
+          from={AllApps.SHIPPER}
+          onRowClick={id => {
+            props.navigation.navigate("TripTracking", { tripId: +id });
+          }}
+        />
+      </PageContent>
+    </Page>
   );
 
   return (
@@ -47,26 +57,19 @@ const Trips: React.FunctionComponent<StackScreenProps<
           return (
             <TabBar
               {...tabBarProps}
+              renderLabel={renderTabBarLable}
+              activeColor={colors.primary}
+              inactiveColor={colors.lighter.primary}
               navigationState={{ index, routes }}
               style={{
-                backgroundColor: colors.white,
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 0,
-                  height: 4
-                },
-                shadowOpacity: 1,
-                elevation: 4
+                backgroundColor: colors.lightest.primary,
+                elevation: 0
               }}
               indicatorStyle={{
-                backgroundColor: colors.primary,
+                backgroundColor: colors.lightest.primary,
                 height: 2
               }}
               labelStyle={{
-                color:
-                  tabBarProps.navigationState.index === index
-                    ? colors.primary
-                    : colors.black[0],
                 fontSize: 16
               }}
             />

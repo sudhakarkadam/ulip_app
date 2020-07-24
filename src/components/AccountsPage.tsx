@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Image, ScrollView } from "react-native";
 import styled from "styled-components/native";
-import { Text, Flex, FlexRow } from "./@styled/BaseElements";
+import { Text, Flex, FlexRow, Box } from "./@styled/BaseElements";
 import { UserDataModel } from "../models/CommonModel";
 const personIcon = require("../images/sample-profile.png");
 //const driverIcon = require("../images/driver.svg");
@@ -13,6 +13,7 @@ import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
 import { TranslationText, I18nContext } from "./InternationalisationProvider";
+import { PageContent, Page } from "./@styled/Page";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
@@ -33,11 +34,6 @@ interface ProfileProps {
   persona: "driver" | "lsp" | "shipper";
   selectedOtherPersona: (user: string) => void;
 }
-
-const Wrapper = styled(Flex)`
-  align-items: center;
-  margin: 40px;
-`;
 
 const ProfileWrapper = styled(Flex)`
   width: 100%;
@@ -78,7 +74,7 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
   const { translate } = useContext(I18nContext);
 
   return (
-    <ScrollView style={{ width: "100%" }}>
+    <>
       <ProfileWrapper>
         <TranslationText id="current.profile" />
         <AccountsProfileCard
@@ -103,7 +99,7 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
           ) : null
         )}
       </ProfileWrapper>
-    </ScrollView>
+    </>
   );
 };
 
@@ -112,20 +108,26 @@ const AccountsPage: React.FC<OwnProps &
   const personName = props.userInfo?.user_details?.name;
   const contactNumber = props.userInfo?.user_details?.phone_number;
   return contactNumber && personName ? (
-    <Wrapper>
-      <FlexRow mb={20}>
-        <Image
-          style={{ width: 100, height: 100, borderRadius: 50 }}
-          source={personIcon}
-        />
-      </FlexRow>
-      <Text fontSize={16}>{personName}</Text>
-      <Text>{`+91-${contactNumber}`}</Text>
-      <ProfileSection
-        persona={props.persona}
-        selectedOtherPersona={user => props.setUserPersona({ user })}
-      />
-    </Wrapper>
+    <Page>
+      <PageContent>
+        <ScrollView>
+          <Box alignItems="center" m="10">
+            <FlexRow mb={20}>
+              <Image
+                style={{ width: 100, height: 100, borderRadius: 50 }}
+                source={personIcon}
+              />
+            </FlexRow>
+            <Text fontSize={16}>{personName}</Text>
+            <Text>{`+91-${contactNumber}`}</Text>
+            <ProfileSection
+              persona={props.persona}
+              selectedOtherPersona={user => props.setUserPersona({ user })}
+            />
+          </Box>
+        </ScrollView>
+      </PageContent>
+    </Page>
   ) : null;
 };
 

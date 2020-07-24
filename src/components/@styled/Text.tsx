@@ -7,7 +7,7 @@ import colors from "../../theme/colors";
 // `;
 
 export const PrimaryText = styled(Text)`
-  color: ${colors.lighter.primary};
+  color: ${colors.primary};
   font-size: 16px;
 `;
 
@@ -20,6 +20,11 @@ export const PrimaryHeaderText = styled(Text)`
   color: ${colors.primary};
   font-size: 20px;
   font-weight: bold;
+`;
+
+export const PrimaryLightText = styled(Text)`
+  color: ${colors.lighter.primary};
+  font-size: 16px;
 `;
 
 export const SecondaryText = styled(Text)`

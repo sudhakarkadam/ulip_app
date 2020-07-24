@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from "./@styled/BaseElements";
 import colors from "../theme/colors";
-import { PrimaryText } from "./@styled/Text";
+import { PrimaryLightText, PrimaryText, PrimaryLabel } from "./@styled/Text";
 import { TripStamp, Place } from "./TripStamp";
 import { TruckType } from "../models/CommonModel";
 import { Flex1Column, Flex1 } from "./@styled/Flex";
@@ -76,18 +76,18 @@ const TripDetails = (props: OwnProps) => {
             flexDirection: "row"
           }}
         >
-          <PrimaryText style={{ textTransform: "uppercase" }}>
+          <PrimaryLightText style={{ textTransform: "uppercase" }}>
             <TranslationText id="trip.id"></TranslationText>
-          </PrimaryText>
+          </PrimaryLightText>
           <PrimaryText style={{ fontWeight: "bold" }}>{id}</PrimaryText>
         </Card>
       )}
       <Card>{!!places && <TripStamp places={places} />}</Card>
       {lspProvider && (
         <Card style={{ paddingVertical: 7 }}>
-          <PrimaryText>
+          <PrimaryLabel>
             <TranslationText id="lsp"></TranslationText>
-          </PrimaryText>
+          </PrimaryLabel>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
             <TranslationText
               id="placeholder"
@@ -97,9 +97,9 @@ const TripDetails = (props: OwnProps) => {
         </Card>
       )}
       <Card style={{ paddingVertical: 7 }}>
-        <PrimaryText>
+        <PrimaryLabel>
           <TranslationText id="pick.up.date"></TranslationText>
-        </PrimaryText>
+        </PrimaryLabel>
         <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
           <TranslationText
             id="placeholder"
@@ -121,9 +121,9 @@ const TripDetails = (props: OwnProps) => {
         }}
       >
         <Flex1Column>
-          <PrimaryText>
+          <PrimaryLabel>
             <TranslationText id="truck.type"></TranslationText>
-          </PrimaryText>
+          </PrimaryLabel>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
             <TranslationText
               id="placeholder"
@@ -157,9 +157,9 @@ const TripDetails = (props: OwnProps) => {
         }}
       >
         <Flex1Column>
-          <PrimaryText>
+          <PrimaryLabel>
             <TranslationText id="required.weight"></TranslationText>
-          </PrimaryText>
+          </PrimaryLabel>
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
             <TranslationText
               id="placeholder"
@@ -174,9 +174,9 @@ const TripDetails = (props: OwnProps) => {
         </Box>
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>
-        <PrimaryText>
+        <PrimaryLabel>
           <TranslationText id="uploaded.docs" />
-        </PrimaryText>
+        </PrimaryLabel>
         {!documents.length && (
           <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
             ---

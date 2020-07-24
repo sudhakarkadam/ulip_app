@@ -22,20 +22,11 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
 
   return (
     <Flex flex={1}>
-      <Box position="absolute" mx={6} mt={80}>
+      <Box mx={6} mt={80}>
         <Logo width={300} height={66} />
       </Box>
 
-      {phoneConfirmed && !otpConfirmed && (
-        <TouchableOpacity
-          my={30}
-          mx={6}
-          onPress={() => setPhoneConfirmed(false)}
-        >
-          <BackBtn width={32} height={32} />
-        </TouchableOpacity>
-      )}
-      <Flex mx={6} flex={1} justifyContent="center">
+      <Flex mx={6} flex={1} mt={10}>
         {!phoneConfirmed && (
           <Flex>
             <PrimaryText style={{ textTransform: "uppercase" }}>
@@ -43,8 +34,6 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
             </PrimaryText>
             <Flex
               style={{
-                height: 50,
-                width: 300,
                 borderRadius: 5,
                 paddingLeft: 12,
                 paddingRight: 15,

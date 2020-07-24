@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import CompanyProfile from "../../../components/CompanyProfile";
 import PersonProfile from "../../../components/PersonProfile";
-import { Flex } from "../../../components/@styled/BaseElements";
+import { Flex, HeaderOptions } from "../../../components/@styled/BaseElements";
 import CardComp from "../../../components/CardComp";
 const personIcon = require("../../../icons/person-icon.png");
 import Hometabs from "./HomeTabs";
@@ -10,6 +10,7 @@ import { ReducerState } from "../store";
 import { connect } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 import { I18nContext } from "../../../components/InternationalisationProvider";
+import { PageContent, Page } from "../../../components/@styled/Page";
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
   CreateProfile: undefined;
@@ -50,25 +51,33 @@ const LSPCreateProfile = props => {
   const personVerified = userInfo?.user_details?.name;
   const comapnyVerified = userInfo?.business_details;
   return (
-    <Flex>
-      {!personVerified && (
-        <CardComp
-          cardHeading="STEP 1"
-          taskHeading={translate("profile.setup")}
-          imgSrc={personIcon}
-          taskClickCallback={() => props.navigation.navigate("PersonProfile")}
-        ></CardComp>
-      )}
-      <Flex mt={3} />
-      {!comapnyVerified && (
-        <CardComp
-          cardHeading="STEP 2"
-          taskHeading={translate("company.setup")}
-          imgSrc={personIcon}
-          taskClickCallback={() => props.navigation.navigate("CompanyProfile")}
-        ></CardComp>
-      )}
-    </Flex>
+    <Page>
+      <PageContent>
+        <Flex>
+          {!personVerified && (
+            <CardComp
+              cardHeading="STEP 1"
+              taskHeading={translate("profile.setup")}
+              imgSrc={personIcon}
+              taskClickCallback={() =>
+                props.navigation.navigate("PersonProfile")
+              }
+            ></CardComp>
+          )}
+          <Flex mt={3} />
+          {!comapnyVerified && (
+            <CardComp
+              cardHeading="STEP 2"
+              taskHeading={translate("company.setup")}
+              imgSrc={personIcon}
+              taskClickCallback={() =>
+                props.navigation.navigate("CompanyProfile")
+              }
+            ></CardComp>
+          )}
+        </Flex>
+      </PageContent>
+    </Page>
   );
 };
 const ConnectedLSPCreateProfile = connector(LSPCreateProfile);
@@ -117,7 +126,10 @@ const AuthenticatedFlow = props => {
           <Stack.Screen name="HomeMetrics" component={Hometabs} />
         </Stack.Navigator>
       ) : (
-        <Stack.Navigator initialRouteName={"CreateProfile"}>
+        <Stack.Navigator
+          initialRouteName={"CreateProfile"}
+          screenOptions={HeaderOptions}
+        >
           <Stack.Screen
             name="CreateProfile"
             component={ConnectedLSPCreateProfile}
