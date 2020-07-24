@@ -13,7 +13,6 @@ import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
 import { SelectLanguage } from "./components/SelectLanguage";
-import { View, Text } from "react-native";
 
 interface Props {
   test: string;
@@ -46,18 +45,13 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
           )}
           {isLoggedIn && (
             <>
-              {/* {!isLanguageSelected && (
+              {!isLanguageSelected && (
                 <Stack.Screen
                   name="LanguageSelect"
                   options={{ headerShown: false }}
-                >
-                  {() => (
-                    <View style={{ width: 200, backgroundColor: "tomato" }}>
-                      <Text>fffdfdfdf</Text>
-                    </View>
-                  )}
-                </Stack.Screen>
-              )} */}
+                  component={SelectLanguage}
+                ></Stack.Screen>
+              )}
               {!userPersona && (
                 <Stack.Screen
                   name="UserPersona"
