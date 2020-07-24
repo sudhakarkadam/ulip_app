@@ -14,8 +14,7 @@ import {
   FlexColumn,
   Text,
   Flex,
-  Box,
-  TouchableOpacity
+  Box
 } from "../../../components/@styled/BaseElements";
 import { PrimaryText } from "../../../components/@styled/Text";
 import StyledButton from "../../../components/@styled/StyledButton";
@@ -25,12 +24,12 @@ import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
 import { DriverAppState } from "../reducers";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { driverTrips } from "../../../fixtures/DriverTrips";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
 import { TranslationText } from "../../../components/InternationalisationProvider";
+import { PageContent, Page } from "../../../components/@styled/Page";
 const options = {
   title: "Select proof",
   storageOptions: {
@@ -119,9 +118,13 @@ const Trip: React.FC<Props> = props => {
 
   if (!trips)
     return (
-      <PrimaryText p={20}>
-        <TranslationText id="no.trips"></TranslationText>
-      </PrimaryText>
+      <Page>
+        <PageContent>
+          <PrimaryText p={20}>
+            <TranslationText id="no.trips"></TranslationText>
+          </PrimaryText>
+        </PageContent>
+      </Page>
     );
 
   const bottomSheetContent = () => {
@@ -257,129 +260,133 @@ const Trip: React.FC<Props> = props => {
   };
 
   return (
-    <>
-      <ScrollView>
-        <FlatList
-          onRefresh={() => props.getTrips(props.phone)}
-          refreshing={isLoading(props.trips)}
-          data={[trips[0]] || []}
-          renderItem={t => {
-            const trip = t.item;
-            const isCreated = t.item.trip.status === "CREATED";
-            const isStarted = t.item.trip.status === "TRIP_STARTED";
-            const isInTransit = t.item.trip.status === "IN_TRANSIT";
-            const isReached =
-              t.item.trip.status === "REACHED" ||
-              t.item.trip.status === "COMPLETED";
+    <Page>
+      <PageContent>
+        <ScrollView>
+          <FlatList
+            onRefresh={() => props.getTrips(props.phone)}
+            refreshing={isLoading(props.trips)}
+            data={[trips[0]] || []}
+            renderItem={t => {
+              const trip = t.item;
+              const isCreated = t.item.trip.status === "CREATED";
+              const isStarted = t.item.trip.status === "TRIP_STARTED";
+              const isInTransit = t.item.trip.status === "IN_TRANSIT";
+              const isReached =
+                t.item.trip.status === "REACHED" ||
+                t.item.trip.status === "COMPLETED";
 
-            return (
-              <Flex mt={4}>
-                <Card>
-                  <FlexRow p={7} backgroundColor="white">
-                    <FlexColumn flex={1.8}>
-                      <Text
-                        color={`${colors.blues[5]}`}
-                        fontSize={20}
-                        fontWeight={"bold"}
-                      >
-                        Trip Details
-                      </Text>
-                      <Flex style={{ paddingVertical: 25 }}>
-                        <PrimaryText>
-                          <TranslationText id="pick.up.date" />
-                        </PrimaryText>
-                        <PrimaryText
-                          style={{ fontWeight: "bold", fontSize: 20 }}
+              return (
+                <Flex mt={4}>
+                  <Card>
+                    <FlexRow p={7} backgroundColor="white">
+                      <FlexColumn flex={1.8}>
+                        <Text
+                          color={`${colors.blues[5]}`}
+                          fontSize={20}
+                          fontWeight={"bold"}
                         >
-                          <TranslationText
-                            id="placeholder"
-                            interpolations={{
-                              value: new Date(
-                                trip.pickup_date
-                              ).toLocaleDateString()
-                            }}
-                          />
-                        </PrimaryText>
-                      </Flex>
-                    </FlexColumn>
-                    <FlexColumn>
-                      <StyledButton
-                        variant="outline"
-                        height="40px"
-                        width="122px"
-                        title={"Details"}
-                        onPress={() => props.navigation.navigate("TripDetails")}
-                        style={{ marginBottom: 10 }}
-                      />
-                      <StyledButton
-                        variant="outline"
-                        height="40px"
-                        width="122px"
-                        title={"Documents"}
-                        onPress={() => {}}
-                      />
-                    </FlexColumn>
-                  </FlexRow>
-                </Card>
-                <Box pl={7} pr={7} backgroundColor="white">
-                  <TripStamp
-                    track={isStarted || isInTransit || isReached}
-                    places={[
-                      ...(isStarted || isInTransit || isReached
-                        ? [
-                            {
-                              name: "Your location",
-                              relativeDistance: 23,
-                              // @ts-ignore
-                              crossed: true
-                            }
-                          ]
-                        : []),
-                      ...(isCreated
-                        ? [
-                            {
-                              ...convert(trip.pickUp_location)
-                            }
-                          ]
-                        : []),
-                      ...(isStarted
-                        ? [
-                            {
-                              ...convert(trip.pickUp_location),
-                              tag: "Pickup Point"
-                            }
-                          ]
-                        : []),
-                      ...(isInTransit || isReached
-                        ? [
-                            {
-                              ...convert(trip.pickUp_location),
-                              // @ts-ignore
-                              crossed: true
-                            }
-                          ]
-                        : []),
+                          Trip Details
+                        </Text>
+                        <Flex style={{ paddingVertical: 25 }}>
+                          <PrimaryText>
+                            <TranslationText id="pick.up.date" />
+                          </PrimaryText>
+                          <PrimaryText
+                            style={{ fontWeight: "bold", fontSize: 20 }}
+                          >
+                            <TranslationText
+                              id="placeholder"
+                              interpolations={{
+                                value: new Date(
+                                  trip.pickup_date
+                                ).toLocaleDateString()
+                              }}
+                            />
+                          </PrimaryText>
+                        </Flex>
+                      </FlexColumn>
+                      <FlexColumn>
+                        <StyledButton
+                          variant="outline"
+                          height="40px"
+                          width="122px"
+                          title={"Details"}
+                          onPress={() =>
+                            props.navigation.navigate("TripDetails")
+                          }
+                          style={{ marginBottom: 10 }}
+                        />
+                        <StyledButton
+                          variant="outline"
+                          height="40px"
+                          width="122px"
+                          title={"Documents"}
+                          onPress={() => {}}
+                        />
+                      </FlexColumn>
+                    </FlexRow>
+                  </Card>
+                  <Box pl={7} pr={7} backgroundColor="white">
+                    <TripStamp
+                      track={isStarted || isInTransit || isReached}
+                      places={[
+                        ...(isStarted || isInTransit || isReached
+                          ? [
+                              {
+                                name: "Your location",
+                                relativeDistance: 23,
+                                // @ts-ignore
+                                crossed: true
+                              }
+                            ]
+                          : []),
+                        ...(isCreated
+                          ? [
+                              {
+                                ...convert(trip.pickUp_location)
+                              }
+                            ]
+                          : []),
+                        ...(isStarted
+                          ? [
+                              {
+                                ...convert(trip.pickUp_location),
+                                tag: "Pickup Point"
+                              }
+                            ]
+                          : []),
+                        ...(isInTransit || isReached
+                          ? [
+                              {
+                                ...convert(trip.pickUp_location),
+                                // @ts-ignore
+                                crossed: true
+                              }
+                            ]
+                          : []),
 
-                      ...(isReached
-                        ? [
-                            {
-                              ...convert(trip.delivery_location),
-                              // @ts-ignore
-                              crossed: true,
-                              tag: "Destination Point"
-                            }
-                          ]
-                        : [convert(trip.delivery_location)])
-                    ]}
-                  />
-                </Box>
-              </Flex>
-            );
-          }}
-        />
-      </ScrollView>
-      <StickyBottom>{bottomSheetContent()}</StickyBottom>
-    </>
+                        ...(isReached
+                          ? [
+                              {
+                                ...convert(trip.delivery_location),
+                                // @ts-ignore
+                                crossed: true,
+                                tag: "Destination Point"
+                              }
+                            ]
+                          : [convert(trip.delivery_location)])
+                      ]}
+                    />
+                  </Box>
+                </Flex>
+              );
+            }}
+          />
+        </ScrollView>
+        <StickyBottom>{bottomSheetContent()}</StickyBottom>
+      </PageContent>
+    </Page>
   );
 };
 

@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AccountsPage from "../../../components/AccountsPage";
 import { TripHome } from "./TripHome";
 import TripDetails from "./TripDetails";
-import { Text } from "../../../components/@styled/BaseElements";
+import { Text, HeaderOptions } from "../../../components/@styled/BaseElements";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
@@ -28,7 +28,10 @@ const HomeStack = () => {
     </Text>
   );
   return (
-    <Stack.Navigator initialRouteName={"TripHome"}>
+    <Stack.Navigator
+      initialRouteName={"TripHome"}
+      screenOptions={HeaderOptions}
+    >
       <Stack.Screen name="TripHome" options={{ title: headerTitleText }}>
         {navigationProps => (
           <TripHome
@@ -44,7 +47,10 @@ const HomeStack = () => {
 
 const AccountsStack = () => {
   return (
-    <Stack.Navigator initialRouteName={"AccountsPage"}>
+    <Stack.Navigator
+      initialRouteName={"AccountsPage"}
+      screenOptions={HeaderOptions}
+    >
       <Stack.Screen name="AccountsPage" options={{ title: "Home" }}>
         {() => <AccountsPage persona={"driver"} />}
       </Stack.Screen>

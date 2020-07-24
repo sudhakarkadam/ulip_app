@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Flex, Box } from "./@styled/BaseElements";
-import { PrimaryHeaderText, PrimaryText } from "./@styled/Text";
+import { PrimaryHeaderText, PrimaryLightText } from "./@styled/Text";
 import colors from "../theme/colors";
 import { personaMapping } from "../components/AccountsPage";
 import AccountsProfileCard from "./AccountsProfileCard";
@@ -18,9 +18,9 @@ const ChoosePersona = (props: OwnProps) => {
           <TranslationText id="tell.us.about" />
           ....
         </PrimaryHeaderText>
-        <PrimaryText>
+        <PrimaryLightText>
           <TranslationText id="this.helps.to.personalize" />
-        </PrimaryText>
+        </PrimaryLightText>
       </Box>
       <Flex flex={1} my={4}>
         {Object.keys(personaMapping).map(persona => {

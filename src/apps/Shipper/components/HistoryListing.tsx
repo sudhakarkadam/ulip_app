@@ -1,9 +1,9 @@
 import React from "react";
-import { Flex1 } from "../../../components/@styled/Flex";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import { CommonState } from "../../../reducers";
 import { ConnectedProps, connect } from "react-redux";
+import { Page, PageContent } from "../../../components/@styled/Page";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
@@ -18,16 +18,16 @@ const HistoryListing = (props: OwnProps) => {
     props.navigation.push("ShipperTripDetails", { data: JSON.stringify(trip) });
   };
   return (
-    <>
-      <Flex1 bg="white">
+    <Page>
+      <PageContent>
         <TripList
           listingMode={ListingModes.COMPLETED}
           from={AllApps.SHIPPER}
           businessId={businessId}
           onRowClick={handleRowClick}
         />
-      </Flex1>
-    </>
+      </PageContent>
+    </Page>
   );
 };
 

@@ -5,6 +5,8 @@ import { TabView, TabBar } from "react-native-tab-view";
 import { AllApps } from "../../../models/CommonModel";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { Dimensions } from "react-native";
+import { renderTabBarLable } from "../../../components/NavHelper";
+import { Page, PageContent } from "../../../components/@styled/Page";
 const Trips: React.FunctionComponent<{}> = props => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
@@ -13,33 +15,45 @@ const Trips: React.FunctionComponent<{}> = props => {
     { key: "PENDING", title: "PENDING" }
   ]);
   const Upcoming = () => (
-    <TripList
-      listingMode={ListingModes.UPCOMING}
-      from={AllApps.LSP}
-      onRowClick={(_id, item) =>
-        props.navigation.push("TripDetails", { tripDetails: item })
-      }
-    />
+    <Page>
+      <PageContent>
+        <TripList
+          listingMode={ListingModes.UPCOMING}
+          from={AllApps.LSP}
+          onRowClick={(_id, item) =>
+            props.navigation.push("TripDetails", { tripDetails: item })
+          }
+        />
+      </PageContent>
+    </Page>
   );
   const OnRoad = () => (
-    <TripList
-      listingMode={ListingModes.ON_ROAD}
-      from={AllApps.LSP}
-      onRowClick={
-        (id, _item) => props.navigation.push("TripTracking", { tripId: id })
+    <Page>
+      <PageContent>
+        <TripList
+          listingMode={ListingModes.ON_ROAD}
+          from={AllApps.LSP}
+          onRowClick={
+            (id, _item) => props.navigation.push("TripTracking", { tripId: id })
 
-        // props.navigation.navigate("TripDetails", { tripDetails: item })
-      }
-    />
+            // props.navigation.navigate("TripDetails", { tripDetails: item })
+          }
+        />
+      </PageContent>
+    </Page>
   );
   const Pending = () => (
-    <TripList
-      listingMode={ListingModes.PENDING}
-      from={AllApps.LSP}
-      onRowClick={(_id, item) =>
-        props.navigation.push("TripDetails", { tripDetails: item })
-      }
-    />
+    <Page>
+      <PageContent>
+        <TripList
+          listingMode={ListingModes.PENDING}
+          from={AllApps.LSP}
+          onRowClick={(_id, item) =>
+            props.navigation.push("TripDetails", { tripDetails: item })
+          }
+        />
+      </PageContent>
+    </Page>
   );
 
   return (
@@ -49,26 +63,19 @@ const Trips: React.FunctionComponent<{}> = props => {
           return (
             <TabBar
               {...tabBarProps}
+              renderLabel={renderTabBarLable}
+              activeColor={colors.primary}
+              inactiveColor={colors.lighter.primary}
               navigationState={{ index, routes }}
               style={{
-                backgroundColor: colors.white,
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 0,
-                  height: 4
-                },
-                shadowOpacity: 1,
-                elevation: 4
+                backgroundColor: colors.lightest.primary,
+                elevation: 0
               }}
               indicatorStyle={{
-                backgroundColor: colors.primary,
+                backgroundColor: colors.lightest.primary,
                 height: 2
               }}
               labelStyle={{
-                color:
-                  tabBarProps.navigationState.index === index
-                    ? colors.primary
-                    : colors.black[0],
                 fontSize: 16
               }}
             />

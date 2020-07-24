@@ -3,12 +3,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import InTransitListing from "./InTransitListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 import TripTracking from "../../../components/TripTracking";
+import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
 const Stack = createStackNavigator();
 
 const InTransitStack = () => {
   return (
-    <Stack.Navigator initialRouteName="InTransitListing">
+    <Stack.Navigator
+      initialRouteName="InTransitListing"
+      screenOptions={HeaderOptions}
+    >
       <Stack.Screen
         name="InTransitListing"
         component={InTransitListing}

@@ -12,81 +12,108 @@ import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import TripAccept from "./TripAccept";
-import { Box, Icon, Flex } from "../../../components/@styled/BaseElements";
-import search from "../../../images/loupe.png";
-import notification from "../../../images/notification.png";
+import {
+  Box,
+  Icon,
+  Flex,
+  HeaderOptions
+} from "../../../components/@styled/BaseElements";
+import Search from "../../../images/search.svg";
+import Notification from "../../../images/notification.svg";
 import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import colors from "../../../theme/colors";
 import TripTracking from "../../../components/TripTracking";
 import AccountsPage from "../../../components/AccountsPage";
+import { Page, PageContent } from "../../../components/@styled/Page";
 
 const Stack = createStackNavigator();
 const HomeMetricsComponent = props => (
   <HomeMetrics onRequestClick={() => props.navigation.push("TripRequests")} />
 );
 const History = props => (
-  <TripList
-    listingMode={ListingModes.COMPLETED}
-    from={AllApps.LSP}
-    onRowClick={(_id, item) =>
-      props.navigation.push("TripDetails", { tripDetails: item })
-    }
-  />
+  <Page>
+    <PageContent>
+      <TripList
+        listingMode={ListingModes.COMPLETED}
+        from={AllApps.LSP}
+        onRowClick={(_id, item) =>
+          props.navigation.push("TripDetails", { tripDetails: item })
+        }
+      />
+    </PageContent>
+  </Page>
 );
 const TripRequests = props => (
-  <TripList
-    listingMode={ListingModes.PENDING_REQUESTS}
-    from={AllApps.LSP}
-    onRowClick={(_id, item) =>
-      props.navigation.push("TripAcceptPage", { tripDetails: item })
-    }
-  />
+  <Page>
+    <PageContent>
+      <TripList
+        listingMode={ListingModes.PENDING_REQUESTS}
+        from={AllApps.LSP}
+        onRowClick={(_id, item) =>
+          props.navigation.push("TripAcceptPage", { tripDetails: item })
+        }
+      />
+    </PageContent>
+  </Page>
 );
 const TripAcceptPage = props => (
-  <TripAccept
-    onAction={() => props.navigation.navigate("TripRequests")}
-    tripDetails={props.route.params.tripDetails}
-  />
+  <Page>
+    <PageContent>
+      <TripAccept
+        onAction={() => props.navigation.navigate("TripRequests")}
+        tripDetails={props.route.params.tripDetails}
+      />
+    </PageContent>
+  </Page>
 );
 const HeaderButtons = () => (
   <Box pr={6} flexDirection="row">
-    <Icon p={4} mx={10} source={notification} />
-    <Icon p={4} source={search} />
+    <Box mr={7}>
+      <Notification />
+    </Box>
+    <Box mx={3}>
+      <Search />
+    </Box>
   </Box>
 );
 const LSPTripDetails = props => {
   const { tripDetails } = props.route.params;
   const tripData = tripDetails as GetTripsResponse;
   return (
-    <Flex flex={1} bg={colors.white}>
-      <TripDetails
-        documents={tripData.trip.documents}
-        id={tripData.id as any}
-        pickupDateString={tripData.pickup_date as any}
-        truckType={tripData.truck_type_preference}
-        truckWeight={tripData.weight as any}
-        truckUnit={tripData.weight_unit}
-        lspProvider={tripData.lsp_name}
-        places={
-          [
-            {
-              name: tripData.pickUp_location.city,
-              ...tripData.pickUp_location
-            },
-            {
-              name: tripData.delivery_location.city,
-              ...tripData.delivery_location
-            }
-          ] as any
-        }
-      />
-    </Flex>
+    <Page>
+      <PageContent>
+        <TripDetails
+          documents={tripData.trip.documents}
+          id={tripData.id as any}
+          pickupDateString={tripData.pickup_date as any}
+          truckType={tripData.truck_type_preference}
+          truckWeight={tripData.weight as any}
+          truckUnit={tripData.weight_unit}
+          lspProvider={tripData.lsp_name}
+          places={
+            [
+              {
+                name: tripData.pickUp_location.city,
+                ...tripData.pickUp_location
+              },
+              {
+                name: tripData.delivery_location.city,
+                ...tripData.delivery_location
+              }
+            ] as any
+          }
+        />
+      </PageContent>
+    </Page>
   );
 };
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName={"HomeMetricsComponent"}>
+    <Stack.Navigator
+      initialRouteName={"HomeMetricsComponent"}
+      screenOptions={HeaderOptions}
+    >
       <Stack.Screen
         name="TripRequests"
         component={TripRequests}
@@ -108,7 +135,7 @@ const HomeStack = () => {
 
 const TripStack = () => {
   return (
-    <Stack.Navigator initialRouteName={"Trips"}>
+    <Stack.Navigator initialRouteName={"Trips"} screenOptions={HeaderOptions}>
       <Stack.Screen
         name="Trips"
         component={Trips}
@@ -131,7 +158,7 @@ const TripStack = () => {
 };
 const HistoryStack = () => {
   return (
-    <Stack.Navigator initialRouteName={"History"}>
+    <Stack.Navigator initialRouteName={"History"} screenOptions={HeaderOptions}>
       <Stack.Screen
         name="History"
         component={History}
@@ -148,7 +175,10 @@ const HistoryStack = () => {
 
 const AccountsStack = () => {
   return (
-    <Stack.Navigator initialRouteName={"AccountsPage"}>
+    <Stack.Navigator
+      initialRouteName={"AccountsPage"}
+      screenOptions={HeaderOptions}
+    >
       <Stack.Screen name="AccountsPage" options={{ title: "Accounts" }}>
         {() => <AccountsPage persona={"lsp"} />}
       </Stack.Screen>

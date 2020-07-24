@@ -6,6 +6,7 @@ import ActionCreators from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
 import Hometabs from "./HomeTabs";
+import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -30,6 +31,7 @@ const AuthenticatedFlow: React.FC<ConnectedProps<typeof connector>> = props => {
       initialRouteName={
         props.userInfo?.user_details.name ? "HomeTabsPage" : "CreateProfile"
       }
+      screenOptions={HeaderOptions}
     >
       <Stack.Screen
         name="CreateProfile"
