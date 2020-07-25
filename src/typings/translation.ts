@@ -50,7 +50,8 @@ export type Keys =
   | "uploaded.docs"
   | "verifying"
   | "choose.language"
-  | "continue";
+  | "continue"
+  | "proof.of.delivery.tnc.received";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -150,5 +151,7 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "choose.language"
   ? never
   : T extends "continue"
+  ? never
+  : T extends "proof.of.delivery.tnc.received"
   ? never
   : never;

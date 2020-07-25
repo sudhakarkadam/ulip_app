@@ -6895,6 +6895,13 @@ react-native-scroll-bottom-sheet@^0.6.2:
   dependencies:
     utility-types "^3.10.0"
 
+react-native-signature-capture@^0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/react-native-signature-capture/-/react-native-signature-capture-0.4.10.tgz#ee355a7ca3e8341d50304572258607b9876a34a6"
+  integrity sha512-4VbZ6wJVLUdai3WfSiTR2YacTxVuDamBrYl7lxbCrsqa0QyBSiupc5Yz5/Qg7GOuD72jhVXpWJvwJQSmMRy4dQ==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-svg-transformer@^0.14.3:
   version "0.14.3"
   resolved "https://registry.npmjs.org/react-native-svg-transformer/-/react-native-svg-transformer-0.14.3.tgz#43c8e176f5a11f16f39b87a64018e0ac090ffbdb"
