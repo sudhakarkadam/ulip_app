@@ -19,6 +19,7 @@
     "@lerna/create-symlink": "^3.16.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.6.1",
+    "@react-navigation/drawer": "^5.8.6",
     "@react-navigation/native": "^5.6.1",
     "@react-navigation/stack": "^5.6.2",
     "@redux-offline/redux-offline": "^2.6.0-native.0",

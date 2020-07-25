@@ -15,10 +15,14 @@ import StyledButton from "../components/@styled/StyledButton";
 import Tick from "../images/tick.svg";
 import colors from "../theme/colors";
 
+interface Props {
+  next?: Function;
+}
 const { setUserLanguage } = actions;
 const connector = connect(null, { setUserLanguage });
-const SelectLanguage: React.FC<ConnectedProps<typeof connector>> = ({
-  setUserLanguage
+const SelectLanguage: React.FC<Props & ConnectedProps<typeof connector>> = ({
+  setUserLanguage,
+  next
 }) => {
   const { lang, changeLanguage } = useContext(I18nContext);
   return (
@@ -61,6 +65,7 @@ const SelectLanguage: React.FC<ConnectedProps<typeof connector>> = ({
               title={<TranslationText id="continue" />}
               onPress={async () => {
                 setUserLanguage({ language: lang });
+                next && next();
               }}
               style={{
                 textAlign: "center",
