@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../utils/actionCreator";
-import { GetTripsResponse } from "../models/CommonModel";
+import { GetTripsResponse,AppConfigsResponse } from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
 import user from "./UserReducer";
@@ -42,12 +42,25 @@ export const trips = createReducer<
   actions.GET_TRIPS_ERROR
 ]);
 
+export const appConfig = createReducer<
+  actions.APP_CONFIG_REQUEST,
+  actions.APP_CONFIG_SUCCESS,
+  actions.APP_CONFIG_ERROR,
+  {},
+  AppConfigsResponse
+>([
+  actions.APP_CONFIG_REQUEST,
+  actions.APP_CONFIG_SUCCESS,
+  actions.APP_CONFIG_ERROR
+]);
+
 export const reducers = {
   user,
   trips,
   HomeMetrics,
   lspList,
-  createTrip
+  createTrip,
+  appConfig
 };
 
 export type CommonState = ReducerMappedState<typeof reducers>;

@@ -57,6 +57,14 @@ const ActionCreators = {
     ],
     api.saveCompanyProfile
   ),
+  getAppConfigs: createAsyncAction(
+    [
+      actions.APP_CONFIG_REQUEST,
+      actions.APP_CONFIG_SUCCESS,
+      actions.APP_CONFIG_ERROR
+    ],
+    api.getAppConfigs
+  ),
   login: createAsyncAction(
     [actions.LOGIN_REQUEST, actions.LOGIN_SUCCESS, actions.LOGIN_ERROR],
     api.login

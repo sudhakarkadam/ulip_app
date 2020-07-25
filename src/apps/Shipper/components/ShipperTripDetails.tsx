@@ -22,7 +22,7 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
           truckType={tripData.truck_type_preference}
           truckWeight={tripData.weight as any}
           truckUnit={tripData.weight_unit}
-          lspProvider={tripData.lsp_name}
+          lspProvider={tripData.legal_name}
           places={
             [
               {

@@ -184,8 +184,8 @@ const TruckTypeComp = (props: {
 
 const CreateTrip = (props: Props) => {
   const lspList = props.lspList.map(lsp => ({
-    label: lsp.lsp_name,
-    value: lsp.lsp_id.toString()
+    label: lsp.legal_name,
+    value: lsp.business_id.toString()
   }));
   const todayDate = new Date().toISOString().substr(0, 10);
   const [tripStep, setTripStep] = useState(0);
@@ -196,7 +196,7 @@ const CreateTrip = (props: Props) => {
   const [truckType, setTruckType] = useState("open");
   const [weight, setWeight] = useState("");
   const [lspProvider, setLspProvider] = useState(lspList[0].value);
-  const [weightUnit, setWeightUnit] = useState("TONNES");
+  const [weightUnit, setWeightUnit] = useState("KG");
 
   const handleNextClick = () => {
     if (tripStep < 4) {
@@ -204,12 +204,12 @@ const CreateTrip = (props: Props) => {
       return;
     }
     const data = {
-      delivery_location: LocationsList.filter(loc => loc.value === toValue)[0],
-      good_type: goodsType,
-      lsp_id: Number(lspProvider),
-      pickup_date: `${pickupDate}`,
-      pickup_location: LocationsList.filter(loc => loc.value === fromValue)[0],
-      truck_type: truckType.toUpperCase(),
+      destination_location_details: LocationsList.filter(loc => loc.value === toValue)[0],
+      good_segment: goodsType,
+      lsp_business_id:lspProvider,
+      pickup_request_time: `${pickupDate}`,
+      source_location_details: LocationsList.filter(loc => loc.value === fromValue)[0],
+      truck_type_preference: truckType.toUpperCase(),
       weight: Number(weight),
       weight_unit: weightUnit
     };

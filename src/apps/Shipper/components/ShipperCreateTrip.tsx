@@ -6,6 +6,8 @@ import ActionCreators from "../../../actions/ActionCreators";
 import { CommonState } from "../../../reducers";
 import CreateTrip from "../../../components/CreateTrip";
 import { HomeStackParamList } from "./HomeStack";
+import { Text } from "../../../components/@styled/BaseElements";
+import { Flex1 } from "../../../components/@styled/Flex";
 
 const { createTrip, getLspList } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
@@ -24,9 +26,11 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
   }, []);
   const { userInfo } = props;
   const businessId = userInfo?.business_details?.business_id;
+  const lspList = props.lspList?.lsp_list;
   return (
+    Array.isArray(lspList) && lspList.length ? 
     <CreateTrip
-      lspList={props.lspList?.lsp_list || [{ lsp_id: 5, lsp_name: "Dummy" }]}
+      lspList={lspList}
       createTripCallback={async data => {
         //@ts-ignore
         await props.createTrip({ business_id: businessId, ...data });
@@ -35,6 +39,11 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
         return;
       }}
     />
+    :<Flex1 justifyContent="center" alignItems="center">
+      <Text>
+        LSP Fetching Failed
+      </Text>
+    </Flex1>
   );
 };
 

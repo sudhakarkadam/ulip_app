@@ -49,7 +49,7 @@ const TripAcceptPage = (
         truckType={trip.truck_type_preference}
         truckWeight={trip.weight.toString()}
         truckUnit={trip.weight_unit}
-        lspProvider={trip.lsp_name}
+        lspProvider={trip.legal_name}
         places={places}
         documents={!!trip.trip && trip.trip.documents}
       />

@@ -30,7 +30,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.IN_PROGRESS,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.CONTAINER,
     trip: {
       id: 1,
@@ -67,7 +67,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.CREATED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.CONTAINER
   },
   {
@@ -95,7 +95,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.REJECTED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.CONTAINER
   },
   {
@@ -123,7 +123,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.CREATED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.CONTAINER
   },
   {
@@ -151,7 +151,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.CREATED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.CONTAINER
   },
   {
@@ -179,7 +179,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.CREATED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.OPEN
   },
   {
@@ -207,7 +207,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.CREATED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.OPEN
   },
   {
@@ -235,7 +235,7 @@ export const GetTripsResponseJson: GetTripsResponse[] = [
     weight: 23.9,
     weight_unit: "tonns",
     status: RequestStatus.CREATED,
-    lsp_name: "ssd",
+    legal_name: "ssd",
     truck_type_preference: TruckType.OPEN
   }
 ];

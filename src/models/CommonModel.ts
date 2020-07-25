@@ -103,7 +103,7 @@ export interface GetTripsResponse {
   weight: number;
   weight_unit: string;
   status: RequestStatus;
-  lsp_name: string;
+  legal_name: string;
   truck_type_preference: TruckType;
   trip?: Trip;
 }
@@ -154,4 +154,11 @@ export interface Metrics {
     [TruckType.TRAILOR]: number;
   };
   drivers: number;
+}
+
+export interface AppConfigsResponse {
+  truck_types: string[];
+  good_types: string[];
+  weight_types: string[];
+  reject_reasons: string[];
 }

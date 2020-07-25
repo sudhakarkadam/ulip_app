@@ -124,12 +124,14 @@ const ConnectedCompanyProfile = connector(LSPCompanyProfile);
 
 const Stack = createStackNavigator<RootStackParamList>();
 const AuthenticatedFlow = props => {
-  const { userInfo } = props;
-  const profileCreated =
-    userInfo && userInfo.user_details.name && userInfo.business_details;
+  const profileCreated = props.userInfo.user_details.find(
+    role => role.profile.persona === "LSP"
+  );
+  const personVerified = profileCreated?.profile.name;
+  const comapnyVerified = profileCreated?.business_details;
   return (
     <>
-      {profileCreated ? (
+      {personVerified && comapnyVerified ? (
         <Stack.Navigator initialRouteName={"HomeMetrics"} headerMode={"none"}>
           <Stack.Screen name="HomeMetrics" component={Hometabs} />
         </Stack.Navigator>

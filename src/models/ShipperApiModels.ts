@@ -1,11 +1,10 @@
 import { LocationModel } from "./CommonModel";
 
 export interface CreateTripRequestModel {
-  business_id: number;
-  delivery_location: LocationModel;
-  good_type: string;
-  lsp_id: number;
-  pickup_date: {
+  destination_location_details: LocationModel;
+  good_segment: string;
+  lsp_business_id: string;
+  pickup_request_time: {
     date: number;
     day?: number;
     hours?: number;
@@ -17,15 +16,15 @@ export interface CreateTripRequestModel {
     timezoneOffset?: number;
     year?: number;
   };
-  pickup_location: LocationModel;
-  truck_type: "OPEN" | "CONTAINER" | "TRAILER";
+  source_location_details: LocationModel;
+  truck_type_preference: "OPEN" | "CONTAINER" | "TRAILER";
   weight: number;
   weight_unit: string;
 }
 
 export interface LspDetailsObj {
-  lsp_id: number;
-  lsp_name: string;
+  business_id: number;
+  legal_name: string;
 }
 export interface LspListResponse {
   lsp_list: LspDetailsObj[];

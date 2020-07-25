@@ -12,6 +12,7 @@ import {
   LocationModel,
   GetTripsRequest,
   GetTripsResponse,
+  AppConfigsResponse,
   Metrics,
   GetMetricsRequest
 } from "../models/CommonModel";
@@ -31,8 +32,9 @@ const urls = {
   saveCompanyProfile: `${endpoint}/ulip/business`,
   login: `${endpoint}/ulip/login`,
   logout: `${endpoint}/ulip/logout`,
-  createTrip: `${endpoint}/ulip/transport_service_request`,
+  createTrip: `${endpoint}/ulip/tsr`,
   getLspList: `${endpoint}/ulip/business`,
+  getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: (businessId: string) =>
     `${endpoint}/ulip/transport_service_request/business/${businessId}`,
   getMetrics: (businessId: string) =>
@@ -101,6 +103,11 @@ export default {
   logoutApi: () => {
     return http.put<{}, {}>(urls.logout, {});
   },
+  getAppConfigs: () => {
+    return http.get<{}, AppConfigsResponse>(
+      urls.getAppConfigs
+    );
+  },
   getTrips: (payload: GetTripsRequest) => {
     return http.get<{ status: string }, GetTripsResponse[]>(
       urls.getTrips(payload.businessId.toString()),
@@ -117,9 +124,7 @@ export default {
     );
   },
   getLspList(req: BusinessRole) {
-    return http.get<BusinessRole, LspListResponse>(urls.getLspList, {
-      type: req.type
-    });
+    return http.get<BusinessRole, LspListResponse>(`${urls.getLspList}/${req.type.toLowerCase()}`);
   },
   createTrip(req: CreateTripRequestModel) {
     return http.post<CreateTripRequestModel, CreateTripRequestModel>(
