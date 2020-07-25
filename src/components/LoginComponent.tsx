@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Flex, Box } from "./@styled/BaseElements";
-import { Text, TextInput } from "react-native";
+import { Text, TextInput, ToastAndroid } from "react-native";
 import colors from "../theme/colors";
 import Logo from "../images/group.svg";
 import StyledButton from "../components/@styled/StyledButton";
@@ -88,12 +88,20 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
                     space={6}
                     codeLength={6}
                     onFulfill={async code => {
-                      await props.verifyOtp({
-                        otp: code,
-                        phone: phoneNumber,
-                        verification_id: props.user.data.verification_id || ""
-                      });
-                      return Promise.resolve(true);
+                      try {
+                        await props.verifyOtp({
+                          otp: code,
+                          phone: phoneNumber,
+                          verification_id: props.user.data.verification_id || ""
+                        });
+                        return Promise.resolve(true);
+                      } catch (err) {
+                        ToastAndroid.show(
+                          `Error while logging in: ${err}`,
+                          ToastAndroid.SHORT
+                        );
+                        return Promise.resolve(false);
+                      }
                     }}
                     codeInputStyle={{
                       borderWidth: 0,
@@ -120,8 +128,15 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
               <StyledButton
                 title={<TranslationText id="confirm" />}
                 onPress={async () => {
-                  await props.sendOtp({ phone: phoneNumber });
-                  setPhoneConfirmed(true);
+                  try {
+                    await props.sendOtp({ phone: phoneNumber });
+                    setPhoneConfirmed(true);
+                  } catch (err) {
+                    ToastAndroid.show(
+                      `Error while sending OTP: ${err}`,
+                      ToastAndroid.SHORT
+                    );
+                  }
                 }}
                 style={{
                   textAlign: "center",

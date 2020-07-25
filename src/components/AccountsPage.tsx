@@ -25,7 +25,7 @@ const mapDispatchToProps = { setUserPersona };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface OwnProps {
-  userInfo?: UserDataModel | null;
+  userInfo?: UserDataModel;
   persona: "driver" | "lsp" | "shipper";
   selectedOtherPersona?: (user: string) => void;
 }
@@ -33,6 +33,7 @@ interface OwnProps {
 interface ProfileProps {
   persona: "driver" | "lsp" | "shipper";
   selectedOtherPersona: (user: string) => void;
+  userInfo: UserDataModel;
 }
 
 const ProfileWrapper = styled(Flex)`
@@ -41,8 +42,8 @@ const ProfileWrapper = styled(Flex)`
   margin-top: 30px;
 `;
 
-type Actors = "shipper" | "driver" | "lsp";
 type Text = "i.am.shipper" | "i.am.driver" | "i.am.lsp";
+type Actors = "lsp" | "shipper" | "driver";
 interface Payload {
   text: Text;
   icon: any;
@@ -70,9 +71,12 @@ export const personaMapping: Record<Actors, Payload> = {
   }
 };
 
-const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
+const ProfileSection = ({
+  persona,
+  selectedOtherPersona,
+  userInfo
+}: ProfileProps) => {
   const { translate } = useContext(I18nContext);
-
   return (
     <>
       <ProfileWrapper>
@@ -87,16 +91,22 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
       </ProfileWrapper>
       <ProfileWrapper>
         <TranslationText id="other.profiles" />
-        {Object.keys(personaMapping).map(otherPersona =>
-          otherPersona !== persona ? (
-            <AccountsProfileCard
-              key={otherPersona}
-              text={translate(personaMapping[otherPersona].text)}
-              subText={translate("setup.required")}
-              icon={personaMapping[otherPersona].icon}
-              onPress={() => selectedOtherPersona(otherPersona)}
-            />
-          ) : null
+        {Object.keys(personaMapping).map(
+          //@ts-ignore
+          (otherPersona: Actors) => {
+            const isSetupComplete = userInfo.user_details?.find(
+              role => role.profile.persona.toLowerCase() === otherPersona
+            );
+            return otherPersona !== persona ? (
+              <AccountsProfileCard
+                key={otherPersona}
+                text={translate(personaMapping[otherPersona].text)}
+                subText={isSetupComplete ? "" : translate("setup.required")}
+                icon={personaMapping[otherPersona].icon}
+                onPress={() => selectedOtherPersona(otherPersona)}
+              />
+            ) : null;
+          }
         )}
       </ProfileWrapper>
     </>
@@ -123,6 +133,7 @@ const AccountsPage: React.FC<OwnProps &
             <ProfileSection
               persona={props.persona}
               selectedOtherPersona={user => props.setUserPersona({ user })}
+              userInfo={props.userInfo}
             />
           </Box>
         </ScrollView>
