@@ -12,17 +12,11 @@ import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import TripAccept from "./TripAccept";
-import {
-  Box,
-  Icon,
-  Flex,
-  HeaderOptions
-} from "../../../components/@styled/BaseElements";
+import { Box, HeaderOptions } from "../../../components/@styled/BaseElements";
 import Search from "../../../images/search.svg";
 import Notification from "../../../images/notification.svg";
 import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
-import colors from "../../../theme/colors";
 import TripTracking from "../../../components/TripTracking";
 import AccountsPage from "../../../components/AccountsPage";
 import { Page, PageContent } from "../../../components/@styled/Page";

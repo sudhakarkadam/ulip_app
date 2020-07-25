@@ -50,7 +50,7 @@ function createI18nContext(lang: Languages = "en") {
     if (interpolations) {
       // @ts-ignore
       return (attrs: GetTranslationTextType<T>) => {
-        interpolations.forEach((interpolation, index) => {
+        interpolations.forEach(interpolation => {
           const varName = interpolation.slice(2, -2);
           // @ts-ignore
           message = message.replace(interpolation, attrs[varName]);
@@ -66,7 +66,7 @@ function createI18nContext(lang: Languages = "en") {
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
     if (interpolations) {
-      interpolations.forEach((interpolation, index) => {
+      interpolations.forEach(interpolation => {
         const varName = interpolation.slice(2, -2);
 
         message = message.replace(interpolation, keys[varName]);

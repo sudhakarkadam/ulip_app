@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { View, TouchableOpacity } from "react-native";
-
-import AccountsProfileCard from "./AccountsProfileCard";
 import {
   ALL_LANGUAGES,
   I18nContext,
@@ -9,9 +7,9 @@ import {
 } from "./InternationalisationProvider";
 import actions from "../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
-import { Page, PageContent } from "./@styled/Page";
+import { Page } from "./@styled/Page";
 import { PrimaryHeaderText } from "./@styled/Text";
-import { Box, Flex, Text, Image, FlexRow } from "./@styled/BaseElements";
+import { Flex, Text, FlexRow } from "./@styled/BaseElements";
 import StyledButton from "../components/@styled/StyledButton";
 
 import Tick from "../images/tick.svg";

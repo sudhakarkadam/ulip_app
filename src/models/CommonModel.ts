@@ -5,35 +5,43 @@ export interface SelectItemType {
 }
 export interface SendOtpRequest {
   phone_number: string;
-  role: "SHIPPER";
 }
 
 export interface VerifyOtpRequest {
   phone_number: string;
   otp: string;
+  verification_id: string;
 }
 
 export interface SavePersonalProfileRequest {
   phone_number: string;
   name: string;
-  user_id: number;
+  login_id: string;
+  persona: string;
+}
+
+export interface SavePersonalProfileResponse
+  extends SavePersonalProfileRequest {
+  user_id: string;
+  status: string;
 }
 
 export interface SendOtpResponse {
-  user_id: number;
-  name: null | string;
+  verification_id: string;
+  attempts: number;
   phone_number: string;
 }
 
 export interface ShipperBusinessProfileModel {
-  business_id?: number;
   business_name: string;
-  location_details: LocationModel;
-  reg_info: {
-    registration_number: string;
-  };
-  role: "SHIPPER";
-  user_id: number;
+  site_details: LocationModel;
+  user_id: string;
+  business_type: string;
+}
+
+export interface ShipperBusinessProfileResponse
+  extends ShipperBusinessProfileModel {
+  business_id: string;
 }
 
 export interface LocationModel {
@@ -44,17 +52,30 @@ export interface LocationModel {
   name: string;
   postal_code: string;
   state: string;
+  gst_in: string;
 }
 
 export interface UserDataModel {
   user_details: {
-    user_id: number;
-    name: null | string;
-    phone_number: string;
-  };
-  business_details: null | ShipperBusinessProfileModel;
+    profile: {
+      user_id: string;
+      name: string;
+      persona: string;
+      phone_number: string;
+      status: string;
+    };
+    business_details?: {
+      business_id: string;
+      legal_name: string;
+      type: string;
+    };
+  }[];
   userPersona?: string;
   language?: Languages;
+  verification_id: string;
+  login_id: string;
+  access_token: string;
+  phone_number: string;
 }
 export interface GetTripsRequest {
   status: string[];

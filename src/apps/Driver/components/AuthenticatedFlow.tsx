@@ -46,8 +46,9 @@ const AuthenticatedFlow: React.FC<ConnectedProps<typeof connector>> = props => {
               try {
                 await props.savePersonalProfile({
                   name,
-                  phone: props.userInfo?.user_details.phone_number,
-                  userId: props.userInfo?.user_details.user_id
+                  phone: props.userInfo.phone_number,
+                  loginId: props.userInfo.login_id,
+                  persona: props.userInfo.userPersona || ""
                 });
                 navigationProps.navigation.navigate("TripHome");
               } catch {

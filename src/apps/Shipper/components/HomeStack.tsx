@@ -10,8 +10,6 @@ import ShipperCreateProfile from "./ShipperCreateProfile";
 import ShipperTripDetails from "./ShipperTripDetails";
 import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
-import colors from "../../../theme/colors";
-import BackIcon from "../../../images/back.svg";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
 export type HomeStackParamList = {
@@ -33,12 +31,14 @@ const Stack = createStackNavigator<HomeStackParamList>();
 type OwnProps = ConnectedProps<typeof connector>;
 
 const HomeStack = (props: OwnProps) => {
-  const { userInfo } = props;
-  const profileCreated =
-    userInfo && userInfo.user_details.name && userInfo.business_details;
+  const profileCreated = props.userInfo.user_details.find(
+    role => role.profile.persona === "SHIPPER"
+  );
+  const personVerified = profileCreated?.profile.name;
+  const comapnyVerified = profileCreated?.business_details;
   return (
     <>
-      {!profileCreated ? (
+      {!personVerified || !comapnyVerified ? (
         <Stack.Navigator
           initialRouteName="CreateProfile"
           screenOptions={HeaderOptions}

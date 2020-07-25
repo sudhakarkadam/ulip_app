@@ -25,9 +25,9 @@ const mapStateToProps = (state: CommonState) => ({
 const connector = connect(mapStateToProps, {});
 
 const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
-  const isLoggedIn = props.userInfo ? true : false;
-  const userPersona = props.userInfo?.userPersona;
-  const isLanguageSelected = props.userInfo?.language;
+  const isLoggedIn = props.userInfo.access_token ? true : false;
+  const userPersona = props.userInfo.userPersona;
+  const isLanguageSelected = props.userInfo.language;
 
   useEffect(() => {
     HeaderProvider.setToken("token");

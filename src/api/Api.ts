@@ -6,7 +6,9 @@ import {
   VerifyOtpRequest,
   UserDataModel,
   SavePersonalProfileRequest,
+  SavePersonalProfileResponse,
   ShipperBusinessProfileModel,
+  ShipperBusinessProfileResponse,
   LocationModel,
   GetTripsRequest,
   GetTripsResponse,
@@ -25,7 +27,7 @@ const endpoint = "http://10.24.7.179";
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
   verifyOtp: `${endpoint}/ulip/user/verify`,
-  savePersonalProfile: `${endpoint}/ulip/user`,
+  savePersonalProfile: `${endpoint}/ulip/user/profile`,
   saveCompanyProfile: `${endpoint}/ulip/business`,
   login: `${endpoint}/ulip/login`,
   logout: `${endpoint}/ulip/logout`,
@@ -45,43 +47,48 @@ export const getEndpoint = () => endpoint;
 export default {
   sendOtp(req: { phone: string }) {
     return http.post<SendOtpRequest, SendOtpResponse>(urls.sendOtp, {
-      phone_number: req.phone,
-      role: "SHIPPER"
+      phone_number: req.phone
     });
   },
-  verifyOtp(req: { phone: string; otp: string }) {
+  verifyOtp(req: { phone: string; otp: string; verification_id: string }) {
     return http.post<VerifyOtpRequest, UserDataModel>(urls.verifyOtp, {
       phone_number: req.phone,
-      otp: req.otp
+      otp: req.otp,
+      verification_id: req.verification_id
     });
   },
-  savePersonalProfile(req: { name: string; phone: string; userId: number }) {
-    return http.put<SavePersonalProfileRequest, SavePersonalProfileRequest>(
+  savePersonalProfile(req: {
+    name: string;
+    phone: string;
+    loginId: string;
+    persona: string;
+  }) {
+    return http.post<SavePersonalProfileRequest, SavePersonalProfileResponse>(
       urls.savePersonalProfile,
       {
         phone_number: req.phone,
         name: req.name,
-        user_id: req.userId
+        login_id: req.loginId,
+        persona: req.persona.toUpperCase()
       }
     );
   },
   saveCompanyProfile(req: {
     name: string;
     location: LocationModel;
-    regNumber: string;
-    role: "SHIPPER";
-    userId: number;
+    userId: string;
+    business_type: string;
   }) {
-    return http.post<ShipperBusinessProfileModel, ShipperBusinessProfileModel>(
+    return http.post<
+      ShipperBusinessProfileModel,
+      ShipperBusinessProfileResponse
+    >(
       urls.saveCompanyProfile,
       {
         business_name: req.name,
-        location_details: req.location,
-        reg_info: {
-          registration_number: req.regNumber
-        },
-        role: req.role,
-        user_id: req.userId
+        site_details: req.location,
+        user_id: req.userId,
+        business_type: req.business_type
       },
       {
         headers: HeaderProvider.getHeaders()

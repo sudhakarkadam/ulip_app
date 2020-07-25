@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { ImageSourcePropType, GestureResponderEvent } from "react-native";
+import { GestureResponderEvent } from "react-native";
 import {
   Image,
   TouchableOpacity,
@@ -11,7 +11,6 @@ import {
 import colors from "../theme/colors";
 import { PrimaryHeaderText } from "./@styled/Text";
 const tick = require("../icons/tick.png");
-import DriverIcon from "../images/driver.svg";
 
 interface ProfileCardTypes {
   isBigCard?: boolean;

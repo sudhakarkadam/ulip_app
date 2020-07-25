@@ -21,14 +21,19 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const ShipperPersonProfile = (props: Props) => {
   const { userInfo } = props;
-  const phone = userInfo ? userInfo.user_details.phone_number : "";
-  const userId = userInfo ? userInfo.user_details.user_id : 0;
+  const phone = userInfo.phone_number || "";
+  const loginId = userInfo.login_id || "";
   return (
     <PersonProfile
       userInfo={props.userInfo}
       createProfileCallback={async ({ name }) => {
         try {
-          await props.savePersonalProfile({ name, phone, userId });
+          await props.savePersonalProfile({
+            name,
+            phone,
+            loginId,
+            persona: userInfo.userPersona || ""
+          });
           props.navigation.navigate("CreateProfile");
           ToastAndroid.show("Profile Created successfully", ToastAndroid.SHORT);
         } catch {

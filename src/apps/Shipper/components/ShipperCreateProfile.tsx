@@ -19,9 +19,11 @@ type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
 
 const ShipperCreateProfile = (props: AllProps) => {
   const { translate } = useContext(I18nContext);
-  const { userInfo } = props;
-  const personVerified = userInfo?.user_details?.name;
-  const comapnyVerified = userInfo?.business_details;
+  const profileExist = props.userInfo.user_details.find(
+    role => role.profile.persona === "SHIPPER"
+  );
+  const personVerified = profileExist?.profile.name;
+  const comapnyVerified = profileExist?.business_details;
   return (
     <Flex>
       {!personVerified && (

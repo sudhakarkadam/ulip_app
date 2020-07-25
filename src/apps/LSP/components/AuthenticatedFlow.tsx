@@ -32,10 +32,15 @@ const LSPPersonProfile = props => (
     userInfo={props.userInfo}
     createProfileCallback={async ({ name }) => {
       const { userInfo } = props;
-      const phone = userInfo ? userInfo.user_details.phone_number : "";
-      const userId = userInfo ? userInfo.user_details.user_id : 0;
+      const phone = userInfo.phone_number || "";
+      const loginId = userInfo.login_id || "";
       try {
-        await props.savePersonalProfile({ name, phone, userId });
+        await props.savePersonalProfile({
+          name,
+          phone,
+          loginId,
+          persona: userInfo.userPersona
+        });
         props.navigation.navigate("CreateProfile");
       } catch {
         console.log("error");
@@ -83,7 +88,9 @@ const LSPCreateProfile = props => {
 const ConnectedLSPCreateProfile = connector(LSPCreateProfile);
 
 const LSPCompanyProfile = props => {
-  const userId = props.userInfo?.user_details.user_id || 0;
+  const userId = props.userInfo.user_details.find(
+    role => role.profile.persona.toLowerCase() === props.userInfo.userPersona
+  );
   const location = {
     address: "Sector 4, Rohini",
     city: "Delhi",
@@ -99,10 +106,9 @@ const LSPCompanyProfile = props => {
         try {
           await props.saveCompanyProfile({
             name,
-            regNumber,
-            role: "LSP",
-            location,
-            userId
+            location: { ...location, gst_in: regNumber },
+            userId: userId ? userId.profile.user_id : "",
+            business_type: "LSP"
           });
           props.navigation.navigate("HomeMetrics");
         } catch {

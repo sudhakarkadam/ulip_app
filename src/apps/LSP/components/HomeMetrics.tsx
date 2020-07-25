@@ -8,7 +8,6 @@ import {
   PrimaryText,
   PrimaryHeaderText
 } from "../../../components/@styled/Text";
-import colors from "../../../theme/colors";
 import styled from "styled-components";
 import ActionCreators from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";

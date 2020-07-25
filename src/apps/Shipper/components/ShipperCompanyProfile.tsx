@@ -28,17 +28,18 @@ const location = {
 };
 
 const ShipperCompanyProfile = (props: Props) => {
-  const userId = props.userInfo?.user_details.user_id || 0;
+  const userId = props.userInfo.user_details.find(
+    role => role.profile.persona.toLowerCase() === props.userInfo.userPersona
+  );
   return (
     <CompanyProfile
       createCompanyCallback={async ({ name, regNumber }) => {
         try {
           await props.saveCompanyProfile({
             name,
-            regNumber,
-            role: "SHIPPER",
-            location,
-            userId
+            location: { ...location, gst_in: regNumber },
+            userId: userId ? userId.profile.user_id : "",
+            business_type: "SHIPPER"
           });
           props.navigation.navigate("MainTripListing");
           ToastAndroid.show("Company profile Created", ToastAndroid.SHORT);
