@@ -11,8 +11,8 @@ import { Flex1 } from "../../../components/@styled/Flex";
 
 const { createTrip, getLspList } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
-  userInfo: state.user.data,
-  lspList: state.lspList.data
+  lspList: state.lspList.data,
+  commonConfig: state.appConfig.data
 });
 const mapDispatchToProps = { createTrip, getLspList };
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -24,16 +24,20 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
   useEffect(() => {
     props.getLspList({ type: "LSP" });
   }, []);
-  const { userInfo } = props;
-  const businessId = userInfo?.business_details?.business_id;
   const lspList = props.lspList?.lsp_list;
+  const goodTypesList = props.commonConfig?.good_types.map(type=>({label:type,value:type}));
+  const weightTypesList = props.commonConfig?.weight_types.map(type=>({label:type,value:type}));
+  const truckTypesList = props.commonConfig?.truck_types.map(type=>({label:type,value:type}));
   return (
-    Array.isArray(lspList) && lspList.length ? 
+    Array.isArray(lspList) && lspList.length && goodTypesList && weightTypesList && truckTypesList? 
     <CreateTrip
+      goodsList={goodTypesList}
+      weightTypeList={weightTypesList}
+      truckTypeList={truckTypesList}
       lspList={lspList}
       createTripCallback={async data => {
         //@ts-ignore
-        await props.createTrip({ business_id: businessId, ...data });
+        await props.createTrip({ data });
         props.navigation.navigate("MainTripListing");
         ToastAndroid.show("Trip Successfully Created", ToastAndroid.SHORT);
         return;

@@ -129,7 +129,10 @@ export default {
   createTrip(req: CreateTripRequestModel) {
     return http.post<CreateTripRequestModel, CreateTripRequestModel>(
       urls.createTrip,
-      req
+      req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
     );
   }
 };

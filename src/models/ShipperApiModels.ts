@@ -2,7 +2,7 @@ import { LocationModel } from "./CommonModel";
 
 export interface CreateTripRequestModel {
   destination_location_details: LocationModel;
-  good_segment: string;
+  goods_segment: string;
   lsp_business_id: string;
   pickup_request_time: {
     date: number;

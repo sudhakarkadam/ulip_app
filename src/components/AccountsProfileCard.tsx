@@ -56,7 +56,7 @@ const AccountsProfileCard = ({
         >
           {text}
         </PrimaryHeaderText>
-        {subText && (
+        {!!subText && (
           <Text mt={1} color={colors.grays[5]} fontSize={10}>
             {subText}
           </Text>

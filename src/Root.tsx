@@ -9,6 +9,7 @@ import { CommonState } from "./reducers";
 import { useEffect } from "react";
 import { HeaderProvider } from "./api/Headers";
 import UserPersona from "./components/UserPersona";
+import ActionCreators from "./actions/ActionCreators";
 import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
@@ -19,9 +20,12 @@ const AuthenticatedStack = createStackNavigator();
 const NoLoginStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const mapStateToProps = (state: CommonState) => ({
-  userInfo: state.user.data
+  userInfo: state.user.data,
+  commonConfig: state.appConfig.data
 });
-const connector = connect(mapStateToProps, {});
+const {getAppConfigs}  = ActionCreators
+const mapDispatchToProps = { getAppConfigs}
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props {
   isLanguageSelected?: boolean;
@@ -113,6 +117,9 @@ const App: React.FC<ConnectedProps<typeof connector>> = props => {
 
   useEffect(() => {
     HeaderProvider.setToken("token");
+    if(!props.commonConfig){
+      props.getAppConfigs({});
+    }
   }, [props.userInfo]);
   return (
     <NavigationContainer>
