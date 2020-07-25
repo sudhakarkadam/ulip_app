@@ -1,7 +1,9 @@
 import { Flex1 } from "./Flex";
 import React from "react";
 
-export const Page: React.FC = props => <Flex1 bg="bg">{props.children}</Flex1>;
+export const Page: React.FC<{ bg?: string }> = props => (
+  <Flex1 bg={props.bg || "bg"}>{props.children}</Flex1>
+);
 
 export const PageContent: React.FC = props => (
   <Flex1

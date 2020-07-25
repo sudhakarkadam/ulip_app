@@ -41,6 +41,14 @@ const ActionCreators = {
     ],
     api.verifyOtp
   ),
+  resendOtp: createAsyncAction(
+    [
+      actions.RESEND_OTP_REQUEST,
+      actions.RESEND_OTP_SUCCESS,
+      actions.RESEND_OTP_ERROR
+    ],
+    api.resendOtp
+  ),
   savePersonalProfile: createAsyncAction(
     [
       actions.SAVE_PROFILE_REQUEST,

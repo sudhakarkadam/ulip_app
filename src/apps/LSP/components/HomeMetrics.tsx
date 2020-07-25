@@ -5,7 +5,7 @@ import {
   TouchableOpacity
 } from "../../../components/@styled/BaseElements";
 import {
-  PrimaryText,
+  PrimaryTextSmall,
   PrimaryHeaderText
 } from "../../../components/@styled/Text";
 import styled from "styled-components";
@@ -40,8 +40,13 @@ interface OwnProps {
 }
 const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
   useEffect(() => {
+    const profileCreated = props.user.data.user_details.find(
+      role => role.profile.persona === "LSP"
+    );
+    const businessCreated = profileCreated?.business_details;
     props.getMetrics({
-      businessId: props.user.data.business_details.business_id
+      business_id: businessCreated?.business_id || "",
+      persona: "LSP"
     });
   }, []);
   const metrics = props.HomeMetrics.data;
@@ -55,34 +60,18 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
         >
           <FlexRow height={100} mb={20}>
             <MetricBox onPress={props.onRequestClick}>
-              <PrimaryText>
+              <PrimaryTextSmall>
                 <TranslationText id="requests" />
-              </PrimaryText>
+              </PrimaryTextSmall>
               <PrimaryHeaderText
                 style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
               >
                 <TranslationText
                   id="placeholder"
                   interpolations={{
-                    value: metrics.transport_service_request.CREATED + ""
-                  }}
-                />
-              </PrimaryHeaderText>
-            </MetricBox>
-            <MetricBox>
-              <PrimaryText>
-                <TranslationText id="trucks" />
-              </PrimaryText>
-              <PrimaryHeaderText
-                style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
-              >
-                <TranslationText
-                  id="placeholder"
-                  interpolations={{
-                    value:
-                      Object.keys(metrics.trucks).reduce((total, type) => {
-                        return total + metrics.trucks[type];
-                      }, 0) + ""
+                    value: (
+                      metrics.status_count_details.CREATED || 0
+                    ).toString()
                   }}
                 />
               </PrimaryHeaderText>
@@ -90,32 +79,36 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
           </FlexRow>
           <FlexRow height={100} mb={20}>
             <MetricBox>
-              <PrimaryText>
+              <PrimaryTextSmall>
                 {" "}
                 <TranslationText id="on.road" />
-              </PrimaryText>
+              </PrimaryTextSmall>
               <PrimaryHeaderText
                 style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
               >
                 <TranslationText
                   id="placeholder"
                   interpolations={{
-                    value: metrics.transport_service_request.IN_PROGRESS + ""
+                    value: (
+                      metrics.status_count_details.IN_PROGRESS || 0
+                    ).toString()
                   }}
                 />
               </PrimaryHeaderText>
             </MetricBox>
             <MetricBox>
-              <PrimaryText>
+              <PrimaryTextSmall>
                 <TranslationText id="pending" />
-              </PrimaryText>
+              </PrimaryTextSmall>
               <PrimaryHeaderText
                 style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
               >
                 <TranslationText
                   id="placeholder"
                   interpolations={{
-                    value: metrics.transport_service_request.PENDING_POD + ""
+                    value: (
+                      metrics.status_count_details.PENDING_POD || 0
+                    ).toString()
                   }}
                 />
               </PrimaryHeaderText>

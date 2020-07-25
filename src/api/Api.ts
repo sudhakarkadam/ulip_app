@@ -14,6 +14,7 @@ import {
   GetTripsResponse,
   AppConfigsResponse,
   Metrics,
+  ResendOtpRequest,
   GetMetricsRequest
 } from "../models/CommonModel";
 import {
@@ -28,6 +29,7 @@ const endpoint = "http://10.24.7.179";
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
   verifyOtp: `${endpoint}/ulip/user/verify`,
+  resendOtp: `${endpoint}/ulip/user/resend/otp`,
   savePersonalProfile: `${endpoint}/ulip/user/profile`,
   saveCompanyProfile: `${endpoint}/ulip/business`,
   login: `${endpoint}/ulip/login`,
@@ -37,8 +39,7 @@ const urls = {
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: (businessId: string) =>
     `${endpoint}/ulip/transport_service_request/business/${businessId}`,
-  getMetrics: (businessId: string) =>
-    `${endpoint}/ulip/transport_service_request/business/${businessId}/view`
+  getMetrics: `${endpoint}/ulip/tsr/view`
 };
 
 interface BusinessRole {
@@ -58,6 +59,9 @@ export default {
       otp: req.otp,
       verification_id: req.verification_id
     });
+  },
+  resendOtp(verification_id: string) {
+    return http.post<ResendOtpRequest, {}>(urls.resendOtp, { verification_id });
   },
   savePersonalProfile(req: {
     name: string;
@@ -104,9 +108,7 @@ export default {
     return http.put<{}, {}>(urls.logout, {});
   },
   getAppConfigs: () => {
-    return http.get<{}, AppConfigsResponse>(
-      urls.getAppConfigs
-    );
+    return http.get<{}, AppConfigsResponse>(urls.getAppConfigs);
   },
   getTrips: (payload: GetTripsRequest) => {
     return http.get<{ status: string }, GetTripsResponse[]>(
@@ -115,16 +117,14 @@ export default {
     );
   },
   getMetrics: (payload: GetMetricsRequest) => {
-    return http.get<{}, Metrics>(
-      urls.getMetrics(payload.businessId.toString()),
-      {},
-      {
-        headers: {}
-      }
-    );
+    return http.get<{}, Metrics>(urls.getMetrics, payload, {
+      headers: {}
+    });
   },
   getLspList(req: BusinessRole) {
-    return http.get<BusinessRole, LspListResponse>(`${urls.getLspList}/${req.type.toLowerCase()}`);
+    return http.get<BusinessRole, LspListResponse>(
+      `${urls.getLspList}/${req.type.toLowerCase()}`
+    );
   },
   createTrip(req: CreateTripRequestModel) {
     return http.post<CreateTripRequestModel, CreateTripRequestModel>(

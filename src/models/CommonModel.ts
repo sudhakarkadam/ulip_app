@@ -12,6 +12,9 @@ export interface VerifyOtpRequest {
   otp: string;
   verification_id: string;
 }
+export interface ResendOtpRequest {
+  verification_id: string;
+}
 
 export interface SavePersonalProfileRequest {
   phone_number: string;
@@ -82,7 +85,8 @@ export interface GetTripsRequest {
   businessId: number;
 }
 export interface GetMetricsRequest {
-  businessId: number;
+  business_id: string;
+  persona: string;
 }
 export enum AllApps {
   SHIPPER = "SHIPPER",
@@ -140,7 +144,7 @@ interface PickUplocation {
 }
 
 export interface Metrics {
-  transport_service_request: {
+  status_count_details: {
     [RequestStatus.ACCEPTED]: number;
     [RequestStatus.COMPLETED]: number;
     [RequestStatus.CREATED]: number;
@@ -148,12 +152,6 @@ export interface Metrics {
     [RequestStatus.PENDING_POD]: number;
     [RequestStatus.REJECTED]: number;
   };
-  trucks: {
-    [TruckType.CONTAINER]: number;
-    [TruckType.OPEN]: number;
-    [TruckType.TRAILOR]: number;
-  };
-  drivers: number;
 }
 
 export interface AppConfigsResponse {

@@ -50,7 +50,12 @@ export type Keys =
   | "uploaded.docs"
   | "verifying"
   | "choose.language"
-  | "continue";
+  | "continue"
+  | "accept.terms"
+  | "otp.not.received"
+  | "otp.resent"
+  | "otp.resend.failed"
+  | "resend";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -150,5 +155,15 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "choose.language"
   ? never
   : T extends "continue"
+  ? never
+  : T extends "accept.terms"
+  ? never
+  : T extends "otp.not.received"
+  ? never
+  : T extends "otp.resent"
+  ? never
+  : T extends "otp.resend.failed"
+  ? never
+  : T extends "resend"
   ? never
   : never;
