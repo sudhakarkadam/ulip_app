@@ -26,11 +26,12 @@ const mapDispatchToProps = { savePersonalProfile };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const AuthenticatedFlow: React.FC<ConnectedProps<typeof connector>> = props => {
+  const profileCreated = props.userInfo.user_details.find(
+    role => role.profile.persona === "DRIVER"
+  );
   return (
     <Stack.Navigator
-      initialRouteName={
-        props.userInfo?.user_details.name ? "HomeTabsPage" : "CreateProfile"
-      }
+      initialRouteName={profileCreated ? "HomeTabsPage" : "CreateProfile"}
       screenOptions={HeaderOptions}
     >
       <Stack.Screen

@@ -52,9 +52,11 @@ const ConnectedLSPPersonProfile = connector(LSPPersonProfile);
 
 const LSPCreateProfile = props => {
   const { translate } = useContext(I18nContext);
-  const { userInfo } = props;
-  const personVerified = userInfo?.user_details?.name;
-  const comapnyVerified = userInfo?.business_details;
+  const profileCreated = props.userInfo.user_details.find(
+    role => role.profile.persona === "LSP"
+  );
+  const personVerified = profileCreated?.profile.name;
+  const comapnyVerified = profileCreated?.business_details;
   return (
     <Page>
       <PageContent>
