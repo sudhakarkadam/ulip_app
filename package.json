@@ -22,7 +22,7 @@
     "@react-navigation/stack": "^5.6.2",
     "@redux-offline/redux-offline": "^2.6.0-native.0",
     "mapmyindia-map-react-native-beta": "^0.0.6",
-    "mmi-widget": "file:../ulip-react-native-modules",
+    "mmi-widget": "git+https://78cb80e2fe699b37612e23a4f9005916431bc062:x-oauth-basic@github.com/samvet/ulip-react-native-modules.git#index-change",
     "moment": "^2.27.0",
     "react": "16.9.0",
     "react-native": "0.61.5",

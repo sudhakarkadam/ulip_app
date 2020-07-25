@@ -5659,7 +5659,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapmyindia-map-react-native-beta@^0.0.6:
+mapmyindia-map-react-native-beta@0.0.6, mapmyindia-map-react-native-beta@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/mapmyindia-map-react-native-beta/-/mapmyindia-map-react-native-beta-0.0.6.tgz#66dd47b687a6a319773bf66d1273698f1986f637"
   integrity sha512-MImuyFrSNu2BDsP2bAQYEU53zTfY1yE03oFggKMI+haiVi77s5eEYp+EghzzAjy3wv5kD0oJVAY0A9fFah1gCg==
@@ -6052,10 +6052,12 @@ mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-"mmi-widget@file:../ulip-react-native-modules":
+"mmi-widget@git+https://78cb80e2fe699b37612e23a4f9005916431bc062:x-oauth-basic@github.com/samvet/ulip-react-native-modules.git#index-change":
   version "1.0.0"
+  resolved "git+https://78cb80e2fe699b37612e23a4f9005916431bc062:x-oauth-basic@github.com/samvet/ulip-react-native-modules.git#b3081ba47a76b33641c9bcb8e9ddf05c86d4f0a2"
   dependencies:
     "@turf/helpers" "^6.1.4"
+    mapmyindia-map-react-native-beta "0.0.6"
 
 moment@^2.24.0, moment@^2.27.0:
   version "2.27.0"

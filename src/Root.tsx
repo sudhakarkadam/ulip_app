@@ -12,6 +12,7 @@ import UserPersona from "./components/UserPersona";
 import AuthenticatedFlowShipper from "./apps/Shipper/components/ShipperHome";
 import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
+import TripTracking from "./apps/Shipper/components/TripTracking";
 
 const MapmyIndia = require("mmi-widget");
 
@@ -41,7 +42,7 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
           {!isLoggedIn && (
             <Stack.Screen
               name="Login"
-              component={Login}
+              component={TripTracking}
               options={{ headerShown: false }}
             />
           )}
