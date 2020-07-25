@@ -59,29 +59,12 @@ const UserReducer = produce(
 
       case actionTypes.SAVE_PROFILE_SUCCESS: {
         draft.asyncStatus = SUCCESS;
-        const { persona } = action.payload.res;
-        if (
-          !draft.data.user_details.find(
-            role => role.profile.persona === persona
-          )
-        ) {
-          draft.data.user_details = [
-            {
-              profile: action.payload.res
-            }
-          ];
-          return draft;
-        }
-        draft.data.user_details = draft.data.user_details.map(role => {
-          if (role.profile.persona === persona) {
-            return {
-              ...role,
-              profile: action.payload.res
-            };
+        draft.data.user_details = [
+          ...draft.data.user_details,
+          {
+            profile: action.payload.res
           }
-          return role;
-        });
-
+        ];
         return draft;
       }
 

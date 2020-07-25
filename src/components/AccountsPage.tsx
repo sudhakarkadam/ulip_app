@@ -105,8 +105,8 @@ const ProfileSection = ({ persona, selectedOtherPersona }: ProfileProps) => {
 
 const AccountsPage: React.FC<OwnProps &
   ConnectedProps<typeof connector>> = props => {
-  const personName = props.userInfo?.user_details?.name;
-  const contactNumber = props.userInfo?.user_details?.phone_number;
+  const personName = props.userInfo.login_id;
+  const contactNumber = props.userInfo.phone_number;
   return contactNumber && personName ? (
     <Page>
       <PageContent>
