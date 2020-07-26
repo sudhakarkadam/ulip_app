@@ -50,7 +50,7 @@ const RejectTripModal = (props: OwnProps) => {
           style={{ flex: 1 }}
           onPress={() =>
             props
-              .onReject({ reason: reason, sr_id: props.id })
+              .onReject({ reject_reason: reason, tsr_id: props.id })
               .then(() => {
                 props.onClose();
                 ToastAndroid.show(

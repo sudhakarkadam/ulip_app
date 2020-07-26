@@ -66,12 +66,19 @@ const AcceptTripModal = (props: OwnProps) => {
           onPress={() =>
             props
               .onAccept({
-                sr_id: props.id,
-                driver: {
-                  name: driverName,
-                  mobile_number: driverMobile
-                },
-                truck_type: truck
+                tsr_id: props.id,
+                driver_name: driverName,
+                driver_phone_number: driverMobile,
+                vehicle_details: {
+                  business_id: "string",
+                  device_id: "string",
+                  device_type: "string",
+                  truck_name: "Shreynik_truck",
+                  truck_number: "DL20HR2121",
+                  truck_type: "OPEN",
+                  tsp_id: "",
+                  vehicle_id: truck
+                }
               })
               .then(() => {
                 props.onClose();
