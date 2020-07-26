@@ -37,8 +37,7 @@ const urls = {
   createTrip: `${endpoint}/ulip/tsr`,
   getLspList: `${endpoint}/ulip/business`,
   getAppConfigs: `${endpoint}/ulip/app/configs`,
-  getTrips: (businessId: string) =>
-    `${endpoint}/ulip/transport_service_request/business/${businessId}`,
+  getTrips: `${endpoint}/ulip/tsr/status_view`,
   getMetrics: `${endpoint}/ulip/tsr/view`
 };
 
@@ -111,10 +110,14 @@ export default {
     return http.get<{}, AppConfigsResponse>(urls.getAppConfigs);
   },
   getTrips: (payload: GetTripsRequest) => {
-    return http.get<{ status: string }, GetTripsResponse[]>(
-      urls.getTrips(payload.businessId.toString()),
-      { status: payload.status.join(",") }
-    );
+    return http.get<
+      { status_list: string; persona: string; business_id: string },
+      { transport_service_requests: GetTripsResponse[] }
+    >(urls.getTrips, {
+      status_list: payload.status.join(","),
+      persona: payload.persona,
+      business_id: payload.businessId
+    });
   },
   getMetrics: (payload: GetMetricsRequest) => {
     return http.get<{}, Metrics>(urls.getMetrics, payload, {

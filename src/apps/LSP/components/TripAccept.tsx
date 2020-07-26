@@ -31,27 +31,27 @@ const TripAcceptPage = (
   const trip = props.tripDetails;
   const places = [
     {
-      name: trip.pickUp_location.city,
-      state: trip.pickUp_location.state,
-      address: trip.pickUp_location.address
+      name: trip.source_location_details.city,
+      state: trip.source_location_details.state,
+      address: trip.source_location_details.address
     },
     {
-      name: trip.delivery_location.city,
-      state: trip.delivery_location.state,
-      address: trip.delivery_location.address
+      name: trip.destination_location_details.city,
+      state: trip.destination_location_details.state,
+      address: trip.destination_location_details.address
     }
   ];
   return (
     <ScrollView mt={3} backgroundColor="white" flex={1}>
       <TripDetails
-        id={trip.id.toString()}
+        id={trip.tsr_id.toString()}
         pickupDate={new Date(trip.pickup_date)}
         truckType={trip.truck_type_preference}
         truckWeight={trip.weight.toString()}
         truckUnit={trip.weight_unit}
         lspProvider={trip.legal_name}
         places={places}
-        documents={!!trip.trip && trip.trip.documents}
+        documents={trip.trip_details?.documents}
       />
       <Flex style={{ flexDirection: "row", marginHorizontal: 25 }}>
         <StyledButton
@@ -64,7 +64,7 @@ const TripAcceptPage = (
                 onReject={props.rejectTrip}
                 onClose={props.hideModal}
                 returningScreen={props.onAction}
-                id={props.tripDetails.id}
+                id={props.tripDetails.tsr_id}
               />
             );
           }}
@@ -78,7 +78,7 @@ const TripAcceptPage = (
                 onAccept={props.acceptTrip}
                 onClose={props.hideModal}
                 returningScreen={props.onAction}
-                id={props.tripDetails.id}
+                id={props.tripDetails.tsr_id}
               />
             );
           }}

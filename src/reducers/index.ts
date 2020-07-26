@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../utils/actionCreator";
-import { GetTripsResponse,AppConfigsResponse } from "../models/CommonModel";
+import { GetTripsResponse, AppConfigsResponse } from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
 import user from "./UserReducer";
@@ -35,7 +35,7 @@ export const trips = createReducer<
   actions.GET_TRIPS_SUCCESS,
   actions.GET_TRIPS_ERROR,
   { status: string[] },
-  GetTripsResponse[]
+  { transport_service_requests: GetTripsResponse[] }
 >([
   actions.GET_TRIPS_REQUEST,
   actions.GET_TRIPS_SUCCESS,

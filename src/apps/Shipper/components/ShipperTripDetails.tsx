@@ -17,7 +17,7 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
     <Page>
       <PageContent>
         <TripDetails
-          id={tripData.id as any}
+          id={tripData.tsr_id as any}
           pickupDateString={tripData.pickup_date as any}
           truckType={tripData.truck_type_preference}
           truckWeight={tripData.weight as any}
@@ -26,16 +26,16 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
           places={
             [
               {
-                name: tripData.pickUp_location.city,
-                ...tripData.pickUp_location
+                name: tripData.source_location_details.city,
+                ...tripData.source_location_details
               },
               {
-                name: tripData.delivery_location.city,
-                ...tripData.delivery_location
+                name: tripData.destination_location_details.city,
+                ...tripData.destination_location_details
               }
             ] as any
           }
-          documents={tripData.trip?.documents || []}
+          documents={tripData.trip_details?.documents || []}
         />
       </PageContent>
     </Page>
