@@ -141,13 +141,17 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
   let config = listingConfig[listingMode] as any;
 
   useEffect(() => {
+    const userPersonaDetails = props.user.data.user_details.find(
+      role => role.profile.persona.toLowerCase() === props.user.data.userPersona
+    );
     props.getTrips({
       status: config.status,
-      businessId: props.user.data?.business_details?.business_id || 1
+      businessId: userPersonaDetails?.business_details?.business_id || "",
+      persona: props.user.data.userPersona?.toUpperCase() || ""
     });
   }, [listingMode]);
 
-  const data = props.trips.data || [];
+  const data = props.trips.data?.transport_service_requests || [];
   if (config.default) {
     config = { ...config.default, ...(config[from] || {}) };
   }
@@ -197,12 +201,12 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
-                      if (props.onRowClick) props.onRowClick(item.id, item);
+                      if (props.onRowClick) props.onRowClick(item.tsr_id, item);
                       return;
                     }}
                   >
                     <FlexRow
-                      key={item.id}
+                      key={item.tsr_id}
                       p={5}
                       borderBottomColor={colors.grays[2]}
                       borderBottomWidth={1}
@@ -222,12 +226,12 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                       )}
                       <Flex mx={5} flex={1}>
                         <FlexRow>
-                          {!!item.trip && (
+                          {!!item.trip_details && (
                             <>
                               {config.primaryWidget === IconWidget.PROFILE &&
                                 !!item.pickup_date && (
                                   <SecondaryText>{`${
-                                    item.trip.driver_name
+                                    item.trip_details.driver_name
                                   }${!!item.pickup_date &&
                                     `  •  ${moment(item.pickup_date).format(
                                       "DD/MM/YYYY"
@@ -240,17 +244,21 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                                 config.primaryWidget !== IconWidget.PROFILE && (
                                   <SecondaryText>{`${moment(
                                     item.pickup_date
-                                  ).format("DD/MM/YYYY")}${!!item.trip &&
-                                    !!item.trip.eta &&
-                                    `  •  ${moment(item.trip.eta).format(
-                                      "DD/MM/YYYY"
-                                    )}`}`}</SecondaryText>
+                                  ).format(
+                                    "DD/MM/YYYY"
+                                  )}${!!item.trip_details &&
+                                    !!item.trip_details.eta &&
+                                    `  •  ${moment(
+                                      item.trip_details.eta
+                                    ).format("DD/MM/YYYY")}`}`}</SecondaryText>
                                 )}
                             </>
                           )}
                         </FlexRow>
                         <FlexRow>
-                          <PrimaryText>{item.pickUp_location.city}</PrimaryText>
+                          <PrimaryText>
+                            {item.source_location_details.city}
+                          </PrimaryText>
                           <Text
                             color={colors.grays[1]}
                             px={2}
@@ -260,12 +268,12 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                             →
                           </Text>
                           <PrimaryText>
-                            {item.delivery_location.city}
+                            {item.destination_location_details.city}
                           </PrimaryText>
                         </FlexRow>
                         <FlexRow>
                           <SecondaryText fontSize={1} color={colors.grays[1]}>
-                            {`${item.good_type}  •  ${item.weight} ${item.weight_unit}`}
+                            {`${item.goods_segment}  •  ${item.weight} ${item.weight_unit}`}
                           </SecondaryText>
                         </FlexRow>
                       </Flex>

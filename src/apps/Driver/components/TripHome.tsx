@@ -6,7 +6,7 @@ import {
   View,
   Animated
 } from "react-native";
-import ImagePicker, { ImagePickerResponse } from "react-native-image-picker";
+import ImagePicker from "react-native-image-picker";
 import colors from "../../../theme/colors";
 import styled from "styled-components/native";
 import {
@@ -62,7 +62,7 @@ const { getTrips, updateTrip, upload } = DriverActionCreators;
 const mapDispatchToProps = { getTrips, updateTrip, upload };
 const mapStateToProps = (state: CommonState & DriverAppState) => ({
   trips: state.trips,
-  phone: state.user.data?.user_details?.phone_number
+  phone: state.user.data.phone_number
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -70,7 +70,7 @@ type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripHome">;
 };
 
-const SwipeActions = (progress, dragX) => {
+const SwipeActions = (_, dragX) => {
   const translate = dragX.interpolate({
     inputRange: [0, 150],
     outputRange: [0, 65]

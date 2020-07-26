@@ -71,7 +71,7 @@ export interface PerosnaDetails {
     legal_name: string;
     type: string;
   };
-};
+}
 
 export interface UserDataModel {
   user_details: PerosnaDetails[];
@@ -84,7 +84,8 @@ export interface UserDataModel {
 }
 export interface GetTripsRequest {
   status: string[];
-  businessId: number;
+  businessId: string;
+  persona: string;
 }
 export interface GetMetricsRequest {
   business_id: string;
@@ -101,17 +102,17 @@ export enum TruckType {
 }
 
 export interface GetTripsResponse {
-  id: number;
-  pickUp_location: PickUplocation;
-  delivery_location: PickUplocation;
+  tsr_id: number;
+  source_location_details: PickUplocation;
+  destination_location_details: PickUplocation;
   pickup_date: string;
-  good_type: string;
+  goods_segment: string;
   weight: number;
   weight_unit: string;
   status: RequestStatus;
   legal_name: string;
   truck_type_preference: TruckType;
-  trip?: Trip;
+  trip_details?: Trip;
 }
 export enum RequestStatus {
   CREATED = "CREATED",
@@ -137,12 +138,12 @@ interface Trip {
 
 interface PickUplocation {
   id: number | null;
-  code?: string | null;
-  address?: string | null;
+  code?: string;
+  address?: string;
   city: string;
-  state?: string | null;
+  state?: string;
   map_ref: { ref: string } | null;
-  country?: string | null;
+  country?: string;
 }
 
 export interface Metrics {
