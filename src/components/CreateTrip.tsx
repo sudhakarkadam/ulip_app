@@ -10,6 +10,7 @@ import StyledButton from "./@styled/StyledButton";
 import TripProgress from "./TripProgress";
 import { LspDetailsObj } from "../models/ShipperApiModels";
 import { PageContent, Page } from "./@styled/Page";
+import {PerosnaDetails} from "../models/CommonModel"
 
 const openTruckImg = require("../images/open-truck.png");
 const containerTruckImg = require("../images/container-truck.png");
@@ -28,6 +29,7 @@ interface OwnProps {
   goodsList: SelectObj[];
   weightTypeList: SelectObj[];
   truckTypeList: SelectObj[];
+  userPersonaDetails: PerosnaDetails;
 }
 
 type Props = OwnProps;
@@ -221,11 +223,12 @@ const CreateTrip = (props: Props) => {
       destination_location_details: LocationsList.filter(loc => loc.value === toValue)[0],
       goods_segment: goodsType,
       lsp_business_id:lspProvider,
-      pickup_request_time: `${pickupDate}`,
+      pickup_request_time: `${new Date(pickupDate).getTime() / 1000}`,
       source_location_details: LocationsList.filter(loc => loc.value === fromValue)[0],
       truck_type_preference: truckType.toUpperCase(),
       weight: Number(weight),
-      weight_unit: weightUnit
+      weight_unit: weightUnit,
+      user_id: props.userPersonaDetails.profile.user_id
     };
 
     props.createTripCallback(data);

@@ -58,21 +58,23 @@ export interface LocationModel {
   gst_in: string;
 }
 
+export interface PerosnaDetails {
+  profile: {
+    user_id: string;
+    name: string;
+    persona: string;
+    phone_number: string;
+    status: string;
+  };
+  business_details?: {
+    business_id: string;
+    legal_name: string;
+    type: string;
+  };
+};
+
 export interface UserDataModel {
-  user_details: {
-    profile: {
-      user_id: string;
-      name: string;
-      persona: string;
-      phone_number: string;
-      status: string;
-    };
-    business_details?: {
-      business_id: string;
-      legal_name: string;
-      type: string;
-    };
-  }[];
+  user_details: PerosnaDetails[];
   userPersona?: string;
   language?: Languages;
   verification_id: string;

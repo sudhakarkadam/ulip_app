@@ -29,17 +29,18 @@ type Props = StackScreenProps<HomeStackParamList, "MainTripListing">;
 type OwnProps = ConnectedProps<typeof connector>;
 
 const MainTripListing = (props: Props & OwnProps) => {
-  const businessId = props.userInfo?.business_details?.business_id;
+  const userPersonaDetails = props.userInfo.user_details.find(role=> role.profile.persona.toLowerCase() === props.userInfo.userPersona)
   useEffect(() => {
     props.getMetrics({
-      businessId: businessId || 1
+      business_id: userPersonaDetails?.business_details?.business_id || '',
+      persona: props.userInfo.userPersona?.toUpperCase() || ''
     });
   }, []);
   if (isLoading(props.metrics) || isInit(props.metrics)) {
     return <BlockScreenLoader />;
   }
 
-  const requests = props.metrics.data.transport_service_request;
+  const requests = props.metrics.data.status_count_details;
   const tripCount = (requests.CREATED || 0) + (requests.ACCEPTED || 0);
   const handleRowClick = (_: any, trip: GetTripsResponse) => {
     props.navigation.push("ShipperTripDetails", { data: JSON.stringify(trip) });
