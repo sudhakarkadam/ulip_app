@@ -1,13 +1,20 @@
 export interface TripAcceptRequest {
-  sr_id: number;
-  driver: {
-    name: string;
-    mobile_number: string;
+  tsr_id: number;
+  driver_name: string;
+  driver_phone_number: string;
+  vehicle_details: {
+    business_id: string;
+    device_id: string;
+    device_type: string;
+    truck_name: string;
+    truck_number: string;
+    truck_type: string;
+    tsp_id: string;
+    vehicle_id: string;
   };
-  truck_type: string;
 }
 
 export interface TripRejectRequest {
-  reason: string;
-  sr_id: number;
+  reject_reason: string;
+  tsr_id: number;
 }

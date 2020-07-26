@@ -9,8 +9,6 @@ import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
 import InTransitBlur from "../../../images/intransit_blur.svg";
-import HistorySelected from "../../../images/history_selected.svg";
-import HistoryBlur from "../../../images/history_blur.svg";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 
