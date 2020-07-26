@@ -105,7 +105,7 @@ const getStartText = () => {
 };
 
 const Trip: React.FC<Props> = props => {
-  const getTrip = () => props.getTripById(Number(props.route.params.id));
+  const getTrip = () => props.getTripById(props.route.params.id);
 
   useEffect(() => {
     getTrip();
@@ -269,7 +269,7 @@ const Trip: React.FC<Props> = props => {
       <PageContent>
         <ScrollView>
           <FlatList
-            onRefresh={() => props.getTripById(Number(props.route.params.id))}
+            onRefresh={() => props.getTripById(props.route.params.id)}
             refreshing={isLoading(props.trip)}
             data={[trip]}
             renderItem={t => {

@@ -17,7 +17,7 @@ export type DriverHomeStackParamList = {
   HomeTabsPage: undefined;
   ProofOfDelivery: undefined;
   TripList: undefined;
-  TripHome: { id: number };
+  TripHome: { id: string };
   TripDetails: undefined;
 };
 
