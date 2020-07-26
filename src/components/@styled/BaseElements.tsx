@@ -67,9 +67,13 @@ type TextProps = SpaceProps &
   BorderProps &
   TypographyProps;
 
-export const Text = styled.Text<TextProps>(
+const StyledText = styled.Text<TextProps>(
   compose(space, color, layout, border, typography)
 );
+
+export const Text = styled(StyledText)`
+  font-family: Roboto-Regular;
+`;
 
 export const StyledActivityIndicator = styled.ActivityIndicator<
   ColorProps & SpaceProps

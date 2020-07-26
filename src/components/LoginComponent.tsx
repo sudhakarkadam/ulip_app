@@ -9,7 +9,9 @@ import {
   PrimaryText,
   PrimaryTextSmall,
   PrimaryHeaderText,
-  SecondaryText
+  SecondaryText,
+  SecondaryLabel,
+  PrimaryLabel
 } from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
@@ -59,17 +61,15 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
       <Flex flex={1}>
         <Box mx={6} mt={80} alignItems={"center"}>
           <Image source={Logo} />
-          <PrimaryTextSmall pt={5}>
-            UNIFIED LOGISTICS INTERFACE PLATFORM
-          </PrimaryTextSmall>
+          <PrimaryText pt={5}>UNIFIED LOGISTICS INTERFACE PLATFORM</PrimaryText>
         </Box>
 
         <Flex mx={6} flex={1} mt={10}>
           {!phoneConfirmed && (
             <Flex mt={6}>
-              <PrimaryTextSmall style={{ textTransform: "uppercase" }}>
+              <PrimaryLabel style={{ textTransform: "uppercase" }}>
                 <TranslationText id="mobile.number" />
-              </PrimaryTextSmall>
+              </PrimaryLabel>
               <Flex
                 style={{
                   borderRadius: 5,
@@ -144,9 +144,9 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
                     }}
                     keyboardType="numeric"
                   />
-                  <SecondaryText mt={50} mx={10}>
+                  <SecondaryLabel mt={55} mx={10}>
                     <TranslationText id="accept.terms" />
-                  </SecondaryText>
+                  </SecondaryLabel>
                   {resendCycle == 1 && (
                     <SecondaryText mt={50} mx={10}>
                       <TranslationText id="otp.not.received" />

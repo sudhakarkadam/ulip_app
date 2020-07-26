@@ -29,11 +29,13 @@ type Props = StackScreenProps<HomeStackParamList, "MainTripListing">;
 type OwnProps = ConnectedProps<typeof connector>;
 
 const MainTripListing = (props: Props & OwnProps) => {
-  const userPersonaDetails = props.userInfo.user_details.find(role=> role.profile.persona.toLowerCase() === props.userInfo.userPersona)
+  const userPersonaDetails = props.userInfo.user_details.find(
+    role => role.profile.persona.toLowerCase() === props.userInfo.userPersona
+  );
   useEffect(() => {
     props.getMetrics({
-      business_id: userPersonaDetails?.business_details?.business_id || '',
-      persona: props.userInfo.userPersona?.toUpperCase() || ''
+      business_id: userPersonaDetails?.business_details?.business_id || "",
+      persona: props.userInfo.userPersona?.toUpperCase() || ""
     });
   }, []);
   if (isLoading(props.metrics) || isInit(props.metrics)) {

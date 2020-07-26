@@ -9,38 +9,44 @@ import colors from "../../theme/colors";
 export const PrimaryText = styled(Text)`
   color: ${colors.primary};
   font-size: 16px;
+  font-family: Roboto-Regular;
 `;
 
 export const PrimaryLabel = styled(Text)`
   color: ${colors.lighter.primary};
   font-size: 14px;
+  font-family: Roboto-Light;
 `;
 
 export const PrimaryHeaderText = styled(Text)`
   color: ${colors.primary};
   font-size: 20px;
-  font-weight: bold;
+  font-family: Roboto-Medium;
 `;
 
 export const PrimaryLightText = styled(Text)`
   color: ${colors.lighter.primary};
   font-size: 16px;
+  font-family: Roboto-Regular;
 `;
 
 export const SecondaryText = styled(Text)`
   color: ${colors.grays[5]};
   font-size: 16px;
+  font-family: Roboto-Regular;
 `;
 
 export const SecondaryLabel = styled(Text)`
   color: ${colors.grays[5]};
   text-transform: capitalize;
   font-size: 14px;
+  font-family: Roboto-Regular;
 `;
 export const SmallCapitalText = styled(Text)`
   color: ${colors.grays[5]};
   text-transform: uppercase;
   font-size: 12px;
+  font-family: Roboto-Regular;
 `;
 // export const PrimaryLabel = styled(PrimaryText)`
 //   color: ${colors.primary};
@@ -51,9 +57,11 @@ export const SmallCapitalText = styled(Text)`
 
 export const LightText = styled(Text)`
   color: ${colors.grays[1]};
+  font-family: Roboto-Regular;
 `;
 
 export const PrimaryTextSmall = styled(Text)`
   color: ${colors.primary};
   font-size: 14px;
+  font-family: Roboto-Regular;
 `;
