@@ -16,6 +16,8 @@ import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow"
 import SelectLanguage from "./components/SelectLanguage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
+const MapmyIndia = require("mmi-widget");
+
 const AuthenticatedStack = createStackNavigator();
 const NoLoginStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,8 +25,8 @@ const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,
   commonConfig: state.appConfig.data
 });
-const {getAppConfigs}  = ActionCreators
-const mapDispatchToProps = { getAppConfigs}
+const { getAppConfigs } = ActionCreators;
+const mapDispatchToProps = { getAppConfigs };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props {
@@ -35,6 +37,10 @@ const AuthenticatedStackNavigator: React.FC<Props> = ({
   isLanguageSelected,
   userPersona
 }) => {
+  useEffect(() => {
+    const trackingInitialize = MapmyIndia.default.initialize;
+    trackingInitialize();
+  }, []);
   return (
     <AuthenticatedStack.Navigator headerMode="none">
       <>
@@ -117,7 +123,7 @@ const App: React.FC<ConnectedProps<typeof connector>> = props => {
 
   useEffect(() => {
     HeaderProvider.setToken("token");
-    if(!props.commonConfig){
+    if (!props.commonConfig) {
       props.getAppConfigs({});
     }
   }, [props.userInfo]);

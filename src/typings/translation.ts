@@ -55,7 +55,8 @@ export type Keys =
   | "otp.not.received"
   | "otp.resent"
   | "otp.resend.failed"
-  | "resend";
+  | "resend"
+  | "proof.of.delivery.tnc.received";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -165,5 +166,7 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "otp.resend.failed"
   ? never
   : T extends "resend"
+  ? never
+  : T extends "proof.of.delivery.tnc.received"
   ? never
   : never;

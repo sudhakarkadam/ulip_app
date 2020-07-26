@@ -53,5 +53,7 @@
   "otp.not.received": "Did not receive OTP?",
   "otp.resent": "OTP resent",
   "otp.resend.failed": "Failed to resend OTP",
-  "resend": "Resend"
+  "resend": "Resend",
+  "proof.of.delivery.tnc.received": "I have Received the goods and agree to Terms and conditions"
+
 }

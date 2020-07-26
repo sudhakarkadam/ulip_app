@@ -5,12 +5,12 @@ import colors from "../../theme/colors";
 export interface TagProps {
   text: React.ReactNode;
   icon?: any;
-  type?: "default" | "primary";
+  type?: "default" | "success";
 }
 
 export const Tag: React.FC<TagProps> = ({ text, type = "default" }) => {
-  const color = type === "primary" ? colors.white : colors.primary;
-  const bg = type === "primary" ? colors.primary : colors.grays[1];
+  const color = type === "success" ? colors.white : colors.grays[0];
+  const bg = type === "success" ? colors.success : colors.grays[1];
 
   return (
     <Text

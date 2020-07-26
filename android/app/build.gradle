@@ -149,6 +149,7 @@ android {
         manifestPlaceholders = [appName: jsonFile.apkName]
         versionCode jsonFile.versionCode
         versionName jsonFile.versionName
+        multiDexEnabled true
     }
     splits {
         abi {

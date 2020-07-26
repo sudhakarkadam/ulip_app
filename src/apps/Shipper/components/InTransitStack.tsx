@@ -2,10 +2,15 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import InTransitListing from "./InTransitListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
-import TripTracking from "../../../components/TripTracking";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
-const Stack = createStackNavigator();
+// eslint-disable-next-line @typescript-eslint/prefer-interface
+export type IntransitStackParams = {
+  InTransitListing: undefined;
+  CreateTrip: undefined;
+};
+
+const Stack = createStackNavigator<IntransitStackParams>();
 
 const InTransitStack = () => {
   return (
@@ -18,13 +23,6 @@ const InTransitStack = () => {
         component={InTransitListing}
         options={{
           title: "In-Transit"
-        }}
-      />
-      <Stack.Screen
-        name="TripTracking"
-        component={TripTracking}
-        options={{
-          headerShown: false
         }}
       />
       <Stack.Screen
