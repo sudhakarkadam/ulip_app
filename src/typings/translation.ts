@@ -51,6 +51,11 @@ export type Keys =
   | "verifying"
   | "choose.language"
   | "continue"
+  | "accept.terms"
+  | "otp.not.received"
+  | "otp.resent"
+  | "otp.resend.failed"
+  | "resend"
   | "proof.of.delivery.tnc.received";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
@@ -151,6 +156,16 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "choose.language"
   ? never
   : T extends "continue"
+  ? never
+  : T extends "accept.terms"
+  ? never
+  : T extends "otp.not.received"
+  ? never
+  : T extends "otp.resent"
+  ? never
+  : T extends "otp.resend.failed"
+  ? never
+  : T extends "resend"
   ? never
   : T extends "proof.of.delivery.tnc.received"
   ? never

@@ -1,42 +1,75 @@
-import React, { useState } from "react";
-import { Flex, Box } from "./@styled/BaseElements";
+import React, { useState, useContext, useEffect } from "react";
+import { Flex, Box, Image } from "./@styled/BaseElements";
 import { Text, TextInput, ToastAndroid } from "react-native";
 import colors from "../theme/colors";
-import Logo from "../images/group.svg";
+import Logo from "../images/logo.png";
 import StyledButton from "../components/@styled/StyledButton";
 import CodeInput from "../components/CodeInput";
-import { PrimaryText } from "../components/@styled/Text";
+import {
+  PrimaryText,
+  PrimaryTextSmall,
+  PrimaryHeaderText,
+  SecondaryText
+} from "../components/@styled/Text";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../actions/ActionCreators";
-import { TranslationText } from "./InternationalisationProvider";
+import { TranslationText, I18nContext } from "./InternationalisationProvider";
 import { Page } from "./@styled/Page";
 import { CommonState } from "../reducers/index";
 
-const { verifyOtp, sendOtp } = ActionCreators;
+const { verifyOtp, sendOtp, resendOtp } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
   user: state.user
 });
-const mapDispatchToProps = { verifyOtp, sendOtp };
+const mapDispatchToProps = { verifyOtp, sendOtp, resendOtp };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const LoginComponent = (props: ConnectedProps<typeof connector>) => {
   const [phoneNumber, editPhoneNumber] = useState("");
   const [phoneConfirmed, setPhoneConfirmed] = useState(false);
+  const [resendCycle, setResendCycle] = useState(-1); // -1: hasn't started. 0: started 30s timer. 1: Show resend
+
   const [otpConfirmed] = useState(false);
+  const verificationID = props.user.data.verification_id || "";
+  const { translate } = useContext(I18nContext);
+
+  useEffect(() => {
+    if (resendCycle === 0) {
+      const timer = setTimeout(() => {
+        setResendCycle(1);
+      }, 30000);
+      return () => clearTimeout(timer);
+    }
+  }, [resendCycle]);
+
+  const resend = async () => {
+    let toastMsg = translate("otp.resent");
+    try {
+      await props.resendOtp(verificationID);
+      setResendCycle(0);
+    } catch {
+      toastMsg = translate("otp.resend.failed");
+    } finally {
+      ToastAndroid.show(toastMsg, ToastAndroid.SHORT);
+    }
+  };
 
   return (
-    <Page>
+    <Page bg={colors.white}>
       <Flex flex={1}>
-        <Box mx={6} mt={80}>
-          <Logo width={300} height={66} />
+        <Box mx={6} mt={80} alignItems={"center"}>
+          <Image source={Logo} />
+          <PrimaryTextSmall pt={5}>
+            UNIFIED LOGISTICS INTERFACE PLATFORM
+          </PrimaryTextSmall>
         </Box>
 
         <Flex mx={6} flex={1} mt={10}>
           {!phoneConfirmed && (
-            <Flex>
-              <PrimaryText style={{ textTransform: "uppercase" }}>
+            <Flex mt={6}>
+              <PrimaryTextSmall style={{ textTransform: "uppercase" }}>
                 <TranslationText id="mobile.number" />
-              </PrimaryText>
+              </PrimaryTextSmall>
               <Flex
                 style={{
                   borderRadius: 5,
@@ -68,18 +101,18 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
             </Flex>
           )}
           {phoneConfirmed && (
-            <Flex alignItems="center">
+            <Flex alignItems="center" mt={5} justifyContent={"space-evenly "}>
               {!otpConfirmed && (
                 <>
-                  <PrimaryText fontSize={3}>
+                  <PrimaryText>
                     <TranslationText id="otp.sent" />
                   </PrimaryText>
-                  <PrimaryText fontSize={6}>
+                  <PrimaryHeaderText mt={3}>
                     <TranslationText
                       id="placeholder"
                       interpolations={{ value: phoneNumber }}
                     />
-                  </PrimaryText>
+                  </PrimaryHeaderText>
                   <CodeInput
                     activeColor={colors.primary}
                     inactiveColor={colors.primary}
@@ -92,7 +125,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
                         await props.verifyOtp({
                           otp: code,
                           phone: phoneNumber,
-                          verification_id: props.user.data.verification_id || ""
+                          verification_id: verificationID
                         });
                         return Promise.resolve(true);
                       } catch (err) {
@@ -111,6 +144,18 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
                     }}
                     keyboardType="numeric"
                   />
+                  <SecondaryText mt={50} mx={10}>
+                    <TranslationText id="accept.terms" />
+                  </SecondaryText>
+                  {resendCycle == 1 && (
+                    <SecondaryText mt={50} mx={10}>
+                      <TranslationText id="otp.not.received" />
+                      {` `}
+                      <PrimaryText onPress={resend}>
+                        <TranslationText id="resend" />
+                      </PrimaryText>
+                    </SecondaryText>
+                  )}
                 </>
               )}
               {otpConfirmed && (
@@ -131,6 +176,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
                   try {
                     await props.sendOtp({ phone: phoneNumber });
                     setPhoneConfirmed(true);
+                    setResendCycle(0);
                   } catch (err) {
                     ToastAndroid.show(
                       `Error while sending OTP: ${err}`,

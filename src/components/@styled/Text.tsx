@@ -52,3 +52,8 @@ export const SmallCapitalText = styled(Text)`
 export const LightText = styled(Text)`
   color: ${colors.grays[1]};
 `;
+
+export const PrimaryTextSmall = styled(Text)`
+  color: ${colors.primary};
+  font-size: 14px;
+`;

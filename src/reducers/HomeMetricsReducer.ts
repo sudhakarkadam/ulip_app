@@ -8,7 +8,7 @@ import {
 } from "../utils/actionCreator";
 import { ActionObjectTypes } from "../actions/ActionCreators";
 import { Metrics } from "../models/CommonModel";
-import { RequestStatus, TruckType } from "../models/CommonModel";
+import { RequestStatus } from "../models/CommonModel";
 
 export interface HomeMetricsStoreState {
   asyncStatus: asyncStatusTypes;
@@ -16,20 +16,14 @@ export interface HomeMetricsStoreState {
 }
 
 const initialMetrics = {
-  transport_service_request: {
+  status_count_details: {
     [RequestStatus.ACCEPTED]: 0,
     [RequestStatus.COMPLETED]: 0,
     [RequestStatus.CREATED]: 0,
     [RequestStatus.IN_PROGRESS]: 0,
     [RequestStatus.PENDING_POD]: 0,
     [RequestStatus.REJECTED]: 0
-  },
-  trucks: {
-    [TruckType.CONTAINER]: 0,
-    [TruckType.OPEN]: 0,
-    [TruckType.TRAILOR]: 0
-  },
-  drivers: 0
+  }
 };
 
 const INITIAL_STATE: HomeMetricsStoreState = {
