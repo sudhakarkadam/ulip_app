@@ -1,16 +1,12 @@
 import React from "react";
-import {
-  Text,
-  Box,
-  Icon,
-  TouchableOpacity as Button
-} from "../@styled/BaseElements";
+import { Box, Icon, TouchableOpacity as Button } from "../@styled/BaseElements";
 import Tag from "../@styled/Tag";
 import { Flex1, FlexRow } from "../@styled/Flex";
 import { TranslationText } from "../InternationalisationProvider";
 
 // @ts-ignore
 import backIcon from "../../icons/back-no-tail.png";
+import { PrimaryText, SecondaryLabel } from "../@styled/Text";
 
 interface TopBarProps {
   onBackPress?: () => void;
@@ -22,7 +18,7 @@ const TopBar: React.FC<TopBarProps> = ({
   tripId,
   status = "ON-TIME"
 }) => (
-  <FlexRow alignItems="center" mx={4} mt={3} zIndex={2}>
+  <FlexRow alignItems="center" mx={4} mt={5} zIndex={2} position="absolute">
     <Button
       height={40}
       width={40}
@@ -44,13 +40,13 @@ const TopBar: React.FC<TopBarProps> = ({
       style={{ elevation: 3 }}
     >
       <Flex1>
-        <Text color="black.1" fontSize={0}>
+        <SecondaryLabel>
           <TranslationText id="trip.id" />
-        </Text>
-        <Text fontWeight="bold">TRIP-{tripId}</Text>
+        </SecondaryLabel>
+        <PrimaryText fontWeight="bold">TRIP-{tripId}</PrimaryText>
       </Flex1>
       <Box>
-        <Tag text={status} type="primary" />
+        <Tag text={status} type="success" />
       </Box>
     </FlexRow>
   </FlexRow>

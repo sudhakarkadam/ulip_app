@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Flex } from "../../../components/@styled/BaseElements";
 import colors from "../../../theme/colors";
 import { TabView, TabBar } from "react-native-tab-view";
@@ -8,15 +8,20 @@ import { TripList, ListingModes } from "../../../components/TripListing";
 import { renderTabBarLable } from "../../../components/NavHelper";
 import { Dimensions } from "react-native";
 import { PageContent, Page } from "../../../components/@styled/Page";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { IntransitStackParams } from "./InTransitStack";
+import { ShipperAuthenticatedStackParamList } from "./ShipperHome";
 
-const Trips: React.FunctionComponent<StackScreenProps<
-  {
-    TripTracking: {
-      tripId: number;
-    };
-  },
-  "TripTracking"
->> = props => {
+type NavigationProps = CompositeNavigationProp<
+  StackNavigationProp<IntransitStackParams, "InTransitListing">,
+  StackNavigationProp<ShipperAuthenticatedStackParamList>
+>;
+
+interface Props {
+  navigation: NavigationProps;
+}
+
+const Trips: React.FunctionComponent<Props> = props => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "ON-ROAD", title: "ON-ROAD" },

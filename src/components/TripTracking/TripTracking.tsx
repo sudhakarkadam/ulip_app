@@ -12,11 +12,13 @@ import TopBar from "./TopBar";
 import Hop from "./Hop";
 import { TripTrackingProps as TTDataProps } from "./TripTracking.model";
 import { CommonState } from "../../reducers";
-import Map from "./Map";
 
 import { cityLatLongs, currentLocations, hops } from "../../fixtures/MapMocks";
 import Button from "../@styled/StyledButton";
 import { TranslationText } from "../InternationalisationProvider";
+import { SecondaryLabel, PrimaryText } from "../@styled/Text";
+
+const MapmyIndia = require("mmi-widget");
 
 const screen = Dimensions.get("window");
 const screenHeight = screen.height;
@@ -57,10 +59,8 @@ const HeadBox: React.FC<{ bigText: string; smallText: string }> = ({
   smallText = ""
 }) => (
   <Flex1 alignItems="center">
-    <Text fontSize={0} color="black.1">
-      {smallText}
-    </Text>
-    <Text fontWeight="bold">{(bigText || "").toUpperCase()}</Text>
+    <SecondaryLabel>{smallText}</SecondaryLabel>
+    <PrimaryText fontWeight="bold">{(bigText || "").toUpperCase()}</PrimaryText>
   </Flex1>
 );
 
@@ -142,15 +142,19 @@ const TripTracking: React.FC<Props & TTDataProps> = ({
     );
   }
 
+  const TrackingComponent = MapmyIndia.default.MapmyIndiaULIPTrip;
+
   return (
     <>
       <Flex1>
         <TopBar {...{ onBackPress, tripId: tripId.toString(), status }} />
-        <Map
-          hops={props.completedHops}
-          source={props.source}
-          destination={props.destination}
-          currentLocation={props.currentLocation}
+        <TrackingComponent
+          style={{ flex: 1 }}
+          requestType="2"
+          vehicalType="truck"
+          destinationLat={19.07609}
+          destinationLng={72.877426}
+          refreshInterVal={5000}
         />
         <ScrollBottomSheet
           componentType="FlatList"

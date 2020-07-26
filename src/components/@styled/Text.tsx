@@ -29,7 +29,13 @@ export const PrimaryLightText = styled(Text)`
 
 export const SecondaryText = styled(Text)`
   color: ${colors.grays[5]};
+  font-size: 16px;
+`;
+
+export const SecondaryLabel = styled(Text)`
+  color: ${colors.grays[5]};
   text-transform: capitalize;
+  font-size: 14px;
 `;
 export const SmallCapitalText = styled(Text)`
   color: ${colors.grays[5]};
