@@ -172,6 +172,7 @@ export const TripStamp: React.FC<Props> = ({ places, track }) => {
 };
 
 export const convert = (loc: Location): Place => {
+  console.log("------------->", loc);
   return {
     name: loc.city,
     address: loc.address,

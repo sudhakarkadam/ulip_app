@@ -22,7 +22,7 @@ import { TripStamp, convert } from "../../../components/TripStamp";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
-import { DriverAppState } from "../reducers";
+
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
@@ -58,10 +58,10 @@ const capture = (callback: (data: FormData) => void) => {
   });
 };
 
-const { getTrips, updateTrip, upload } = DriverActionCreators;
-const mapDispatchToProps = { getTrips, updateTrip, upload };
-const mapStateToProps = (state: CommonState & DriverAppState) => ({
-  trips: state.trips,
+const { getTripById, updateTrip, upload } = DriverActionCreators;
+const mapDispatchToProps = { getTripById, updateTrip, upload };
+const mapStateToProps = (state: CommonState) => ({
+  trip: state.driverTrip,
   phone: state.user.data.phone_number
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -102,21 +102,19 @@ const getStartText = () => {
 };
 
 const Trip: React.FC<Props> = props => {
-  const getTrips = () => props.getTrips(props.phone);
+  console.log(props);
+  const getTrip = () => props.getTripById(props.route.params.id);
 
   useEffect(() => {
-    getTrips();
+    getTrip();
   }, []);
-  if (props.trips && props.trips.data) {
-    props.setTitle(props.trips.data[0]);
-  }
-  if (isLoading(props.trips) || isInit(props.trips))
-    return <ActivityIndicator />;
+
+  if (isLoading(props.trip) || isInit(props.trip)) return <ActivityIndicator />;
 
   // const trips = driverTrips || props.trips.data;
-  const trips = props.trips.data;
-
-  if (!trips)
+  const trip = props.trip.data;
+  console.log(trip);
+  if (!trip)
     return (
       <Page>
         <PageContent>
@@ -128,11 +126,12 @@ const Trip: React.FC<Props> = props => {
     );
 
   const bottomSheetContent = () => {
-    const trip = trips?.find(t => t);
     const today = new Date().toLocaleDateString();
-    const tripStartDate = new Date(trip.pickup_date).toLocaleDateString();
+    const tripStartDate = new Date(
+      trip.pickup_request_time
+    ).toLocaleDateString();
 
-    if (trip.trip.status === "CREATED") {
+    if (trip.trip_status === "CREATED") {
       if (today === tripStartDate) {
         return (
           <Flex width="100%">
@@ -140,10 +139,10 @@ const Trip: React.FC<Props> = props => {
               renderLeftActions={SwipeActions}
               onSwipeableLeftOpen={async () => {
                 await props.updateTrip({
-                  sr_id: trip.id,
+                  sr_id: trip.trip_id,
                   status: "TRIP_STARTED"
                 });
-                getTrips();
+                getTrip();
               }}
             >
               <StyledButton width="100%" height="50" title={getStartText()} />
@@ -171,7 +170,7 @@ const Trip: React.FC<Props> = props => {
       }
     }
 
-    if (trip.trip.status === "TRIP_STARTED") {
+    if (trip.trip_status === "TRIP_STARTED") {
       return (
         <>
           <Box textAlign="left" alignItems="flex-start">
@@ -196,10 +195,10 @@ const Trip: React.FC<Props> = props => {
                 capture(async d => {
                   await props.upload({
                     file: d,
-                    id: trip.trip.id,
+                    id: trip.trip_id,
                     type: "POP"
                   });
-                  getTrips();
+                  getTrip();
                 });
               }}
             />
@@ -208,7 +207,7 @@ const Trip: React.FC<Props> = props => {
       );
     }
 
-    if (trip.trip.status === "IN_TRANSIT") {
+    if (trip.trip_status === "IN_TRANSIT") {
       return (
         <>
           <Box textAlign="left" alignItems="flex-start">
@@ -229,8 +228,11 @@ const Trip: React.FC<Props> = props => {
               width="50%"
               title={<TranslationText id="reached"></TranslationText>}
               onPress={async () => {
-                await props.updateTrip({ sr_id: trip.id, status: "REACHED" });
-                getTrips();
+                await props.updateTrip({
+                  sr_id: trip.tsr_id,
+                  status: "REACHED"
+                });
+                getTrip();
               }}
             />
           </FlexRow>
@@ -238,7 +240,7 @@ const Trip: React.FC<Props> = props => {
       );
     }
 
-    if (trip.trip.status === "REACHED") {
+    if (trip.trip_status === "REACHED") {
       return (
         <StyledButton
           width="100%"
@@ -251,7 +253,7 @@ const Trip: React.FC<Props> = props => {
                 id: trip.trip.id,
                 type: "POD"
               });
-              getTrips();
+              getTrip();
             });
           }}
         />
@@ -264,17 +266,17 @@ const Trip: React.FC<Props> = props => {
       <PageContent>
         <ScrollView>
           <FlatList
-            onRefresh={() => props.getTrips(props.phone)}
-            refreshing={isLoading(props.trips)}
-            data={[trips[0]] || []}
+            onRefresh={() => props.getTripById(props.route.params.id)}
+            refreshing={isLoading(props.trip)}
+            data={[trip]}
             renderItem={t => {
               const trip = t.item;
-              const isCreated = t.item.trip.status === "CREATED";
-              const isStarted = t.item.trip.status === "TRIP_STARTED";
-              const isInTransit = t.item.trip.status === "IN_TRANSIT";
+              const isCreated = t.item.trip_status === "CREATED";
+              const isStarted = t.item.trip_status === "TRIP_STARTED";
+              const isInTransit = t.item.trip_status === "IN_TRANSIT";
               const isReached =
-                t.item.trip.status === "REACHED" ||
-                t.item.trip.status === "COMPLETED";
+                t.item.trip_status === "REACHED" ||
+                t.item.trip_status === "COMPLETED";
 
               return (
                 <Flex mt={4}>
@@ -299,7 +301,7 @@ const Trip: React.FC<Props> = props => {
                               id="placeholder"
                               interpolations={{
                                 value: new Date(
-                                  trip.pickup_date
+                                  trip.pickup_request_time
                                 ).toLocaleDateString()
                               }}
                             />
@@ -344,14 +346,14 @@ const Trip: React.FC<Props> = props => {
                         ...(isCreated
                           ? [
                               {
-                                ...convert(trip.pickUp_location)
+                                ...convert(trip.source_location_details)
                               }
                             ]
                           : []),
                         ...(isStarted
                           ? [
                               {
-                                ...convert(trip.pickUp_location),
+                                ...convert(trip.source_location_details),
                                 tag: "Pickup Point"
                               }
                             ]
@@ -359,7 +361,7 @@ const Trip: React.FC<Props> = props => {
                         ...(isInTransit || isReached
                           ? [
                               {
-                                ...convert(trip.pickUp_location),
+                                ...convert(trip.source_location_details),
                                 // @ts-ignore
                                 crossed: true
                               }
@@ -369,13 +371,13 @@ const Trip: React.FC<Props> = props => {
                         ...(isReached
                           ? [
                               {
-                                ...convert(trip.delivery_location),
+                                ...convert(trip.destination_location_details),
                                 // @ts-ignore
                                 crossed: true,
                                 tag: "Destination Point"
                               }
                             ]
-                          : [convert(trip.delivery_location)])
+                          : [convert(trip.destination_location_details)])
                       ]}
                     />
                   </Box>

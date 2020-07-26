@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { StyleSheet, View, CheckBox } from "react-native";
 import Input from "../../../components/InputComponent";
-import styled from "styled-components/native";
 import {
   Text,
   Flex,
@@ -14,13 +13,13 @@ import StyledButton from "../../../components/@styled/StyledButton";
 import { StickyBottom } from "../../../components/StickyBottom";
 import SignatureCapture from "react-native-signature-capture";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
-import { DriverAppState } from "../reducers";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { TranslationText } from "../../../components/InternationalisationProvider";
+import { CommonState } from "../../../reducers";
 
 const { upload } = DriverActionCreators;
 const mapDispatchToProps = { upload };
-const mapStateToProps = (state: DriverAppState) => ({
+const mapStateToProps = (state: CommonState) => ({
   trips: state.trips
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);

@@ -54,6 +54,8 @@
   "otp.resent": "OTP resent",
   "otp.resend.failed": "Failed to resend OTP",
   "resend": "Resend",
-  "proof.of.delivery.tnc.received": "I have Received the goods and agree to Terms and conditions"
-
+  "proof.of.delivery.tnc.received": "I have Received the goods and agree to Terms and conditions",
+  "home": "Home",
+  "upcoming": "Upcoming trips",
+  "account": "Account"
 }

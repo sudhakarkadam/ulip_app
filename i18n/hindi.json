@@ -54,5 +54,8 @@
   "otp.resent": "OTP फिर से भेजा गया",
   "otp.resend.failed": "OTP को पुनः भेजने में विफल",
   "resend": "पुन: भेजें",
-  "proof.of.delivery.tnc.received": "मैंने माल प्राप्त कर लिया है और नियम और शर्तों से सहमत हूं"
+  "account": "खाता",
+  "proof.of.delivery.tnc.received": "मैंने माल प्राप्त कर लिया है और नियम और शर्तों से सहमत हूं",
+  "home": "घर",
+  "upcoming": "आगामी यात्राएँ"
 }
