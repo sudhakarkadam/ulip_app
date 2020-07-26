@@ -13,7 +13,6 @@ import { DriverActionCreators } from "../actions/DriverActionCreators";
 
 import {
   Flex,
-  FlexRow,
   Box,
   Text,
   TouchableOpacity

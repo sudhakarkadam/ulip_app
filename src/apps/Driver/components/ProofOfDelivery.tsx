@@ -11,7 +11,9 @@ import {
 } from "../../../components/@styled/BaseElements";
 import StyledButton from "../../../components/@styled/StyledButton";
 import { StickyBottom } from "../../../components/StickyBottom";
-import SignatureCapture from "react-native-signature-capture";
+import SignatureCapture, {
+  SaveEventParams
+} from "react-native-signature-capture";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { TranslationText } from "../../../components/InternationalisationProvider";
@@ -25,18 +27,15 @@ const mapStateToProps = (state: CommonState) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
-  const tripId =
-    props.trips &&
-    props.trips.data &&
-    props.trips.data[0] &&
-    props.trips.data[0].trip.id;
+  const tripId = props.trips.data?.transport_service_requests[0].tsr_id;
   const signRef = useRef(null);
   const [name, setName] = useState("");
   const [checked, setCheckbox] = useState(false);
   const saveSign = () => {
-    signRef.current.saveImage();
+    //@ts-ignore
+    signRef?.current?.saveImage();
   };
-  const onSaveEvent = result => {
+  const onSaveEvent = (result: SaveEventParams) => {
     const fd = new FormData();
     fd.append("file", {
       // @ts-ignore
@@ -46,7 +45,7 @@ const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
     });
     props.upload({
       file: fd,
-      id: tripId || "1",
+      id: tripId || 1,
       type: "POD"
     });
     alert("Signature Captured Successfully");
@@ -58,17 +57,18 @@ const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
           <TextWrapper label="Receiver's name">
             <Input value={name} onChangeText={text => setName(text)} />
           </TextWrapper>
-          <TextWrapper label="Signature" />
-          <View style={styles.body}>
-            <SignatureCapture
-              ref={signRef}
-              style={{ flex: 1 }}
-              onSaveEvent={onSaveEvent}
-              showNativeButtons={false}
-              showTitleLabel={false}
-              viewMode={"portrait"}
-            />
-          </View>
+          <TextWrapper label="Signature">
+            <View style={styles.body}>
+              <SignatureCapture
+                ref={signRef}
+                style={{ flex: 1 }}
+                onSaveEvent={onSaveEvent}
+                showNativeButtons={false}
+                showTitleLabel={false}
+                viewMode={"portrait"}
+              />
+            </View>
+          </TextWrapper>
         </Flex>
         <StickyBottom>
           <FlexRow>
@@ -90,9 +90,7 @@ const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
               height="50px"
               width="100%"
               title="Submit"
-              onPress={() => {
-                saveSign();
-              }}
+              onPress={saveSign}
             />
           </FlexRow>
         </StickyBottom>

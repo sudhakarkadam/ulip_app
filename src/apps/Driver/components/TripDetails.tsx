@@ -40,7 +40,7 @@ const TripDetailsPage: React.FC<Props> = props => {
         truckType={trip.vehicle_details.truck_type}
         truckUnit={trip.weight_unit}
         truckWeight={trip.weight + ""}
-        documents={trip.documents}
+        documents={trip.documents as any}
       />
     </Flex>
   );

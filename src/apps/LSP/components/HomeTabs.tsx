@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import React from "react";
+import { StackScreenProps } from "@react-navigation/stack";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
@@ -19,13 +20,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import TripTracking from "../../../components/TripTracking";
 import AccountsPage from "../../../components/AccountsPage";
+import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
 
+type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
+type TripRequestsProps = StackScreenProps<RootStackParamList, "TripAcceptPage">;
+type TripAcceptProps = StackScreenProps<RootStackParamList, "TripRequests">;
+
 const Stack = createStackNavigator();
-const HomeMetricsComponent = props => (
-  <HomeMetrics onRequestClick={() => props.navigation.push("TripRequests")} />
+const HomeMetricsComponent = (props: TripAcceptProps) => (
+  <HomeMetrics
+    onRequestClick={() => props.navigation.push("TripRequests", {})}
+  />
 );
-const History = props => (
+const History = (props: HistoryProps) => (
   <Page>
     <PageContent>
       <TripList
@@ -38,7 +46,7 @@ const History = props => (
     </PageContent>
   </Page>
 );
-const TripRequests = props => (
+const TripRequests = (props: TripRequestsProps) => (
   <Page>
     <PageContent>
       <TripList
@@ -51,13 +59,15 @@ const TripRequests = props => (
     </PageContent>
   </Page>
 );
-const TripAcceptPage = props => (
+const TripAcceptPage = (props: TripAcceptProps) => (
   <Page>
     <PageContent>
-      <TripAccept
-        onAction={() => props.navigation.navigate("TripRequests")}
-        tripDetails={props.route.params.tripDetails}
-      />
+      {props.route.params?.tripDetails && (
+        <TripAccept
+          onAction={() => props.navigation.navigate("TripRequests", {})}
+          tripDetails={props.route.params?.tripDetails}
+        />
+      )}
     </PageContent>
   </Page>
 );
@@ -71,7 +81,7 @@ const HeaderButtons = () => (
     </Box>
   </Box>
 );
-const LSPTripDetails = props => {
+const LSPTripDetails = (props: HistoryProps) => {
   const { tripDetails } = props.route.params;
   const tripData = tripDetails as GetTripsResponse;
   return (

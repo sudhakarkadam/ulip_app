@@ -26,6 +26,8 @@ export interface Root {
   trip_status: Status;
   tsr_id: number;
   vehicle_details: VehicleDetails;
+  weight_unit: string;
+  weight: string;
 }
 
 export interface DestinationLocationDetails {

@@ -24,12 +24,14 @@ const screen = Dimensions.get("window");
 const screenHeight = screen.height;
 
 const mapStateToProps = (state: CommonState, props: Props): TTDataProps => {
-  const trip = (state.trips.data || []).find(
-    t => t.id === props.route.params.tripId
+  const trip = (state.trips.data?.transport_service_requests || []).find(
+    t => t.tsr_id === props.route.params.tripId
   );
-  const pickupCity = ((trip && trip.pickUp_location.city) || "").toLowerCase();
-  const dropCity = ((trip && trip.delivery_location.city) || "").toLowerCase();
-  const delay = trip && trip.trip && trip.trip.status;
+  const pickupCity = (trip?.source_location_details.city || "").toLowerCase();
+  const dropCity = (
+    trip?.destination_location_details.city || ""
+  ).toLowerCase();
+  const delay = trip?.status;
 
   // @ts-ignore
   const source = cityLatLongs[pickupCity];

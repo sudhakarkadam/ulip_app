@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackScreenProps
+} from "@react-navigation/stack";
 import CompanyProfile from "../../../components/CompanyProfile";
 import PersonProfile from "../../../components/PersonProfile";
 import { Flex, HeaderOptions } from "../../../components/@styled/BaseElements";
@@ -7,19 +10,28 @@ import CardComp from "../../../components/CardComp";
 const personIcon = require("../../../icons/person-icon.png");
 import Hometabs from "./HomeTabs";
 import { ReducerState } from "../store";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 import { I18nContext } from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
+import { GetTripsResponse, PerosnaDetails } from "../../../models/CommonModel";
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
   CreateProfile: undefined;
   PersonProfile: undefined;
   CompanyProfile: undefined;
-  TripRequests: undefined;
+  TripRequests: { tripDetails?: GetTripsResponse };
   HomeMetrics: undefined;
-  TripAcceptPage: undefined;
+  TripAcceptPage: { tripDetails: GetTripsResponse };
+  TripDetails: { tripDetails: GetTripsResponse };
+  TripTracking: { tripId: number };
 };
+
+type CreateProfileProps = StackScreenProps<RootStackParamList, "CreateProfile">;
+type HomeMetricsProps = StackScreenProps<RootStackParamList, "HomeMetrics">;
+type ProfileProps = StackScreenProps<RootStackParamList, "PersonProfile"> &
+  StackScreenProps<RootStackParamList, "CompanyProfile">;
+
 const mapStateToProps = (state: ReducerState) => ({
   userInfo: state.user.data
 });
@@ -27,7 +39,9 @@ const { saveCompanyProfile, savePersonalProfile } = ActionCreators;
 const mapDispatchToProps = { saveCompanyProfile, savePersonalProfile };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const LSPPersonProfile = props => (
+const LSPPersonProfile = (
+  props: CreateProfileProps & ConnectedProps<typeof connector>
+) => (
   <PersonProfile
     userInfo={props.userInfo}
     createProfileCallback={async ({ name }) => {
@@ -39,7 +53,7 @@ const LSPPersonProfile = props => (
           name,
           phone,
           loginId,
-          persona: userInfo.userPersona
+          persona: userInfo.userPersona?.toUpperCase() || ""
         });
         props.navigation.navigate("CreateProfile");
       } catch {
@@ -50,10 +64,12 @@ const LSPPersonProfile = props => (
 );
 const ConnectedLSPPersonProfile = connector(LSPPersonProfile);
 
-const LSPCreateProfile = props => {
+const LSPCreateProfile = (
+  props: ConnectedProps<typeof connector> & ProfileProps
+) => {
   const { translate } = useContext(I18nContext);
   const profileCreated = props.userInfo.user_details.find(
-    role => role.profile.persona === "LSP"
+    (role: PerosnaDetails) => role.profile.persona === "LSP"
   );
   const personVerified = profileCreated?.profile.name;
   const comapnyVerified = profileCreated?.business_details;
@@ -89,9 +105,12 @@ const LSPCreateProfile = props => {
 };
 const ConnectedLSPCreateProfile = connector(LSPCreateProfile);
 
-const LSPCompanyProfile = props => {
+const LSPCompanyProfile = (
+  props: ConnectedProps<typeof connector> & HomeMetricsProps
+) => {
   const userId = props.userInfo.user_details.find(
-    role => role.profile.persona.toLowerCase() === props.userInfo.userPersona
+    (role: PerosnaDetails) =>
+      role.profile.persona.toLowerCase() === props.userInfo.userPersona
   );
   const location = {
     address: "Sector 4, Rohini",
@@ -123,9 +142,9 @@ const LSPCompanyProfile = props => {
 const ConnectedCompanyProfile = connector(LSPCompanyProfile);
 
 const Stack = createStackNavigator<RootStackParamList>();
-const AuthenticatedFlow = props => {
+const AuthenticatedFlow = (props: ConnectedProps<typeof connector>) => {
   const profileCreated = props.userInfo.user_details.find(
-    role => role.profile.persona === "LSP"
+    (role: PerosnaDetails) => role.profile.persona === "LSP"
   );
   const personVerified = profileCreated?.profile.name;
   const comapnyVerified = profileCreated?.business_details;

@@ -19,7 +19,7 @@ import {
 import { PrimaryText } from "../../../components/@styled/Text";
 import StyledButton from "../../../components/@styled/StyledButton";
 import { TripStamp, convert } from "../../../components/TripStamp";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { DriverActionCreators } from "../actions/DriverActionCreators";
 
@@ -51,7 +51,7 @@ const capture = (callback: (data: FormData) => void) => {
     fd.append("file", {
       // @ts-ignore
       uri: data.uri,
-      type: data.type,
+      type: data.type || "",
       name: data.fileName
     });
     callback(fd);
@@ -68,9 +68,12 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripHome">;
-};
+} & StackScreenProps<DriverHomeStackParamList, "TripHome">;
 
-const SwipeActions = (_, dragX) => {
+const SwipeActions = (
+  _: Animated.AnimatedInterpolation,
+  dragX: Animated.AnimatedInterpolation
+) => {
   const translate = dragX.interpolate({
     inputRange: [0, 150],
     outputRange: [0, 65]
@@ -102,8 +105,7 @@ const getStartText = () => {
 };
 
 const Trip: React.FC<Props> = props => {
-  console.log(props);
-  const getTrip = () => props.getTripById(props.route.params.id);
+  const getTrip = () => props.getTripById(Number(props.route.params.id));
 
   useEffect(() => {
     getTrip();
@@ -250,7 +252,7 @@ const Trip: React.FC<Props> = props => {
             capture(async d => {
               await props.upload({
                 file: d,
-                id: trip.trip.id,
+                id: trip.trip_id,
                 type: "POD"
               });
               getTrip();
@@ -259,6 +261,7 @@ const Trip: React.FC<Props> = props => {
         />
       );
     }
+    return;
   };
 
   return (
@@ -266,7 +269,7 @@ const Trip: React.FC<Props> = props => {
       <PageContent>
         <ScrollView>
           <FlatList
-            onRefresh={() => props.getTripById(props.route.params.id)}
+            onRefresh={() => props.getTripById(Number(props.route.params.id))}
             refreshing={isLoading(props.trip)}
             data={[trip]}
             renderItem={t => {

@@ -11,6 +11,7 @@ import ShipperTripDetails from "./ShipperTripDetails";
 import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
+import { PerosnaDetails } from "../../../models/CommonModel";
 
 export type HomeStackParamList = {
   CreateProfile: undefined;
@@ -32,7 +33,7 @@ type OwnProps = ConnectedProps<typeof connector>;
 
 const HomeStack = (props: OwnProps) => {
   const profileCreated = props.userInfo.user_details.find(
-    role => role.profile.persona === "SHIPPER"
+    (role: PerosnaDetails) => role.profile.persona === "SHIPPER"
   );
   const personVerified = profileCreated?.profile.name;
   const comapnyVerified = profileCreated?.business_details;
