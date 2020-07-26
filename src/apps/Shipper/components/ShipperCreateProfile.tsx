@@ -6,6 +6,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
 import { HomeStackParamList } from "./HomeStack";
 import { I18nContext } from "../../../components/InternationalisationProvider";
+import { PerosnaDetails } from "../../../models/CommonModel";
 const personIcon = require("../../../icons/person-icon.png");
 const mapStateToProps = (state: CommonState) => {
   return {
@@ -20,7 +21,7 @@ type AllProps = StackScreenProps<HomeStackParamList, "CreateProfile"> &
 const ShipperCreateProfile = (props: AllProps) => {
   const { translate } = useContext(I18nContext);
   const profileExist = props.userInfo.user_details.find(
-    role => role.profile.persona === "SHIPPER"
+    (role: PerosnaDetails) => role.profile.persona === "SHIPPER"
   );
   const personVerified = profileExist?.profile.name;
   const comapnyVerified = profileExist?.business_details;

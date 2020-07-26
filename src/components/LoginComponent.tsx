@@ -2,12 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { Flex, Box, Image } from "./@styled/BaseElements";
 import { Text, TextInput, ToastAndroid } from "react-native";
 import colors from "../theme/colors";
-import Logo from "../images/logo.png";
 import StyledButton from "../components/@styled/StyledButton";
 import CodeInput from "../components/CodeInput";
 import {
   PrimaryText,
-  PrimaryTextSmall,
   PrimaryHeaderText,
   SecondaryText,
   SecondaryLabel,
@@ -18,6 +16,8 @@ import ActionCreators from "../actions/ActionCreators";
 import { TranslationText, I18nContext } from "./InternationalisationProvider";
 import { Page } from "./@styled/Page";
 import { CommonState } from "../reducers/index";
+
+const Logo = require("../images/logo.png");
 
 const { verifyOtp, sendOtp, resendOtp } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
@@ -42,6 +42,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
       }, 30000);
       return () => clearTimeout(timer);
     }
+    return;
   }, [resendCycle]);
 
   const resend = async () => {

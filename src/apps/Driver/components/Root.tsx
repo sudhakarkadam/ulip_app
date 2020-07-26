@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/prefer-interface */
+/* eslint-disable react/display-name */
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -27,12 +29,12 @@ const mapStateToProps = (state: CommonState) => ({
 
 const connector = connect(mapStateToProps, {});
 
-export interface RootStackParamList {
+export type RootStackParamList = {
   CreateProfile: undefined;
   PersonProfile: undefined;
   TripStart: undefined;
   TripDetails: undefined;
-}
+};
 
 const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
   const [showSplash, toggleSplash] = useState(true);
@@ -56,9 +58,7 @@ const App: React.FC<Props & ConnectedProps<typeof connector>> = props => {
             />
           )}
           {isLoggedIn && (
-            <Stack.Screen name="Home">
-              {() => <AuthenticatedFlow userInfo={userInfo} />}
-            </Stack.Screen>
+            <Stack.Screen name="Home" component={AuthenticatedFlow} />
           )}
         </Stack.Navigator>
       </ThemeProvider>

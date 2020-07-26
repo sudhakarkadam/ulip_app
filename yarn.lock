@@ -1690,6 +1690,14 @@
     "@types/react-native" "*"
     "@types/xdate" "*"
 
+"@types/react-native-signature-capture@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@types/react-native-signature-capture/-/react-native-signature-capture-0.4.1.tgz#04e6e07cbef69a3a3339e5f01ee868639f0bc81e"
+  integrity sha512-BCOwwvXVXYWlzWd4KMrKJku+MNLCXmOro54jbwAiy0jVkWsQankrC8m006jg5kNw7DT8LIAcWTWSZbcG1wNN4w==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
 "@types/react-native@*":
   version "0.62.13"
   resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.62.13.tgz#c688c5ae03e426f927f7e1fa1a59cd067f35d1c2"

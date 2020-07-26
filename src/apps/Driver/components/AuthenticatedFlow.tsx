@@ -15,6 +15,10 @@ export type DriverHomeStackParamList = {
   PersonProfile: undefined;
   HomePage: undefined;
   HomeTabsPage: undefined;
+  ProofOfDelivery: undefined;
+  TripList: undefined;
+  TripHome: { id: string };
+  TripDetails: undefined;
 };
 
 const { savePersonalProfile } = ActionCreators;
@@ -26,7 +30,9 @@ const mapStateToProps = (state: CommonState) => ({
 const mapDispatchToProps = { savePersonalProfile };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const AuthenticatedFlow: React.FC<ConnectedProps<typeof connector>> = props => {
+type OwnProps = ConnectedProps<typeof connector>;
+
+const AuthenticatedFlow = (props: OwnProps) => {
   const profileCreated = props.userInfo.user_details.find(
     role => role.profile.persona === "DRIVER"
   );

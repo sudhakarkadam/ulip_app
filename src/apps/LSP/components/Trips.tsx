@@ -1,13 +1,19 @@
 import React, { useState } from "react";
+import { StackScreenProps } from "@react-navigation/stack";
+import { Dimensions } from "react-native";
+import { TabView, TabBar } from "react-native-tab-view";
 import { Flex } from "../../../components/@styled/BaseElements";
 import colors from "../../../theme/colors";
-import { TabView, TabBar } from "react-native-tab-view";
 import { AllApps } from "../../../models/CommonModel";
 import { TripList, ListingModes } from "../../../components/TripListing";
-import { Dimensions } from "react-native";
 import { renderTabBarLable } from "../../../components/NavHelper";
+import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
-const Trips: React.FunctionComponent<{}> = props => {
+
+type AllProps = StackScreenProps<RootStackParamList, "TripDetails"> &
+  StackScreenProps<RootStackParamList, "TripTracking">;
+
+const Trips = (props: AllProps) => {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: "UPCOMING", title: "UPCOMING" },
@@ -33,10 +39,8 @@ const Trips: React.FunctionComponent<{}> = props => {
         <TripList
           listingMode={ListingModes.ON_ROAD}
           from={AllApps.LSP}
-          onRowClick={
-            (id, _item) => props.navigation.push("TripTracking", { tripId: id })
-
-            // props.navigation.navigate("TripDetails", { tripDetails: item })
+          onRowClick={(id, _item) =>
+            props.navigation.push("TripTracking", { tripId: Number(id) })
           }
         />
       </PageContent>

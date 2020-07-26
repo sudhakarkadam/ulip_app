@@ -1,20 +1,17 @@
 /* eslint-disable react/display-name */
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AccountsPage from "../../../components/AccountsPage";
 import { TripHome } from "./TripHome";
 import TripDetails from "./TripDetails";
-import { Text, HeaderOptions } from "../../../components/@styled/BaseElements";
+import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
 import InTransitBlur from "../../../images/intransit_blur.svg";
 import UpcomingTrips from "./DriverUpcomingTrips";
 import UlipBottomTab from "../../../components/UlipBottomTab";
-import {
-  I18nContext,
-  TranslationText
-} from "../../../components/InternationalisationProvider";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 
 const Stack = createStackNavigator();
 

@@ -13,7 +13,6 @@ import { DriverActionCreators } from "../actions/DriverActionCreators";
 
 import {
   Flex,
-  FlexRow,
   Box,
   Text,
   TouchableOpacity
@@ -56,7 +55,7 @@ const UpcomingTrips: React.FC<Props> = ({
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("TripHome", {
-                        id: t.trip_id
+                        id: t.tsr_id.toString()
                       })
                     }
                   >

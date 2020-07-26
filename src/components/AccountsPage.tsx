@@ -43,14 +43,13 @@ const ProfileWrapper = styled(Flex)`
 `;
 
 type Text = "i.am.shipper" | "i.am.driver" | "i.am.lsp";
-type Actors = "lsp" | "shipper" | "driver";
 interface Payload {
   text: Text;
   icon: any;
   navigationScreen: string;
   businessKey: string;
 }
-export const personaMapping: Record<Actors, Payload> = {
+export const personaMapping: Record<string, Payload> = {
   shipper: {
     text: "i.am.shipper" as "i.am.shipper",
     icon: <ShipperIcon />,
@@ -91,23 +90,20 @@ const ProfileSection = ({
       </ProfileWrapper>
       <ProfileWrapper>
         <TranslationText id="other.profiles" />
-        {Object.keys(personaMapping).map(
-          //@ts-ignore
-          (otherPersona: Actors) => {
-            const isSetupComplete = userInfo.user_details?.find(
-              role => role.profile.persona.toLowerCase() === otherPersona
-            );
-            return otherPersona !== persona ? (
-              <AccountsProfileCard
-                key={otherPersona}
-                text={translate(personaMapping[otherPersona].text)}
-                subText={isSetupComplete ? "" : translate("setup.required")}
-                icon={personaMapping[otherPersona].icon}
-                onPress={() => selectedOtherPersona(otherPersona)}
-              />
-            ) : null;
-          }
-        )}
+        {Object.keys(personaMapping).map((otherPersona: string) => {
+          const isSetupComplete = userInfo.user_details?.find(
+            role => role.profile.persona.toLowerCase() === otherPersona
+          );
+          return otherPersona !== persona ? (
+            <AccountsProfileCard
+              key={otherPersona}
+              text={translate(personaMapping[otherPersona].text)}
+              subText={isSetupComplete ? "" : translate("setup.required")}
+              icon={personaMapping[otherPersona].icon}
+              onPress={() => selectedOtherPersona(otherPersona)}
+            />
+          ) : null;
+        })}
       </ProfileWrapper>
     </>
   );

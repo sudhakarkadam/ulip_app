@@ -2,32 +2,42 @@ import { DriverTrips } from "../apps/Driver/models/DriverTrips";
 
 export const driverTrips: DriverTrips = [
   {
-    id: 6,
-    pickUp_location: {
+    tsr_id: 6,
+    source_location_details: {
+      id: 2,
       address: "",
-      city: "Bangalore",
-      state: "Karnataka"
+      city: "Delhi",
+      state: "",
+      map_ref: { ref: "" },
+      country: "",
+      name: "Delhi",
+      postal_code: 110085
     },
-    delivery_location: {
+    destination_location_details: {
+      id: 5,
       address: "",
       city: "Mumbai",
-      state: "Karnataka"
+      state: "",
+      map_ref: { ref: "" },
+      country: "",
+      name: "Mumbai",
+      postal_code: 401501
     },
-    pickup_date: "2020-06-28T17:38:35.000+0000",
-    good_type: "rice",
-    weight: 120,
+    pickup_request_time: 12212321312,
+    weight: "120",
     weight_unit: "ton",
-    status: "ACCEPTED",
-    truck_type_preference: "OPEN",
-    trip: {
-      id: 5,
-      status: "TRIP_STARTED",
-      eta: "2020-06-27T21:05:53.000+0000",
-      driver_name: "driver1-ph",
-      truck_name: null,
+    trip_id: 4,
+    trip_status: "COMPLETED",
+    documents: [],
+    vehicle_details: {
+      business_id: "string",
+      device_id: "string",
+      device_type: "string",
+      truck_name: "Shreynik_truck",
+      truck_number: "DL20HR2121",
       truck_type: "OPEN",
-      delay: false,
-      documents: []
+      tsp_id: "",
+      vehicle_id: 12212
     }
   }
 ];

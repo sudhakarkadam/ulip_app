@@ -30,7 +30,7 @@ const mapDispatchToProps = { getAppConfigs };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props {
-  isLanguageSelected?: boolean;
+  isLanguageSelected: boolean;
   userPersona?: string;
 }
 const AuthenticatedStackNavigator: React.FC<Props> = ({
@@ -119,7 +119,7 @@ const DrawerNavigator: React.FC<Props> = ({
 const App: React.FC<ConnectedProps<typeof connector>> = props => {
   const isLoggedIn = props.userInfo.access_token ? true : false;
   const userPersona = props.userInfo.userPersona;
-  const isLanguageSelected = props.userInfo.language;
+  const isLanguageSelected = props.userInfo.language ? true : false;
 
   useEffect(() => {
     HeaderProvider.setToken("token");
