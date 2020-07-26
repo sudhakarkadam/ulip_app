@@ -78,8 +78,8 @@ const LSPTripDetails = props => {
     <Page>
       <PageContent>
         <TripDetails
-          documents={tripData.trip.documents}
-          id={tripData.id as any}
+          documents={tripData.trip_details?.documents}
+          id={tripData.tsr_id as any}
           pickupDateString={tripData.pickup_date as any}
           truckType={tripData.truck_type_preference}
           truckWeight={tripData.weight as any}
@@ -88,12 +88,12 @@ const LSPTripDetails = props => {
           places={
             [
               {
-                name: tripData.pickUp_location.city,
-                ...tripData.pickUp_location
+                name: tripData.source_location_details.city,
+                ...tripData.source_location_details
               },
               {
-                name: tripData.delivery_location.city,
-                ...tripData.delivery_location
+                name: tripData.destination_location_details.city,
+                ...tripData.destination_location_details
               }
             ] as any
           }
