@@ -14,7 +14,7 @@ interface OwnProps {
 
 const SelectComponent = (props: OwnProps) => {
   const [selectedValue, setSelectedValue] = useState(props.defaultValue);
-  const { label, data, getSelectedValue } = props;
+  const { label, data, getSelectedValue, onOpen } = props;
   return (
     <Flex>
       {label && (

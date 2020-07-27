@@ -8,7 +8,7 @@ import PersonProfile from "../../../components/PersonProfile";
 import { Flex, HeaderOptions } from "../../../components/@styled/BaseElements";
 import CardComp from "../../../components/CardComp";
 const personIcon = require("../../../icons/person-icon.png");
-import Hometabs from "./HomeTabs";
+import LSPLanding from "./LSPLanding";
 import { ReducerState } from "../store";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
@@ -152,7 +152,7 @@ const AuthenticatedFlow = (props: ConnectedProps<typeof connector>) => {
     <>
       {personVerified && comapnyVerified ? (
         <Stack.Navigator initialRouteName={"HomeMetrics"} headerMode={"none"}>
-          <Stack.Screen name="HomeMetrics" component={Hometabs} />
+          <Stack.Screen name="HomeMetrics" component={LSPLanding} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator

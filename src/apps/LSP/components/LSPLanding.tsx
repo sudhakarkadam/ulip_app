@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-interface */
 /* eslint-disable react/display-name */
 import React from "react";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -7,12 +8,11 @@ import InTransitSelected from "../../../images/intransit_selected.svg";
 import InTransitBlur from "../../../images/intransit_blur.svg";
 import HistorySelected from "../../../images/history_selected.svg";
 import HistoryBlur from "../../../images/history_blur.svg";
-import HomeMetrics from "./HomeMetrics";
 import Trips from "./Trips";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import UlipBottomTab from "../../../components/UlipBottomTab";
-import TripAccept from "./TripAccept";
+
 import { Box, HeaderOptions } from "../../../components/@styled/BaseElements";
 import Search from "../../../images/search.svg";
 import Notification from "../../../images/notification.svg";
@@ -20,19 +20,25 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import TripTracking from "../../../components/TripTracking";
 import AccountsPage from "../../../components/AccountsPage";
+import TruckSelect from "./TruckSelect";
 import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
+import HomeStack from "./LSPHomeStack";
 
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
-type TripRequestsProps = StackScreenProps<RootStackParamList, "TripAcceptPage">;
-type TripAcceptProps = StackScreenProps<RootStackParamList, "TripRequests">;
+
+const HeaderButtons = () => (
+  <Box pr={6} flexDirection="row">
+    <Box mr={7}>
+      <Notification />
+    </Box>
+    <Box mx={3}>
+      <Search />
+    </Box>
+  </Box>
+);
 
 const Stack = createStackNavigator();
-const HomeMetricsComponent = (props: TripAcceptProps) => (
-  <HomeMetrics
-    onRequestClick={() => props.navigation.push("TripRequests", {})}
-  />
-);
 const History = (props: HistoryProps) => (
   <Page>
     <PageContent>
@@ -45,41 +51,6 @@ const History = (props: HistoryProps) => (
       />
     </PageContent>
   </Page>
-);
-const TripRequests = (props: TripRequestsProps) => (
-  <Page>
-    <PageContent>
-      <TripList
-        listingMode={ListingModes.PENDING_REQUESTS}
-        from={AllApps.LSP}
-        onRowClick={(_id, item) =>
-          props.navigation.push("TripAcceptPage", { tripDetails: item })
-        }
-      />
-    </PageContent>
-  </Page>
-);
-const TripAcceptPage = (props: TripAcceptProps) => (
-  <Page>
-    <PageContent>
-      {props.route.params?.tripDetails && (
-        <TripAccept
-          onAction={() => props.navigation.navigate("TripRequests", {})}
-          tripDetails={props.route.params?.tripDetails}
-        />
-      )}
-    </PageContent>
-  </Page>
-);
-const HeaderButtons = () => (
-  <Box pr={6} flexDirection="row">
-    <Box mr={7}>
-      <Notification />
-    </Box>
-    <Box mx={3}>
-      <Search />
-    </Box>
-  </Box>
 );
 const LSPTripDetails = (props: HistoryProps) => {
   const { tripDetails } = props.route.params;
@@ -110,30 +81,6 @@ const LSPTripDetails = (props: HistoryProps) => {
         />
       </PageContent>
     </Page>
-  );
-};
-const HomeStack = () => {
-  return (
-    <Stack.Navigator
-      initialRouteName={"HomeMetricsComponent"}
-      screenOptions={HeaderOptions}
-    >
-      <Stack.Screen
-        name="TripRequests"
-        component={TripRequests}
-        options={{ title: "Home", headerRight: HeaderButtons }}
-      />
-      <Stack.Screen
-        name="HomeMetricsComponent"
-        component={HomeMetricsComponent}
-        options={{ title: "Home", headerRight: HeaderButtons }}
-      />
-      <Stack.Screen
-        name="TripAcceptPage"
-        component={TripAcceptPage}
-        options={{ title: "Truck Request", headerRight: HeaderButtons }}
-      />
-    </Stack.Navigator>
   );
 };
 
@@ -221,8 +168,30 @@ const tabs = [
   }
 ];
 
-const Hometabs = () => {
-  return <UlipBottomTab tabs={tabs} />;
+export type LSPAuthenticatedStackParamList = {
+  MainBottomTab: undefined;
+  TruckSelect: undefined;
 };
 
-export default Hometabs;
+const MainStack = createStackNavigator<LSPAuthenticatedStackParamList>();
+
+const MainBottomTab: React.FC = () => (
+  <UlipBottomTab tabs={tabs}></UlipBottomTab>
+);
+
+const LSPLanding = () => {
+  return (
+    <MainStack.Navigator initialRouteName="MainBottomTab" headerMode="none">
+      <MainStack.Screen
+        name="MainBottomTab"
+        component={MainBottomTab}
+      ></MainStack.Screen>
+      <MainStack.Screen
+        name="TruckSelect"
+        component={TruckSelect}
+      ></MainStack.Screen>
+    </MainStack.Navigator>
+  );
+};
+
+export default LSPLanding;

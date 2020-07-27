@@ -150,7 +150,7 @@ export const TextWrapper = (props: {
   label: React.ReactNode;
 }) => {
   return (
-    <Flex mt={5}>
+    <Flex mb={2}>
       <Text mb={3} color={`${colors.grays[5]}`} fontSize={1}>
         {props.label}
       </Text>

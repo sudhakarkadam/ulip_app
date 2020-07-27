@@ -32,7 +32,7 @@ const AcceptTripModal = (props: OwnProps) => {
 
   return (
     <Flex>
-      <PrimaryText>
+      <PrimaryText mb={4}>
         <TranslationText id="driver.details" />
       </PrimaryText>
       <TextWrapper label={<TranslationText id="driver.name" />}>
