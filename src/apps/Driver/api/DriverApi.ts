@@ -7,8 +7,7 @@ const urls = {
   getTrips: `${endpoint}/ulip/trip/driver/`,
   getTripById: `${endpoint}/ulip/trip/`,
   updateTrip: `${endpoint}/ulip/transport_service_request/updateStatus`,
-  upload: (id: number, type: string) =>
-    `${endpoint}/ulip/trip/${id}/document/upload?type=${type}`
+  upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`
 };
 
 export const getTrips = (driverPhoneNumber: string) =>

@@ -6,6 +6,7 @@ export type Keys =
   | "choose.reason"
   | "choose.truck"
   | "close"
+  | "submit"
   | "company.setup"
   | "confirm"
   | "current.profile"
@@ -59,7 +60,18 @@ export type Keys =
   | "proof.of.delivery.tnc.received"
   | "home"
   | "upcoming"
-  | "account";
+  | "account"
+  | "add.now"
+  | "please.wait"
+  | "try.again"
+  | "eway.pending"
+  | "eway.loading"
+  | "eway.error"
+  | "eway.success"
+  | "do.not.have.ewb"
+  | "generate.ewb"
+  | "details"
+  | "must.have.ewb";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -69,6 +81,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "choose.truck"
   ? never
   : T extends "close"
+  ? never
+  : T extends "submit"
   ? never
   : T extends "company.setup"
   ? never
@@ -177,5 +191,27 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "upcoming"
   ? never
   : T extends "account"
+  ? never
+  : T extends "add.now"
+  ? never
+  : T extends "please.wait"
+  ? never
+  : T extends "try.again"
+  ? never
+  : T extends "eway.pending"
+  ? never
+  : T extends "eway.loading"
+  ? never
+  : T extends "eway.error"
+  ? never
+  : T extends "eway.success"
+  ? never
+  : T extends "do.not.have.ewb"
+  ? never
+  : T extends "generate.ewb"
+  ? never
+  : T extends "details"
+  ? never
+  : T extends "must.have.ewb"
   ? never
   : never;

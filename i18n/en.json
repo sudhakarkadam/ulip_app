@@ -4,6 +4,7 @@
   "choose.reason": "Choose Reason",
   "choose.truck": "Choose Truck",
   "close": "Close",
+  "submit": "Submit",
   "company.setup": "Company setup",
   "confirm": "Confirm",
   "current.profile": "Current Profile",
@@ -57,5 +58,16 @@
   "proof.of.delivery.tnc.received": "I have Received the goods and agree to Terms and conditions",
   "home": "Home",
   "upcoming": "Upcoming trips",
-  "account": "Account"
+  "account": "Account",
+  "add.now": "Add now",
+  "please.wait": "Please wait",
+  "try.again": "Try again",
+  "eway.pending": "Trip E- Way bill is pending.",
+  "eway.loading": "E-Way bill generation is in process…",
+  "eway.error": "Error occured while generating E-way bill.",
+  "eway.success": "Trip E- Way bill is added.",
+  "do.not.have.ewb": "In case, if you do not have EWB number",
+  "generate.ewb": "Generate E-Way bill",
+  "details": "Details",
+  "must.have.ewb": "You must have E-Way credentials to generate bill."
 }

@@ -8,6 +8,7 @@ import { CommonState } from "../../../reducers";
 import Hometabs from "./HomeTabs";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import ProofOfDelivery from "./ProofOfDelivery";
+import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -75,6 +76,11 @@ const AuthenticatedFlow = (props: OwnProps) => {
         name="ProofOfDelivery"
         component={ProofOfDelivery}
         options={{ title: "Add Signature" }}
+      />
+      <Stack.Screen
+        name="EwayBillGeneration"
+        component={EWayBillGenerationPage}
+        options={{ title: "Generate E-way bill" }}
       />
     </Stack.Navigator>
   );
