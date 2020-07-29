@@ -22,6 +22,7 @@
   "lsp": "தளவாட சேவை வழங்குநர்",
   "mobile.number": "கைபேசி எண்",
   "no.trips": "பயணங்கள் இல்லை",
+  "no.upcoming.trips": "வரவிருக்கும் பயணங்கள் இல்லை",
   "on.road": "சாலையில்",
   "other.profiles": "பிற சுயவிவரங்கள்",
   "otp.sent": "ஒரு OTP அனுப்பப்பட்டுள்ளது",
@@ -55,7 +56,7 @@
   "otp.resend.failed": "OTP ஐ மீண்டும் அனுப்புவதில் தோல்வி",
   "resend": "மீண்டும் அனுப்பு",
   "proof.of.delivery.tnc.received": "நான் பொருட்களைப் பெற்றுள்ளேன் மற்றும் விதிமுறைகளையும் நிபந்தனைகளையும் ஏற்றுக்கொள்கிறேன்",
-  "home": "home",
-  "upcoming":"upcoming",
+  "home": "தொடக்கம்",
+  "upcoming": "upcoming",
   "account": "account"
 }

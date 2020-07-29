@@ -29,7 +29,7 @@ const PersonProfile = (props: OwnProps) => {
           <Input
             label="Mobile number"
             editable={false}
-            value={props.userInfo?.phone_number || ""}
+            value={`+91-${props.userInfo?.phone_number}` || ""}
             onChangeText={text => setName(text)}
           />
           <Flex mt={5}>

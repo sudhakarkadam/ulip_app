@@ -24,6 +24,7 @@ export type Keys =
   | "lsp"
   | "mobile.number"
   | "no.trips"
+  | "no.upcoming.trips"
   | "on.road"
   | "other.profiles"
   | "otp.sent"

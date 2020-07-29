@@ -23,6 +23,7 @@
   "mobile.number": "Mobile Number",
   "no.trips": "No trips",
   "on.road": "LIVE TRACKING",
+  "no.upcoming.trips": "No upcoming trips",
   "other.profiles": "Other Profiles",
   "otp.sent": "An OTP has been sent to",
   "otp.verified": "OTP successfully verified for {{phoneNumber}}",
