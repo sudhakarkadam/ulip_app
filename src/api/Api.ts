@@ -137,5 +137,16 @@ export default {
         headers: HeaderProvider.getHeaders()
       }
     );
+  },
+
+  // todo add actual models, urls and payloads
+  saveWarehouse(req: CreateTripRequestModel) {
+    return http.post<CreateTripRequestModel, CreateTripRequestModel>(
+      urls.createTrip,
+      req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   }
 };

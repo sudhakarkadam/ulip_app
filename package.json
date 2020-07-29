@@ -86,7 +86,7 @@
     "metro-react-native-babel-preset": "^0.56.0",
     "node-watch": "^0.6.4",
     "prettier": "1.19",
-    "react-native-typescript-transformer": "^1.2.12",
+    "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "16.9.0",
     "typescript": "^3.7"
   },

@@ -70,5 +70,6 @@
   "do.not.have.ewb": "In case, if you do not have EWB number",
   "generate.ewb": "Generate E-Way bill",
   "details": "Details",
-  "must.have.ewb": "You must have E-Way credentials to generate bill."
+  "must.have.ewb": "You must have E-Way credentials to generate bill.",
+  "warehouse.details": "Warehouse details"
 }

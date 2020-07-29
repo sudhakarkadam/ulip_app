@@ -24,8 +24,8 @@ export type Keys =
   | "lsp"
   | "mobile.number"
   | "no.trips"
-  | "no.upcoming.trips"
   | "on.road"
+  | "no.upcoming.trips"
   | "other.profiles"
   | "otp.sent"
   | "otp.verified"
@@ -72,7 +72,8 @@ export type Keys =
   | "do.not.have.ewb"
   | "generate.ewb"
   | "details"
-  | "must.have.ewb";
+  | "must.have.ewb"
+  | "warehouse.details";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -120,6 +121,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "no.trips"
   ? never
   : T extends "on.road"
+  ? never
+  : T extends "no.upcoming.trips"
   ? never
   : T extends "other.profiles"
   ? never
@@ -214,5 +217,7 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "details"
   ? never
   : T extends "must.have.ewb"
+  ? never
+  : T extends "warehouse.details"
   ? never
   : never;

@@ -12,6 +12,7 @@ import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import { PerosnaDetails } from "../../../models/CommonModel";
+import WarehoueseAdd from "./WarehouseAdd";
 
 export type HomeStackParamList = {
   CreateProfile: undefined;
@@ -20,6 +21,7 @@ export type HomeStackParamList = {
   CreateTrip: undefined;
   MainTripListing: undefined;
   ShipperTripDetails: { data: string };
+  WarehouseAdd: undefined;
 };
 
 const mapStateToProps = (state: CommonState) => ({
@@ -62,7 +64,7 @@ const HomeStack = (props: OwnProps) => {
         </Stack.Navigator>
       ) : (
         <Stack.Navigator
-          initialRouteName="MainTripListing"
+          initialRouteName="WarehouseAdd"
           screenOptions={HeaderOptions}
         >
           <Stack.Screen
@@ -79,6 +81,11 @@ const HomeStack = (props: OwnProps) => {
             name="CreateTrip"
             component={ShipperCreateTrip}
             options={{ title: "Create Trip" }}
+          />
+          <Stack.Screen
+            name="WarehouseAdd"
+            component={WarehoueseAdd}
+            options={{ title: "Add Warehouse" }}
           />
         </Stack.Navigator>
       )}

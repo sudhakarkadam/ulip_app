@@ -94,6 +94,14 @@ const ActionCreators = {
     ],
     api.getMetrics
   ),
+  saveWarehouse: createAsyncAction(
+    [
+      actions.SAVE_WAREHOUSE_REQUEST,
+      actions.SAVE_WAREHOUSE_SUCCESS,
+      actions.SAVE_WAREHOUSE_ERROR
+    ],
+    api.saveWarehouse
+  ),
   setUserPersona: (args: { user: string }) =>
     createAction(actions.SET_USER_PERSONA, args, {}),
 
