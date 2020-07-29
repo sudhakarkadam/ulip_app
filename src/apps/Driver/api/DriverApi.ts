@@ -1,6 +1,6 @@
 import http from "../../../utils/http";
 import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
-
+import RNFetch from "rn-fetch-blob";
 const endpoint = "http://10.24.7.179";
 
 const urls = {
@@ -21,6 +21,22 @@ export const getTripById = (id: string) => {
 
 export const updateTrip = (args: UpdateTripRequest) =>
   http.put<UpdateTripRequest, {}>(urls.updateTrip, args);
+
+export const specialUpload = (args: any) => {
+  return RNFetch.fetch(
+    "POST",
+    urls.upload(args.id),
+    {
+      "Content-Type": "multipart/form-data"
+    },
+    [
+      { name: "file", filename: "sig.jpeg", data: args.fileData },
+      { name: "document_format", data: args.document_format },
+      { name: "document_type", data: args.document_type },
+      { name: "document_id", data: args.document_id }
+    ]
+  );
+};
 
 export const upload = ({
   file,

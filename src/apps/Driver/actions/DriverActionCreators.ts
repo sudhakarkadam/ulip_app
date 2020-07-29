@@ -37,6 +37,15 @@ export const DriverActionCreators = {
   upload: createAsyncAction(
     [actions.UPLOAD_REQUEST, actions.UPLOAD_SUCCESS, actions.UPLOAD_ERROR],
     api.upload
+  ),
+
+  specialUpload: createAsyncAction(
+    [
+      actions.SPECIAL_UPLOAD_REQUEST,
+      actions.SPECIAL_UPLOAD_SUCCESS,
+      actions.SPECIAL_UPLOAD_ERROR
+    ],
+    api.specialUpload
   )
 };
 
