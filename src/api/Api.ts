@@ -15,7 +15,8 @@ import {
   AppConfigsResponse,
   Metrics,
   ResendOtpRequest,
-  GetMetricsRequest
+  GetMetricsRequest,
+  SaveTruckRequestModel
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -38,7 +39,8 @@ const urls = {
   getLspList: `${endpoint}/ulip/business`,
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: `${endpoint}/ulip/tsr/status_view`,
-  getMetrics: `${endpoint}/ulip/tsr/view`
+  getMetrics: `${endpoint}/ulip/tsr/view`,
+  saveTruck: `${endpoint}/ulip/business/vehicle`
 };
 
 interface BusinessRole {
@@ -107,7 +109,13 @@ export default {
     return http.put<{}, {}>(urls.logout, {});
   },
   getAppConfigs: () => {
-    return http.get<{}, AppConfigsResponse>(urls.getAppConfigs);
+    return http.get<{}, AppConfigsResponse>(
+      urls.getAppConfigs,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   },
   getTrips: (payload: GetTripsRequest) => {
     return http.get<
@@ -132,6 +140,15 @@ export default {
   createTrip(req: CreateTripRequestModel) {
     return http.post<CreateTripRequestModel, CreateTripRequestModel>(
       urls.createTrip,
+      req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+  saveTruck(req: SaveTruckRequestModel) {
+    return http.post<SaveTruckRequestModel, SaveTruckRequestModel>(
+      urls.saveTruck,
       req,
       {
         headers: HeaderProvider.getHeaders()

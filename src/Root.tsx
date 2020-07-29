@@ -91,10 +91,19 @@ const NoLoginStackNavigator = () => {
     </NoLoginStack.Navigator>
   );
 };
-const DrawerNavigator: React.FC<Props> = ({
+const DrawerNavigator: React.FC<Props & ConnectedProps<typeof connector>> = ({
   isLanguageSelected,
-  userPersona
+  userPersona,
+  getAppConfigs,
+  commonConfig,
+  userInfo
 }) => {
+  useEffect(() => {
+    HeaderProvider.setToken(userInfo.access_token);
+    if (!commonConfig) {
+      getAppConfigs({});
+    }
+  }, [userInfo]);
   return (
     <Drawer.Navigator>
       <Drawer.Screen name="Home">
@@ -116,22 +125,17 @@ const DrawerNavigator: React.FC<Props> = ({
   );
 };
 
+const ConnectedDrawer = connector(DrawerNavigator);
+
 const App: React.FC<ConnectedProps<typeof connector>> = props => {
   const isLoggedIn = props.userInfo.access_token ? true : false;
   const userPersona = props.userInfo.userPersona;
   const isLanguageSelected = props.userInfo.language ? true : false;
-
-  useEffect(() => {
-    HeaderProvider.setToken("token");
-    if (!props.commonConfig) {
-      props.getAppConfigs({});
-    }
-  }, [props.userInfo]);
   return (
     <NavigationContainer>
       {!isLoggedIn && <NoLoginStackNavigator />}
       {isLoggedIn && (
-        <DrawerNavigator
+        <ConnectedDrawer
           userPersona={userPersona}
           isLanguageSelected={isLanguageSelected}
         />

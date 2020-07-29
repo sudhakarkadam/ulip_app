@@ -1,25 +1,16 @@
-import React, { useState, useRef } from "react";
-import { ConnectedProps, connect } from "react-redux";
-import { StyleSheet, View, CheckBox, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { ConnectedProps } from "react-redux";
+import { View, ScrollView } from "react-native";
 import Input from "./InputComponent";
-import styled from "styled-components/native";
-import {
-  Text,
-  Flex,
-  FlexRow,
-  TextWrapper,
-  FlexColumn,
-  Box
-} from "./@styled/BaseElements";
+import { Text, Flex, Box } from "./@styled/BaseElements";
+import { TextWrapper } from "./@styled/Text";
 import StyledButton from "./@styled/StyledButton";
-import { StickyBottom } from "./StickyBottom";
-import SignatureCapture from "react-native-signature-capture";
 import { Page, PageContent } from "./@styled/Page";
 import { TranslationText } from "./InternationalisationProvider";
 
 const EWayBillGenerationPage: React.FC<ConnectedProps<
   typeof connector
->> = props => {
+>> = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [transactionType, setTransactionType] = useState("");
