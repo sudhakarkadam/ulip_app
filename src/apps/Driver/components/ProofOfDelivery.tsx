@@ -19,8 +19,8 @@ import { Page, PageContent } from "../../../components/@styled/Page";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { CommonState } from "../../../reducers";
 
-const { upload } = DriverActionCreators;
-const mapDispatchToProps = { upload };
+const { upload, specialUpload } = DriverActionCreators;
+const mapDispatchToProps = { upload, specialUpload };
 const mapStateToProps = (state: CommonState) => ({
   trips: state.trips
 });
@@ -36,18 +36,11 @@ const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
     signRef?.current?.saveImage();
   };
   const onSaveEvent = (result: SaveEventParams) => {
-    const fd = new FormData();
-    fd.append("file", {
-      // @ts-ignore
-      uri: result.pathName,
-      type: "image/png",
-      name: "Sample.png"
-    });
-    fd.append("document_format", "JPEG");
-    fd.append("document_type", "POD");
-    fd.append("document_id", name);
-    props.upload({
-      file: fd,
+    props.specialUpload({
+      fileData: result.encoded,
+      document_format: "JPEG",
+      document_type: "POfD",
+      document_id: name,
       id: tripId || 1
     });
     alert("Signature Captured Successfully");
