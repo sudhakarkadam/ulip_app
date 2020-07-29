@@ -1,7 +1,13 @@
 import React, { useState } from "react";
-import { Image, ScrollView } from "react-native";
 import colors from "../theme/colors";
-import { Flex, FlexRow, Text, Box } from "./@styled/BaseElements";
+import {
+  Flex,
+  FlexRow,
+  Text,
+  Box,
+  ScrollView,
+  Image
+} from "./@styled/BaseElements";
 import SelectComponent from "./SelectComponent";
 import CalendarComponent from "./CalendarComponent";
 import Input from "./InputComponent";
@@ -10,7 +16,7 @@ import StyledButton from "./@styled/StyledButton";
 import TripProgress from "./TripProgress";
 import { LspDetailsObj } from "../models/ShipperApiModels";
 import { PageContent, Page } from "./@styled/Page";
-import {PerosnaDetails} from "../models/CommonModel"
+import { PerosnaDetails } from "../models/CommonModel";
 
 const openTruckImg = require("../images/open-truck.png");
 const containerTruckImg = require("../images/container-truck.png");
@@ -20,8 +26,8 @@ const trailerLightImg = require("../images/trailer-light.png");
 const openDarkTruckImg = require("../images/open-dark.png");
 
 interface SelectObj {
-  value:string;
-  label:string;
+  value: string;
+  label: string;
 }
 interface OwnProps {
   createTripCallback: (data: any) => any;
@@ -42,7 +48,7 @@ const LocationsList = [
     state: "Delhi",
     label: "Delhi",
     value: "del",
-    map_ref: {},
+    map_ref: {}
   },
   {
     label: "Bangalore",
@@ -51,7 +57,7 @@ const LocationsList = [
     state: "Karnataka",
     name: "Bangalore",
     address: "Devrabessanhalli, Bangalore",
-    map_ref: {},
+    map_ref: {}
   },
   {
     label: "Kolkata",
@@ -60,7 +66,7 @@ const LocationsList = [
     state: "West Bengal",
     name: "Kolkata",
     address: "Jibantala, Kolkata",
-    map_ref: {},
+    map_ref: {}
   },
   {
     label: "Mumbai",
@@ -69,7 +75,7 @@ const LocationsList = [
     state: "Maharashtra",
     name: "Mumbai",
     address: "Powai, Mumbai",
-    map_ref: {},
+    map_ref: {}
   }
 ];
 
@@ -179,7 +185,8 @@ const TruckTypeComp = (props: {
             style={{
               backgroundColor: "white",
               height: 40,
-              borderColor: "white"
+              borderRadius: 4,
+              borderColor: colors.grays[1]
             }}
             value={weight}
             onChangeText={text => onChange(text)}
@@ -198,7 +205,7 @@ const TruckTypeComp = (props: {
 };
 
 const CreateTrip = (props: Props) => {
-  const {goodsList, truckTypeList, weightTypeList} = props;
+  const { goodsList, truckTypeList, weightTypeList } = props;
   const lspList = props.lspList.map(lsp => ({
     label: lsp.legal_name,
     value: lsp.business_id.toString()
@@ -220,11 +227,15 @@ const CreateTrip = (props: Props) => {
       return;
     }
     const data = {
-      destination_location_details: LocationsList.filter(loc => loc.value === toValue)[0],
+      destination_location_details: LocationsList.filter(
+        loc => loc.value === toValue
+      )[0],
       goods_segment: goodsType,
-      lsp_business_id:lspProvider,
+      lsp_business_id: lspProvider,
       pickup_request_time: `${new Date(pickupDate).getTime() / 1000}`,
-      source_location_details: LocationsList.filter(loc => loc.value === fromValue)[0],
+      source_location_details: LocationsList.filter(
+        loc => loc.value === fromValue
+      )[0],
       truck_type_preference: truckType.toUpperCase(),
       weight: Number(weight),
       weight_unit: weightUnit,
@@ -252,85 +263,85 @@ const CreateTrip = (props: Props) => {
       <PageContent>
         {tripStep !== 4 && (
           <>
-          <Flex
-            backgroundColor={tripStep === 4 ? "white" : ""}
-            position="relative"
-            height="80%"
-          >
-            <ScrollView>
-            <TripProgress currentStep={tripStep} />
-            {tripStep === 0 ? (
-              <Flex m={5}>
-                <SelectComponent
-                  label="From"
-                  getSelectedValue={val => setFromValue(val)}
-                  data={LocationsList}
-                  defaultValue={fromValue}
-                />
-                <Flex mt={3}>
-                  <SelectComponent
-                    getSelectedValue={val => setToValue(val)}
-                    label="To"
-                    data={LocationsList}
-                    defaultValue={toValue}
+            <Flex
+              backgroundColor={tripStep === 4 ? "white" : ""}
+              position="relative"
+              height="80%"
+            >
+              <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <TripProgress currentStep={tripStep} />
+                {tripStep === 0 ? (
+                  <Flex m={5}>
+                    <SelectComponent
+                      label="From"
+                      getSelectedValue={val => setFromValue(val)}
+                      data={LocationsList}
+                      defaultValue={fromValue}
+                    />
+                    <Flex mt={3}>
+                      <SelectComponent
+                        getSelectedValue={val => setToValue(val)}
+                        label="To"
+                        data={LocationsList}
+                        defaultValue={toValue}
+                      />
+                    </Flex>
+                  </Flex>
+                ) : null}
+                {tripStep === 1 ? (
+                  <Flex m={5}>
+                    <CalendarComponent
+                      defaultDate={pickupDate}
+                      getSelectedDate={val => setPickUpDate(val)}
+                      label="Pickup date"
+                    />
+                  </Flex>
+                ) : null}
+                {tripStep === 2 ? (
+                  <Flex flex={1} m={5}>
+                    <SelectComponent
+                      getSelectedValue={val => setGoodsType(val)}
+                      label="Select goods type"
+                      data={goodsList}
+                      defaultValue={goodsType}
+                    />
+                  </Flex>
+                ) : null}
+                {tripStep === 3 ? (
+                  <TruckTypeComp
+                    lspList={lspList}
+                    lspProvider={lspProvider.toString()}
+                    weightUnit={weightUnit}
+                    weightTypeList={weightTypeList}
+                    weight={weight}
+                    truckType={truckType}
+                    onChange={(val, type) => {
+                      if (!type) {
+                        setWeight(val);
+                        return;
+                      }
+                      if (type === "lsp") {
+                        setLspProvider(val);
+                        return;
+                      }
+                      if (type === "truckType") {
+                        setTruckType(val);
+                        return;
+                      }
+                      return setWeightUnit(val);
+                    }}
                   />
-                </Flex>
-              </Flex>
-            ) : null}
-            {tripStep === 1 ? (
-              <Flex m={5}>
-                <CalendarComponent
-                  defaultDate={pickupDate}
-                  getSelectedDate={val => setPickUpDate(val)}
-                  label="Pickup date"
-                />
-              </Flex>
-            ) : null}
-            {tripStep === 2 ? (
-              <Flex flex={1} m={5}>
-                <SelectComponent
-                  getSelectedValue={val => setGoodsType(val)}
-                  label="Select goods type"
-                  data={goodsList}
-                  defaultValue={goodsType}
-                />
-              </Flex>
-            ) : null}
-            {tripStep === 3 ? (
-              <TruckTypeComp
-                lspList={lspList}
-                lspProvider={lspProvider.toString()}
-                weightUnit={weightUnit}
-                weightTypeList={weightTypeList}
-                weight={weight}
-                truckType={truckType}
-                onChange={(val, type) => {
-                  if (!type) {
-                    setWeight(val);
-                    return;
-                  }
-                  if (type === "lsp") {
-                    setLspProvider(val);
-                    return;
-                  }
-                  if (type === "truckType") {
-                    setTruckType(val);
-                    return;
-                  }
-                  return setWeightUnit(val);
-                }}
+                ) : null}
+              </ScrollView>
+            </Flex>
+            <Flex width="98%" position="absolute" bottom={1} m={2}>
+              <StyledButton
+                disabled={tripStep === 3 && !weight}
+                title={tripStep === 3 ? "preview" : "next"}
+                onPress={handleNextClick}
               />
-            ) : null}
-            </ScrollView>
-          </Flex>
-          <Flex width="98%" position="absolute" bottom={1} m={2}>
-             <StyledButton
-               disabled={tripStep === 3 && !weight}
-               title={tripStep === 3 ? "preview" : "next"}
-               onPress={handleNextClick}
-             />
-           </Flex>
-           </>
+            </Flex>
+          </>
         )}
         {tripStep === 4 && (
           <ScrollView>
