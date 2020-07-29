@@ -11,7 +11,7 @@ import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import Search from "../../../images/search.svg";
 import Notification from "../../../images/notification.svg";
-import TruckSelect from "./TruckSelect";
+import { useIsFocused } from "@react-navigation/native";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type HomeStackParamList = {
@@ -29,24 +29,30 @@ type HomeMetricsProps = StackScreenProps<
 const HomeMetricsComponent = (props: HomeMetricsProps) => (
   <HomeMetrics
     onRequestClick={() => props.navigation.push("TripRequests", {})}
+    focused={useIsFocused()}
   />
 );
 
 type TripRequestsProps = StackScreenProps<HomeStackParamList, "TripRequests">;
 
-const TripRequests = (props: TripRequestsProps) => (
-  <Page>
-    <PageContent>
-      <TripList
-        listingMode={ListingModes.PENDING_REQUESTS}
-        from={AllApps.LSP}
-        onRowClick={(_id, item) =>
-          props.navigation.push("TripAcceptPage", { tripDetails: item })
-        }
-      />
-    </PageContent>
-  </Page>
-);
+const TripRequests: React.FC<TripRequestsProps> = (
+  props: TripRequestsProps
+) => {
+  return (
+    <Page>
+      <PageContent>
+        <TripList
+          listingMode={ListingModes.PENDING_REQUESTS}
+          from={AllApps.LSP}
+          onRowClick={(_id, item) =>
+            props.navigation.push("TripAcceptPage", { tripDetails: item })
+          }
+          focused={useIsFocused()}
+        />
+      </PageContent>
+    </Page>
+  );
+};
 
 // const TripAcceptPage = (props: TripAcceptProps) => (
 //   <Page>
@@ -94,11 +100,6 @@ const HomeStack = () => {
         name="TripAcceptPage"
         component={TripAccept}
         options={{ title: "Truck Request", headerRight: HeaderButtons }}
-      />
-      <Stack.Screen
-        name="TruckSelect"
-        component={TruckSelect}
-        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

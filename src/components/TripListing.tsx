@@ -30,6 +30,7 @@ import { FlatList } from "react-native";
 import { ReducerState } from "../apps/LSP/store";
 import { isLoading, isSuccess } from "../utils/actionCreator";
 import BlockScreenLoader from "../components/BlockScreenLoader";
+import { useFocusEffect } from "@react-navigation/native";
 
 const profile = require("../images/40px.png");
 const trailerTruck = require("../images/trailerTruckColored.png");
@@ -41,6 +42,7 @@ interface OwnProps {
   from: AllApps;
   onRowClick?: (id: string | number, trip: GetTripsResponse) => void;
   businessId?: any;
+  focused: boolean;
 }
 export enum ListingModes {
   UPCOMING = "UPCOMING",
@@ -137,10 +139,10 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
-  const { from, listingMode } = props;
+  const { from, listingMode, focused } = props;
   let config = listingConfig[listingMode] as any;
 
-  useEffect(() => {
+  const fetchTrips = () => {
     const userPersonaDetails = props.user.data.user_details.find(
       role => role.profile.persona.toLowerCase() === props.user.data.userPersona
     );
@@ -149,7 +151,11 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
       businessId: userPersonaDetails?.business_details?.business_id || "",
       persona: props.user.data.userPersona?.toUpperCase() || ""
     });
-  }, [listingMode]);
+  };
+
+  useEffect(() => {
+    if (focused) fetchTrips();
+  }, [listingMode, focused]);
 
   const data = props.trips.data?.transport_service_requests || [];
   if (config.default) {

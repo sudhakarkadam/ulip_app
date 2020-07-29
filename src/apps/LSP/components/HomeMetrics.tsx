@@ -37,18 +37,21 @@ const mapDispatchToProps = { getMetrics };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 interface OwnProps {
   onRequestClick: () => void;
+  focused: boolean;
 }
 const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
   useEffect(() => {
-    const profileCreated = props.user.data.user_details.find(
-      role => role.profile.persona === "LSP"
-    );
-    const businessCreated = profileCreated?.business_details;
-    props.getMetrics({
-      business_id: businessCreated?.business_id || "",
-      persona: "LSP"
-    });
-  }, []);
+    if (props.focused) {
+      const profileCreated = props.user.data.user_details.find(
+        role => role.profile.persona === "LSP"
+      );
+      const businessCreated = profileCreated?.business_details;
+      props.getMetrics({
+        business_id: businessCreated?.business_id || "",
+        persona: "LSP"
+      });
+    }
+  }, [props.focused]);
   const metrics = props.HomeMetrics.data;
   return (
     <Page>

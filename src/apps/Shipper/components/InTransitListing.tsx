@@ -8,7 +8,10 @@ import { TripList, ListingModes } from "../../../components/TripListing";
 import { renderTabBarLable } from "../../../components/NavHelper";
 import { Dimensions } from "react-native";
 import { PageContent, Page } from "../../../components/@styled/Page";
-import { CompositeNavigationProp } from "@react-navigation/native";
+import {
+  CompositeNavigationProp,
+  useIsFocused
+} from "@react-navigation/native";
 import { IntransitStackParams } from "./InTransitStack";
 import { ShipperAuthenticatedStackParamList } from "./ShipperHome";
 
@@ -37,6 +40,7 @@ const Trips: React.FunctionComponent<Props> = props => {
           onRowClick={id => {
             props.navigation.navigate("TripTracking", { tripId: +id });
           }}
+          focused={useIsFocused()}
         />
       </PageContent>
     </Page>
@@ -50,6 +54,7 @@ const Trips: React.FunctionComponent<Props> = props => {
           onRowClick={id => {
             props.navigation.navigate("TripTracking", { tripId: +id });
           }}
+          focused={useIsFocused()}
         />
       </PageContent>
     </Page>

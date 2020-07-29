@@ -89,7 +89,7 @@ const TripAcceptPage = (
               title="Accept"
               style={{ flex: 1 }}
               onPress={() => {
-                // return openTruckSelect();
+                //return openTruckSelect();
                 props.showModal(
                   <AcceptTripModal
                     onAccept={props.acceptTrip}

@@ -24,6 +24,7 @@ import TruckSelect from "./TruckSelect";
 import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import HomeStack from "./LSPHomeStack";
+import { useIsFocused } from "@react-navigation/native";
 
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
 
@@ -48,6 +49,7 @@ const History = (props: HistoryProps) => (
         onRowClick={(_id, item) =>
           props.navigation.push("TripDetails", { tripDetails: item })
         }
+        focused={useIsFocused()}
       />
     </PageContent>
   </Page>
@@ -175,9 +177,9 @@ export type LSPAuthenticatedStackParamList = {
 
 const MainStack = createStackNavigator<LSPAuthenticatedStackParamList>();
 
-const MainBottomTab: React.FC = () => (
-  <UlipBottomTab tabs={tabs}></UlipBottomTab>
-);
+const MainBottomTab: React.FC = () => {
+  return <UlipBottomTab tabs={tabs}></UlipBottomTab>;
+};
 
 const LSPLanding = () => {
   return (

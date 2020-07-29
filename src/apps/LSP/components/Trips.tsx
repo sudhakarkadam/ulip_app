@@ -9,6 +9,7 @@ import { TripList, ListingModes } from "../../../components/TripListing";
 import { renderTabBarLable } from "../../../components/NavHelper";
 import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
+import { useIsFocused } from "@react-navigation/native";
 
 type AllProps = StackScreenProps<RootStackParamList, "TripDetails"> &
   StackScreenProps<RootStackParamList, "TripTracking">;
@@ -29,6 +30,7 @@ const Trips = (props: AllProps) => {
           onRowClick={(_id, item) =>
             props.navigation.push("TripDetails", { tripDetails: item })
           }
+          focused={useIsFocused()}
         />
       </PageContent>
     </Page>
@@ -42,6 +44,7 @@ const Trips = (props: AllProps) => {
           onRowClick={(id, _item) =>
             props.navigation.push("TripTracking", { tripId: Number(id) })
           }
+          focused={useIsFocused()}
         />
       </PageContent>
     </Page>
@@ -55,6 +58,7 @@ const Trips = (props: AllProps) => {
           onRowClick={(_id, item) =>
             props.navigation.push("TripDetails", { tripDetails: item })
           }
+          focused={useIsFocused()}
         />
       </PageContent>
     </Page>

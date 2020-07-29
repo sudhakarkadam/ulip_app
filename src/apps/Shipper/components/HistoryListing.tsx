@@ -25,6 +25,7 @@ const HistoryListing = (props: OwnProps) => {
           from={AllApps.SHIPPER}
           businessId={businessId}
           onRowClick={handleRowClick}
+          focused={useIsFocused()}
         />
       </PageContent>
     </Page>

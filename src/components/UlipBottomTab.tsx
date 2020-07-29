@@ -3,7 +3,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Flex } from "./@styled/BaseElements";
 import { PrimaryText, LightText } from "./@styled/Text";
-import { useIsFocused } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,15 +22,11 @@ const UlipBottomTab: React.FC<IOwnProps> = ({ tabs }) => {
   return (
     <Tab.Navigator initialRouteName={tabs[0].name}>
       {tabs.map(tab => {
-        const TabContent = (props: any) => {
-          const isFocused = useIsFocused();
-          return isFocused ? <tab.component {...props} /> : null;
-        };
         return (
           <Tab.Screen
             key={tab.name}
             name={tab.name}
-            component={TabContent}
+            component={tab.component}
             options={{
               tabBarIcon: ({ focused }) => {
                 return (

@@ -13,6 +13,7 @@ import ActionCreators from "../../../actions/ActionCreators";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import BlockScreenLoader from "../../../components/BlockScreenLoader";
 import { PageContent, Page } from "../../../components/@styled/Page";
+import { useIsFocused } from "@react-navigation/native";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,
@@ -66,6 +67,7 @@ const MainTripListing = (props: Props & OwnProps) => {
               listingMode={ListingModes.UPCOMING}
               from={AllApps.SHIPPER}
               onRowClick={handleRowClick}
+              focused={useIsFocused()}
             />
             <Box position="absolute" bottom="15" right="20">
               <FloatingButton
