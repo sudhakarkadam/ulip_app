@@ -77,6 +77,9 @@ export default {
         name: req.name,
         login_id: req.loginId,
         persona: req.persona.toUpperCase()
+      },
+      {
+        headers: HeaderProvider.getHeaders()
       }
     );
   },
@@ -106,7 +109,13 @@ export default {
     return http.post<{}, {}>(urls.login, {});
   },
   logoutApi: () => {
-    return http.put<{}, {}>(urls.logout, {});
+    return http.put<{}, {}>(
+      urls.logout,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   },
   getAppConfigs: () => {
     return http.get<{}, AppConfigsResponse>(
@@ -121,20 +130,30 @@ export default {
     return http.get<
       { status_list: string; persona: string; business_id: string },
       { transport_service_requests: GetTripsResponse[] }
-    >(urls.getTrips, {
-      status_list: payload.status.join(","),
-      persona: payload.persona,
-      business_id: payload.businessId
-    });
+    >(
+      urls.getTrips,
+      {
+        status_list: payload.status.join(","),
+        persona: payload.persona,
+        business_id: payload.businessId
+      },
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   },
   getMetrics: (payload: GetMetricsRequest) => {
     return http.get<{}, Metrics>(urls.getMetrics, payload, {
-      headers: {}
+      headers: HeaderProvider.getHeaders()
     });
   },
   getLspList(req: BusinessRole) {
-    return http.get<BusinessRole, LspListResponse>(
-      `${urls.getLspList}/${req.type.toLowerCase()}`
+    return http.get<{}, LspListResponse>(
+      `${urls.getLspList}/${req.type.toLowerCase()}`,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
     );
   },
   createTrip(req: CreateTripRequestModel) {
