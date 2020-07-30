@@ -11,7 +11,16 @@ import {
 import Input from "../../../components/InputComponent";
 import MapComp from "../../../components/MapComp";
 import StyledButton from "../../../components/@styled/StyledButton";
-const WarehoueseAdd = () => {
+import Actions from "../../../actions/ActionCreators";
+import { connect, ConnectedProps } from "react-redux";
+
+const { saveWarehouse } = Actions;
+
+const connector = connect(null, { saveWarehouse });
+
+const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
+  saveWarehouse
+}) => {
   const [name, setName] = useState("");
   const [gstin, setGstin] = useState("");
   const [address, setAddress] = useState("");
@@ -27,40 +36,20 @@ const WarehoueseAdd = () => {
             <TranslationText id="warehouse.details"></TranslationText>
           </PrimaryHeaderText>
           <Box p={6}>
-            <Input
-              value={name}
-              onChangeText={text => setName(text)}
-              label="Warehouse name"
-            />
-            <Input
-              value={gstin}
-              onChangeText={text => setGstin(text)}
-              label="GSTIN"
-            />
+            <Input value={name} onChangeText={setName} label="Warehouse name" />
+            <Input value={gstin} onChangeText={setGstin} label="GSTIN" />
             <TextWrapper label="Locate on map">
               <Flex height={120}>
                 <MapComp />
               </Flex>
             </TextWrapper>
 
-            <Input
-              value={address}
-              onChangeText={text => setAddress(text)}
-              label="Address"
-            />
-            <Input
-              value={city}
-              onChangeText={text => setCity(text)}
-              label="City"
-            />
-            <Input
-              value={state}
-              onChangeText={text => setState(text)}
-              label="State"
-            />
+            <Input value={address} onChangeText={setAddress} label="Address" />
+            <Input value={city} onChangeText={setCity} label="City" />
+            <Input value={state} onChangeText={setState} label="State" />
             <Input
               value={postalCode}
-              onChangeText={text => setPostalCode(text)}
+              onChangeText={setPostalCode}
               label="Pin Code"
             />
             <Flex mt={10}>
@@ -68,7 +57,24 @@ const WarehoueseAdd = () => {
                 disabled={!name || !gstin}
                 title="Save Warehouse"
                 fontSize={14}
-                onPress={() => {}}
+                onPress={() => {
+                  if (!postalCode) return;
+
+                  saveWarehouse({
+                    business_id: "whattttt???",
+                    gstin,
+                    warehouse_name: name,
+                    location: {
+                      address,
+                      city,
+                      country: "India",
+                      map_ref: {},
+                      name,
+                      postal_code: parseInt(postalCode, 10),
+                      state
+                    }
+                  });
+                }}
               />
             </Flex>
           </Box>
@@ -78,4 +84,4 @@ const WarehoueseAdd = () => {
   );
 };
 
-export default WarehoueseAdd;
+export default connector(WarehoueseAdd);

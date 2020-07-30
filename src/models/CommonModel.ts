@@ -163,3 +163,20 @@ export interface AppConfigsResponse {
   weight_types: string[];
   reject_reasons: string[];
 }
+
+export interface BusinessSite {
+  business_id: string;
+  warehouse_name: string;
+  gstin: string;
+  location: Location;
+}
+
+export interface Location {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code: number;
+  map_ref: {};
+}

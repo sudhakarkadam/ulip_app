@@ -15,7 +15,8 @@ import {
   AppConfigsResponse,
   Metrics,
   ResendOtpRequest,
-  GetMetricsRequest
+  GetMetricsRequest,
+  BusinessSite
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -38,7 +39,8 @@ const urls = {
   getLspList: `${endpoint}/ulip/business`,
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: `${endpoint}/ulip/tsr/status_view`,
-  getMetrics: `${endpoint}/ulip/tsr/view`
+  getMetrics: `${endpoint}/ulip/tsr/view`,
+  business: `${endpoint}/ulip/business/businessSite`
 };
 
 interface BusinessRole {
@@ -139,10 +141,9 @@ export default {
     );
   },
 
-  // todo add actual models, urls and payloads
-  saveWarehouse(req: CreateTripRequestModel) {
-    return http.post<CreateTripRequestModel, CreateTripRequestModel>(
-      urls.createTrip,
+  saveWarehouse(req: BusinessSite) {
+    return http.post<BusinessSite, BusinessSite & { business_site_id: string }>(
+      urls.business,
       req,
       {
         headers: HeaderProvider.getHeaders()
