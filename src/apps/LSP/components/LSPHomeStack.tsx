@@ -12,6 +12,7 @@ import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import Search from "../../../images/search.svg";
 import Notification from "../../../images/notification.svg";
 import { useIsFocused } from "@react-navigation/native";
+import AddTruck from "./AddTruck";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type HomeStackParamList = {
@@ -19,6 +20,7 @@ export type HomeStackParamList = {
   TripRequests: object;
   TripAcceptPage: { tripDetails: GetTripsResponse };
   TruckSelect: undefined;
+  AddTruck: undefined;
 };
 
 type HomeMetricsProps = StackScreenProps<
@@ -30,6 +32,7 @@ const HomeMetricsComponent = (props: HomeMetricsProps) => (
   <HomeMetrics
     onRequestClick={() => props.navigation.push("TripRequests", {})}
     focused={useIsFocused()}
+    onTruckCreateClick={() => props.navigation.push("AddTruck")}
   />
 );
 
@@ -100,6 +103,11 @@ const HomeStack = () => {
         name="TripAcceptPage"
         component={TripAccept}
         options={{ title: "Truck Request", headerRight: HeaderButtons }}
+      />
+      <Stack.Screen
+        name="AddTruck"
+        component={AddTruck}
+        options={{ title: "Add Truck", headerRight: HeaderButtons }}
       />
     </Stack.Navigator>
   );

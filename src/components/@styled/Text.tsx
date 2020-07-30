@@ -1,5 +1,6 @@
+import React from "react";
 import styled from "styled-components/native";
-import { Text } from "./BaseElements";
+import { Text, Flex } from "./BaseElements";
 import colors from "../../theme/colors";
 
 // export const PrimaryText = styled(Text)`
@@ -65,3 +66,17 @@ export const PrimaryTextSmall = styled(Text)`
   font-size: 14px;
   font-family: Roboto-Regular;
 `;
+
+export const TextWrapper = (props: {
+  children: React.ReactNode;
+  label: React.ReactNode;
+}) => {
+  return (
+    <Flex mb={2}>
+      <SecondaryLabel mb={3} style={{ textTransform: "none" }}>
+        {props.label}
+      </SecondaryLabel>
+      {props.children}
+    </Flex>
+  );
+};

@@ -15,7 +15,8 @@ import {
   AppConfigsResponse,
   Metrics,
   ResendOtpRequest,
-  GetMetricsRequest
+  GetMetricsRequest,
+  SaveTruckRequestModel
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -38,7 +39,8 @@ const urls = {
   getLspList: `${endpoint}/ulip/business`,
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: `${endpoint}/ulip/tsr/status_view`,
-  getMetrics: `${endpoint}/ulip/tsr/view`
+  getMetrics: `${endpoint}/ulip/tsr/view`,
+  saveTruck: `${endpoint}/ulip/business/vehicle`
 };
 
 interface BusinessRole {
@@ -75,6 +77,9 @@ export default {
         name: req.name,
         login_id: req.loginId,
         persona: req.persona.toUpperCase()
+      },
+      {
+        headers: HeaderProvider.getHeaders()
       }
     );
   },
@@ -104,34 +109,65 @@ export default {
     return http.post<{}, {}>(urls.login, {});
   },
   logoutApi: () => {
-    return http.put<{}, {}>(urls.logout, {});
+    return http.put<{}, {}>(
+      urls.logout,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   },
   getAppConfigs: () => {
-    return http.get<{}, AppConfigsResponse>(urls.getAppConfigs);
+    return http.get<{}, AppConfigsResponse>(
+      urls.getAppConfigs,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   },
   getTrips: (payload: GetTripsRequest) => {
     return http.get<
       { status_list: string; persona: string; business_id: string },
       { transport_service_requests: GetTripsResponse[] }
-    >(urls.getTrips, {
-      status_list: payload.status.join(","),
-      persona: payload.persona,
-      business_id: payload.businessId
-    });
+    >(
+      urls.getTrips,
+      {
+        status_list: payload.status.join(","),
+        persona: payload.persona,
+        business_id: payload.businessId
+      },
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   },
   getMetrics: (payload: GetMetricsRequest) => {
     return http.get<{}, Metrics>(urls.getMetrics, payload, {
-      headers: {}
+      headers: HeaderProvider.getHeaders()
     });
   },
   getLspList(req: BusinessRole) {
-    return http.get<BusinessRole, LspListResponse>(
-      `${urls.getLspList}/${req.type.toLowerCase()}`
+    return http.get<{}, LspListResponse>(
+      `${urls.getLspList}/${req.type.toLowerCase()}`,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
     );
   },
   createTrip(req: CreateTripRequestModel) {
     return http.post<CreateTripRequestModel, CreateTripRequestModel>(
       urls.createTrip,
+      req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+  saveTruck(req: SaveTruckRequestModel) {
+    return http.post<SaveTruckRequestModel, SaveTruckRequestModel>(
+      urls.saveTruck,
       req,
       {
         headers: HeaderProvider.getHeaders()

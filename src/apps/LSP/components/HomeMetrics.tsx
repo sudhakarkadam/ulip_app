@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import {
   FlexColumn,
   FlexRow,
-  TouchableOpacity
+  TouchableOpacity,
+  Box
 } from "../../../components/@styled/BaseElements";
 import {
   PrimaryTextSmall,
-  PrimaryHeaderText
+  PrimaryHeaderText,
+  PrimaryText
 } from "../../../components/@styled/Text";
 import styled from "styled-components";
 import ActionCreators from "../../../actions/ActionCreators";
@@ -16,6 +18,7 @@ import { isLoading } from "../../../utils/actionCreator";
 import BlockScreenLoader from "../../../components/BlockScreenLoader";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { Page, PageContent } from "../../../components/@styled/Page";
+import LSPIcon from "../../../images/lsp.svg";
 
 const MetricBox = styled(TouchableOpacity)`
   background-color: ${({ theme }) => theme.colors.yellow};
@@ -25,6 +28,16 @@ const MetricBox = styled(TouchableOpacity)`
   border-color: ${({ theme }) => theme.colors.yellow};
   border-width: 1;
   padding: 10px;
+`;
+
+const IconBox = styled(TouchableOpacity)`
+  border-color: ${({ theme }) => theme.colors.yellow};
+  border-width: 1;
+  padding: 15px;
+  border-radius: 5;
+  margin-horizontal: 12;
+  justify-content: center;
+  align-items: center;
 `;
 
 const { getMetrics } = ActionCreators;
@@ -38,6 +51,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 interface OwnProps {
   onRequestClick: () => void;
   focused: boolean;
+  onTruckCreateClick: () => void;
 }
 const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
   useEffect(() => {
@@ -116,6 +130,32 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
                 />
               </PrimaryHeaderText>
             </MetricBox>
+          </FlexRow>
+          <FlexColumn mx={5} mb={5}>
+            <Box
+              borderWidth="1px"
+              borderColor="grays.3"
+              borderStyle="solid"
+              borderBottomWidth="0px"
+              mb={2}
+              height="0px"
+            ></Box>
+            <Box
+              borderWidth="1px"
+              borderColor="grays.3"
+              borderStyle="solid"
+              borderBottomWidth="0px"
+              width="100%"
+              height="0px"
+            ></Box>
+          </FlexColumn>
+          <FlexRow>
+            <IconBox onPress={props.onTruckCreateClick}>
+              <Box mb={2}>
+                <LSPIcon />
+              </Box>
+              <PrimaryText style={{ fontSize: 10 }}>ADD TRUCK</PrimaryText>
+            </IconBox>
           </FlexRow>
         </FlexColumn>
       </PageContent>

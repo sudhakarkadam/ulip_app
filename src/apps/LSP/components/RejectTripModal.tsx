@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import {
-  Flex,
-  TextWrapper,
-  FlexRow
-} from "../../../components/@styled/BaseElements";
-import { PrimaryText } from "../../../components/@styled/Text";
+import { Flex, FlexRow } from "../../../components/@styled/BaseElements";
+import { PrimaryText, TextWrapper } from "../../../components/@styled/Text";
 import SelectComponent from "../../../components/SelectComponent";
 import { TripRejectRequest } from "../models/TripAcceptance";
 import { ReduxCustomAction } from "../../../utils/actionCreator";

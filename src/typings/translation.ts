@@ -24,8 +24,8 @@ export type Keys =
   | "lsp"
   | "mobile.number"
   | "no.trips"
-  | "no.upcoming.trips"
   | "on.road"
+  | "no.upcoming.trips"
   | "other.profiles"
   | "otp.sent"
   | "otp.verified"
@@ -72,7 +72,15 @@ export type Keys =
   | "do.not.have.ewb"
   | "generate.ewb"
   | "details"
-  | "must.have.ewb";
+  | "must.have.ewb"
+  | "truck.details"
+  | "truck.name"
+  | "truck.number"
+  | "gps.vendor"
+  | "gps.id"
+  | "save.truck"
+  | "truck.save.error"
+  | "truck.save.success";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -120,6 +128,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "no.trips"
   ? never
   : T extends "on.road"
+  ? never
+  : T extends "no.upcoming.trips"
   ? never
   : T extends "other.profiles"
   ? never
@@ -214,5 +224,21 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "details"
   ? never
   : T extends "must.have.ewb"
+  ? never
+  : T extends "truck.details"
+  ? never
+  : T extends "truck.name"
+  ? never
+  : T extends "truck.number"
+  ? never
+  : T extends "gps.vendor"
+  ? never
+  : T extends "gps.id"
+  ? never
+  : T extends "save.truck"
+  ? never
+  : T extends "truck.save.error"
+  ? never
+  : T extends "truck.save.success"
   ? never
   : never;

@@ -30,7 +30,6 @@ import { FlatList } from "react-native";
 import { ReducerState } from "../apps/LSP/store";
 import { isLoading, isSuccess } from "../utils/actionCreator";
 import BlockScreenLoader from "../components/BlockScreenLoader";
-import { useFocusEffect } from "@react-navigation/native";
 
 const profile = require("../images/40px.png");
 const trailerTruck = require("../images/trailerTruckColored.png");
