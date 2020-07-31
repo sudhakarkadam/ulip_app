@@ -39,6 +39,7 @@ const MainTripListing = (props: Props & OwnProps) => {
       persona: props.userInfo.userPersona?.toUpperCase() || ""
     });
   }, []);
+  const focused = useIsFocused();
   if (isLoading(props.metrics) || isInit(props.metrics)) {
     return <BlockScreenLoader />;
   }
@@ -67,7 +68,7 @@ const MainTripListing = (props: Props & OwnProps) => {
               listingMode={ListingModes.UPCOMING}
               from={AllApps.SHIPPER}
               onRowClick={handleRowClick}
-              focused={useIsFocused()}
+              focused={focused}
             />
             <Box position="absolute" bottom="15" right="20">
               <FloatingButton
