@@ -224,7 +224,7 @@ export default {
 
   getTripById(id: string) {
     return http.get<{}, DriverTrips[0]>(
-      urls.getTripById + id,
+      urls.getTripById + Number(id),
       {},
       {
         headers: HeaderProvider.getHeaders()
