@@ -7,6 +7,7 @@ import {
   createAction
 } from "../utils/actionCreator";
 import { Languages } from "src/components/InternationalisationProvider";
+import { UserPersonaTypes } from "src/models/CommonModel";
 
 const ActionCreators = {
   createTrip: createAsyncAction(
@@ -102,6 +103,14 @@ const ActionCreators = {
     ],
     api.getMetrics
   ),
+  saveWarehouse: createAsyncAction(
+    [
+      actions.SAVE_WAREHOUSE_REQUEST,
+      actions.SAVE_WAREHOUSE_SUCCESS,
+      actions.SAVE_WAREHOUSE_ERROR
+    ],
+    api.saveWarehouse
+  ),
   saveTruck: createAsyncAction(
     [
       actions.SAVE_TRUCK_REQUEST,
@@ -110,7 +119,7 @@ const ActionCreators = {
     ],
     api.saveTruck
   ),
-  setUserPersona: (args: { user: string }) =>
+  setUserPersona: (args: { user: UserPersonaTypes }) =>
     createAction(actions.SET_USER_PERSONA, args, {}),
 
   setUserLanguage: (args: { language: Languages }) =>

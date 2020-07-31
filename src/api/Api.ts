@@ -16,8 +16,10 @@ import {
   Metrics,
   ResendOtpRequest,
   GetMetricsRequest,
+  BusinessSite,
   SaveTruckRequestModel,
-  VehicleListDetails
+  VehicleListDetails,
+  UserPersonaTypes
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -41,6 +43,7 @@ const urls = {
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: `${endpoint}/ulip/tsr/status_view`,
   getMetrics: `${endpoint}/ulip/tsr/view`,
+  business: `${endpoint}/ulip/business/businessSite`,
   saveTruck: `${endpoint}/ulip/business/vehicle`,
   getVehiclesList: `${endpoint}/ulip/business`
 };
@@ -70,7 +73,7 @@ export default {
     name: string;
     phone: string;
     loginId: string;
-    persona: string;
+    persona: UserPersonaTypes;
   }) {
     return http.post<SavePersonalProfileRequest, SavePersonalProfileResponse>(
       urls.savePersonalProfile,
@@ -78,7 +81,7 @@ export default {
         phone_number: req.phone,
         name: req.name,
         login_id: req.loginId,
-        persona: req.persona.toUpperCase()
+        persona: req.persona
       },
       {
         headers: HeaderProvider.getHeaders()
@@ -167,6 +170,17 @@ export default {
       }
     );
   },
+
+  saveWarehouse(req: BusinessSite) {
+    return http.post<BusinessSite, BusinessSite & { business_site_id: string }>(
+      urls.business,
+      req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+
   saveTruck(req: SaveTruckRequestModel) {
     return http.post<SaveTruckRequestModel, SaveTruckRequestModel>(
       urls.saveTruck,

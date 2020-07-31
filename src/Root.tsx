@@ -15,6 +15,7 @@ import AuthenticatedFlowLSP from "./apps/LSP/components/AuthenticatedFlow";
 import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow";
 import SelectLanguage from "./components/SelectLanguage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { UserPersonaTypes } from "./models/CommonModel";
 
 const MapmyIndia = require("mmi-widget");
 
@@ -31,7 +32,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props {
   isLanguageSelected: boolean;
-  userPersona?: string;
+  userPersona?: UserPersonaTypes;
 }
 const AuthenticatedStackNavigator: React.FC<Props> = ({
   isLanguageSelected,
@@ -58,19 +59,19 @@ const AuthenticatedStackNavigator: React.FC<Props> = ({
             options={{ headerShown: false }}
           />
         )}
-        {userPersona === "shipper" && (
+        {userPersona === "SHIPPER" && (
           <AuthenticatedStack.Screen
             name="Home"
             component={AuthenticatedFlowShipper}
           />
         )}
-        {userPersona === "lsp" && (
+        {userPersona === "LSP" && (
           <AuthenticatedStack.Screen
             name="Home"
             component={AuthenticatedFlowLSP}
           />
         )}
-        {userPersona === "driver" && (
+        {userPersona === "DRIVER" && (
           <AuthenticatedStack.Screen
             name="Home"
             component={AuthenticatedFlowDriver}

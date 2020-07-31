@@ -28,6 +28,7 @@
   "otp.sent": "An OTP has been sent to",
   "otp.verified": "OTP successfully verified for {{phoneNumber}}",
   "pending": "IN TRANSIT TRIPS",
+  "pending.literally": "Pending",
   "pick.up.date": "Pickup Date",
   "pick.up.point": "Pickup Point",
   "placeholder": "{{value}}",
@@ -35,6 +36,8 @@
   "reached": "Reached",
   "reject": "Reject",
   "requests": "TRIPS TO ASSIGN",
+  "requested": "Requested",
+
   "required.weight": "Required Weight",
   "rice.grain.wheat": "RICE/GRAIN/WHEAT",
   "setup.required": "Setup Required",
@@ -71,6 +74,8 @@
   "generate.ewb": "Generate E-Way bill",
   "details": "Details",
   "must.have.ewb": "You must have E-Way credentials to generate bill.",
+  "warehouse.details": "Warehouse details",
+  "no.business.id": "Business ID not found",
   "truck.details": "Truck details",
   "truck.name": "Truck name",
   "truck.number": "Truck number",
@@ -79,5 +84,8 @@
   "save.truck": "Save Truck",
   "truck.save.error": "Error occured while saving truck",
   "truck.save.success": "Truck successfully saved",
-  "signature": "Signature"
+  "create.trip": "Create Trip",
+  "add.warehouse": "Add Warehouse",
+  "signature": "Signature",
+  "error": "Something went wrong"
 }

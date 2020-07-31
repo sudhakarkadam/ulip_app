@@ -46,6 +46,7 @@ const CompanyProfile = (props: OwnProps) => {
                 <MapComp />
               </Flex>
             </TextWrapper>
+
             <Flex mt={10}>
               <StyledButton
                 disabled={!name || !regNumber}

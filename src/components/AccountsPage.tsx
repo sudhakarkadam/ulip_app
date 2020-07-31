@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { Image, ScrollView } from "react-native";
 import styled from "styled-components/native";
 import { Text, Flex, FlexRow, Box } from "./@styled/BaseElements";
-import { UserDataModel } from "../models/CommonModel";
+import { UserDataModel, UserPersonaTypes } from "../models/CommonModel";
 const personIcon = require("../images/sample-profile.png");
 //const driverIcon = require("../images/driver.svg");
 import DriverIcon from "../images/driver.svg";
@@ -14,6 +14,7 @@ import { CommonState } from "../reducers";
 import AccountsProfileCard from "./AccountsProfileCard";
 import { TranslationText, I18nContext } from "./InternationalisationProvider";
 import { PageContent, Page } from "./@styled/Page";
+import { keys } from "../utils/keys";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
@@ -26,13 +27,13 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface OwnProps {
   userInfo?: UserDataModel;
-  persona: "driver" | "lsp" | "shipper";
-  selectedOtherPersona?: (user: string) => void;
+  persona: UserPersonaTypes;
+  selectedOtherPersona?: (user: UserPersonaTypes) => void;
 }
 
 interface ProfileProps {
-  persona: "driver" | "lsp" | "shipper";
-  selectedOtherPersona: (user: string) => void;
+  persona: UserPersonaTypes;
+  selectedOtherPersona: (user: UserPersonaTypes) => void;
   userInfo: UserDataModel;
 }
 
@@ -49,20 +50,20 @@ interface Payload {
   navigationScreen: string;
   businessKey: string;
 }
-export const personaMapping: Record<string, Payload> = {
-  shipper: {
+export const personaMapping: Record<UserPersonaTypes, Payload> = {
+  SHIPPER: {
     text: "i.am.shipper" as "i.am.shipper",
     icon: <ShipperIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "shipper_details"
   },
-  driver: {
+  DRIVER: {
     text: "i.am.driver" as "i.am.driver",
     icon: <DriverIcon />,
     navigationScreen: "CreateProfile",
     businessKey: "driver_details"
   },
-  lsp: {
+  LSP: {
     text: "i.am.lsp" as "i.am.lsp",
     icon: <LSPIcon />,
     navigationScreen: "CreateProfile",
@@ -90,9 +91,9 @@ const ProfileSection = ({
       </ProfileWrapper>
       <ProfileWrapper>
         <TranslationText id="other.profiles" />
-        {Object.keys(personaMapping).map((otherPersona: string) => {
+        {keys(personaMapping).map(otherPersona => {
           const isSetupComplete = userInfo.user_details?.find(
-            role => role.profile.persona.toLowerCase() === otherPersona
+            role => role.profile.persona === otherPersona
           );
           return otherPersona !== persona ? (
             <AccountsProfileCard
