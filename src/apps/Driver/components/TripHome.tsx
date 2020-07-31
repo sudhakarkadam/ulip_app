@@ -316,10 +316,10 @@ const Trip: React.FC<Props> = props => {
                           </PrimaryText>
                         </Flex>
                       </FlexColumn>
-                      <FlexColumn>
+                      <FlexColumn style={{ alignItems: "center" }}>
                         <StyledButton
                           variant="outline"
-                          height="40px"
+                          height="30px"
                           width="122px"
                           title={"Details"}
                           onPress={() =>
@@ -329,8 +329,8 @@ const Trip: React.FC<Props> = props => {
                         />
                         <StyledButton
                           variant="outline"
-                          height="40px"
-                          width="122px"
+                          height="30px"
+                          width="142px"
                           title={"Documents"}
                           onPress={() => {}}
                         />

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import {
   PrimaryHeaderText,
-  PrimaryLabel
+  PrimaryLabel,
+  PrimaryText
 } from "../../../components/@styled/Text";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
@@ -15,7 +16,8 @@ import {
   Flex,
   Box,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  FlexRow
 } from "../../../components/@styled/BaseElements";
 import { ActivityIndicator } from "react-native";
 import { isLoading, isSuccess } from "../../../utils/actionCreator";
@@ -48,10 +50,15 @@ const UpcomingTrips: React.FC<Props> = ({
         </PrimaryHeaderText>
         <Flex>
           {isLoading(trips) && <ActivityIndicator />}
+          {!isLoading(trips) && (!trips.data || trips.data.length === 0) && (
+            <PrimaryText mx={8}>
+              <TranslationText id="no.upcoming.trips"></TranslationText>
+            </PrimaryText>
+          )}
           {isSuccess(trips) &&
             trips.data?.map(t => {
               return (
-                <>
+                <React.Fragment key={t.tsr_id}>
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("TripHome", {
@@ -66,10 +73,18 @@ const UpcomingTrips: React.FC<Props> = ({
                       bg={colors.secondary}
                       borderRadius={2}
                     >
-                      <Text fontSize={16}>
-                        {t.source_location_details.city} →{" "}
-                        {t.destination_location_details.city}
-                      </Text>
+                      <FlexRow style={{ alignItems: "center" }}>
+                        <Text fontSize={16}>
+                          {t.source_location_details.city}
+                        </Text>
+                        <Text fontSize={16} paddingBottom={2}>
+                          {" "}
+                          →{" "}
+                        </Text>
+                        <Text fontSize={16}>
+                          {t.destination_location_details.city}
+                        </Text>
+                      </FlexRow>
                       <Box mt={6} mb={2}>
                         <PrimaryLabel>
                           <TranslationText id="pick.up.date"></TranslationText>
@@ -87,7 +102,7 @@ const UpcomingTrips: React.FC<Props> = ({
                       </Box>
                     </Box>
                   </TouchableOpacity>
-                </>
+                </React.Fragment>
               );
             })}
         </Flex>
