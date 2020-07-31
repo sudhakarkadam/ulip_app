@@ -100,20 +100,31 @@ export enum TruckType {
   CONTAINER = "CONTAINER",
   TRAILOR = "TRAILOR"
 }
-
 export interface GetTripsResponse {
   tsr_id: number;
-  source_location_details: PickUplocation;
-  destination_location_details: PickUplocation;
-  pickup_date: string;
-  goods_segment: string;
+  status: string;
+  source_location_details: Sourcelocationdetails;
+  destination_location_details: Sourcelocationdetails;
   weight: number;
   weight_unit: string;
-  status: RequestStatus;
-  legal_name: string;
   truck_type_preference: TruckType;
-  trip_details?: Trip;
+  goods_segment: string;
+  pickup_request_time: number;
+  created_at: number;
+  updated_at: number;
 }
+
+interface Sourcelocationdetails {
+  id: number;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code: number;
+  map_ref: {};
+}
+
 export enum RequestStatus {
   CREATED = "CREATED",
   ACCEPTED = "ACCEPTED",
@@ -121,29 +132,6 @@ export enum RequestStatus {
   IN_PROGRESS = "IN_PROGRESS",
   PENDING_POD = "PENDING_POD",
   COMPLETED = "COMPLETED"
-}
-interface Trip {
-  id: number;
-  status: RequestStatus;
-  eta: string;
-  driver_name: string;
-  truck_name?: string;
-  truck_type: TruckType;
-  delay: boolean;
-  documents: {
-    id: number;
-    type: string;
-  }[];
-}
-
-interface PickUplocation {
-  id: number | null;
-  code?: string;
-  address?: string;
-  city: string;
-  state?: string;
-  map_ref: { ref: string } | null;
-  country?: string;
 }
 
 export interface Metrics {
