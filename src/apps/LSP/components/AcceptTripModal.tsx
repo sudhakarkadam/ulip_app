@@ -70,16 +70,7 @@ const AcceptTripModal = (props: OwnProps) => {
                 tsr_id: props.id,
                 driver_name: driverName,
                 driver_phone_number: driverMobile,
-                vehicle_details: {
-                  business_id: "string",
-                  device_id: "string",
-                  device_type: "string",
-                  truck_name: "Shreynik_truck",
-                  truck_number: "DL20HR2121",
-                  truck_type: "OPEN",
-                  tsp_id: "",
-                  vehicle_id: truck
-                }
+                vehicle_id: Number(truck)
               })
               .then(() => {
                 props.onClose();
