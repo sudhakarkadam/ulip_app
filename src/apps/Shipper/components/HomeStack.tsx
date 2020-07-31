@@ -35,7 +35,7 @@ const HomeStack = (props: OwnProps) => {
   const profileCreated = props.userInfo.user_details.find(
     (role: PerosnaDetails) => role.profile.persona === "SHIPPER"
   );
-  const personVerified = profileCreated?.profile.name;
+  const personVerified = profileCreated?.profile.name && false;
   const comapnyVerified = profileCreated?.business_details;
   return (
     <>

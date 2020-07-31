@@ -24,7 +24,7 @@ const ShipperCreateProfile = (props: AllProps) => {
     (role: PerosnaDetails) => role.profile.persona === "SHIPPER"
   );
   const personVerified = profileExist?.profile.name;
-  const comapnyVerified = profileExist?.business_details;
+  const comapnyVerified = profileExist?.business_details && false;
   return (
     <Flex>
       {!personVerified && (
