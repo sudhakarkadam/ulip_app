@@ -46,7 +46,8 @@ export const specialUpload = (args: any) => {
     "POST",
     urls.upload(args.id),
     {
-      "Content-Type": "multipart/form-data"
+      "Content-Type": "multipart/form-data",
+      ...HeaderProvider.getHeaders()
     },
     [
       { name: "file", filename: "sig.jpeg", data: args.fileData },

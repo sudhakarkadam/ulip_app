@@ -80,7 +80,8 @@ export type Keys =
   | "gps.id"
   | "save.truck"
   | "truck.save.error"
-  | "truck.save.success";
+  | "truck.save.success"
+  | "signature";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -240,5 +241,7 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "truck.save.error"
   ? never
   : T extends "truck.save.success"
+  ? never
+  : T extends "signature"
   ? never
   : never;

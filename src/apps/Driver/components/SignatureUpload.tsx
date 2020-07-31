@@ -74,18 +74,19 @@ const SignatureUpload: React.FC<Props> = props => {
           <TextWrapper label="Receiver's name">
             <Input value={name} onChangeText={text => setName(text)} />
           </TextWrapper>
-          <TextWrapper label="Signature">
-            <View style={styles.body}>
-              <SignatureCapture
-                ref={signRef}
-                style={{ flex: 1 }}
-                onSaveEvent={onSaveEvent}
-                showNativeButtons={false}
-                showTitleLabel={false}
-                viewMode={"portrait"}
-              />
-            </View>
-          </TextWrapper>
+          <Text>
+            <TranslationText id="signature"></TranslationText>
+          </Text>
+          <View style={styles.body}>
+            <SignatureCapture
+              ref={signRef}
+              style={{ flex: 1 }}
+              onSaveEvent={onSaveEvent}
+              showNativeButtons={false}
+              showTitleLabel={false}
+              viewMode={"portrait"}
+            />
+          </View>
         </Flex>
         <StickyBottom>
           <FlexRow>

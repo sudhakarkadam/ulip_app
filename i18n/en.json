@@ -78,5 +78,6 @@
   "gps.id": "GPS ID",
   "save.truck": "Save Truck",
   "truck.save.error": "Error occured while saving truck",
-  "truck.save.success": "Truck successfully saved"
+  "truck.save.success": "Truck successfully saved",
+  "signature": "Signature"
 }
