@@ -73,6 +73,14 @@ const ActionCreators = {
     ],
     api.getAppConfigs
   ),
+  getVehiclesList: createAsyncAction(
+    [
+      actions.VEHICLES_LIST_REQUEST,
+      actions.VEHICLES_LIST_SUCCESS,
+      actions.VEHICLES_LIST_ERROR
+    ],
+    api.getVehiclesList
+  ),
   login: createAsyncAction(
     [actions.LOGIN_REQUEST, actions.LOGIN_SUCCESS, actions.LOGIN_ERROR],
     api.login

@@ -1,5 +1,6 @@
 import http from "../../../utils/http";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
+import { HeaderProvider } from "../../../api/Headers";
 const endpoint = "http://10.24.7.179";
 
 const urls = {
@@ -12,13 +13,13 @@ export const getEndpoint = () => endpoint;
 export default {
   acceptTrip: (payload: TripAcceptRequest) => {
     return http.post<TripAcceptRequest, {}>(urls.acceptTrip, payload, {
-      headers: {}
+      headers: HeaderProvider.getHeaders()
     });
   },
 
   rejectTrip: (payload: TripRejectRequest) => {
     return http.post<TripRejectRequest, {}>(urls.rejectTrip, payload, {
-      headers: {}
+      headers: HeaderProvider.getHeaders()
     });
   }
 };

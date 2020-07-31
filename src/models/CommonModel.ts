@@ -165,18 +165,21 @@ export interface AppConfigsResponse {
   gps_providers: string[];
 }
 
+export interface VehicleDetails {
+  device_id: string;
+  device_type: string;
+  truck_name: string;
+  truck_number: string;
+  truck_type: string;
+  tsp_id: string;
+}
 export interface SaveTruckRequestModel {
   business_id: string;
-  vehicle_details: [
-    {
-      device_id: string;
-      device_type: string;
-      truck_name: string;
-      truck_number: string;
-      truck_type: string;
-      tsp_id: string;
-    }
-  ];
+  vehicle_details: VehicleDetails[];
+}
+
+export interface VehicleListDetails extends VehicleDetails {
+  vehicle_id: number;
 }
 
 export interface BusinessSite {

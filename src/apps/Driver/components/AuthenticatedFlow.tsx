@@ -20,6 +20,7 @@ export type DriverHomeStackParamList = {
   TripList: undefined;
   TripHome: { id: string };
   TripDetails: undefined;
+  EwayBillGeneration: undefined;
 };
 
 const { savePersonalProfile } = ActionCreators;

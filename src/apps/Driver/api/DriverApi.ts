@@ -1,5 +1,6 @@
 import http from "../../../utils/http";
 import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
+import { HeaderProvider } from "../../../api/Headers";
 import RNFetch from "rn-fetch-blob";
 const endpoint = "http://10.24.7.179";
 
@@ -11,12 +12,24 @@ const urls = {
 };
 
 export const getTrips = (driverPhoneNumber: string) =>
-  http.get<{}, DriverTrips>(urls.getTrips + driverPhoneNumber, {
-    status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT"]
-  });
+  http.get<{}, DriverTrips>(
+    urls.getTrips + driverPhoneNumber,
+    {
+      status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT"]
+    },
+    {
+      headers: HeaderProvider.getHeaders()
+    }
+  );
 
 export const getTripById = (id: string) => {
-  return http.get<{ id: string }, DriverTrips[0]>(urls.getTripById + id);
+  return http.get<{}, DriverTrips[0]>(
+    urls.getTripById + id,
+    {},
+    {
+      headers: HeaderProvider.getHeaders()
+    }
+  );
 };
 
 export const updateTrip = (args: UpdateTripRequest) =>
@@ -38,16 +51,8 @@ export const specialUpload = (args: any) => {
   );
 };
 
-export const upload = ({
-  file,
-  id,
-  type
-}: {
-  id: number;
-  file: FormData;
-  type: "POD" | "POP";
-}) =>
-  fetch(urls.upload(id, type), {
+export const upload = ({ file, id }: { id: number; file: FormData }) =>
+  fetch(urls.upload(id), {
     body: file,
     headers: {
       "Content-Type": "multipart/form-data"
