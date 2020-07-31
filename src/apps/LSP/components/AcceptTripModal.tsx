@@ -4,19 +4,19 @@ import { PrimaryText, TextWrapper } from "../../../components/@styled/Text";
 import Input from "../../../components/InputComponent";
 import SelectComponent from "../../../components/SelectComponent";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
-import { TripAcceptRequest } from "../models/TripAcceptance";
-import { ReduxCustomAction } from "../../../utils/actionCreator";
-import LSPActionTypes from "../actions/LSPActions";
+
 import { ToastAndroid } from "react-native";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { VehicleListDetails } from "../../../models/CommonModel";
+import ActionCreators from "../../../actions/ActionCreators";
+import { ConnectedProps, connect } from "react-redux";
+
+const { acceptTrip } = ActionCreators;
+const connector = connect(null, { acceptTrip });
+type AcceptTripType = ConnectedProps<typeof connector>["acceptTrip"];
 
 interface OwnProps {
-  onAccept: (
-    apiArgs: TripAcceptRequest
-  ) => Promise<
-    ReduxCustomAction<LSPActionTypes.TRIP_ACCEPT_SUCCESS, TripAcceptRequest, {}>
-  >;
+  onAccept: AcceptTripType;
   onClose: () => void;
   returningScreen: () => void;
   id: number;

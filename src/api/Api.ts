@@ -29,6 +29,7 @@ import {
 import RNFetch from "rn-fetch-blob";
 import { HeaderProvider } from "./Headers";
 import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
+import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
 const endpoint = "https://b5f8220d0286.ngrok.io";
@@ -52,7 +53,9 @@ const urls = {
   getDriverTrips: `${endpoint}/ulip/trip/driver/`,
   getTripById: `${endpoint}/ulip/trip/`,
   updateTrip: (id: number | undefined) => `${endpoint}/ulip/trip/${id}/status`,
-  upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`
+  upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`,
+  acceptTrip: `${endpoint}/ulip/tsr/accept`,
+  rejectTrip: `${endpoint}/ulip/tsr/reject`
 };
 
 interface BusinessRole {
@@ -180,14 +183,13 @@ export default {
     );
   },
 
-  saveWarehouse(req: BusinessSite) {
-    return http.post<BusinessSite, BusinessSite & { business_site_id: string }>(
-      urls.business,
-      req,
-      {
-        headers: HeaderProvider.getHeaders()
-      }
-    );
+  saveWarehouse(req: Omit<BusinessSite, "business_site_id">) {
+    return http.post<
+      Omit<BusinessSite, "business_site_id">,
+      BusinessSite & { business_site_id: string }
+    >(urls.business, req, {
+      headers: HeaderProvider.getHeaders()
+    });
   },
 
   saveTruck(req: SaveTruckRequestModel) {
@@ -260,11 +262,25 @@ export default {
     return fetch(urls.upload(id), {
       body: file,
       headers: {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
+        ...HeaderProvider.getHeaders()
       },
       method: "POST"
     });
   },
+
+  acceptTrip: (payload: TripAcceptRequest) => {
+    return http.post<TripAcceptRequest, {}>(urls.acceptTrip, payload, {
+      headers: HeaderProvider.getHeaders()
+    });
+  },
+
+  rejectTrip: (payload: TripRejectRequest) => {
+    return http.post<TripRejectRequest, {}>(urls.rejectTrip, payload, {
+      headers: HeaderProvider.getHeaders()
+    });
+  },
+
   getBusinessSites(id: string) {
     return http.get<{}, BusinessSitesResponse>(
       `${endpoint}/ulip/business/${id}/businessSite`,

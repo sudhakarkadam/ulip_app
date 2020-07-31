@@ -13,12 +13,12 @@ import {
 import styled from "styled-components";
 import ActionCreators from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
-import { ReducerState } from "../store";
 import { isLoading } from "../../../utils/actionCreator";
 import BlockScreenLoader from "../../../components/BlockScreenLoader";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import LSPIcon from "../../../images/lsp.svg";
+import { CommonState } from "../../../reducers";
 
 const MetricBox = styled(TouchableOpacity)`
   background-color: ${({ theme }) => theme.colors.yellow};
@@ -42,7 +42,7 @@ const IconBox = styled(TouchableOpacity)`
 
 const { getMetrics } = ActionCreators;
 
-const mapStateToProps = (state: ReducerState) => ({
+const mapStateToProps = (state: CommonState) => ({
   HomeMetrics: state.HomeMetrics,
   user: state.user
 });

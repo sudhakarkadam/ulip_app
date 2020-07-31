@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import { Flex, FlexRow } from "../../../components/@styled/BaseElements";
 import { PrimaryText, TextWrapper } from "../../../components/@styled/Text";
 import SelectComponent from "../../../components/SelectComponent";
-import { TripRejectRequest } from "../models/TripAcceptance";
-import { ReduxCustomAction } from "../../../utils/actionCreator";
-import LSPActionTypes from "../actions/LSPActions";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import { ToastAndroid } from "react-native";
 import { TranslationText } from "../../../components/InternationalisationProvider";
+import ActionCreators from "../../../actions/ActionCreators";
+import { ConnectedProps, connect } from "react-redux";
+
+const { rejectTrip } = ActionCreators;
+const connector = connect(null, { rejectTrip });
+type RejectTripType = ConnectedProps<typeof connector>["rejectTrip"];
 
 interface OwnProps {
-  onReject: (
-    apiArgs: TripRejectRequest
-  ) => Promise<
-    ReduxCustomAction<LSPActionTypes.TRIP_REJECT_SUCCESS, TripRejectRequest, {}>
-  >;
+  onReject: RejectTripType;
   onClose: () => void;
   returningScreen: () => void;
   id: number;

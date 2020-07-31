@@ -9,12 +9,13 @@ import { Flex, HeaderOptions } from "../../../components/@styled/BaseElements";
 import CardComp from "../../../components/CardComp";
 const personIcon = require("../../../images/person-icon.png");
 import LSPLanding from "./LSPLanding";
-import { ReducerState } from "../store";
+
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 import { I18nContext } from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
 import { GetTripsResponse, PerosnaDetails } from "../../../models/CommonModel";
+import { CommonState } from "../../../reducers";
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type RootStackParamList = {
   CreateProfile: undefined;
@@ -32,7 +33,7 @@ type HomeMetricsProps = StackScreenProps<RootStackParamList, "HomeMetrics">;
 type ProfileProps = StackScreenProps<RootStackParamList, "PersonProfile"> &
   StackScreenProps<RootStackParamList, "CompanyProfile">;
 
-const mapStateToProps = (state: ReducerState) => ({
+const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data
 });
 const { saveCompanyProfile, savePersonalProfile } = ActionCreators;

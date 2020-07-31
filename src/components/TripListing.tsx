@@ -27,9 +27,9 @@ import {
 import ActionCreators from "../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { FlatList } from "react-native";
-import { ReducerState } from "../apps/LSP/store";
 import { isLoading, isSuccess } from "../utils/actionCreator";
 import BlockScreenLoader from "../components/BlockScreenLoader";
+import { CommonState } from "../reducers";
 import ContainerTruck from "../images/containerTruck.svg";
 import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
@@ -127,7 +127,7 @@ const CalendarComponent = ({ date }: any) => {
     </Flex>
   );
 };
-const mapStateToProps = (state: ReducerState) => ({
+const mapStateToProps = (state: CommonState) => ({
   trips: state.trips,
   user: state.user
 });

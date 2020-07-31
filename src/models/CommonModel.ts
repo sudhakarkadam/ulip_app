@@ -187,6 +187,7 @@ export interface BusinessSitesResponse {
   business_sites: BusinessSite[];
 }
 export interface BusinessSite {
+  business_id: string;
   warehouse_name: string;
   gstin: string;
   location: Location;

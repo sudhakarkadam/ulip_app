@@ -172,6 +172,23 @@ const ActionCreators = {
       actions.SPECIAL_UPLOAD_ERROR
     ],
     api.specialUpload
+  ),
+
+  acceptTrip: createAsyncAction(
+    [
+      actions.TRIP_ACCEPT_REQUEST,
+      actions.TRIP_ACCEPT_SUCCESS,
+      actions.TRIP_ACCEPT_ERROR
+    ],
+    api.acceptTrip
+  ),
+  rejectTrip: createAsyncAction(
+    [
+      actions.TRIP_REJECT_REQUEST,
+      actions.TRIP_REJECT_SUCCESS,
+      actions.TRIP_REJECT_ERROR
+    ],
+    api.rejectTrip
   )
 };
 

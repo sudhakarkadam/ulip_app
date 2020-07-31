@@ -7,18 +7,15 @@ import withModal, {
 import TripDetails from "../../../components/TripDetails";
 import AcceptTripModal from "./AcceptTripModal";
 import RejectTripModal from "./RejectTripModal";
-import { LSPAppState } from "../reducers";
 import { CommonState } from "../../../reducers";
 import { connect, ConnectedProps } from "react-redux";
-import LSPActionCreators from "../actions/LSPActionCreators";
 import CommonActionCreators from "../../../actions/ActionCreators";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { LSPAuthenticatedStackParamList } from "./LSPLanding";
 import { HomeStackParamList } from "./LSPHomeStack";
-const { acceptTrip, rejectTrip } = LSPActionCreators;
-const { getVehiclesList } = CommonActionCreators;
+const { getVehiclesList, acceptTrip, rejectTrip } = CommonActionCreators;
 
 type NavigationProps = CompositeNavigationProp<
   StackNavigationProp<HomeStackParamList, "TripAcceptPage">,
@@ -32,14 +29,12 @@ interface OwnProps {
   route: TripAcceptRouteProps;
 }
 
-const mapStateToProps = (state: LSPAppState & CommonState) => ({
-  acceptedTripStatus: state.acceptedTripStatus,
+const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,
-  rejectedTripStatus: state.rejectedTripStatus,
   vehiclesList: state.vehiclesList.data,
   commonConfig: state.appConfig.data
 });
-const mapDispatchToProps = { acceptTrip, rejectTrip, getVehiclesList };
+const mapDispatchToProps = { getVehiclesList, acceptTrip, rejectTrip };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const TripAcceptPage = (

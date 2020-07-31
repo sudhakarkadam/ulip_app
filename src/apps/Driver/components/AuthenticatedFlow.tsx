@@ -7,6 +7,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
 import Hometabs from "./HomeTabs";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
+
 import SignatureUpload from "./SignatureUpload";
 import PODDetails from "../../../components/PODDetails";
 
@@ -38,6 +39,7 @@ const AuthenticatedFlow = (props: OwnProps) => {
   const profileCreated = props.userInfo.user_details.find(
     role => role.profile.persona === "DRIVER"
   );
+
   return (
     <Stack.Navigator
       initialRouteName={profileCreated ? "HomeTabsPage" : "CreateProfile"}

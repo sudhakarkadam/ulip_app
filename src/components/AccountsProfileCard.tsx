@@ -1,13 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import { GestureResponderEvent } from "react-native";
-import {
-  Image,
-  TouchableOpacity,
-  Text,
-  Flex,
-  FlexRow
-} from "./@styled/BaseElements";
+import { TouchableOpacity, Text, Flex, FlexRow } from "./@styled/BaseElements";
 import colors from "../theme/colors";
 import { PrimaryHeaderText } from "./@styled/Text";
 import Tick from "../images/tick.svg";

@@ -11,14 +11,15 @@ import StyledButton from "../../../components/@styled/StyledButton/StyledButton"
 import Input from "../../../components/InputComponent";
 import { i18n } from "../../../components/InternationalisationProvider";
 import SelectComponent from "../../../components/SelectComponent";
-import { ReducerState } from "../store";
+
 import ActionCreators from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { ToastAndroid } from "react-native";
 import { HomeStackParamList } from "./LSPHomeStack";
 import { StackScreenProps } from "@react-navigation/stack";
+import { CommonState } from "../../../reducers";
 
-const mapStateToProps = (state: ReducerState) => ({
+const mapStateToProps = (state: CommonState) => ({
   trips: state.trips,
   user: state.user,
   appConfig: state.appConfig
