@@ -9,8 +9,7 @@ import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
 import user from "./UserReducer";
 import HomeMetrics from "./HomeMetricsReducer";
-import DriverActionTypes from "../apps/Driver/actions/DriverActions";
-import { DriverTrips } from "../apps/Driver/models/DriverTrips";
+import { DriverTrips } from "../models/DriverTrips";
 
 import {
   CreateTripRequestModel,
@@ -62,15 +61,15 @@ export const appConfig = createReducer<
 ]);
 
 const driverTrips = createReducer<
-  DriverActionTypes.GET_TRIPS_REQUEST,
-  DriverActionTypes.GET_TRIPS_SUCCESS,
-  DriverActionTypes.GET_TRIPS_ERROR,
+  actions.GET_DRIVER_TRIPS_REQUEST,
+  actions.GET_DRIVER_TRIPS_SUCCESS,
+  actions.GET_DRIVER_TRIPS_ERROR,
   {},
   DriverTrips
 >([
-  DriverActionTypes.GET_TRIPS_REQUEST,
-  DriverActionTypes.GET_TRIPS_SUCCESS,
-  DriverActionTypes.GET_TRIPS_ERROR
+  actions.GET_DRIVER_TRIPS_REQUEST,
+  actions.GET_DRIVER_TRIPS_SUCCESS,
+  actions.GET_DRIVER_TRIPS_ERROR
 ]);
 
 export const vehiclesList = createReducer<
@@ -91,15 +90,15 @@ export const vehiclesList = createReducer<
 // createReducer util and write an actual reducer and merge
 // both calls data into one.
 const driverTrip = createReducer<
-  DriverActionTypes.GET_TRIP_BY_ID_REQUEST,
-  DriverActionTypes.GET_TRIP_BY_ID_SUCCESS,
-  DriverActionTypes.GET_TRIP_BY_ID_ERROR,
+  actions.GET_TRIP_BY_ID_REQUEST,
+  actions.GET_TRIP_BY_ID_SUCCESS,
+  actions.GET_TRIP_BY_ID_ERROR,
   {},
   DriverTrips[0]
 >([
-  DriverActionTypes.GET_TRIP_BY_ID_REQUEST,
-  DriverActionTypes.GET_TRIP_BY_ID_SUCCESS,
-  DriverActionTypes.GET_TRIP_BY_ID_ERROR
+  actions.GET_TRIP_BY_ID_REQUEST,
+  actions.GET_TRIP_BY_ID_SUCCESS,
+  actions.GET_TRIP_BY_ID_ERROR
 ]);
 
 export const reducers = {

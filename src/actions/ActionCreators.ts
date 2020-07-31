@@ -6,8 +6,8 @@ import {
   GetActionTypes,
   createAction
 } from "../utils/actionCreator";
-import { Languages } from "src/components/InternationalisationProvider";
-import { UserPersonaTypes } from "src/models/CommonModel";
+import { Languages } from "../components/InternationalisationProvider";
+import { UserPersonaTypes } from "../models/CommonModel";
 
 const ActionCreators = {
   createTrip: createAsyncAction(
@@ -123,7 +123,48 @@ const ActionCreators = {
     createAction(actions.SET_USER_PERSONA, args, {}),
 
   setUserLanguage: (args: { language: Languages }) =>
-    createAction(actions.SET_USER_LANGUAGE, args, {})
+    createAction(actions.SET_USER_LANGUAGE, args, {}),
+
+  getDriverTrips: createAsyncAction(
+    [
+      actions.GET_DRIVER_TRIPS_REQUEST,
+      actions.GET_DRIVER_TRIPS_SUCCESS,
+      actions.GET_DRIVER_TRIPS_ERROR
+    ],
+    api.getDriverTrips
+  ),
+
+  getTripById: createAsyncAction(
+    [
+      actions.GET_TRIP_BY_ID_REQUEST,
+      actions.GET_TRIP_BY_ID_SUCCESS,
+      actions.GET_TRIP_BY_ID_ERROR
+    ],
+    api.getTripById
+  ),
+
+  updateTrip: createAsyncAction(
+    [
+      actions.GET_UPDATE_TRIP_REQUEST,
+      actions.GET_UPDATE_TRIP_SUCCESS,
+      actions.GET_UPDATE_TRIP_ERROR
+    ],
+    api.updateTrip
+  ),
+
+  upload: createAsyncAction(
+    [actions.UPLOAD_REQUEST, actions.UPLOAD_SUCCESS, actions.UPLOAD_ERROR],
+    api.upload
+  ),
+
+  specialUpload: createAsyncAction(
+    [
+      actions.SPECIAL_UPLOAD_REQUEST,
+      actions.SPECIAL_UPLOAD_SUCCESS,
+      actions.SPECIAL_UPLOAD_ERROR
+    ],
+    api.specialUpload
+  )
 };
 
 export default ActionCreators;

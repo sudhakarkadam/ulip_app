@@ -11,7 +11,7 @@ import Tag from "./@styled/Tag";
 import DestinationIcon from "../images/location.svg";
 import TrailerIcon from "../images/trailer.svg";
 import CheckIcon from "../images/check-circle-1.svg";
-import { Location } from "../apps/Driver/models/DriverTrips";
+import { Location } from "../models/DriverTrips";
 
 export interface Place {
   name: string;
