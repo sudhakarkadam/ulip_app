@@ -4,10 +4,10 @@ import { PageContent, Page } from "../../../components/@styled/Page";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import {
   Box,
-  TextWrapper,
   Flex,
   ScrollView
 } from "../../../components/@styled/BaseElements";
+import { TextWrapper } from "../../../components/@styled/Text";
 import Input from "../../../components/InputComponent";
 import MapComp from "../../../components/MapComp";
 import StyledButton from "../../../components/@styled/StyledButton";

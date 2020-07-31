@@ -28,6 +28,7 @@
   "otp.sent": "An OTP has been sent to",
   "otp.verified": "OTP successfully verified for {{phoneNumber}}",
   "pending": "IN TRANSIT TRIPS",
+  "pending.literally": "Pending",
   "pick.up.date": "Pickup Date",
   "pick.up.point": "Pickup Point",
   "placeholder": "{{value}}",
@@ -35,6 +36,8 @@
   "reached": "Reached",
   "reject": "Reject",
   "requests": "TRIPS TO ASSIGN",
+  "requested": "Requested",
+
   "required.weight": "Required Weight",
   "rice.grain.wheat": "RICE/GRAIN/WHEAT",
   "setup.required": "Setup Required",
@@ -80,5 +83,7 @@
   "gps.id": "GPS ID",
   "save.truck": "Save Truck",
   "truck.save.error": "Error occured while saving truck",
-  "truck.save.success": "Truck successfully saved"
+  "truck.save.success": "Truck successfully saved",
+  "create.trip": "Create Trip",
+  "add.warehouse": "Add Warehouse"
 }
