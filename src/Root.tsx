@@ -91,39 +91,40 @@ const NoLoginStackNavigator = () => {
     </NoLoginStack.Navigator>
   );
 };
-const DrawerNavigator: React.FC<Props & ConnectedProps<typeof connector>> = ({
-  isLanguageSelected,
-  userPersona,
-  getAppConfigs,
-  commonConfig,
-  userInfo
-}) => {
-  useEffect(() => {
+class DrawerNavigator extends React.Component<
+  Props & ConnectedProps<typeof connector>
+> {
+  componentWillMount() {
+    const { getAppConfigs, commonConfig, userInfo } = this.props;
     HeaderProvider.setToken(userInfo.access_token);
     if (!commonConfig) {
       getAppConfigs({});
     }
-  }, [userInfo]);
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home">
-        {() => (
-          <AuthenticatedStackNavigator
-            isLanguageSelected={isLanguageSelected}
-            userPersona={userPersona}
-          />
-        )}
-      </Drawer.Screen>
-      <Drawer.Screen name="Change Language">
-        {({ navigation }) => (
-          <SelectLanguage
-            next={() => navigation.navigate("Home")}
-          ></SelectLanguage>
-        )}
-      </Drawer.Screen>
-    </Drawer.Navigator>
-  );
-};
+  }
+  render() {
+    const { isLanguageSelected, userPersona } = this.props;
+
+    return (
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home">
+          {() => (
+            <AuthenticatedStackNavigator
+              isLanguageSelected={isLanguageSelected}
+              userPersona={userPersona}
+            />
+          )}
+        </Drawer.Screen>
+        <Drawer.Screen name="Change Language">
+          {({ navigation }) => (
+            <SelectLanguage
+              next={() => navigation.navigate("Home")}
+            ></SelectLanguage>
+          )}
+        </Drawer.Screen>
+      </Drawer.Navigator>
+    );
+  }
+}
 
 const ConnectedDrawer = connector(DrawerNavigator);
 
