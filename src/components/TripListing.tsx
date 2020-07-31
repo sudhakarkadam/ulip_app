@@ -12,7 +12,6 @@ import Filter from "../images/sort.svg";
 import Sort from "../images/filter.svg";
 import {
   SecondaryText,
-  PrimaryLabel,
   SmallCapitalText,
   PrimaryHeaderText,
   PrimaryText
@@ -236,13 +235,13 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                           {!!item.trip_details && (
                             <>
                               {config.primaryWidget === IconWidget.PROFILE &&
-                                !!item.pickup_date && (
+                                !!item.pickup_request_time && (
                                   <SecondaryText>{`${
-                                    item.trip_details.driver_name
-                                  }${!!item.pickup_date &&
-                                    `  •  ${moment(item.pickup_date).format(
-                                      "DD/MM/YYYY"
-                                    )}`}`}</SecondaryText>
+                                    item.trip_details.status
+                                  }${!!item.pickup_request_time &&
+                                    `  •  ${moment(
+                                      item.pickup_request_time
+                                    ).format("DD/MM/YYYY")}`}`}</SecondaryText>
                                 )}
                               {[
                                 RequestStatus.COMPLETED,
@@ -250,14 +249,8 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                               ].indexOf(item.status) > -1 &&
                                 config.primaryWidget !== IconWidget.PROFILE && (
                                   <SecondaryText>{`${moment(
-                                    item.pickup_date
-                                  ).format(
-                                    "DD/MM/YYYY"
-                                  )}${!!item.trip_details &&
-                                    !!item.trip_details.eta &&
-                                    `  •  ${moment(
-                                      item.trip_details.eta
-                                    ).format("DD/MM/YYYY")}`}`}</SecondaryText>
+                                    item.pickup_request_time
+                                  ).format("DD/MM/YYYY")}`}</SecondaryText>
                                 )}
                             </>
                           )}

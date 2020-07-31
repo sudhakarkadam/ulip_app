@@ -101,28 +101,34 @@ export enum TruckType {
   TRAILOR = "TRAILOR"
 }
 export interface GetTripsResponse {
-  tsr_id: number;
-  status: string;
-  source_location_details: Sourcelocationdetails;
-  destination_location_details: Sourcelocationdetails;
-  weight: number;
-  weight_unit: string;
-  truck_type_preference: TruckType;
+  created_at: number;
+  destination_location_details: LocationDetails;
   goods_segment: string;
   pickup_request_time: number;
-  created_at: number;
+  source_location_details: LocationDetails;
+  status: RequestStatus;
+  trip_details: TripDetails;
+  truck_type_preference: string;
+  tsr_id: number;
   updated_at: number;
+  weight: number;
+  weight_unit: string;
 }
 
-interface Sourcelocationdetails {
+interface TripDetails {
   id: number;
-  name: string;
+  status: string;
+}
+
+interface LocationDetails {
   address: string;
   city: string;
-  state: string;
   country: string;
-  postal_code: number;
+  id: number;
   map_ref: {};
+  name: string;
+  postal_code: number;
+  state: string;
 }
 
 export enum RequestStatus {

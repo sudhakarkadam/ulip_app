@@ -62,25 +62,17 @@ const LSPTripDetails = (props: HistoryProps) => {
     <Page>
       <PageContent>
         <TripDetails
-          documents={tripData.trip_details?.documents}
-          id={tripData.tsr_id as any}
-          pickupDateString={tripData.pickup_date as any}
+          id={tripData.tsr_id + ""}
+          pickupDateString={new Date(
+            tripData.pickup_request_time
+          ).toLocaleDateString()}
           truckType={tripData.truck_type_preference}
-          truckWeight={tripData.weight as any}
+          truckWeight={tripData.weight + ""}
           truckUnit={tripData.weight_unit}
-          lspProvider={tripData.legal_name}
-          places={
-            [
-              {
-                name: tripData.source_location_details.city,
-                ...tripData.source_location_details
-              },
-              {
-                name: tripData.destination_location_details.city,
-                ...tripData.destination_location_details
-              }
-            ] as any
-          }
+          places={[
+            tripData.source_location_details,
+            tripData.destination_location_details
+          ]}
         />
       </PageContent>
     </Page>
