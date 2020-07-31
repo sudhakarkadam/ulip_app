@@ -74,7 +74,15 @@ export type Keys =
   | "details"
   | "must.have.ewb"
   | "warehouse.details"
-  | "no.business.id";
+  | "no.business.id"
+  | "truck.details"
+  | "truck.name"
+  | "truck.number"
+  | "gps.vendor"
+  | "gps.id"
+  | "save.truck"
+  | "truck.save.error"
+  | "truck.save.success";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -222,5 +230,21 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "warehouse.details"
   ? never
   : T extends "no.business.id"
+  ? never
+  : T extends "truck.details"
+  ? never
+  : T extends "truck.name"
+  ? never
+  : T extends "truck.number"
+  ? never
+  : T extends "gps.vendor"
+  ? never
+  : T extends "gps.id"
+  ? never
+  : T extends "save.truck"
+  ? never
+  : T extends "truck.save.error"
+  ? never
+  : T extends "truck.save.success"
   ? never
   : never;

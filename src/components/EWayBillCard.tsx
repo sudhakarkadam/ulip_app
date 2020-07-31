@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { View, Modal } from "react-native";
-import {
-  Text,
-  Flex,
-  FlexRow,
-  FlexColumn,
-  Image,
-  TextWrapper,
-  Box
-} from "./@styled/BaseElements";
+import { Text, Flex, FlexRow, FlexColumn, Box } from "./@styled/BaseElements";
+import { TextWrapper } from "./@styled/Text";
 import InfoIcon from "../images/info.svg";
 import LoaderIcon from "../images/loader.svg";
 import ErrorIcon from "../images/errorInfo.svg";

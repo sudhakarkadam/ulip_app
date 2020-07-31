@@ -102,6 +102,14 @@ const ActionCreators = {
     ],
     api.saveWarehouse
   ),
+  saveTruck: createAsyncAction(
+    [
+      actions.SAVE_TRUCK_REQUEST,
+      actions.SAVE_TRUCK_REQUEST,
+      actions.SAVE_TRUCK_ERROR
+    ],
+    api.saveTruck
+  ),
   setUserPersona: (args: { user: string }) =>
     createAction(actions.SET_USER_PERSONA, args, {}),
 

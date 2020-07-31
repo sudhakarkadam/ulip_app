@@ -26,6 +26,7 @@ import {
 } from "styled-system";
 import colors from "../../theme/colors";
 import BackIcon from "../../images/back.svg";
+import { SecondaryLabel } from "./Text";
 
 export type BoxProps = SpaceProps &
   ColorProps &
@@ -144,20 +145,6 @@ export type TInputProps = SpaceProps &
   Omit<LayoutProps, "height" | "width" | "size"> &
   TypographyProps &
   BorderProps;
-
-export const TextWrapper = (props: {
-  children: React.ReactNode;
-  label: React.ReactNode;
-}) => {
-  return (
-    <Flex mb={2}>
-      <Text mb={3} color={`${colors.grays[5]}`} fontSize={1}>
-        {props.label}
-      </Text>
-      {props.children}
-    </Flex>
-  );
-};
 
 export const HeaderOptions = {
   headerStyle: { backgroundColor: colors.bg, elevation: 0 },

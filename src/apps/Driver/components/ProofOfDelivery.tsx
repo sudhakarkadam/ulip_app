@@ -6,9 +6,9 @@ import {
   Text,
   Flex,
   FlexRow,
-  TextWrapper,
   FlexColumn
 } from "../../../components/@styled/BaseElements";
+import { TextWrapper } from "../../../components/@styled/Text";
 import StyledButton from "../../../components/@styled/StyledButton";
 import { StickyBottom } from "../../../components/StickyBottom";
 import SignatureCapture, {

@@ -72,5 +72,13 @@
   "details": "Details",
   "must.have.ewb": "You must have E-Way credentials to generate bill.",
   "warehouse.details": "Warehouse details",
-  "no.business.id": "Business ID not found"
+  "no.business.id": "Business ID not found",
+  "truck.details": "Truck details",
+  "truck.name": "Truck name",
+  "truck.number": "Truck number",
+  "gps.vendor": "GPS Vendor",
+  "gps.id": "GPS ID",
+  "save.truck": "Save Truck",
+  "truck.save.error": "Error occured while saving truck",
+  "truck.save.success": "Truck successfully saved"
 }

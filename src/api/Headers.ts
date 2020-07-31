@@ -5,7 +5,7 @@ function createHeader() {
       authToken = token;
     },
     getHeaders: () => {
-      return { "X-AUTH_TOKEN": authToken };
+      return { Authorization: `Bearer ${authToken}` };
     }
   };
 }

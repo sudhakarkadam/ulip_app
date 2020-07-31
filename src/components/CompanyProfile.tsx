@@ -4,8 +4,8 @@ import Input from "../components/InputComponent";
 import MapComp from "./MapComp";
 import StyledButton from "../components/@styled/StyledButton";
 import colors from "../theme/colors";
-import { FlexColumn, Flex, TextWrapper } from "./@styled/BaseElements";
-import { PrimaryHeaderText } from "./@styled/Text";
+import { FlexColumn, Flex } from "./@styled/BaseElements";
+import { PrimaryHeaderText, TextWrapper } from "./@styled/Text";
 import { Page, PageContent } from "./@styled/Page";
 
 interface OwnProps {

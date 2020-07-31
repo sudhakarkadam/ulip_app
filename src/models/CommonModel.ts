@@ -162,6 +162,21 @@ export interface AppConfigsResponse {
   good_types: string[];
   weight_types: string[];
   reject_reasons: string[];
+  gps_providers: string[];
+}
+
+export interface SaveTruckRequestModel {
+  business_id: string;
+  vehicle_details: [
+    {
+      device_id: string;
+      device_type: string;
+      truck_name: string;
+      truck_number: string;
+      truck_type: string;
+      tsp_id: string;
+    }
+  ];
 }
 
 export interface BusinessSite {
