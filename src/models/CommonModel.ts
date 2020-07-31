@@ -62,7 +62,7 @@ export interface PerosnaDetails {
   profile: {
     user_id: string;
     name: string;
-    persona: string;
+    persona: "SHIPPER" | "LSP" | "DRIVER";
     phone_number: string;
     status: string;
   };

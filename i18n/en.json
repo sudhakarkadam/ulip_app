@@ -71,5 +71,6 @@
   "generate.ewb": "Generate E-Way bill",
   "details": "Details",
   "must.have.ewb": "You must have E-Way credentials to generate bill.",
-  "warehouse.details": "Warehouse details"
+  "warehouse.details": "Warehouse details",
+  "no.business.id": "Business ID not found"
 }

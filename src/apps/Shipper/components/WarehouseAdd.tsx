@@ -13,13 +13,22 @@ import MapComp from "../../../components/MapComp";
 import StyledButton from "../../../components/@styled/StyledButton";
 import Actions from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
+import { CommonState } from "../../../reducers";
 
 const { saveWarehouse } = Actions;
 
-const connector = connect(null, { saveWarehouse });
+const connector = connect(
+  (state: CommonState) => ({
+    business: state.user.data.user_details.filter(
+      d => d.profile.persona === "SHIPPER"
+    )[0]
+  }),
+  { saveWarehouse }
+);
 
 const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
-  saveWarehouse
+  saveWarehouse,
+  business
 }) => {
   const [name, setName] = useState("");
   const [gstin, setGstin] = useState("");
@@ -27,7 +36,13 @@ const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
-
+  const id = business && business.business_details?.business_id;
+  if (!id)
+    return (
+      <PrimaryHeaderText p={6}>
+        <TranslationText id="no.business.id"></TranslationText>
+      </PrimaryHeaderText>
+    );
   return (
     <Page>
       <PageContent>
@@ -61,7 +76,7 @@ const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
                   if (!postalCode) return;
 
                   saveWarehouse({
-                    business_id: "whattttt???",
+                    business_id: id,
                     gstin,
                     warehouse_name: name,
                     location: {

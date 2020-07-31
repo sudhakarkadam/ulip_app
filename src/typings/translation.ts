@@ -73,7 +73,8 @@ export type Keys =
   | "generate.ewb"
   | "details"
   | "must.have.ewb"
-  | "warehouse.details";
+  | "warehouse.details"
+  | "no.business.id";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -219,5 +220,7 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "must.have.ewb"
   ? never
   : T extends "warehouse.details"
+  ? never
+  : T extends "no.business.id"
   ? never
   : never;
