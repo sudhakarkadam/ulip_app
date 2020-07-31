@@ -114,7 +114,7 @@ const ActionCreators = {
   saveTruck: createAsyncAction(
     [
       actions.SAVE_TRUCK_REQUEST,
-      actions.SAVE_TRUCK_REQUEST,
+      actions.SAVE_TRUCK_SUCCESS,
       actions.SAVE_TRUCK_ERROR
     ],
     api.saveTruck

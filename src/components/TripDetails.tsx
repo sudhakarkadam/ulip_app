@@ -82,7 +82,7 @@ const TripDetails = (props: OwnProps) => {
         </Card>
       )}
       <Card>{!!places && <TripStamp places={places} />}</Card>
-      {lspProvider && (
+      {!!lspProvider && (
         <Card style={{ paddingVertical: 7 }}>
           <PrimaryLabel>
             <TranslationText id="lsp"></TranslationText>
