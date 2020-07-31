@@ -37,6 +37,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
   const [vendor, setVendor] = useState("");
   const [gpsId, setGpsId] = useState("");
   const [type, setType] = useState("");
+  const [loading, setLoading] = useState(false);
   const { translate } = useContext(i18n);
   const { appConfig, user } = props;
 
@@ -45,6 +46,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
       role => role.profile.persona === "LSP"
     );
     const businessCreated = profileCreated?.business_details;
+    setLoading(true);
     try {
       await props.saveTruck({
         business_id: businessCreated?.business_id || "",
@@ -59,9 +61,11 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
           }
         ]
       });
+      setLoading(false);
       ToastAndroid.show(translate("truck.save.success"), ToastAndroid.LONG);
       props.navigation.goBack();
     } catch {
+      setLoading(false);
       ToastAndroid.show(translate("truck.save.error"), ToastAndroid.LONG);
     }
   };
@@ -116,6 +120,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
                 title={translate("save.truck")}
                 fontSize={14}
                 onPress={fireSaveTruck}
+                loading={loading}
               />
             </Flex>
           </FlexColumn>

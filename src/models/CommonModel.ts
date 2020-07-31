@@ -37,9 +37,10 @@ export interface SendOtpResponse {
 
 export interface ShipperBusinessProfileModel {
   business_name: string;
-  site_details: LocationModel;
+  location: LocationModel;
   user_id: string;
   business_type: string;
+  registration_number: string;
 }
 
 export interface ShipperBusinessProfileResponse
@@ -50,12 +51,11 @@ export interface ShipperBusinessProfileResponse
 export interface LocationModel {
   address: string;
   city: string;
-  location_code: string;
-  map_ref: string;
+  country: string;
+  map_ref: object;
   name: string;
-  postal_code: string;
+  postal_code: number;
   state: string;
-  gst_in: string;
 }
 
 export interface PerosnaDetails {

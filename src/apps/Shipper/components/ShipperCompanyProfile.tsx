@@ -20,10 +20,10 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 const location = {
   address: "Sector 4, Rohini",
   city: "Delhi",
-  location_code: "loc_1",
-  map_ref: "ref",
+  country: "India",
+  map_ref: {},
   name: "Delhi",
-  postal_code: "560035",
+  postal_code: 560035,
   state: "Delhi"
 };
 
@@ -37,9 +37,10 @@ const ShipperCompanyProfile = (props: Props) => {
         try {
           await props.saveCompanyProfile({
             name,
-            location: { ...location, gst_in: regNumber },
+            location: { ...location },
             userId: userId ? userId.profile.user_id : "",
-            business_type: "SHIPPER"
+            business_type: "SHIPPER",
+            gst_in: regNumber
           });
           props.navigation.navigate("MainTripListing");
           ToastAndroid.show("Company profile Created", ToastAndroid.SHORT);
