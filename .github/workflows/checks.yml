@@ -29,6 +29,8 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.YARN_TOKEN }}
       - name: Prettier check
         run: yarn check-prettier
       - name: Lint test
