@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ScrollView, Flex, FlexRow } from "./@styled/BaseElements";
+import { ScrollView, Flex, FlexRow, Box } from "./@styled/BaseElements";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "../apps/Driver/components/AuthenticatedFlow";
 import { PrimaryText } from "./@styled/Text";
@@ -8,6 +8,8 @@ import StyledButton from "./@styled/StyledButton/StyledButton";
 import colors from "../theme/colors";
 import moment from "moment";
 import { Page, PageContent } from "./@styled/Page";
+import { Image } from "react-native";
+const Received = require("../images/received-stamp.png");
 
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
@@ -52,6 +54,9 @@ const PODDetails = (props: Props) => {
     <Page>
       <PageContent>
         <ScrollView backgroundColor="#ffffff" mt={4}>
+          <Box position="absolute" ml={150} mt={60}>
+            <Image source={Received} style={{ width: 200, height: 115 }} />
+          </Box>
           {ewb && (
             <Card
               style={{

@@ -16,17 +16,21 @@ import {
   Metrics,
   ResendOtpRequest,
   GetMetricsRequest,
+  BusinessSite,
   SaveTruckRequestModel,
-  VehicleListDetails
+  VehicleListDetails,
+  UserPersonaTypes
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
   LspListResponse
 } from "../models/ShipperApiModels";
+import RNFetch from "rn-fetch-blob";
 import { HeaderProvider } from "./Headers";
+import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
-const endpoint = "http://10.24.7.179";
+const endpoint = "https://b5f8220d0286.ngrok.io";
 
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
@@ -41,8 +45,13 @@ const urls = {
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: `${endpoint}/ulip/tsr/status_view`,
   getMetrics: `${endpoint}/ulip/tsr/view`,
+  business: `${endpoint}/ulip/business/businessSite`,
   saveTruck: `${endpoint}/ulip/business/vehicle`,
-  getVehiclesList: `${endpoint}/ulip/business`
+  getVehiclesList: `${endpoint}/ulip/business`,
+  getDriverTrips: `${endpoint}/ulip/trip/driver/`,
+  getTripById: `${endpoint}/ulip/trip/`,
+  updateTrip: (id: number | undefined) => `${endpoint}/ulip/trip/${id}/status`,
+  upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`
 };
 
 interface BusinessRole {
@@ -70,7 +79,7 @@ export default {
     name: string;
     phone: string;
     loginId: string;
-    persona: string;
+    persona: UserPersonaTypes;
   }) {
     return http.post<SavePersonalProfileRequest, SavePersonalProfileResponse>(
       urls.savePersonalProfile,
@@ -78,7 +87,7 @@ export default {
         phone_number: req.phone,
         name: req.name,
         login_id: req.loginId,
-        persona: req.persona.toUpperCase()
+        persona: req.persona
       },
       {
         headers: HeaderProvider.getHeaders()
@@ -90,6 +99,7 @@ export default {
     location: LocationModel;
     userId: string;
     business_type: string;
+    gst_in: string;
   }) {
     return http.post<
       ShipperBusinessProfileModel,
@@ -98,9 +108,10 @@ export default {
       urls.saveCompanyProfile,
       {
         business_name: req.name,
-        site_details: req.location,
+        location: req.location,
         user_id: req.userId,
-        business_type: req.business_type
+        business_type: req.business_type,
+        registration_number: req.gst_in
       },
       {
         headers: HeaderProvider.getHeaders()
@@ -167,6 +178,17 @@ export default {
       }
     );
   },
+
+  saveWarehouse(req: BusinessSite) {
+    return http.post<BusinessSite, BusinessSite & { business_site_id: string }>(
+      urls.business,
+      req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+
   saveTruck(req: SaveTruckRequestModel) {
     return http.post<SaveTruckRequestModel, SaveTruckRequestModel>(
       urls.saveTruck,
@@ -184,5 +206,62 @@ export default {
         headers: HeaderProvider.getHeaders()
       }
     );
+  },
+  getDriverTrips(driverPhoneNumber: string) {
+    return http.get<{}, DriverTrips>(
+      urls.getTrips + driverPhoneNumber,
+      {
+        status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT"]
+      },
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+
+  getTripById(id: string) {
+    return http.get<{}, DriverTrips[0]>(
+      urls.getTripById + id,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+
+  updateTrip(args: UpdateTripRequest) {
+    return http.put<UpdateTripRequest, {}>(
+      urls.updateTrip(args.tripId),
+      { status: args.status },
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+  specialUpload(args: any) {
+    return RNFetch.fetch(
+      "POST",
+      urls.upload(args.id),
+      {
+        "Content-Type": "multipart/form-data",
+        ...HeaderProvider.getHeaders()
+      },
+      [
+        { name: "file", filename: "sig.jpeg", data: args.fileData },
+        { name: "document_format", data: args.document_format },
+        { name: "document_type", data: args.document_type },
+        { name: "document_id", data: args.document_id }
+      ]
+    );
+  },
+
+  upload({ file, id }: { id: number; file: FormData }) {
+    return fetch(urls.upload(id), {
+      body: file,
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      method: "POST"
+    });
   }
 };

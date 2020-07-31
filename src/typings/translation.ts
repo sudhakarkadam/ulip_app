@@ -30,6 +30,7 @@ export type Keys =
   | "otp.sent"
   | "otp.verified"
   | "pending"
+  | "pending.literally"
   | "pick.up.date"
   | "pick.up.point"
   | "placeholder"
@@ -37,6 +38,7 @@ export type Keys =
   | "reached"
   | "reject"
   | "requests"
+  | "requested"
   | "required.weight"
   | "rice.grain.wheat"
   | "setup.required"
@@ -73,6 +75,8 @@ export type Keys =
   | "generate.ewb"
   | "details"
   | "must.have.ewb"
+  | "warehouse.details"
+  | "no.business.id"
   | "truck.details"
   | "truck.name"
   | "truck.number"
@@ -80,7 +84,11 @@ export type Keys =
   | "gps.id"
   | "save.truck"
   | "truck.save.error"
-  | "truck.save.success";
+  | "truck.save.success"
+  | "create.trip"
+  | "add.warehouse"
+  | "signature"
+  | "error";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -139,6 +147,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? { phoneNumber: string }
   : T extends "pending"
   ? never
+  : T extends "pending.literally"
+  ? never
   : T extends "pick.up.date"
   ? never
   : T extends "pick.up.point"
@@ -152,6 +162,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "reject"
   ? never
   : T extends "requests"
+  ? never
+  : T extends "requested"
   ? never
   : T extends "required.weight"
   ? never
@@ -225,6 +237,10 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "must.have.ewb"
   ? never
+  : T extends "warehouse.details"
+  ? never
+  : T extends "no.business.id"
+  ? never
   : T extends "truck.details"
   ? never
   : T extends "truck.name"
@@ -240,5 +256,13 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "truck.save.error"
   ? never
   : T extends "truck.save.success"
+  ? never
+  : T extends "create.trip"
+  ? never
+  : T extends "add.warehouse"
+  ? never
+  : T extends "signature"
+  ? never
+  : T extends "error"
   ? never
   : never;

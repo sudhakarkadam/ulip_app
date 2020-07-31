@@ -1,7 +1,7 @@
 import http from "../../../utils/http";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 import { HeaderProvider } from "../../../api/Headers";
-const endpoint = "http://10.24.7.179";
+const endpoint = "https://b5f8220d0286.ngrok.io";
 
 const urls = {
   acceptTrip: `${endpoint}/ulip/tsr/accept`,

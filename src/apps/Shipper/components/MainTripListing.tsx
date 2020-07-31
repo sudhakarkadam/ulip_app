@@ -36,7 +36,7 @@ const MainTripListing = (props: Props & OwnProps) => {
   useEffect(() => {
     props.getMetrics({
       business_id: userPersonaDetails?.business_details?.business_id || "",
-      persona: props.userInfo.userPersona?.toUpperCase() || ""
+      persona: props.userInfo.userPersona
     });
   }, []);
   const focused = useIsFocused();

@@ -133,7 +133,7 @@ const AccountsStack = () => {
       screenOptions={HeaderOptions}
     >
       <Stack.Screen name="AccountsPage" options={{ title: "Accounts" }}>
-        {() => <AccountsPage persona={"lsp"} />}
+        {() => <AccountsPage persona="LSP" />}
       </Stack.Screen>
     </Stack.Navigator>
   );

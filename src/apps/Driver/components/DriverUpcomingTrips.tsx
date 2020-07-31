@@ -10,7 +10,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CommonState } from "../../../reducers";
-import { DriverActionCreators } from "../actions/DriverActionCreators";
+import ActionCreators from "../../../actions/ActionCreators";
 
 import {
   Flex,
@@ -22,8 +22,8 @@ import {
 import { ActivityIndicator } from "react-native";
 import { isLoading, isSuccess } from "../../../utils/actionCreator";
 import colors from "../../../theme/colors";
-const { getTrips, updateTrip, upload } = DriverActionCreators;
-const mapDispatchToProps = { getTrips, updateTrip, upload };
+const { getDriverTrips, updateTrip, upload } = ActionCreators;
+const mapDispatchToProps = { getDriverTrips, updateTrip, upload };
 const mapStateToProps = (state: CommonState) => ({
   trips: state.driverTrips,
   phone: state.user.data.phone_number
@@ -34,13 +34,13 @@ type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripList">;
 };
 const UpcomingTrips: React.FC<Props> = ({
-  getTrips,
+  getDriverTrips,
   phone,
   trips,
   navigation
 }) => {
   useEffect(() => {
-    getTrips(phone);
+    getDriverTrips(phone);
   }, []);
   return (
     <Page>

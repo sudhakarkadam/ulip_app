@@ -20,7 +20,7 @@ export interface SavePersonalProfileRequest {
   phone_number: string;
   name: string;
   login_id: string;
-  persona: string;
+  persona: UserPersonaTypes;
 }
 
 export interface SavePersonalProfileResponse
@@ -37,9 +37,10 @@ export interface SendOtpResponse {
 
 export interface ShipperBusinessProfileModel {
   business_name: string;
-  site_details: LocationModel;
+  location: LocationModel;
   user_id: string;
   business_type: string;
+  registration_number: string;
 }
 
 export interface ShipperBusinessProfileResponse
@@ -50,19 +51,18 @@ export interface ShipperBusinessProfileResponse
 export interface LocationModel {
   address: string;
   city: string;
-  location_code: string;
-  map_ref: string;
+  country: string;
+  map_ref: object;
   name: string;
-  postal_code: string;
+  postal_code: number;
   state: string;
-  gst_in: string;
 }
 
 export interface PerosnaDetails {
   profile: {
     user_id: string;
     name: string;
-    persona: string;
+    persona: UserPersonaTypes;
     phone_number: string;
     status: string;
   };
@@ -72,10 +72,10 @@ export interface PerosnaDetails {
     type: string;
   };
 }
-
+export type UserPersonaTypes = "SHIPPER" | "LSP" | "DRIVER";
 export interface UserDataModel {
   user_details: PerosnaDetails[];
-  userPersona?: string;
+  userPersona: UserPersonaTypes;
   language?: Languages;
   verification_id: string;
   login_id: string;
@@ -85,11 +85,11 @@ export interface UserDataModel {
 export interface GetTripsRequest {
   status: string[];
   businessId: string;
-  persona: string;
+  persona: UserPersonaTypes;
 }
 export interface GetMetricsRequest {
   business_id: string;
-  persona: string;
+  persona: UserPersonaTypes;
 }
 export enum AllApps {
   SHIPPER = "SHIPPER",
@@ -180,4 +180,21 @@ export interface SaveTruckRequestModel {
 
 export interface VehicleListDetails extends VehicleDetails {
   vehicle_id: number;
+}
+
+export interface BusinessSite {
+  business_id: string;
+  warehouse_name: string;
+  gstin: string;
+  location: Location;
+}
+
+export interface Location {
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code: number;
+  map_ref: {};
 }

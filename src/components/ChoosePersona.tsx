@@ -5,8 +5,10 @@ import colors from "../theme/colors";
 import { personaMapping } from "../components/AccountsPage";
 import AccountsProfileCard from "./AccountsProfileCard";
 import { TranslationText, I18nContext } from "./InternationalisationProvider";
+import { UserPersonaTypes } from "../models/CommonModel";
+import { keys } from "../utils/keys";
 interface OwnProps {
-  selectedUser: (user: string) => void;
+  selectedUser: (user: UserPersonaTypes) => void;
 }
 
 const ChoosePersona = (props: OwnProps) => {
@@ -23,7 +25,7 @@ const ChoosePersona = (props: OwnProps) => {
         </PrimaryLightText>
       </Box>
       <Flex flex={1} my={4}>
-        {Object.keys(personaMapping).map(persona => {
+        {keys(personaMapping).map(persona => {
           return (
             <AccountsProfileCard
               onPress={() => props.selectedUser(persona)}

@@ -35,7 +35,7 @@ const CardComp = (props: OwnProps) => {
           <FlexRow>
             <Text fontSize={4}>{taskHeading || "Create profile"}</Text>
           </FlexRow>
-          <FlexRow mt={4}>
+          <FlexRow mt={4} mb={2}>
             <StyledButton
               width={120}
               title={clickLabel || "start"}

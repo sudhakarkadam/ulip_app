@@ -16,13 +16,13 @@ import { StickyBottom } from "../../../components/StickyBottom";
 import SignatureCapture, {
   SaveEventParams
 } from "react-native-signature-capture";
-import { DriverActionCreators } from "../actions/DriverActionCreators";
+import ActionCreators from "../../../actions/ActionCreators";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { CommonState } from "../../../reducers";
 import { ToastAndroid } from "react-native";
 
-const { upload, specialUpload } = DriverActionCreators;
+const { upload, specialUpload } = ActionCreators;
 const mapDispatchToProps = { upload, specialUpload };
 const mapStateToProps = (state: CommonState) => ({
   trips: state.trips
@@ -74,18 +74,19 @@ const SignatureUpload: React.FC<Props> = props => {
           <TextWrapper label="Receiver's name">
             <Input value={name} onChangeText={text => setName(text)} />
           </TextWrapper>
-          <TextWrapper label="Signature">
-            <View style={styles.body}>
-              <SignatureCapture
-                ref={signRef}
-                style={{ flex: 1 }}
-                onSaveEvent={onSaveEvent}
-                showNativeButtons={false}
-                showTitleLabel={false}
-                viewMode={"portrait"}
-              />
-            </View>
-          </TextWrapper>
+          <Text>
+            <TranslationText id="signature"></TranslationText>
+          </Text>
+          <View style={styles.body}>
+            <SignatureCapture
+              ref={signRef}
+              style={{ flex: 1 }}
+              onSaveEvent={onSaveEvent}
+              showNativeButtons={false}
+              showTitleLabel={false}
+              viewMode={"portrait"}
+            />
+          </View>
         </Flex>
         <StickyBottom>
           <FlexRow>

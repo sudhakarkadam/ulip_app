@@ -21,7 +21,7 @@ import StyledButton from "../../../components/@styled/StyledButton";
 import { TripStamp, convert } from "../../../components/TripStamp";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
-import { DriverActionCreators } from "../actions/DriverActionCreators";
+import ActionCreators from "../../../actions/ActionCreators";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { ConnectedProps, connect } from "react-redux";
@@ -65,7 +65,7 @@ const capture = (
   });
 };
 
-const { getTripById, updateTrip, upload } = DriverActionCreators;
+const { getTripById, updateTrip, upload } = ActionCreators;
 const mapDispatchToProps = { getTripById, updateTrip, upload };
 const mapStateToProps = (state: CommonState) => ({
   trip: state.driverTrip,

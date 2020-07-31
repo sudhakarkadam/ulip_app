@@ -1,4 +1,4 @@
-import { DriverTrips } from "../apps/Driver/models/DriverTrips";
+import { DriverTrips } from "../models/DriverTrips";
 
 export const driverTrips: DriverTrips = [
   {

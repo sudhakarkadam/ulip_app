@@ -148,7 +148,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
     props.getTrips({
       status: config.status,
       businessId: userPersonaDetails?.business_details?.business_id || "",
-      persona: props.user.data.userPersona?.toUpperCase() || ""
+      persona: props.user.data.userPersona
     });
   };
 
