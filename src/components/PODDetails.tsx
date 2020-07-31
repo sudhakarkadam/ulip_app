@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { ScrollView, Flex, FlexRow } from "./@styled/BaseElements";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { DriverHomeStackParamList } from "../apps/Driver/components/AuthenticatedFlow";
 import { PrimaryText } from "./@styled/Text";
 import StyledButton from "./@styled/StyledButton/StyledButton";
 import colors from "../theme/colors";
@@ -27,7 +29,11 @@ interface OwnProps {
   signature: string;
 }
 
-const PODDocument = (props: OwnProps) => {
+type Props = OwnProps & {
+  navigation: StackNavigationProp<DriverHomeStackParamList, "PODDetailsPage">;
+} & StackScreenProps<DriverHomeStackParamList, "PODDetailsPage">;
+
+const PODDetails = (props: Props) => {
   const {
     ewb = "1810000120234",
     deliveredDate,
@@ -127,7 +133,9 @@ const PODDocument = (props: OwnProps) => {
             <StyledButton
               title="Add Signature"
               fontSize={14}
-              onPress={() => {}}
+              onPress={() => {
+                props.navigation.navigate("SignatureUpload");
+              }}
             />
           </Flex>
         )}
@@ -136,4 +144,4 @@ const PODDocument = (props: OwnProps) => {
   );
 };
 
-export default PODDocument;
+export default PODDetails;

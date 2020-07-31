@@ -7,10 +7,13 @@ import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
 import Hometabs from "./HomeTabs";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
+
 import ProofOfDelivery from "./ProofOfDelivery";
 import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
 import { PrimaryHeaderText } from "../../../components/@styled/Text";
 import { TranslationText } from "../../../components/InternationalisationProvider";
+import SignatureUpload from "./SignatureUpload";
+import PODDetails from "../../../components/PODDetails";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -18,11 +21,11 @@ export type DriverHomeStackParamList = {
   PersonProfile: undefined;
   HomePage: undefined;
   HomeTabsPage: undefined;
-  ProofOfDelivery: undefined;
+  SignatureUpload: undefined;
   TripList: undefined;
   TripHome: { id: string };
   TripDetails: undefined;
-  EwayBillGeneration: undefined;
+  PODDetailsPage: undefined;
 };
 
 const { savePersonalProfile } = ActionCreators;
@@ -82,14 +85,14 @@ const AuthenticatedFlow = (props: OwnProps) => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="ProofOfDelivery"
-        component={ProofOfDelivery}
-        options={{ title: "Add Signature" }}
+        name="PODDetailsPage"
+        component={PODDetails}
+        options={{ title: "Proof of delivery" }}
       />
       <Stack.Screen
-        name="EwayBillGeneration"
-        component={EWayBillGenerationPage}
-        options={{ title: "Generate E-way bill" }}
+        name="SignatureUpload"
+        component={SignatureUpload}
+        options={{ title: "Add Signature" }}
       />
     </Stack.Navigator>
   );

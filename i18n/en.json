@@ -85,6 +85,7 @@
   "truck.save.error": "Error occured while saving truck",
   "truck.save.success": "Truck successfully saved",
   "create.trip": "Create Trip",
-	"add.warehouse": "Add Warehouse",
-	"error": "Something went wrong"
+  "add.warehouse": "Add Warehouse",
+  "signature": "Signature",
+  "error": "Something went wrong"
 }

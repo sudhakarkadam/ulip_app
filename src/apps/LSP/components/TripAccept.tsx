@@ -36,7 +36,8 @@ const mapStateToProps = (state: LSPAppState & CommonState) => ({
   acceptedTripStatus: state.acceptedTripStatus,
   userInfo: state.user.data,
   rejectedTripStatus: state.rejectedTripStatus,
-  vehiclesList: state.vehiclesList.data
+  vehiclesList: state.vehiclesList.data,
+  commonConfig: state.appConfig.data
 });
 const mapDispatchToProps = { acceptTrip, rejectTrip, getVehiclesList };
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -96,6 +97,7 @@ const TripAcceptPage = (
                     onClose={props.hideModal}
                     returningScreen={returnToList}
                     id={trip.tsr_id}
+                    rejectReasons={props.commonConfig?.reject_reasons || []}
                   />
                 );
               }}

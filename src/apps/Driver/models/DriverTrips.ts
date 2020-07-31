@@ -13,7 +13,7 @@ export interface Location {
 }
 
 export interface UpdateTripRequest {
-  sr_id: number;
+  tripId?: number;
   status: "TRIP_STARTED" | "REACHED";
 }
 

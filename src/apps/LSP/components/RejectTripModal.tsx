@@ -18,6 +18,7 @@ interface OwnProps {
   onClose: () => void;
   returningScreen: () => void;
   id: number;
+  rejectReasons: string[];
 }
 
 const RejectTripModal = (props: OwnProps) => {
@@ -29,8 +30,11 @@ const RejectTripModal = (props: OwnProps) => {
       </PrimaryText>
       <TextWrapper label={<TranslationText id="choose.reason" />}>
         <SelectComponent
-          data={[{ label: "Drivers Unavailable", value: "xyz" }]}
-          defaultValue={"xyz"}
+          data={props.rejectReasons.map(reason => ({
+            label: reason,
+            value: reason
+          }))}
+          defaultValue={""}
           getSelectedValue={val => setReason(val)}
         />
       </TextWrapper>
@@ -44,6 +48,7 @@ const RejectTripModal = (props: OwnProps) => {
         <StyledButton
           title={<TranslationText id="reject" />}
           style={{ flex: 1 }}
+          disabled={!reason}
           onPress={() =>
             props
               .onReject({ reject_reason: reason, tsr_id: props.id })
