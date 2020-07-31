@@ -8,8 +8,6 @@ import { CommonState } from "../../../reducers";
 import Hometabs from "./HomeTabs";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
-import ProofOfDelivery from "./ProofOfDelivery";
-import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
 import { PrimaryHeaderText } from "../../../components/@styled/Text";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import SignatureUpload from "./SignatureUpload";
