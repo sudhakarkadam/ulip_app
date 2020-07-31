@@ -2,7 +2,7 @@ import http from "../../../utils/http";
 import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
 import { HeaderProvider } from "../../../api/Headers";
 import RNFetch from "rn-fetch-blob";
-const endpoint = "http://10.24.7.179";
+const endpoint = "https://b5f8220d0286.ngrok.io";
 
 const urls = {
   getTrips: `${endpoint}/ulip/trip/driver/`,

@@ -115,10 +115,10 @@ const LSPCompanyProfile = (
   const location = {
     address: "Sector 4, Rohini",
     city: "Delhi",
-    location_code: "loc_1",
-    map_ref: "ref",
+    country: "loc_1",
+    map_ref: {},
     name: "Delhi",
-    postal_code: "560035",
+    postal_code: 560035,
     state: "Delhi"
   };
   return (
@@ -127,9 +127,10 @@ const LSPCompanyProfile = (
         try {
           await props.saveCompanyProfile({
             name,
-            location: { ...location, gst_in: regNumber },
+            location: { ...location },
             userId: userId ? userId.profile.user_id : "",
-            business_type: "LSP"
+            business_type: "LSP",
+            gst_in: regNumber
           });
           props.navigation.navigate("HomeMetrics");
         } catch {

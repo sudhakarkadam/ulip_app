@@ -7,6 +7,7 @@ import { CommonState } from "../../../reducers";
 import { HomeStackParamList } from "./HomeStack";
 import { I18nContext } from "../../../components/InternationalisationProvider";
 import { PerosnaDetails } from "../../../models/CommonModel";
+import { Page, PageContent } from "../../../components/@styled/Page";
 const personIcon = require("../../../icons/person-icon.png");
 const mapStateToProps = (state: CommonState) => {
   return {
@@ -26,25 +27,29 @@ const ShipperCreateProfile = (props: AllProps) => {
   const personVerified = profileExist?.profile.name;
   const comapnyVerified = profileExist?.business_details;
   return (
-    <Flex>
-      {!personVerified && (
-        <CardComp
-          cardHeading="STEP 1"
-          taskHeading={translate("profile.setup")}
-          imgSrc={personIcon}
-          taskClickCallback={() => props.navigation.navigate("PersonProfile")}
-        ></CardComp>
-      )}
-      <Flex mt={3} />
-      {!comapnyVerified && (
-        <CardComp
-          cardHeading="STEP 2"
-          taskHeading={translate("company.setup")}
-          imgSrc={personIcon}
-          taskClickCallback={() => props.navigation.navigate("CompanyProfile")}
-        ></CardComp>
-      )}
-    </Flex>
+    <Page>
+      <PageContent>
+        {!personVerified && (
+          <CardComp
+            cardHeading="STEP 1"
+            taskHeading={translate("profile.setup")}
+            imgSrc={personIcon}
+            taskClickCallback={() => props.navigation.navigate("PersonProfile")}
+          ></CardComp>
+        )}
+        <Flex mt={3} />
+        {!comapnyVerified && (
+          <CardComp
+            cardHeading="STEP 2"
+            taskHeading={translate("company.setup")}
+            imgSrc={personIcon}
+            taskClickCallback={() =>
+              props.navigation.navigate("CompanyProfile")
+            }
+          ></CardComp>
+        )}
+      </PageContent>
+    </Page>
   );
 };
 
