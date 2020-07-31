@@ -2,7 +2,7 @@ export interface CreateTripRequestModel {
   goods_segment: string;
   pickup_request_time: string | number;
   truck_type_preference: string;
-  lsp_id: string;
+  lsp_business_id: string;
   source_business_site_id: string;
   destination_business_site_id: string;
 }

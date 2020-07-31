@@ -183,7 +183,7 @@ const CreateTrip = (props: Props) => {
     const data = {
       destination_business_site_id: toValue,
       goods_segment: goodsType,
-      lsp_id: lspProvider,
+      lsp_business_id: lspProvider,
       pickup_request_time: `${new Date(pickupDate).getTime()}`,
       source_business_site_id: fromValue,
       truck_type_preference: truckType.toUpperCase(),
