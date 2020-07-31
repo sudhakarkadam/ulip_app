@@ -51,7 +51,7 @@ const urls = {
   saveTruck: `${endpoint}/ulip/business/vehicle`,
   getVehiclesList: `${endpoint}/ulip/business`,
   getDriverTrips: `${endpoint}/ulip/trip/driver/`,
-  getTripById: `${endpoint}/ulip/trip/`,
+  getTripById:(id:number)=> `${endpoint}/ulip/trip/${id}`,
   updateTrip: (id: number | undefined) => `${endpoint}/ulip/trip/${id}/status`,
   upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`,
   acceptTrip: `${endpoint}/ulip/tsr/accept`,
@@ -224,7 +224,7 @@ export default {
 
   getTripById(id: string) {
     return http.get<{}, DriverTrips[0]>(
-      urls.getTripById + Number(id),
+      urls.getTripById(Number(id)),
       {},
       {
         headers: HeaderProvider.getHeaders()
