@@ -23,7 +23,7 @@ export const getTrips = (driverPhoneNumber: string) =>
   );
 
 export const getTripById = (id: string) => {
-  return http.get<{ id: string }, DriverTrips[0]>(
+  return http.get<{}, DriverTrips[0]>(
     urls.getTripById + id,
     {},
     {
