@@ -232,7 +232,7 @@ const CreateTrip = (props: Props) => {
       )[0],
       goods_segment: goodsType,
       lsp_business_id: lspProvider,
-      pickup_request_time: `${new Date(pickupDate).getTime() / 1000}`,
+      pickup_request_time: `${new Date(pickupDate).getTime()}`,
       source_location_details: LocationsList.filter(
         loc => loc.value === fromValue
       )[0],
