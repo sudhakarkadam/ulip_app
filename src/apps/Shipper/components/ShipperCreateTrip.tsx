@@ -11,7 +11,7 @@ import { Flex1 } from "../../../components/@styled/Flex";
 
 const { createTrip, getLspList } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
-  userInfo:state.user.data,
+  userInfo: state.user.data,
   lspList: state.lspList.data,
   commonConfig: state.appConfig.data
 });
@@ -25,13 +25,28 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
   useEffect(() => {
     props.getLspList({ type: "LSP" });
   }, []);
-  const userPersonaDetails = props.userInfo.user_details.find(role=> role.profile.persona === 'SHIPPER');
+  const userPersonaDetails = props.userInfo.user_details.find(
+    role => role.profile.persona === "SHIPPER"
+  );
   const lspList = props.lspList?.lsp_list;
-  const goodTypesList = props.commonConfig?.good_types.map(type=>({label:type,value:type}));
-  const weightTypesList = props.commonConfig?.weight_types.map(type=>({label:type,value:type}));
-  const truckTypesList = props.commonConfig?.truck_types.map(type=>({label:type,value:type}));
-  return (
-    Array.isArray(lspList) && lspList.length && goodTypesList && weightTypesList && truckTypesList && userPersonaDetails? 
+  const goodTypesList = props.commonConfig?.good_types.map(type => ({
+    label: type,
+    value: type
+  }));
+  const weightTypesList = props.commonConfig?.weight_types.map(type => ({
+    label: type,
+    value: type
+  }));
+  const truckTypesList = props.commonConfig?.truck_types.map(type => ({
+    label: type,
+    value: type
+  }));
+  return Array.isArray(lspList) &&
+    lspList.length &&
+    goodTypesList &&
+    weightTypesList &&
+    truckTypesList &&
+    userPersonaDetails ? (
     <CreateTrip
       goodsList={goodTypesList}
       weightTypeList={weightTypesList}
@@ -45,10 +60,9 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
         return;
       }}
     />
-    :<Flex1 justifyContent="center" alignItems="center">
-      <Text>
-        LSP Fetching Failed
-      </Text>
+  ) : (
+    <Flex1 justifyContent="center" alignItems="center">
+      <Text>LSP Fetching Failed</Text>
     </Flex1>
   );
 };
