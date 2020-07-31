@@ -46,7 +46,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
     );
     const businessCreated = profileCreated?.business_details;
     try {
-      await saveTruck({
+      await props.saveTruck({
         business_id: businessCreated?.business_id || "",
         vehicle_details: [
           {
