@@ -7,7 +7,7 @@ const endpoint = "http://10.24.7.179";
 const urls = {
   getTrips: `${endpoint}/ulip/trip/driver/`,
   getTripById: `${endpoint}/ulip/trip/`,
-  updateTrip: `${endpoint}/ulip/transport_service_request/updateStatus`,
+  updateTrip: (id: number | undefined) => `${endpoint}/ulip/trip/${id}/status`,
   upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`
 };
 
@@ -33,7 +33,13 @@ export const getTripById = (id: string) => {
 };
 
 export const updateTrip = (args: UpdateTripRequest) =>
-  http.put<UpdateTripRequest, {}>(urls.updateTrip, args);
+  http.put<UpdateTripRequest, {}>(
+    urls.updateTrip(args.tripId),
+    { status: args.status },
+    {
+      headers: HeaderProvider.getHeaders()
+    }
+  );
 
 export const specialUpload = (args: any) => {
   return RNFetch.fetch(

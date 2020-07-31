@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { StyleSheet, View, CheckBox } from "react-native";
+import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
+import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import Input from "../../../components/InputComponent";
 import {
   Text,
@@ -18,6 +20,7 @@ import { DriverActionCreators } from "../actions/DriverActionCreators";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { CommonState } from "../../../reducers";
+import { ToastAndroid } from "react-native";
 
 const { upload, specialUpload } = DriverActionCreators;
 const mapDispatchToProps = { upload, specialUpload };
@@ -26,7 +29,11 @@ const mapStateToProps = (state: CommonState) => ({
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
+type Props = ConnectedProps<typeof connector> & {
+  navigation: StackNavigationProp<DriverHomeStackParamList, "SignatureUpload">;
+} & StackScreenProps<DriverHomeStackParamList, "SignatureUpload">;
+
+const SignatureUpload: React.FC<Props> = props => {
   const tripId = props.trips.data?.transport_service_requests[0].tsr_id;
   const signRef = useRef(null);
   const [name, setName] = useState("");
@@ -36,14 +43,29 @@ const ProofOfDelivery: React.FC<ConnectedProps<typeof connector>> = props => {
     signRef?.current?.saveImage();
   };
   const onSaveEvent = (result: SaveEventParams) => {
-    props.specialUpload({
-      fileData: result.encoded,
-      document_format: "JPEG",
-      document_type: "POfD",
-      document_id: name,
-      id: tripId || 1
-    });
-    alert("Signature Captured Successfully");
+    props
+      .specialUpload({
+        fileData: result.encoded,
+        document_type: "POD",
+        document_id: name,
+        id: tripId || 1
+      })
+      .then(res => {
+        if (res.type === "SPECIAL_UPLOAD_SUCCESS") {
+          props.navigation.navigate("PODDetailsPage");
+        } else {
+          ToastAndroid.show(
+            "Something went wrong. Please try again.",
+            ToastAndroid.SHORT
+          );
+        }
+      })
+      .catch(() => {
+        ToastAndroid.show(
+          "Something went wrong. Please try again.",
+          ToastAndroid.SHORT
+        );
+      });
   };
   return (
     <Page>
@@ -102,4 +124,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connector(ProofOfDelivery);
+export default connector(SignatureUpload);

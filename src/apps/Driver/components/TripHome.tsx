@@ -87,11 +87,11 @@ const SwipeActions = (
   });
   return (
     <View
-      style={{ flex: 1, backgroundColor: "#42526E", justifyContent: "center" }}
+      style={{ flex: 1, backgroundColor: "#FFCC00", justifyContent: "center" }}
     >
       <Animated.Text
         style={{
-          color: "white",
+          color: "#083F69",
           paddingHorizontal: 0,
           fontWeight: "bold",
           transform: [{ translateX: translate }]
@@ -139,7 +139,6 @@ const Trip: React.FC<Props> = props => {
     const tripStartDate = new Date(
       trip.pickup_request_time
     ).toLocaleDateString();
-
     if (trip.trip_status === "CREATED") {
       if (today === tripStartDate) {
         return (
@@ -148,13 +147,13 @@ const Trip: React.FC<Props> = props => {
               renderLeftActions={SwipeActions}
               onSwipeableLeftOpen={async () => {
                 await props.updateTrip({
-                  sr_id: trip.trip_id,
-                  status: "TRIP_STARTED"
+                  status: "TRIP_STARTED",
+                  tripId: trip.trip_id
                 });
                 getTrip();
               }}
             >
-              <StyledButton width="100%" height="50" title={getStartText()} />
+              <StyledButton width="100%" height="60" title={getStartText()} />
             </Swipeable>
           </Flex>
         );
@@ -169,6 +168,7 @@ const Trip: React.FC<Props> = props => {
             </Text>
             <StyledButton
               width="100%"
+              height="60"
               title={<TranslationText id="start.trip"></TranslationText>}
               style={{ opacity: 0.6 }}
               disabled={true}
@@ -237,8 +237,8 @@ const Trip: React.FC<Props> = props => {
               title={<TranslationText id="reached"></TranslationText>}
               onPress={async () => {
                 await props.updateTrip({
-                  sr_id: trip.tsr_id,
-                  status: "REACHED"
+                  status: "REACHED",
+                  tripId: trip.trip_id
                 });
                 getTrip();
               }}
@@ -252,16 +252,9 @@ const Trip: React.FC<Props> = props => {
       return (
         <StyledButton
           width="100%"
-          title="Capture POD"
+          title="Collect POD"
           onPress={() => {
-            // upload pop
-            capture(123, "POD", async d => {
-              await props.upload({
-                file: d,
-                id: trip.trip_id
-              });
-              getTrip();
-            });
+            props.navigation.navigate("PODDetailsPage");
           }}
         />
       );

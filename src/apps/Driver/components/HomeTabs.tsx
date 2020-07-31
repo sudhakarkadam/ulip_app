@@ -11,6 +11,7 @@ import InTransitSelected from "../../../images/intransit_selected.svg";
 import InTransitBlur from "../../../images/intransit_blur.svg";
 import UpcomingTrips from "./DriverUpcomingTrips";
 import UlipBottomTab from "../../../components/UlipBottomTab";
+import PODDetails from "../../../components/PODDetails";
 import { I18nContext } from "../../../components/InternationalisationProvider";
 
 const Stack = createStackNavigator();
@@ -29,6 +30,7 @@ const HomeStack = () => {
       ></Stack.Screen>
       <Stack.Screen name="TripHome" component={TripHome} />
       <Stack.Screen name="TripDetails" component={TripDetails} />
+      <Stack.Screen name="PODDetailsPage" component={PODDetails} />
     </Stack.Navigator>
   );
 };
