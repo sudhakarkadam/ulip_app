@@ -179,7 +179,7 @@ const TruckTypeComp = (props: {
           Required weight
         </Text>
       </Flex>
-      <FlexRow justifyContent="space-betweene" mt={3}>
+      <FlexRow justifyContent="space-between" mt={3}>
         <Flex flex={1} mr={3}>
           <Input
             style={{
