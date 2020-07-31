@@ -58,7 +58,6 @@ const capture = (
       type: data.type || "",
       name: data.fileName
     });
-    fd.append("document_format", "JPEG");
     fd.append("document_type", document_type);
     fd.append("document_id", document_id as any);
     callback(fd);

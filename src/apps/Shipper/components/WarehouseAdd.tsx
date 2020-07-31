@@ -73,10 +73,10 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector>> = ({
                 disabled={!name || !gstin}
                 title="Save Warehouse"
                 fontSize={14}
-                onPress={() => {
+                onPress={async () => {
                   if (!postalCode) return;
                   try {
-                    saveWarehouse({
+                    await saveWarehouse({
                       business_id: id,
                       gstin,
                       warehouse_name: name,

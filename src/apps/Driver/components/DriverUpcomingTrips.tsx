@@ -62,7 +62,7 @@ const UpcomingTrips: React.FC<Props> = ({
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("TripHome", {
-                        id: t.tsr_id.toString()
+                        id: t.trip_id.toString()
                       })
                     }
                   >
