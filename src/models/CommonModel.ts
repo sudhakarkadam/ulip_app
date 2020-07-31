@@ -75,7 +75,7 @@ export interface PerosnaDetails {
 
 export interface UserDataModel {
   user_details: PerosnaDetails[];
-  userPersona?: string;
+  userPersona: "shipper" | "lsp" | "driver";
   language?: Languages;
   verification_id: string;
   login_id: string;

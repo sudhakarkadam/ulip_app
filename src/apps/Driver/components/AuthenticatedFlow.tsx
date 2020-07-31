@@ -9,6 +9,8 @@ import Hometabs from "./HomeTabs";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import ProofOfDelivery from "./ProofOfDelivery";
 import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
+import { PrimaryHeaderText } from "../../../components/@styled/Text";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -38,6 +40,12 @@ const AuthenticatedFlow = (props: OwnProps) => {
   const profileCreated = props.userInfo.user_details.find(
     role => role.profile.persona === "DRIVER"
   );
+  if (!profileCreated)
+    return (
+      <PrimaryHeaderText p={6}>
+        <TranslationText id="error"></TranslationText>
+      </PrimaryHeaderText>
+    );
   return (
     <Stack.Navigator
       initialRouteName={profileCreated ? "HomeTabsPage" : "CreateProfile"}
@@ -58,7 +66,7 @@ const AuthenticatedFlow = (props: OwnProps) => {
                   name,
                   phone: props.userInfo.phone_number,
                   loginId: props.userInfo.login_id,
-                  persona: props.userInfo.userPersona || ""
+                  persona: props.userInfo.userPersona
                 });
                 navigationProps.navigation.navigate("HomeTabsPage");
               } catch {

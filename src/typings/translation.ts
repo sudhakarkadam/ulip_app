@@ -86,7 +86,8 @@ export type Keys =
   | "truck.save.error"
   | "truck.save.success"
   | "create.trip"
-  | "add.warehouse";
+  | "add.warehouse"
+  | "error";
 export type GetTranslationTextType<T> = T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
@@ -258,5 +259,7 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "create.trip"
   ? never
   : T extends "add.warehouse"
+  ? never
+  : T extends "error"
   ? never
   : never;

@@ -72,7 +72,7 @@ export default {
     name: string;
     phone: string;
     loginId: string;
-    persona: string;
+    persona: "shipper" | "lsp" | "driver";
   }) {
     return http.post<SavePersonalProfileRequest, SavePersonalProfileResponse>(
       urls.savePersonalProfile,
