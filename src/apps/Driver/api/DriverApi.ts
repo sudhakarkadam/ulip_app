@@ -38,16 +38,8 @@ export const specialUpload = (args: any) => {
   );
 };
 
-export const upload = ({
-  file,
-  id,
-  type
-}: {
-  id: number;
-  file: FormData;
-  type: "POD" | "POP";
-}) =>
-  fetch(urls.upload(id, type), {
+export const upload = ({ file, id }: { id: number; file: FormData }) =>
+  fetch(urls.upload(id), {
     body: file,
     headers: {
       "Content-Type": "multipart/form-data"

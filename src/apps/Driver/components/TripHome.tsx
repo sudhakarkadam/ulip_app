@@ -46,8 +46,8 @@ const Card = styled(Flex)`
 `;
 
 const capture = (
-  document_id,
-  document_type,
+  document_id: number,
+  document_type: Blob | string,
   callback: (data: FormData) => void
 ) => {
   ImagePicker.showImagePicker(options, data => {
@@ -60,7 +60,7 @@ const capture = (
     });
     fd.append("document_format", "JPEG");
     fd.append("document_type", document_type);
-    fd.append("document_id", document_id);
+    fd.append("document_id", document_id as any);
     callback(fd);
   });
 };
@@ -201,10 +201,10 @@ const Trip: React.FC<Props> = props => {
               title={<TranslationText id="capture.pop"></TranslationText>}
               onPress={() => {
                 // upload pop
-                capture("123", "POP", async d => {
+                capture(123, "POP", async d => {
                   await props.upload({
                     file: d,
-                    id: trip.trip.id
+                    id: trip.trip_id
                   });
                   getTrip();
                 });
@@ -255,10 +255,10 @@ const Trip: React.FC<Props> = props => {
           title="Capture POD"
           onPress={() => {
             // upload pop
-            capture("123", "POD", async d => {
+            capture(123, "POD", async d => {
               await props.upload({
                 file: d,
-                id: trip.trip.id
+                id: trip.trip_id
               });
               getTrip();
             });

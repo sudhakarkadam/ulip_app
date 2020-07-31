@@ -36,7 +36,9 @@ export const InternationalisationProvider: React.FC = ({ children }) => {
 function createI18nContext(lang: Languages = "en") {
   const translations: Record<Languages, Record<Keys, string>> = {
     en: EnglishStrings,
+    //@ts-ignore
     hindi: HindiStrings,
+    //@ts-ignore
     tamil: TamilStrings
   };
 

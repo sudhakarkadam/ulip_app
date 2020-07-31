@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ConnectedProps } from "react-redux";
 import { View, ScrollView } from "react-native";
 import Input from "./InputComponent";
 import { Text, Flex, Box } from "./@styled/BaseElements";
@@ -8,9 +7,7 @@ import StyledButton from "./@styled/StyledButton";
 import { Page, PageContent } from "./@styled/Page";
 import { TranslationText } from "./InternationalisationProvider";
 
-const EWayBillGenerationPage: React.FC<ConnectedProps<
-  typeof connector
->> = () => {
+const EWayBillGenerationPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [transactionType, setTransactionType] = useState("");
