@@ -1,6 +1,10 @@
 import { combineReducers } from "redux";
 import { ReducerMappedState } from "../utils/actionCreator";
-import { GetTripsResponse, AppConfigsResponse } from "../models/CommonModel";
+import {
+  GetTripsResponse,
+  AppConfigsResponse,
+  VehicleListDetails
+} from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
 import user from "./UserReducer";
@@ -69,6 +73,18 @@ const driverTrips = createReducer<
   DriverActionTypes.GET_TRIPS_ERROR
 ]);
 
+export const vehiclesList = createReducer<
+  actions.VEHICLES_LIST_REQUEST,
+  actions.VEHICLES_LIST_SUCCESS,
+  actions.VEHICLES_LIST_ERROR,
+  {},
+  { vehicles: VehicleListDetails[] }
+>([
+  actions.VEHICLES_LIST_REQUEST,
+  actions.VEHICLES_LIST_SUCCESS,
+  actions.VEHICLES_LIST_ERROR
+]);
+
 // I could have enriched the list data but I'm not
 // looking at that kind of reuse right now
 // in future someone can come and remove the
@@ -94,7 +110,8 @@ export const reducers = {
   createTrip,
   appConfig,
   driverTrips,
-  driverTrip
+  driverTrip,
+  vehiclesList
 };
 
 export type CommonState = ReducerMappedState<typeof reducers>;

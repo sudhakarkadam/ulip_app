@@ -4,6 +4,7 @@ import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import { CommonState } from "../../../reducers";
 import { ConnectedProps, connect } from "react-redux";
 import { Page, PageContent } from "../../../components/@styled/Page";
+import { useIsFocused } from "@react-navigation/native";
 
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data

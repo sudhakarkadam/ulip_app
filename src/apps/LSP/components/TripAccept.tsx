@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Flex, ScrollView } from "../../../components/@styled/BaseElements";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import withModal, {
@@ -8,14 +8,17 @@ import TripDetails from "../../../components/TripDetails";
 import AcceptTripModal from "./AcceptTripModal";
 import RejectTripModal from "./RejectTripModal";
 import { LSPAppState } from "../reducers";
+import { CommonState } from "../../../reducers";
 import { connect, ConnectedProps } from "react-redux";
 import LSPActionCreators from "../actions/LSPActionCreators";
+import CommonActionCreators from "../../../actions/ActionCreators";
 import { CompositeNavigationProp, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { LSPAuthenticatedStackParamList } from "./LSPLanding";
 import { HomeStackParamList } from "./LSPHomeStack";
 const { acceptTrip, rejectTrip } = LSPActionCreators;
+const { getVehiclesList } = CommonActionCreators;
 
 type NavigationProps = CompositeNavigationProp<
   StackNavigationProp<HomeStackParamList, "TripAcceptPage">,
@@ -29,11 +32,13 @@ interface OwnProps {
   route: TripAcceptRouteProps;
 }
 
-const mapStateToProps = (state: LSPAppState) => ({
+const mapStateToProps = (state: LSPAppState & CommonState) => ({
   acceptedTripStatus: state.acceptedTripStatus,
-  rejectedTripStatus: state.rejectedTripStatus
+  userInfo: state.user.data,
+  rejectedTripStatus: state.rejectedTripStatus,
+  vehiclesList: state.vehiclesList.data
 });
-const mapDispatchToProps = { acceptTrip, rejectTrip };
+const mapDispatchToProps = { acceptTrip, rejectTrip, getVehiclesList };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const TripAcceptPage = (
@@ -53,6 +58,16 @@ const TripAcceptPage = (
       address: trip.destination_location_details.address
     }
   ];
+  useEffect(() => {
+    const userPersonaDetails = props.userInfo.user_details.find(
+      role => role.profile.persona === "LSP"
+    );
+    if (!props.vehiclesList) {
+      props.getVehiclesList(
+        userPersonaDetails?.business_details?.business_id || ""
+      );
+    }
+  }, []);
   const returnToList = () => props.navigation.navigate("TripRequests", {});
   // const openTruckSelect = () => props.navigation.push("TruckSelect");
   return (
@@ -96,6 +111,7 @@ const TripAcceptPage = (
                     onClose={props.hideModal}
                     returningScreen={returnToList}
                     id={trip.tsr_id}
+                    vehiclesList={props.vehiclesList?.vehicles || []}
                   />
                 );
               }}

@@ -16,7 +16,8 @@ import {
   Metrics,
   ResendOtpRequest,
   GetMetricsRequest,
-  SaveTruckRequestModel
+  SaveTruckRequestModel,
+  VehicleListDetails
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -40,7 +41,8 @@ const urls = {
   getAppConfigs: `${endpoint}/ulip/app/configs`,
   getTrips: `${endpoint}/ulip/tsr/status_view`,
   getMetrics: `${endpoint}/ulip/tsr/view`,
-  saveTruck: `${endpoint}/ulip/business/vehicle`
+  saveTruck: `${endpoint}/ulip/business/vehicle`,
+  getVehiclesList: `${endpoint}/ulip/business`
 };
 
 interface BusinessRole {
@@ -169,6 +171,15 @@ export default {
     return http.post<SaveTruckRequestModel, SaveTruckRequestModel>(
       urls.saveTruck,
       req,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+  getVehiclesList(lspId: string) {
+    return http.get<{}, { vehicles: VehicleListDetails[] }>(
+      `${urls.getVehiclesList}/${lspId}/vehicles`,
+      {},
       {
         headers: HeaderProvider.getHeaders()
       }
