@@ -182,14 +182,17 @@ export interface VehicleListDetails extends VehicleDetails {
   vehicle_id: number;
 }
 
-export interface BusinessSite {
+export interface BusinessSitesResponse {
   business_id: string;
+  business_sites: BusinessSite[];
+}
+export interface BusinessSite {
   warehouse_name: string;
   gstin: string;
   location: Location;
+  business_site_id: string;
 }
-
-export interface Location {
+interface Location {
   name: string;
   address: string;
   city: string;

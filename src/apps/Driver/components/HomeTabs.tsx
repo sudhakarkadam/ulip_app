@@ -7,12 +7,12 @@ import TripDetails from "./TripDetails";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
-import InTransitSelected from "../../../images/intransit_selected.svg";
-import InTransitBlur from "../../../images/intransit_blur.svg";
 import UpcomingTrips from "./DriverUpcomingTrips";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import PODDetails from "../../../components/PODDetails";
 import { I18nContext } from "../../../components/InternationalisationProvider";
+import AccountInactive from "../../../images/user-circle.svg";
+import AccountActive from "../../../images/user-circle-dark.svg";
 
 const Stack = createStackNavigator();
 
@@ -62,8 +62,8 @@ const Hometabs = () => {
       name: "Account",
       label: translate("account"),
       component: AccountsStack,
-      activeImage: InTransitSelected,
-      inActiveImage: InTransitBlur
+      activeImage: AccountActive,
+      inActiveImage: AccountInactive
     }
   ];
   return <UlipBottomTab tabs={tabs} />;

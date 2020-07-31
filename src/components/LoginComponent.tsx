@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Flex, Box, Image } from "./@styled/BaseElements";
+import { Flex, Box } from "./@styled/BaseElements";
 import { Text, TextInput, ToastAndroid } from "react-native";
 import colors from "../theme/colors";
 import StyledButton from "../components/@styled/StyledButton";
@@ -16,8 +16,7 @@ import ActionCreators from "../actions/ActionCreators";
 import { TranslationText, I18nContext } from "./InternationalisationProvider";
 import { Page } from "./@styled/Page";
 import { CommonState } from "../reducers/index";
-
-const Logo = require("../images/logo.png");
+import Logo from "../images/logo.svg";
 
 const { verifyOtp, sendOtp, resendOtp } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
@@ -61,7 +60,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
     <Page bg={colors.white}>
       <Flex flex={1}>
         <Box mx={6} mt={80} alignItems={"center"}>
-          <Image source={Logo} />
+          <Logo />
           <PrimaryText pt={5}>UNIFIED LOGISTICS INTERFACE PLATFORM</PrimaryText>
         </Box>
 

@@ -4,7 +4,7 @@ import CardComp from "../../../components/CardComp";
 import { RootStackParamList } from "./Root";
 import { Page, PageContent } from "../../../components/@styled/Page";
 
-const personIcon = require("../../../icons/person-icon.png");
+const personIcon = require("../../../images/person-icon.png");
 
 type ScreenProps = StackScreenProps<RootStackParamList, "CreateProfile">;
 

@@ -18,10 +18,9 @@ import { Modal } from "react-native";
 import { getEndpoint } from "../api/Api";
 import moment from "moment";
 import { TranslationText } from "./InternationalisationProvider";
-
-const trailerTruck = require("../images/trailerTruckColored.png");
-const containerTruck = require("../images/containerTruckColored.png");
-const openTruck = require("../images/openTruckColored.png");
+import ContainerTruck from "../images/containerTruck.svg";
+import TrailorTruck from "../images/trailorTruck.svg";
+import OpenTruck from "../images/openTruck.svg";
 
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
@@ -134,18 +133,9 @@ const TripDetails = (props: OwnProps) => {
           </PrimaryText>
         </Flex1Column>
         <Box>
-          <Image
-            source={
-              truckType === TruckType.TRAILOR
-                ? trailerTruck
-                : truckType === TruckType.CONTAINER
-                ? containerTruck
-                : openTruck
-            }
-            height={20}
-            width={44}
-            resizeMode="contain"
-          />
+          {truckType === TruckType.CONTAINER && <ContainerTruck />}
+          {truckType === TruckType.OPEN && <OpenTruck />}
+          {truckType === TruckType.TRAILOR && <TrailorTruck />}
         </Box>
       </Card>
       <Card

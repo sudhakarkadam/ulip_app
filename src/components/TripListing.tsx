@@ -30,11 +30,11 @@ import { FlatList } from "react-native";
 import { ReducerState } from "../apps/LSP/store";
 import { isLoading, isSuccess } from "../utils/actionCreator";
 import BlockScreenLoader from "../components/BlockScreenLoader";
+import ContainerTruck from "../images/containerTruck.svg";
+import TrailorTruck from "../images/trailorTruck.svg";
+import OpenTruck from "../images/openTruck.svg";
 
 const profile = require("../images/40px.png");
-const trailerTruck = require("../images/trailerTruckColored.png");
-const containerTruck = require("../images/containerTruckColored.png");
-const openTruck = require("../images/openTruckColored.png");
 
 interface OwnProps {
   listingMode: ListingModes;
@@ -203,6 +203,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
               }
               data={data}
               renderItem={({ item }) => {
+                const truckType = item.truck_type_preference;
                 return (
                   <TouchableOpacity
                     onPress={() => {
@@ -284,21 +285,18 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                       </Flex>
                       {config.secondaryWidget === IconWidget.TRUCK && (
                         <Box alignItems="flex-end">
-                          <SmallCapitalText>
-                            {item.truck_type_preference}
-                          </SmallCapitalText>
-                          <Image
-                            source={
-                              item.truck_type_preference === TruckType.TRAILOR
-                                ? trailerTruck
-                                : item.truck_type_preference === TruckType.OPEN
-                                ? openTruck
-                                : containerTruck
-                            }
-                            height={20}
-                            width={44}
-                            resizeMode="contain"
-                          />
+                          <Box>
+                            <SmallCapitalText pb={2}>
+                              {item.truck_type_preference}
+                            </SmallCapitalText>
+                            {truckType === TruckType.CONTAINER && (
+                              <ContainerTruck />
+                            )}
+                            {truckType === TruckType.OPEN && <OpenTruck />}
+                            {truckType === TruckType.TRAILOR && (
+                              <TrailorTruck />
+                            )}
+                          </Box>
                         </Box>
                       )}
                       {config.secondaryWidget === IconWidget.LABEL && (

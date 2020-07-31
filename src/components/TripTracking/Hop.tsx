@@ -3,7 +3,7 @@ import { Text, Box, Icon } from "../@styled/BaseElements";
 import { Flex1, Flex3, FlexRow } from "../@styled/Flex";
 
 // @ts-ignore
-import trackTruck from "../../icons/truck-black.png";
+import trackTruck from "../../images/truck-black.png";
 
 const HopBorder: React.FC<{ lastIndex?: boolean }> = ({
   lastIndex = false

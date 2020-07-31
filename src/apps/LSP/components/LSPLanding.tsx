@@ -25,7 +25,8 @@ import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import HomeStack from "./LSPHomeStack";
 import { useIsFocused } from "@react-navigation/native";
-
+import AccountInactive from "../../../images/user-circle.svg";
+import AccountActive from "../../../images/user-circle-dark.svg";
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
 
 const HeaderButtons = () => (
@@ -165,8 +166,8 @@ const tabs = [
     name: "Account",
     label: "ACCOUNT",
     component: AccountsStack,
-    activeImage: InTransitSelected,
-    inActiveImage: InTransitBlur
+    activeImage: AccountActive,
+    inActiveImage: AccountInactive
   }
 ];
 

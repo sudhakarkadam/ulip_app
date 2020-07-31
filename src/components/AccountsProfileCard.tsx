@@ -10,7 +10,7 @@ import {
 } from "./@styled/BaseElements";
 import colors from "../theme/colors";
 import { PrimaryHeaderText } from "./@styled/Text";
-const tick = require("../icons/tick.png");
+import Tick from "../images/tick.svg";
 
 interface ProfileCardTypes {
   isBigCard?: boolean;
@@ -62,7 +62,7 @@ const AccountsProfileCard = ({
           </Text>
         )}
       </Flex>
-      {showTick && <Image width={25} height={25} source={tick} />}
+      {showTick && <Tick />}
     </ProfileCard>
   </TouchableOpacity>
 );

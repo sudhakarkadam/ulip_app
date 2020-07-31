@@ -5,7 +5,7 @@ const colors: any = {
   blues: ["#262a34", "#172b4d", "#42526d", "#6b778b", "#7a8699", "#172B4D"],
   new_blues: ["#E0F4FF", "#7F7FB5", "#4C4A96", "#3399FF", "#000066", "#172B4D"],
   yellow: ["#FFCC00"],
-  greens: ["#064", "#00875a", "#36b37e", "#abf5d1", "#e2ffee"],
+  greens: ["#36b37e6e", "#00875a", "#36b37e", "#abf5d1", "#e2ffee"],
   grays: [
     "#262626",
     "#c1c7d0",
@@ -17,6 +17,8 @@ const colors: any = {
   ],
   black: ["#000", "#7A869A", "#172B4D"]
 };
+
+colors.highlight = colors.greens[0];
 
 colors.default = colors.grays[0];
 colors.primary = colors.new_blues[4];
