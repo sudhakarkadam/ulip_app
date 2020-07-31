@@ -128,7 +128,7 @@ const Trip: React.FC<Props> = props => {
       <Page>
         <PageContent>
           <PrimaryText p={20}>
-            <TranslationText id="no.upcoming.trips"></TranslationText>
+            <TranslationText id="failed.to.fetch.trip.details"></TranslationText>
           </PrimaryText>
         </PageContent>
       </Page>

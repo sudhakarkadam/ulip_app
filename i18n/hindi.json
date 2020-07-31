@@ -23,6 +23,7 @@
   "mobile.number": "मोबाइल नंबर",
   "no.trips": "कोई यात्रा नहीं",
   "no.upcoming.trips": "कोई आगामी यात्राएं नहीं",
+  "failed.to.fetch.trip.details": "यात्रा विवरण प्राप्त करने में विफल",
   "on.road": "सड़क पर",
   "other.profiles": "अन्य प्रोफाइल",
   "otp.sent": "एक OTP भेजा गया है",

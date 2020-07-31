@@ -24,6 +24,7 @@
   "no.trips": "No trips",
   "on.road": "LIVE TRACKING",
   "no.upcoming.trips": "No upcoming trips",
+  "failed.to.fetch.trip.details": "Failed to fetch trip details",
   "other.profiles": "Other Profiles",
   "otp.sent": "An OTP has been sent to",
   "otp.verified": "OTP successfully verified for {{phoneNumber}}",

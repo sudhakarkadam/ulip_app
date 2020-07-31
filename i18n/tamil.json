@@ -23,6 +23,7 @@
   "mobile.number": "கைபேசி எண்",
   "no.trips": "பயணங்கள் இல்லை",
   "no.upcoming.trips": "வரவிருக்கும் பயணங்கள் இல்லை",
+  "failed.to.fetch.trip.details": "பயண விவரங்களை பெற முடியவில்லை",
   "on.road": "சாலையில்",
   "other.profiles": "பிற சுயவிவரங்கள்",
   "otp.sent": "ஒரு OTP அனுப்பப்பட்டுள்ளது",

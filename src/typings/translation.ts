@@ -26,6 +26,7 @@ export type Keys =
   | "no.trips"
   | "on.road"
   | "no.upcoming.trips"
+  | "failed.to.fetch.trip.details"
   | "other.profiles"
   | "otp.sent"
   | "otp.verified"
@@ -138,6 +139,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "on.road"
   ? never
   : T extends "no.upcoming.trips"
+  ? never
+  : T extends "failed.to.fetch.trip.details"
   ? never
   : T extends "other.profiles"
   ? never
