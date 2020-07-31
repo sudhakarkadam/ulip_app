@@ -150,7 +150,7 @@ export default {
     >(
       urls.getTrips,
       {
-        status_list: payload.status.join(","),
+        status_list: (payload.status || []).join(","),
         persona: payload.persona,
         business_id: payload.businessId
       },

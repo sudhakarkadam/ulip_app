@@ -107,14 +107,15 @@ export const listingConfig = {
 };
 
 const CalendarComponent = ({ date }: any) => {
-  const momentDate = moment(date, moment.defaultFormatUtc);
+  if (!date) return null;
+  const momentDate = moment(date);
   const month = momentDate.format("MMM");
   const day = momentDate.format("D");
   return (
     <Flex border={2} borderColor={colors.grays[2]} borderRadius={6} width={44}>
-      <PrimaryLabel px={2} textAlign={"center"} fontSize={2}>
+      <PrimaryHeaderText px={2} textAlign={"center"} fontSize={2}>
         {day}
-      </PrimaryLabel>
+      </PrimaryHeaderText>
       <SmallCapitalText
         px={2}
         py={1}
@@ -143,7 +144,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
 
   const fetchTrips = () => {
     const userPersonaDetails = props.user.data.user_details.find(
-      role => role.profile.persona.toLowerCase() === props.user.data.userPersona
+      role => role.profile.persona === props.user.data.userPersona
     );
     props.getTrips({
       status: config.status,
@@ -227,7 +228,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                       )}
                       {config.primaryWidget === IconWidget.CALENDAR && (
                         <Box>
-                          <CalendarComponent date={item.pickup_date} />
+                          <CalendarComponent date={item.pickup_request_time} />
                         </Box>
                       )}
                       <Flex mx={5} flex={1}>
@@ -323,7 +324,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                               ]
                             }
                           </SmallCapitalText>
-                          <CalendarComponent date={item.pickup_date} />
+                          <CalendarComponent date={item.pickup_request_time} />
                         </Box>
                       )}
                     </FlexRow>
