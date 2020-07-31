@@ -26,7 +26,6 @@ import {
 } from "styled-system";
 import colors from "../../theme/colors";
 import BackIcon from "../../images/back.svg";
-import { SecondaryLabel } from "./Text";
 
 export type BoxProps = SpaceProps &
   ColorProps &

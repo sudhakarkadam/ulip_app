@@ -62,8 +62,6 @@
   },
   "exclude": [
     "./node_modules",
-    "./src/apps/LSP/**/*",
-    "./src/apps/Driver/**/*"
   ],
   "include": ["./src/typings", "./src/**/*", "./__tests__/*"]
 }

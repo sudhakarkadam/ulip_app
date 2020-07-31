@@ -15,7 +15,7 @@ interface EWayBillCardProps {
   ewayBillObj: any;
 }
 
-const ewayStatusProps = ewayBillStatus => {
+const ewayStatusProps = (ewayBillStatus: any) => {
   switch (ewayBillStatus) {
     case "loading":
       return {
@@ -54,12 +54,12 @@ const ewayStatusProps = ewayBillStatus => {
         buttonText: "add.now" as "add.now",
         borderColor: "#FFCC00",
         disableBtn: false,
-        onPress: setModal => setModal(true)
+        onPress: (setModal: any) => setModal(true)
       };
   }
 };
 
-const Card = styled(Flex)`
+const Card = styled(Flex)<{ bgColor: string; borderColor: string }>`
   padding: 8px;
   background-color: ${props => props.bgColor};
   border-radius: 2px;
@@ -83,9 +83,7 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
   //   ewbNumber: '123456789012',
   //   valipUpto: '26/08/2020, 12:00 PM'
   // }
-  const [ewayStatus, setEwayStatus] = useState(
-    ewayStatusProps(ewayBillObj && ewayBillObj.status)
-  );
+  const [ewayStatus] = useState(ewayStatusProps(ewayBillObj?.status));
   const [showModal, setModal] = useState(false);
   const [number, setNumber] = useState("");
   return (
@@ -101,7 +99,7 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
               <TranslationText id={ewayStatus.text}></TranslationText>
             </Text>
           </FlexColumn>
-          {!ewayStatus.disableBtn ? (
+          {!ewayStatus.disableBtn && ewayStatus.buttonText ? (
             <StyledButton
               title={
                 <TranslationText id={ewayStatus.buttonText}></TranslationText>
