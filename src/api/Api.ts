@@ -212,7 +212,7 @@ export default {
   },
   getDriverTrips(driverPhoneNumber: string) {
     return http.get<{}, DriverTrips>(
-      urls.getTrips + driverPhoneNumber,
+      urls.getDriverTrips + driverPhoneNumber,
       {
         status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT"]
       },
