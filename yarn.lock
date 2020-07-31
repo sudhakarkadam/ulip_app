@@ -6073,9 +6073,9 @@ mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git#master":
+"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/samvet/ulip-react-native-modules.git#196d07221456236382c70ca342d5b1593ba92115"
+  resolved "git+ssh://git@github.com/samvet/ulip-react-native-modules.git#a60622465affd7dfe19ad095e0e2f5c98c1c941d"
   dependencies:
     "@turf/helpers" "^6.1.4"
     mapmyindia-map-react-native-beta "0.0.6"

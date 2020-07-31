@@ -9,6 +9,7 @@ import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import { convert } from "../../../components/TripStamp";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { CommonState } from "../../../reducers";
+import { Page, PageContent } from "../../../components/@styled/Page";
 
 const mapStateToProps = (state: CommonState) => ({
   trip: state.driverTrip
@@ -29,20 +30,24 @@ const TripDetailsPage: React.FC<Props> = props => {
       </PrimaryText>
     );
   return (
-    <Flex backgroundColor="white">
-      <TripDetails
-        id={trip.trip_id + ""}
-        pickupDate={new Date(trip.pickup_request_time)}
-        places={[
-          convert(trip.source_location_details),
-          convert(trip.destination_location_details)
-        ]}
-        truckType={trip.vehicle_details.truck_type}
-        truckUnit={trip.weight_unit}
-        truckWeight={trip.weight + ""}
-        documents={trip.documents as any}
-      />
-    </Flex>
+    <Page>
+      <PageContent>
+        <Flex backgroundColor="white">
+          <TripDetails
+            id={trip.trip_id + ""}
+            pickupDate={new Date(trip.pickup_request_time)}
+            places={[
+              convert(trip.source_location_details),
+              convert(trip.destination_location_details)
+            ]}
+            truckType={trip.vehicle_details.truck_type}
+            truckUnit={trip.weight_unit}
+            truckWeight={trip.weight + ""}
+            documents={trip.documents as any}
+          />
+        </Flex>
+      </PageContent>
+    </Page>
   );
 };
 

@@ -18,7 +18,7 @@
         {
           "type": "String",
           "fieldName": "APP_BASE_URL",
-          "value": "http://10.24.7.179"
+          "value": "https://b5f8220d0286.ngrok.io"
         },
         {
           "type": "String",
@@ -39,7 +39,7 @@
         {
           "type": "String",
           "fieldName": "APP_BASE_URL",
-          "value": "http://10.24.7.179/ulip"
+          "value": "https://b5f8220d0286.ngrok.io/ulip"
         },
         {
           "type": "String",

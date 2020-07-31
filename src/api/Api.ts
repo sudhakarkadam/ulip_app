@@ -30,7 +30,7 @@ import { HeaderProvider } from "./Headers";
 import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
-const endpoint = "https://b5f8220d0286.ngrok.io/";
+const endpoint = "https://b5f8220d0286.ngrok.io";
 
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
@@ -99,6 +99,7 @@ export default {
     location: LocationModel;
     userId: string;
     business_type: string;
+    gst_in: string;
   }) {
     return http.post<
       ShipperBusinessProfileModel,
@@ -107,9 +108,10 @@ export default {
       urls.saveCompanyProfile,
       {
         business_name: req.name,
-        site_details: req.location,
+        location: req.location,
         user_id: req.userId,
-        business_type: req.business_type
+        business_type: req.business_type,
+        registration_number: req.gst_in
       },
       {
         headers: HeaderProvider.getHeaders()
