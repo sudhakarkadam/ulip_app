@@ -19,7 +19,8 @@ import {
   BusinessSite,
   SaveTruckRequestModel,
   VehicleListDetails,
-  UserPersonaTypes
+  UserPersonaTypes,
+  BusinessSitesResponse
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -263,5 +264,14 @@ export default {
       },
       method: "POST"
     });
+  },
+  getBusinessSites(id: string) {
+    return http.get<{}, BusinessSitesResponse>(
+      `${endpoint}/ulip/business/${id}/businessSite`,
+      {},
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
   }
 };

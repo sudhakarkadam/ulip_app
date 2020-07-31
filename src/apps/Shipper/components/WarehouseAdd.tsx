@@ -14,6 +14,7 @@ import StyledButton from "../../../components/@styled/StyledButton";
 import Actions from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
+import { ToastAndroid } from "react-native";
 
 const { saveWarehouse } = Actions;
 
@@ -26,7 +27,7 @@ const connector = connect(
   { saveWarehouse }
 );
 
-const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
+const WarehouseAdd: React.FC<ConnectedProps<typeof connector>> = ({
   saveWarehouse,
   business
 }) => {
@@ -74,21 +75,29 @@ const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
                 fontSize={14}
                 onPress={() => {
                   if (!postalCode) return;
-
-                  saveWarehouse({
-                    business_id: id,
-                    gstin,
-                    warehouse_name: name,
-                    location: {
-                      address,
-                      city,
-                      country: "India",
-                      map_ref: {},
-                      name,
-                      postal_code: parseInt(postalCode, 10),
-                      state
-                    }
-                  });
+                  try {
+                    saveWarehouse({
+                      business_id: id,
+                      gstin,
+                      warehouse_name: name,
+                      location: {
+                        address,
+                        city,
+                        country: "India",
+                        map_ref: {},
+                        name,
+                        postal_code: parseInt(postalCode, 10),
+                        state
+                      }
+                    });
+                    ToastAndroid.show("Saved warehouse", ToastAndroid.SHORT);
+                    // need to navigate away from here
+                  } catch {
+                    ToastAndroid.show(
+                      "Failed to save warehouse",
+                      ToastAndroid.SHORT
+                    );
+                  }
                 }}
               />
             </Flex>
@@ -99,4 +108,4 @@ const WarehoueseAdd: React.FC<ConnectedProps<typeof connector>> = ({
   );
 };
 
-export default connector(WarehoueseAdd);
+export default connector(WarehouseAdd);

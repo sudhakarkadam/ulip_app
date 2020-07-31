@@ -38,7 +38,7 @@ const TripProgress = (props: OwnProps) => {
           position="relative"
           border="2px"
           borderRadius="10px"
-          borderColor={`${colors.grays[1]}`}
+          borderColor={`${colors.highlight}`}
         >
           <Flex
             position="absolute"

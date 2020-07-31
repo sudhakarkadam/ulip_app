@@ -7,7 +7,7 @@ import CompanyProfile from "../../../components/CompanyProfile";
 import PersonProfile from "../../../components/PersonProfile";
 import { Flex, HeaderOptions } from "../../../components/@styled/BaseElements";
 import CardComp from "../../../components/CardComp";
-const personIcon = require("../../../icons/person-icon.png");
+const personIcon = require("../../../images/person-icon.png");
 import LSPLanding from "./LSPLanding";
 import { ReducerState } from "../store";
 import { connect, ConnectedProps } from "react-redux";

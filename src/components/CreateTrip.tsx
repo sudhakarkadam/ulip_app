@@ -1,83 +1,37 @@
 import React, { useState } from "react";
 import colors from "../theme/colors";
-import {
-  Flex,
-  FlexRow,
-  Text,
-  Box,
-  ScrollView,
-  Image
-} from "./@styled/BaseElements";
+import { Flex, FlexRow, Text, Box, ScrollView } from "./@styled/BaseElements";
 import SelectComponent from "./SelectComponent";
 import CalendarComponent from "./CalendarComponent";
 import Input from "./InputComponent";
 import TripDetails from "./TripDetails";
 import StyledButton from "./@styled/StyledButton";
 import TripProgress from "./TripProgress";
-import { LspDetailsObj } from "../models/ShipperApiModels";
+import {
+  LspDetailsObj,
+  CreateTripRequestModel
+} from "../models/ShipperApiModels";
 import { PageContent, Page } from "./@styled/Page";
-import { PerosnaDetails } from "../models/CommonModel";
-
-const openTruckImg = require("../images/open-truck.png");
-const containerTruckImg = require("../images/container-truck.png");
-const containerLightImg = require("../images/container-light.png");
-const trailerTruckImg = require("../images/trailer-truck.png");
-const trailerLightImg = require("../images/trailer-light.png");
-const openDarkTruckImg = require("../images/open-dark.png");
+import { PerosnaDetails, BusinessSite } from "../models/CommonModel";
+import ContainerTruck from "../images/containerTruck.svg";
+import TrailorTruck from "../images/trailorTruck.svg";
+import OpenTruck from "../images/openTruck.svg";
 
 interface SelectObj {
   value: string;
   label: string;
 }
 interface OwnProps {
-  createTripCallback: (data: any) => any;
+  createTripCallback: (data: CreateTripRequestModel) => any;
   lspList: LspDetailsObj[];
   goodsList: SelectObj[];
   weightTypeList: SelectObj[];
   truckTypeList: SelectObj[];
   userPersonaDetails: PerosnaDetails;
+  businessSites: BusinessSite[];
 }
 
 type Props = OwnProps;
-
-const LocationsList = [
-  {
-    address: "Sector 4, Rohini",
-    city: "Delhi",
-    name: "Delhi",
-    state: "Delhi",
-    label: "Delhi",
-    value: "del",
-    map_ref: {}
-  },
-  {
-    label: "Bangalore",
-    value: "bg",
-    city: "Bangalore",
-    state: "Karnataka",
-    name: "Bangalore",
-    address: "Devrabessanhalli, Bangalore",
-    map_ref: {}
-  },
-  {
-    label: "Kolkata",
-    value: "kol",
-    city: "Kolkata",
-    state: "West Bengal",
-    name: "Kolkata",
-    address: "Jibantala, Kolkata",
-    map_ref: {}
-  },
-  {
-    label: "Mumbai",
-    value: "mum",
-    city: "Mumbai",
-    state: "Maharashtra",
-    name: "Mumbai",
-    address: "Powai, Mumbai",
-    map_ref: {}
-  }
-];
 
 const TruckTypeComp = (props: {
   lspList: { label: string; value: string }[];
@@ -110,10 +64,16 @@ const TruckTypeComp = (props: {
           Preference
         </Text>
       </Flex>
-      <FlexRow height="90" backgroundColor="white" mt={3}>
+      <FlexRow
+        height="90"
+        mt={3}
+        border={1}
+        borderRadius={2}
+        borderColor={colors.grays[2]}
+      >
         <Flex
           onTouchEnd={() => onChange("OPEN", "truckType")}
-          backgroundColor={`${truckType === "OPEN" ? colors.black[1] : null}`}
+          bg={`${truckType === "OPEN" ? colors.highlight : colors.white}`}
           flex={1}
           p={5}
           pl={10}
@@ -123,16 +83,11 @@ const TruckTypeComp = (props: {
               Open
             </Text>
           </Flex>
-          <Image
-            style={{ width: 49, height: 27 }}
-            source={truckType === "OPEN" ? openTruckImg : openDarkTruckImg}
-          />
+          <OpenTruck />
         </Flex>
         <Flex
           onTouchEnd={() => onChange("CONTAINER", "truckType")}
-          backgroundColor={`${
-            truckType === "CONTAINER" ? colors.black[1] : null
-          }`}
+          bg={`${truckType === "CONTAINER" ? colors.highlight : colors.white}`}
           flex={1}
           p={5}
           borderLeftWidth="1px"
@@ -146,18 +101,11 @@ const TruckTypeComp = (props: {
               Container
             </Text>
           </Flex>
-          <Image
-            style={{ width: 66, height: 27 }}
-            source={
-              truckType === "CONTAINER" ? containerLightImg : containerTruckImg
-            }
-          />
+          <ContainerTruck />
         </Flex>
         <Flex
           onTouchEnd={() => onChange("TROLLEY", "truckType")}
-          backgroundColor={`${
-            truckType === "TROLLEY" ? colors.black[1] : null
-          }`}
+          bg={`${truckType === "TROLLEY" ? colors.highlight : colors.white}`}
           flex={1}
           p={5}
         >
@@ -168,10 +116,7 @@ const TruckTypeComp = (props: {
               Trolley
             </Text>
           </Flex>
-          <Image
-            style={{ width: 70, height: 28 }}
-            source={truckType === "TROLLEY" ? trailerLightImg : trailerTruckImg}
-          />
+          <TrailorTruck />
         </Flex>
       </FlexRow>
       <Flex mt={3}>
@@ -184,8 +129,8 @@ const TruckTypeComp = (props: {
           <Input
             style={{
               backgroundColor: "white",
-              height: 40,
-              borderRadius: 4,
+              height: 46,
+              borderRadius: 3,
               borderColor: colors.grays[1]
             }}
             value={weight}
@@ -205,6 +150,11 @@ const TruckTypeComp = (props: {
 };
 
 const CreateTrip = (props: Props) => {
+  const LocationsList = props.businessSites.map(warehouse => ({
+    ...warehouse,
+    label: warehouse.warehouse_name,
+    value: warehouse.business_site_id
+  }));
   const { goodsList, truckTypeList, weightTypeList } = props;
   const lspList = props.lspList.map(lsp => ({
     label: lsp.legal_name,
@@ -212,8 +162,12 @@ const CreateTrip = (props: Props) => {
   }));
   const todayDate = new Date().toISOString().substr(0, 10);
   const [tripStep, setTripStep] = useState(0);
-  const [fromValue, setFromValue] = useState(LocationsList[0].value);
-  const [toValue, setToValue] = useState(LocationsList[1].value);
+  const [fromValue, setFromValue] = useState(
+    LocationsList[0] ? LocationsList[0].value : ""
+  );
+  const [toValue, setToValue] = useState(
+    LocationsList[1] ? LocationsList[1].value : ""
+  );
   const [pickupDate, setPickUpDate] = useState(todayDate);
   const [goodsType, setGoodsType] = useState(goodsList[0].value);
   const [truckType, setTruckType] = useState(truckTypeList[0].value);
@@ -227,15 +181,11 @@ const CreateTrip = (props: Props) => {
       return;
     }
     const data = {
-      destination_location_details: LocationsList.filter(
-        loc => loc.value === toValue
-      )[0],
+      destination_business_site_id: toValue,
       goods_segment: goodsType,
       lsp_business_id: lspProvider,
       pickup_request_time: `${new Date(pickupDate).getTime()}`,
-      source_location_details: LocationsList.filter(
-        loc => loc.value === fromValue
-      )[0],
+      source_business_site_id: fromValue,
       truck_type_preference: truckType.toUpperCase(),
       weight: Number(weight),
       weight_unit: weightUnit,
@@ -248,14 +198,14 @@ const CreateTrip = (props: Props) => {
 
   const allPlaces = [
     ...LocationsList.filter(loc => loc.value === fromValue).map(loc => ({
-      name: loc.name,
-      state: loc.state,
-      address: loc.address
+      name: loc.warehouse_name,
+      state: loc.location.state,
+      address: loc.location.address
     })),
     ...LocationsList.filter(loc => loc.value === toValue).map(loc => ({
-      name: loc.name,
-      state: loc.state,
-      address: loc.address
+      name: loc.warehouse_name,
+      state: loc.location.state,
+      address: loc.location.address
     }))
   ];
   return (
@@ -263,11 +213,7 @@ const CreateTrip = (props: Props) => {
       <PageContent>
         {tripStep !== 4 && (
           <>
-            <Flex
-              backgroundColor={tripStep === 4 ? "white" : ""}
-              position="relative"
-              height="80%"
-            >
+            <Flex bg={"white"} position="relative" height="80%">
               <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <TripProgress currentStep={tripStep} />
                 {tripStep === 0 ? (
@@ -345,7 +291,7 @@ const CreateTrip = (props: Props) => {
         )}
         {tripStep === 4 && (
           <ScrollView>
-            <Flex height="100%" backgroundColor={tripStep === 4 ? "white" : ""}>
+            <Flex height="100%" bg={"white"}>
               <TripDetails
                 pickupDate={new Date(pickupDate)}
                 truckType={truckType.toUpperCase()}

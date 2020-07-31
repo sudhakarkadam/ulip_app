@@ -3,7 +3,8 @@ import { ReducerMappedState } from "../utils/actionCreator";
 import {
   GetTripsResponse,
   AppConfigsResponse,
-  VehicleListDetails
+  VehicleListDetails,
+  BusinessSitesResponse
 } from "../models/CommonModel";
 import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
@@ -101,6 +102,18 @@ const driverTrip = createReducer<
   actions.GET_TRIP_BY_ID_ERROR
 ]);
 
+const businessSites = createReducer<
+  actions.GET_BUSINESS_SITES_REQUEST,
+  actions.GET_BUSINESS_SITES_SUCCESS,
+  actions.GET_BUSINESS_SITES_ERROR,
+  {},
+  BusinessSitesResponse
+>([
+  actions.GET_BUSINESS_SITES_REQUEST,
+  actions.GET_BUSINESS_SITES_SUCCESS,
+  actions.GET_BUSINESS_SITES_ERROR
+]);
+
 export const reducers = {
   user,
   trips,
@@ -110,7 +123,8 @@ export const reducers = {
   appConfig,
   driverTrips,
   driverTrip,
-  vehiclesList
+  vehiclesList,
+  businessSites
 };
 
 export type CommonState = ReducerMappedState<typeof reducers>;

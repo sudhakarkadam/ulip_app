@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>1A8414B0-C89D-4EE6-93A3-D324E0EC7DCE</title>
+    <defs>
+        <path d="M10,0.3125 C4.64972656,0.3125 0.3125,4.64972656 0.3125,10 C0.3125,15.3502734 4.64972656,19.6875 10,19.6875 C15.3502734,19.6875 19.6875,15.3502734 19.6875,10 C19.6875,4.64972656 15.3502734,0.3125 10,0.3125 Z M5.625,8.125 C5.625,5.70875 7.58375,3.75 10,3.75 C12.41625,3.75 14.375,5.70875 14.375,8.125 C14.375,10.54125 12.41625,12.5 10,12.5 C7.58375,12.5 5.625,10.54125 5.625,8.125 Z M16.1096875,14.8696484 C12.9711719,18.7919531 7.03253906,18.7966016 3.89027344,14.8696484 C4.57042969,14.1786328 5.51632812,13.75 6.5625,13.75 L7.27359375,13.75 C8.99351563,14.5834375 11.0038672,14.5846875 12.7264063,13.75 L13.4375,13.75 C14.4836719,13.75 15.4295703,14.1786328 16.1096875,14.8696484 Z" id="path-1"></path>
+    </defs>
+    <g id="UI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="in_transit_upcoming" transform="translate(-305.000000, -575.000000)">
+            <g id="App-bar-/2.-Bottom-/E.-FAB-end-cut/_Light" transform="translate(0.000000, 564.000000)">
+                <g id="Group" transform="translate(292.000000, 11.000000)">
+                    <g id="📍icon" transform="translate(13.000000, 0.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Color" mask="url(#mask-2)" fill="#C1C7D0">
+                            <rect id="Turquoise" x="0" y="0" width="20" height="20"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

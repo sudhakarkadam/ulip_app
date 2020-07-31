@@ -5,7 +5,7 @@ import { View, StyleSheet, Dimensions, Text } from "react-native";
 
 import { Icon } from "../@styled/BaseElements";
 // @ts-ignore
-import trackTruck from "../../icons/truck-black.png";
+import trackTruck from "../../images/truck-black.png";
 
 import MapStyle from "./MapStyle";
 import {

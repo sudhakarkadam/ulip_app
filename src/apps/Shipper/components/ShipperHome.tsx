@@ -14,7 +14,8 @@ import HistorySelected from "../../../images/history_selected.svg";
 import HistoryBlur from "../../../images/history_blur.svg";
 import { createStackNavigator } from "@react-navigation/stack";
 import TripTracking from "../../../components/TripTracking";
-
+import AccountInactive from "../../../images/user-circle.svg";
+import AccountActive from "../../../images/user-circle-dark.svg";
 const tabs = [
   {
     name: "HomeStack",
@@ -41,8 +42,8 @@ const tabs = [
     name: "Account",
     label: "ACCOUNT",
     component: AccountsStack,
-    activeImage: InTransitSelected,
-    inActiveImage: InTransitBlur
+    activeImage: AccountActive,
+    inActiveImage: AccountInactive
   }
 ];
 

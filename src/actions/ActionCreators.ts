@@ -119,6 +119,14 @@ const ActionCreators = {
     ],
     api.saveTruck
   ),
+  getBusinessSites: createAsyncAction(
+    [
+      actions.GET_BUSINESS_SITES_REQUEST,
+      actions.GET_BUSINESS_SITES_SUCCESS,
+      actions.GET_BUSINESS_SITES_ERROR
+    ],
+    api.getBusinessSites
+  ),
   setUserPersona: (args: { user: UserPersonaTypes }) =>
     createAction(actions.SET_USER_PERSONA, args, {}),
 

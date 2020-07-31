@@ -5,7 +5,7 @@ import { Flex1, FlexRow } from "../@styled/Flex";
 import { TranslationText } from "../InternationalisationProvider";
 
 // @ts-ignore
-import backIcon from "../../icons/back-no-tail.png";
+import backIcon from "../../images/back-no-tail.png";
 import { PrimaryText, SecondaryLabel } from "../@styled/Text";
 
 interface TopBarProps {

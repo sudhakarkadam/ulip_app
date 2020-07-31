@@ -8,7 +8,7 @@ import { HomeStackParamList } from "./HomeStack";
 import { I18nContext } from "../../../components/InternationalisationProvider";
 import { PerosnaDetails } from "../../../models/CommonModel";
 import { Page, PageContent } from "../../../components/@styled/Page";
-const personIcon = require("../../../icons/person-icon.png");
+const personIcon = require("../../../images/person-icon.png");
 const mapStateToProps = (state: CommonState) => {
   return {
     userInfo: state.user.data

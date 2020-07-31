@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Calendar } from "react-native-calendars";
 import { Flex, Text } from "./@styled/BaseElements";
 import colors from "../theme/colors";
+import moment from "moment";
 
 interface OwnProps {
   label?: string;
@@ -23,6 +24,7 @@ const SelectComponent = (props: OwnProps) => {
       )}
       <Calendar
         markedDates={date}
+        minDate={moment().format("YYYY-MM-DD")}
         onDayPress={day => {
           setDate({ [day.dateString]: { color: `${colors.greens[3]}` } });
           getSelectedDate(day.dateString);

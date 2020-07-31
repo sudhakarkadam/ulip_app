@@ -8,26 +8,30 @@ import CreateTrip from "../../../components/CreateTrip";
 import { HomeStackParamList } from "./HomeStack";
 import { Text } from "../../../components/@styled/BaseElements";
 import { Flex1 } from "../../../components/@styled/Flex";
+import { CreateTripRequestModel } from "src/models/ShipperApiModels";
 
-const { createTrip, getLspList } = ActionCreators;
+const { createTrip, getLspList, getBusinessSites } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,
   lspList: state.lspList.data,
-  commonConfig: state.appConfig.data
+  commonConfig: state.appConfig.data,
+  businessSites: state.businessSites.data
 });
-const mapDispatchToProps = { createTrip, getLspList };
+const mapDispatchToProps = { createTrip, getLspList, getBusinessSites };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type CreateTripProps = StackScreenProps<HomeStackParamList, "CreateTrip"> &
   ConnectedProps<typeof connector>;
 
 const ShipperCreateTrip = (props: CreateTripProps) => {
-  useEffect(() => {
-    props.getLspList({ type: "LSP" });
-  }, []);
   const userPersonaDetails = props.userInfo.user_details.find(
     role => role.profile.persona === "SHIPPER"
   );
+  useEffect(() => {
+    props.getLspList({ type: "LSP" });
+    const businessID = userPersonaDetails?.business_details?.business_id || "";
+    props.getBusinessSites(businessID);
+  }, []);
   const lspList = props.lspList?.lsp_list;
   const goodTypesList = props.commonConfig?.good_types.map(type => ({
     label: type,
@@ -41,6 +45,7 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
     label: type,
     value: type
   }));
+  const businessSites = props.businessSites?.business_sites || [];
   return Array.isArray(lspList) &&
     lspList.length &&
     goodTypesList &&
@@ -53,7 +58,8 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
       truckTypeList={truckTypesList}
       lspList={lspList}
       userPersonaDetails={userPersonaDetails}
-      createTripCallback={async data => {
+      businessSites={businessSites}
+      createTripCallback={async (data: CreateTripRequestModel) => {
         await props.createTrip(data);
         props.navigation.navigate("MainTripListing");
         ToastAndroid.show("Trip Successfully Created", ToastAndroid.SHORT);

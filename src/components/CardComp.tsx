@@ -4,7 +4,7 @@ import StyledButton from "../components/@styled/StyledButton";
 import colors from "../theme/colors";
 import { FlexRow, Text, FlexColumn } from "./@styled/BaseElements";
 
-const personIcon = require("../icons/person-icon.png");
+const personIcon = require("../images/person-icon.png");
 
 interface OwnProps {
   taskClickCallback: () => void;
