@@ -6073,7 +6073,7 @@ mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git":
+"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git#a60622465affd7dfe19ad095e0e2f5c98c1c941d":
   version "1.0.0"
   resolved "git+ssh://git@github.com/samvet/ulip-react-native-modules.git#a60622465affd7dfe19ad095e0e2f5c98c1c941d"
   dependencies:
