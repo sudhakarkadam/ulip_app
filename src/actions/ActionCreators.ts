@@ -7,6 +7,7 @@ import {
   createAction
 } from "../utils/actionCreator";
 import { Languages } from "src/components/InternationalisationProvider";
+import { UserPersonaTypes } from "src/models/CommonModel";
 
 const ActionCreators = {
   createTrip: createAsyncAction(
@@ -118,7 +119,7 @@ const ActionCreators = {
     ],
     api.saveTruck
   ),
-  setUserPersona: (args: { user: string }) =>
+  setUserPersona: (args: { user: UserPersonaTypes }) =>
     createAction(actions.SET_USER_PERSONA, args, {}),
 
   setUserLanguage: (args: { language: Languages }) =>

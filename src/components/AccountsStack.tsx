@@ -13,7 +13,7 @@ const AccountsStack = () => {
     >
       <Stack.Screen
         name="AccountsPage"
-        component={() => <AccountsPage persona={"shipper"} />}
+        component={() => <AccountsPage persona="SHIPPER" />}
         options={{
           title: "Accounts"
         }}

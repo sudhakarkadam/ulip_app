@@ -12,7 +12,7 @@ export const LoginResponse: UserDataModel = {
       }
     }
   ],
-  userPersona: "shipper",
+  userPersona: "SHIPPER",
   language: "en",
   verification_id: "sdfsfsdfsfsd",
   login_id: "sdfsdfsfsd",

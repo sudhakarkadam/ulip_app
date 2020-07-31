@@ -53,7 +53,7 @@ const LSPPersonProfile = (
           name,
           phone,
           loginId,
-          persona: userInfo.userPersona?.toUpperCase() || ""
+          persona: userInfo.userPersona
         });
         props.navigation.navigate("CreateProfile");
       } catch {

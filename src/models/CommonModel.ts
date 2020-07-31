@@ -20,7 +20,7 @@ export interface SavePersonalProfileRequest {
   phone_number: string;
   name: string;
   login_id: string;
-  persona: string;
+  persona: UserPersonaTypes;
 }
 
 export interface SavePersonalProfileResponse
@@ -62,7 +62,7 @@ export interface PerosnaDetails {
   profile: {
     user_id: string;
     name: string;
-    persona: "SHIPPER" | "LSP" | "DRIVER";
+    persona: UserPersonaTypes;
     phone_number: string;
     status: string;
   };
@@ -72,10 +72,10 @@ export interface PerosnaDetails {
     type: string;
   };
 }
-
+export type UserPersonaTypes = "SHIPPER" | "LSP" | "DRIVER";
 export interface UserDataModel {
   user_details: PerosnaDetails[];
-  userPersona: "shipper" | "lsp" | "driver";
+  userPersona: UserPersonaTypes;
   language?: Languages;
   verification_id: string;
   login_id: string;
@@ -85,11 +85,11 @@ export interface UserDataModel {
 export interface GetTripsRequest {
   status: string[];
   businessId: string;
-  persona: string;
+  persona: UserPersonaTypes;
 }
 export interface GetMetricsRequest {
   business_id: string;
-  persona: string;
+  persona: UserPersonaTypes;
 }
 export enum AllApps {
   SHIPPER = "SHIPPER",

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
+import { UserPersonaTypes } from "../models/CommonModel";
 import ActionCreators from "../actions/ActionCreators";
 import ChoosePersona from "./ChoosePersona";
 
@@ -13,7 +14,9 @@ const UserPerosna = (props: UserPerosnaProps) => {
   return (
     <>
       <ChoosePersona
-        selectedUser={(user: string) => props.setUserPersona({ user })}
+        selectedUser={(user: UserPersonaTypes) =>
+          props.setUserPersona({ user })
+        }
       />
     </>
   );
