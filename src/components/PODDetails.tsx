@@ -8,7 +8,10 @@ import StyledButton from "./@styled/StyledButton/StyledButton";
 import colors from "../theme/colors";
 import moment from "moment";
 import { Page, PageContent } from "./@styled/Page";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
+import { CommonState } from "../reducers";
+import { connect, ConnectedProps } from "react-redux";
+import { Document } from "src/models/DriverTrips";
 const Received = require("../images/received-stamp.png");
 
 const Card = styled(Flex)`
@@ -31,9 +34,16 @@ interface OwnProps {
   signature: string;
 }
 
-type Props = OwnProps & {
-  navigation: StackNavigationProp<DriverHomeStackParamList, "PODDetailsPage">;
-} & StackScreenProps<DriverHomeStackParamList, "PODDetailsPage">;
+const mapStateToProps = (state: CommonState) => ({
+  trip: state.driverTrip.data
+});
+
+const connector = connect(mapStateToProps);
+
+type Props = OwnProps &
+  ConnectedProps<typeof connector> & {
+    navigation: StackNavigationProp<DriverHomeStackParamList, "PODDetailsPage">;
+  } & StackScreenProps<DriverHomeStackParamList, "PODDetailsPage">;
 
 const PODDetails = (props: Props) => {
   const {
@@ -41,8 +51,6 @@ const PODDetails = (props: Props) => {
     deliveredDate,
     deliveredDateString = "30/07/2020",
     deliveredTime = "12:30 PM",
-    deliveryLandmark = "Nestle Warehouse",
-    deliveryAddress = "ICC Chambers, Saki vihar rd, Muranjan wadi, Marol, Andheri East, Mumbai, Maharashtra 400072",
     shipper = {
       name: "Nestle Warehouse",
       address:
@@ -50,13 +58,21 @@ const PODDetails = (props: Props) => {
     },
     signature
   } = props;
+
+  const destination = props.trip?.destination_location_details;
+  const pod = props.trip?.documents?.find((document: Document) => {
+    return document?.type === "POD";
+  });
+
   return (
     <Page>
       <PageContent>
         <ScrollView backgroundColor="#ffffff" mt={4}>
-          <Box position="absolute" ml={150} mt={60}>
-            <Image source={Received} style={{ width: 200, height: 115 }} />
-          </Box>
+          {props.trip?.trip_status === "COMPLETED" && (
+            <Box position="absolute" ml={150} mt={60}>
+              <Image source={Received} style={{ width: 200, height: 115 }} />
+            </Box>
+          )}
           {ewb && (
             <Card
               style={{
@@ -92,7 +108,7 @@ const PODDetails = (props: Props) => {
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
               {moment(
                 deliveredDateString || deliveredDate,
-                moment.defaultFormatUtc
+                moment?.defaultFormatUtc
               ).format("DD/MM/YYYY")}
               {", "}
               {deliveredTime}
@@ -101,29 +117,38 @@ const PODDetails = (props: Props) => {
           <Card style={{ paddingVertical: 7 }}>
             <PrimaryText>Delivery Address</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-              {deliveryLandmark}
+              {destination?.name}
             </PrimaryText>
             <PrimaryText style={{ fontSize: 12 }}>
-              {deliveryAddress}
+              {destination?.address}, {destination?.city},{" "}
+              {destination?.postal_code}
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>
             <PrimaryText>Shipper</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-              {shipper.name}
+              {shipper?.name}
             </PrimaryText>
             <PrimaryText style={{ fontSize: 12 }}>
-              {shipper.address}
+              {shipper?.address}
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>
             <PrimaryText>Received by</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-              {"Brijesh Singh"}
+              {pod && pod.id}
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7, borderBottomColor: "#ffffff" }}>
             <PrimaryText>Receiver signature</PrimaryText>
+            {pod && (
+              <View style={{ paddingTop: 50 }}>
+                <Image
+                  source={{ uri: pod?.url }}
+                  style={{ resizeMode: "stretch", height: 200, width: 100 }}
+                />
+              </View>
+            )}
           </Card>
         </ScrollView>
         {!signature && (
@@ -149,4 +174,4 @@ const PODDetails = (props: Props) => {
   );
 };
 
-export default PODDetails;
+export default connector(PODDetails);

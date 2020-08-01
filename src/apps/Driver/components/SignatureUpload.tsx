@@ -22,10 +22,10 @@ import { TranslationText } from "../../../components/InternationalisationProvide
 import { CommonState } from "../../../reducers";
 import { ToastAndroid } from "react-native";
 
-const { upload, specialUpload } = ActionCreators;
-const mapDispatchToProps = { upload, specialUpload };
+const { upload, specialUpload, getTripById } = ActionCreators;
+const mapDispatchToProps = { upload, specialUpload, getTripById };
 const mapStateToProps = (state: CommonState) => ({
-  trips: state.trips
+  trip: state.driverTrip.data
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -34,7 +34,7 @@ type Props = ConnectedProps<typeof connector> & {
 } & StackScreenProps<DriverHomeStackParamList, "SignatureUpload">;
 
 const SignatureUpload: React.FC<Props> = props => {
-  const tripId = props.trips.data?.transport_service_requests[0].tsr_id;
+  const tripId = props.trip?.trip_id;
   const signRef = useRef(null);
   const [name, setName] = useState("");
   const [checked, setCheckbox] = useState(false);
@@ -48,10 +48,11 @@ const SignatureUpload: React.FC<Props> = props => {
         fileData: result.encoded,
         document_type: "POD",
         document_id: name,
-        id: tripId || 1
+        id: tripId
       })
       .then(res => {
         if (res.type === "SPECIAL_UPLOAD_SUCCESS") {
+          props.getTripById(tripId);
           props.navigation.navigate("PODDetailsPage");
         } else {
           ToastAndroid.show(

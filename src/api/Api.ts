@@ -32,7 +32,7 @@ import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
-const endpoint = "https://b5f8220d0286.ngrok.io";
+const endpoint = "http://1aeab443012f.ngrok.io";
 
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
@@ -51,7 +51,7 @@ const urls = {
   saveTruck: `${endpoint}/ulip/business/vehicle`,
   getVehiclesList: `${endpoint}/ulip/business`,
   getDriverTrips: `${endpoint}/ulip/trip/driver/`,
-  getTripById:(id:number)=> `${endpoint}/ulip/trip/${id}`,
+  getTripById: (id: number) => `${endpoint}/ulip/trip/${id}`,
   updateTrip: (id: number | undefined) => `${endpoint}/ulip/trip/${id}/status`,
   upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`,
   acceptTrip: `${endpoint}/ulip/tsr/accept`,
@@ -214,7 +214,7 @@ export default {
     return http.get<{}, DriverTrips>(
       urls.getDriverTrips + driverPhoneNumber,
       {
-        status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT"]
+        status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT", "REACHED"]
       },
       {
         headers: HeaderProvider.getHeaders()
@@ -222,7 +222,7 @@ export default {
     );
   },
 
-  getTripById(id: string) {
+  getTripById(id?: string | number) {
     return http.get<{}, DriverTrips[0]>(
       urls.getTripById(Number(id)),
       {},

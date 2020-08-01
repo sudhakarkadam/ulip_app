@@ -189,13 +189,13 @@ const Trip: React.FC<Props> = props => {
           </Box>
           <FlexRow>
             <StyledButton
-              height="40"
+              height="30"
               width="50%"
               title={<TranslationText id="go.to.map"></TranslationText>}
               onPress={() => {}}
             />
             <StyledButton
-              height="40"
+              height="30"
               width="50%"
               title={<TranslationText id="capture.pop"></TranslationText>}
               onPress={() => {
@@ -225,13 +225,13 @@ const Trip: React.FC<Props> = props => {
           </Box>
           <FlexRow>
             <StyledButton
-              height="40"
+              height="30"
               width="50%"
               title={<TranslationText id="go.to.map"></TranslationText>}
               onPress={() => {}}
             />
             <StyledButton
-              height="40"
+              height="30"
               width="50%"
               title={<TranslationText id="reached"></TranslationText>}
               onPress={async () => {
