@@ -37,12 +37,21 @@ const SignatureUpload: React.FC<Props> = props => {
   const tripId = props.trip?.trip_id;
   const signRef = useRef(null);
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [signed, setSignstate] = useState(false);
   const [checked, setCheckbox] = useState(false);
   const saveSign = () => {
     //@ts-ignore
     signRef?.current?.saveImage();
   };
+  const SubmitText = !loading ? <Text>Submit</Text> : <Text>Loading...</Text>;
+
+  const onDragEvent = () => {
+    setSignstate(true);
+  };
+
   const onSaveEvent = (result: SaveEventParams) => {
+    setLoading(true);
     props
       .specialUpload({
         fileData: result.encoded,
@@ -51,6 +60,7 @@ const SignatureUpload: React.FC<Props> = props => {
         id: tripId
       })
       .then(res => {
+        setLoading(false);
         if (res.type === "SPECIAL_UPLOAD_SUCCESS") {
           props.getTripById(tripId);
           props.navigation.navigate("PODDetailsPage");
@@ -62,6 +72,7 @@ const SignatureUpload: React.FC<Props> = props => {
         }
       })
       .catch(() => {
+        setLoading(false);
         ToastAndroid.show(
           "Something went wrong. Please try again.",
           ToastAndroid.SHORT
@@ -83,6 +94,7 @@ const SignatureUpload: React.FC<Props> = props => {
               ref={signRef}
               style={{ flex: 1 }}
               onSaveEvent={onSaveEvent}
+              onDragEvent={onDragEvent}
               showNativeButtons={false}
               showTitleLabel={false}
               viewMode={"portrait"}
@@ -105,10 +117,10 @@ const SignatureUpload: React.FC<Props> = props => {
           </FlexRow>
           <FlexRow>
             <StyledButton
-              disabled={!checked}
+              disabled={!(checked && name.length > 0 && signed)}
               height="50px"
               width="100%"
-              title="Submit"
+              title={SubmitText}
               onPress={saveSign}
             />
           </FlexRow>

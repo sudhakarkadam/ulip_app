@@ -5,7 +5,8 @@ import { TranslationText } from "../../../components/InternationalisationProvide
 import {
   Box,
   Flex,
-  ScrollView
+  ScrollView,
+  Text
 } from "../../../components/@styled/BaseElements";
 import { TextWrapper } from "../../../components/@styled/Text";
 import Input from "../../../components/InputComponent";
@@ -35,6 +36,7 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
   business,
   navigation
 }) => {
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [gstin, setGstin] = useState("");
   const [address, setAddress] = useState("");
@@ -75,9 +77,10 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
             <Flex mt={10}>
               <StyledButton
                 disabled={!name || !gstin}
-                title="Save Warehouse"
+                title={loading ? <Text>Loading...</Text> : "Save Warehouse"}
                 fontSize={14}
                 onPress={async () => {
+                  setLoading(true);
                   if (!postalCode) return;
                   try {
                     await saveWarehouse({
@@ -94,10 +97,12 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                         state
                       }
                     });
+                    setLoading(false);
                     ToastAndroid.show("Saved warehouse", ToastAndroid.SHORT);
                     navigation.goBack();
                     // need to navigate away from here
                   } catch {
+                    setLoading(false);
                     ToastAndroid.show(
                       "Failed to save warehouse",
                       ToastAndroid.SHORT

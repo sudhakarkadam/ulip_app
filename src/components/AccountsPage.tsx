@@ -110,9 +110,15 @@ const ProfileSection = ({
   );
 };
 
+const getProfileUsername = (userInfo: UserDataModel) =>
+  userInfo?.user_details?.find(
+    details => details?.profile.persona === userInfo.userPersona
+  )?.profile?.name;
+
 const AccountsPage: React.FC<OwnProps &
   ConnectedProps<typeof connector>> = props => {
-  const personName = props.userInfo.login_id;
+  const personName =
+    getProfileUsername(props.userInfo) || props.userInfo.login_id;
   const contactNumber = props.userInfo.phone_number;
   return contactNumber && personName ? (
     <Page>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   ActivityIndicator,
@@ -112,7 +112,7 @@ const getStartText = () => {
 
 const Trip: React.FC<Props> = props => {
   const getTrip = () => props.getTripById(props.route.params.id);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     getTrip();
   }, []);
@@ -167,7 +167,7 @@ const Trip: React.FC<Props> = props => {
             </Text>
             <StyledButton
               width="100%"
-              height="60"
+              height="50"
               title={<TranslationText id="start.trip"></TranslationText>}
               style={{ opacity: 0.6 }}
               disabled={true}
@@ -189,17 +189,24 @@ const Trip: React.FC<Props> = props => {
           </Box>
           <FlexRow>
             <StyledButton
-              height="30"
+              height="50"
               width="50%"
               title={<TranslationText id="go.to.map"></TranslationText>}
               onPress={() => {}}
             />
             <StyledButton
-              height="30"
+              height="50"
               width="50%"
-              title={<TranslationText id="capture.pop"></TranslationText>}
+              title={
+                !loading ? (
+                  <TranslationText id="capture.pop"></TranslationText>
+                ) : (
+                  <Text>Loading...</Text>
+                )
+              }
               onPress={() => {
                 // upload pop
+                setLoading(true);
                 capture(123, "POP", async d => {
                   await props.upload({
                     file: d,
@@ -225,13 +232,13 @@ const Trip: React.FC<Props> = props => {
           </Box>
           <FlexRow>
             <StyledButton
-              height="30"
+              height="50"
               width="50%"
               title={<TranslationText id="go.to.map"></TranslationText>}
               onPress={() => {}}
             />
             <StyledButton
-              height="30"
+              height="50"
               width="50%"
               title={<TranslationText id="reached"></TranslationText>}
               onPress={async () => {
@@ -251,6 +258,7 @@ const Trip: React.FC<Props> = props => {
       return (
         <StyledButton
           width="100%"
+          height="50px"
           title="Collect POD"
           onPress={() => {
             props.navigation.navigate("PODDetailsPage");
