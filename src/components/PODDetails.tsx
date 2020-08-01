@@ -55,8 +55,7 @@ const PODDetails = (props: Props) => {
       name: "Nestle Warehouse",
       address:
         "ICC Chambers, Saki vihar rd, Muranjan wadi, Marol, Andheri East, Mumbai, Maharashtra 400072"
-    },
-    signature
+    }
   } = props;
 
   const destination = props.trip?.destination_location_details;
@@ -151,7 +150,7 @@ const PODDetails = (props: Props) => {
             )}
           </Card>
         </ScrollView>
-        {!signature && (
+        {!pod && (
           <Flex
             mt={3}
             px={7}

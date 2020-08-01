@@ -11,10 +11,12 @@ import { TextWrapper } from "../../../components/@styled/Text";
 import Input from "../../../components/InputComponent";
 import MapComp from "../../../components/MapComp";
 import StyledButton from "../../../components/@styled/StyledButton";
+import { StackScreenProps } from "@react-navigation/stack";
 import Actions from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "../../../reducers";
 import { ToastAndroid } from "react-native";
+import { HomeStackParamList } from "./HomeStack";
 
 const { saveWarehouse } = Actions;
 
@@ -27,9 +29,11 @@ const connector = connect(
   { saveWarehouse }
 );
 
-const WarehouseAdd: React.FC<ConnectedProps<typeof connector>> = ({
+const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
+  StackScreenProps<HomeStackParamList, "WarehouseAdd">> = ({
   saveWarehouse,
-  business
+  business,
+  navigation
 }) => {
   const [name, setName] = useState("");
   const [gstin, setGstin] = useState("");
@@ -91,6 +95,7 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector>> = ({
                       }
                     });
                     ToastAndroid.show("Saved warehouse", ToastAndroid.SHORT);
+                    navigation.goBack();
                     // need to navigate away from here
                   } catch {
                     ToastAndroid.show(

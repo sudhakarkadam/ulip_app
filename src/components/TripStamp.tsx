@@ -10,7 +10,7 @@ import {
 import Tag from "./@styled/Tag";
 import DestinationIcon from "../images/location.svg";
 import TrailerIcon from "../images/trailer.svg";
-import CheckIcon from "../images/check-circle-1.svg";
+import CheckIcon from "../images/tick.svg";
 import { Location } from "../models/DriverTrips";
 
 export interface Place {
