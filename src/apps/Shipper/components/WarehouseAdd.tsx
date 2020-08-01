@@ -19,6 +19,10 @@ import { CommonState } from "../../../reducers";
 import { ToastAndroid } from "react-native";
 import { HomeStackParamList } from "./HomeStack";
 
+const gstinPattern = new RegExp(
+  /\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}/
+);
+
 const { saveWarehouse } = Actions;
 
 const connector = connect(
@@ -58,8 +62,12 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
             <TranslationText id="warehouse.details"></TranslationText>
           </PrimaryHeaderText>
           <Box p={6}>
-            <Input value={name} onChangeText={setName} label="Warehouse name" />
-            <Input value={gstin} onChangeText={setGstin} label="GSTIN" />
+            <Input
+              value={name}
+              onChangeText={setName}
+              label="Warehouse name*"
+            />
+            <Input value={gstin} onChangeText={setGstin} label="GSTIN*" />
             <TextWrapper label="Locate on map">
               <Flex height={120}>
                 <MapComp />
@@ -72,16 +80,17 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
             <Input
               value={postalCode}
               onChangeText={setPostalCode}
-              label="Pin Code"
+              label="Pin Code*"
             />
             <Flex mt={10}>
               <StyledButton
-                disabled={!name || !gstin}
-                title={loading ? <Text>Loading...</Text> : "Save Warehouse"}
+                disabled={
+                  !name || !gstinPattern.test(gstin) || !postalCode || loading
+                }
+                title={loading ? <Text>Saving...</Text> : "Save Warehouse"}
                 fontSize={14}
                 onPress={async () => {
                   setLoading(true);
-                  if (!postalCode) return;
                   try {
                     await saveWarehouse({
                       business_id: id,
@@ -97,16 +106,15 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                         state
                       }
                     });
-                    setLoading(false);
                     ToastAndroid.show("Saved warehouse", ToastAndroid.SHORT);
                     navigation.goBack();
-                    // need to navigate away from here
                   } catch {
-                    setLoading(false);
                     ToastAndroid.show(
                       "Failed to save warehouse",
                       ToastAndroid.SHORT
                     );
+                  } finally {
+                    setLoading(false);
                   }
                 }}
               />

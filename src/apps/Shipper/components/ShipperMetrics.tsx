@@ -49,26 +49,21 @@ const mapStateToProps = (state: CommonState) => ({
 });
 const mapDispatchToProps = { getMetrics };
 const connector = connect(mapStateToProps, mapDispatchToProps);
-interface OwnProps {
-  focused: boolean;
-}
+
 const HomeMetrics = (
-  props: OwnProps &
-    ConnectedProps<typeof connector> &
+  props: ConnectedProps<typeof connector> &
     StackScreenProps<HomeStackParamList, "ShipperMetrics">
 ) => {
   useEffect(() => {
-    if (props.focused) {
-      const profileCreated = props.user.data.user_details.find(
-        role => role.profile.persona === "SHIPPER"
-      );
-      const businessCreated = profileCreated?.business_details;
-      props.getMetrics({
-        business_id: businessCreated?.business_id || "",
-        persona: "SHIPPER"
-      });
-    }
-  }, [props.focused]);
+    const profileCreated = props.user.data.user_details.find(
+      role => role.profile.persona === "SHIPPER"
+    );
+    const businessCreated = profileCreated?.business_details;
+    props.getMetrics({
+      business_id: businessCreated?.business_id || "",
+      persona: "SHIPPER"
+    });
+  }, []);
   const metrics = props.HomeMetrics.data;
   return (
     <Page>
@@ -79,7 +74,9 @@ const HomeMetrics = (
           style={{ paddingHorizontal: 13, paddingVertical: 30 }}
         >
           <FlexRow height={100} mb={20}>
-            <MetricBox>
+            <MetricBox
+              onPress={() => props.navigation.navigate("MainTripListing")}
+            >
               <PrimaryTextSmall>
                 <TranslationText id="requested" />
               </PrimaryTextSmall>

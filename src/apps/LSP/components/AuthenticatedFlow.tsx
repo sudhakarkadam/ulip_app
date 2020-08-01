@@ -111,7 +111,7 @@ const LSPCompanyProfile = (
 ) => {
   const userId = props.userInfo.user_details.find(
     (role: PerosnaDetails) =>
-      role.profile.persona.toLowerCase() === props.userInfo.userPersona
+      role.profile.persona === props.userInfo.userPersona
   );
   const location = {
     address: "Sector 4, Rohini",

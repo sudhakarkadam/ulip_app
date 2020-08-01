@@ -57,19 +57,6 @@ const TripRequests: React.FC<TripRequestsProps> = (
   );
 };
 
-// const TripAcceptPage = (props: TripAcceptProps) => (
-//   <Page>
-//     <PageContent>
-//       {props.route.params?.tripDetails && (
-//         <TripAccept
-//           onAction={() => props.navigation.navigate("TripRequests", {})}
-//           tripDetails={props.route.params?.tripDetails}
-//         />
-//       )}
-//     </PageContent>
-//   </Page>
-// );
-
 const HeaderButtons = () => (
   <Box pr={6} flexDirection="row">
     <Box mr={7}>

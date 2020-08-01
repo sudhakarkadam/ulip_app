@@ -15,6 +15,10 @@ interface OwnProps {
   }) => void;
 }
 
+const gstinPattern = new RegExp(
+  /\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}/
+);
+
 const CompanyProfile = (props: OwnProps) => {
   const [name, setName] = useState("");
   const [regNumber, setRegNumber] = useState("");
@@ -35,7 +39,7 @@ const CompanyProfile = (props: OwnProps) => {
             <TextWrapper label="Company name">
               <Input value={name} onChangeText={text => setName(text)} />
             </TextWrapper>
-            <TextWrapper label="Registration Number">
+            <TextWrapper label="Registration Number(GSTIN)">
               <Input
                 value={regNumber}
                 onChangeText={text => setRegNumber(text)}
@@ -49,7 +53,7 @@ const CompanyProfile = (props: OwnProps) => {
 
             <Flex mt={10}>
               <StyledButton
-                disabled={!name || !regNumber}
+                disabled={!name || !gstinPattern.test(regNumber)}
                 title="Save company"
                 fontSize={14}
                 onPress={() => {

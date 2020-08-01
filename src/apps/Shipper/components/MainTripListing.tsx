@@ -31,7 +31,7 @@ type OwnProps = ConnectedProps<typeof connector>;
 
 const MainTripListing = (props: Props & OwnProps) => {
   const userPersonaDetails = props.userInfo.user_details.find(
-    role => role.profile.persona.toLowerCase() === props.userInfo.userPersona
+    role => role.profile.persona === props.userInfo.userPersona
   );
   useEffect(() => {
     props.getMetrics({

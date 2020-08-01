@@ -29,7 +29,7 @@ const location = {
 
 const ShipperCompanyProfile = (props: Props) => {
   const userId = props.userInfo.user_details.find(
-    role => role.profile.persona.toLowerCase() === props.userInfo.userPersona
+    role => role.profile.persona === props.userInfo.userPersona
   );
   return (
     <CompanyProfile

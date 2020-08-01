@@ -28,6 +28,7 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
             tripData.source_location_details,
             tripData.destination_location_details
           ]}
+          goodsSegment={tripData.goods_segment}
         />
       </PageContent>
     </Page>

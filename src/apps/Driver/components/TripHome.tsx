@@ -121,7 +121,6 @@ const Trip: React.FC<Props> = props => {
 
   // const trips = driverTrips || props.trips.data;
   const trip = props.trip.data;
-  console.log(trip);
   if (!trip)
     return (
       <Page>
@@ -205,7 +204,6 @@ const Trip: React.FC<Props> = props => {
                 )
               }
               onPress={() => {
-                // upload pop
                 setLoading(true);
                 capture(123, "POP", async d => {
                   await props.upload({

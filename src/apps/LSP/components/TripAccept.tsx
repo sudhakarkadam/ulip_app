@@ -72,6 +72,7 @@ const TripAcceptPage = (
               trip.source_location_details,
               trip.destination_location_details
             ]}
+            goodsSegment={trip.goods_segment}
           />
           <Flex style={{ flexDirection: "row", marginHorizontal: 25 }}>
             <StyledButton
@@ -94,7 +95,6 @@ const TripAcceptPage = (
               title="Accept"
               style={{ flex: 1 }}
               onPress={() => {
-                //return openTruckSelect();
                 props.showModal(
                   <AcceptTripModal
                     onAccept={props.acceptTrip}

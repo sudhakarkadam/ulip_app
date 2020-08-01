@@ -44,6 +44,7 @@ interface OwnProps {
     id: number;
     type: string;
   }[];
+  goodsSegment?: string;
 }
 
 const TripDetails = (props: OwnProps) => {
@@ -103,10 +104,9 @@ const TripDetails = (props: OwnProps) => {
           <TranslationText
             id="placeholder"
             interpolations={{
-              value: moment(
-                pickupDateString || pickupDate,
-                moment.defaultFormatUtc
-              ).format("DD/MM/YYYY")
+              value:
+                pickupDateString ||
+                moment(pickupDate, moment.defaultFormatUtc).format("DD/MM/YYYY")
             }}
           ></TranslationText>
         </PrimaryText>
@@ -159,9 +159,11 @@ const TripDetails = (props: OwnProps) => {
             ></TranslationText>
           </PrimaryText>
         </Flex1Column>
-        <Box>
-          <Tag text={<TranslationText id="rice.grain.wheat" />}></Tag>
-        </Box>
+        {props.goodsSegment && (
+          <Box>
+            <Tag text={props.goodsSegment}></Tag>
+          </Box>
+        )}
       </Card>
       <Card style={{ paddingVertical: 7, borderBottomColor: "white" }}>
         <PrimaryLabel>

@@ -73,6 +73,7 @@ const LSPTripDetails = (props: HistoryProps) => {
             tripData.source_location_details,
             tripData.destination_location_details
           ]}
+          goodsSegment={tripData.goods_segment}
         />
       </PageContent>
     </Page>
