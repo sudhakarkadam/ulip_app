@@ -187,13 +187,13 @@ const TripDetails = (props: OwnProps) => {
                 mx="3"
                 my="3"
                 onPress={() => {
-                  setSelectedImage(document.id);
+                  setSelectedImage(document.url);
                   setModalState(!showModal);
                 }}
               >
                 <Image
                   source={{
-                    uri: `${getEndpoint()}/ulip/trip/document/${document.id}`
+                    uri: document.url
                   }}
                   resizeMethod="resize"
                   style={{ width: 100, height: 100 }}
@@ -218,7 +218,7 @@ const TripDetails = (props: OwnProps) => {
           <Flex1 width="100%">
             <Image
               source={{
-                uri: `${getEndpoint()}/ulip/trip/document/${selectedImage}`
+                uri: selectedImage
               }}
               resizeMode="contain"
               style={{ width: "100%", height: "100%" }}
