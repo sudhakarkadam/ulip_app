@@ -32,7 +32,7 @@ import { DriverTrips, Status, UpdateTripRequest } from "../models/DriverTrips";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
-const endpoint = "http://e2528d93ef62.ngrok.io";
+const endpoint = "http://20.40.44.155";
 
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
