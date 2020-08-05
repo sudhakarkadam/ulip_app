@@ -142,6 +142,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    dexOptions { 
+        incremental true 
+        javaMaxHeapSize "4g" 
+    }
+
     defaultConfig {
         applicationId "com.reactnativemonorepo"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -150,6 +155,10 @@ android {
         versionCode jsonFile.versionCode
         versionName jsonFile.versionName
         multiDexEnabled true
+    }
+
+    dataBinding {
+        enabled = true
     }
     splits {
         abi {
@@ -173,6 +182,7 @@ android {
             keyPassword 'android'
         }
     }
+    
       buildTypes {
         jsonFile.buildTypes.each {
             buildTypeObject ->

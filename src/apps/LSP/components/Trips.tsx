@@ -30,7 +30,7 @@ interface Props {
 }
 
 const Trips = (props: Props) => {
-  const [index, setIndex] = useState(props.route.params.activeIndex || 0);
+  const [index, setIndex] = useState(props.route.params?.activeIndex || 0);
   const [routes] = useState([
     { key: "UPCOMING", title: "UPCOMING" },
     { key: "ON-ROAD", title: "ON-ROAD" },

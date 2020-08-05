@@ -30,6 +30,8 @@ import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
+const MapmyIndia = require("mmi-widget");
+
 const options = {
   title: "Select proof",
   storageOptions: {
@@ -71,6 +73,8 @@ const mapStateToProps = (state: CommonState) => ({
   phone: state.user.data.phone_number
 });
 const connector = connect(mapStateToProps, mapDispatchToProps);
+
+const MapmyIndiaDirection = MapmyIndia.default.MapmyIndiaDirection;
 
 type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripHome">;
@@ -132,6 +136,18 @@ const Trip: React.FC<Props> = props => {
       </Page>
     );
 
+  const openDirections = () => {
+    const location = trip.destination_location_details;
+    MapmyIndiaDirection.open({
+      destination: {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        address: location.address,
+        name: location.name
+      }
+    });
+  };
+
   const bottomSheetContent = () => {
     const today = new Date().toLocaleDateString();
     const tripStartDate = new Date(
@@ -191,7 +207,7 @@ const Trip: React.FC<Props> = props => {
               height="50"
               width="50%"
               title={<TranslationText id="go.to.map"></TranslationText>}
-              onPress={() => {}}
+              onPress={openDirections}
             />
             <StyledButton
               height="50"
@@ -233,7 +249,7 @@ const Trip: React.FC<Props> = props => {
               height="50"
               width="50%"
               title={<TranslationText id="go.to.map"></TranslationText>}
-              onPress={() => {}}
+              onPress={openDirections}
             />
             <StyledButton
               height="50"

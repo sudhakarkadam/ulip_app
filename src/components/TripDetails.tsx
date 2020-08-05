@@ -15,7 +15,6 @@ import { TruckType } from "../models/CommonModel";
 import { Flex1Column, Flex1 } from "./@styled/Flex";
 import Tag from "./@styled/Tag";
 import { Modal } from "react-native";
-import { getEndpoint } from "../api/Api";
 import moment from "moment";
 import { TranslationText } from "./InternationalisationProvider";
 import ContainerTruck from "../images/containerTruck.svg";

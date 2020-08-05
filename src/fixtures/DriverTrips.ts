@@ -11,7 +11,9 @@ export const driverTrips: DriverTrips = [
       map_ref: { ref: "" },
       country: "",
       name: "Delhi",
-      postal_code: 110085
+      postal_code: 110085,
+      latitude: 72.23,
+      longitude: 19.23
     },
     destination_location_details: {
       id: 5,
@@ -21,7 +23,9 @@ export const driverTrips: DriverTrips = [
       map_ref: { ref: "" },
       country: "",
       name: "Mumbai",
-      postal_code: 401501
+      postal_code: 401501,
+      latitude: 72.23,
+      longitude: 19.23
     },
     pickup_request_time: 12212321312,
     weight: "120",

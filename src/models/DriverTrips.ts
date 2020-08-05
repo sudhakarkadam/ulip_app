@@ -18,10 +18,10 @@ export interface UpdateTripRequest {
 }
 
 export interface Root {
-  destination_location_details: DestinationLocationDetails;
+  destination_location_details: LocationDetails;
   documents: Document[];
   pickup_request_time: number;
-  source_location_details: SourceLocationDetails;
+  source_location_details: LocationDetails;
   trip_id: number;
   trip_status: Status;
   tsr_id: number;
@@ -31,7 +31,7 @@ export interface Root {
   tracking_request_id: string;
 }
 
-export interface DestinationLocationDetails {
+export interface LocationDetails {
   address: string;
   city: string;
   country: string;
@@ -40,23 +40,14 @@ export interface DestinationLocationDetails {
   name: string;
   postal_code: number;
   state: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface Document {
   id: string;
   type: string;
   url: string;
-}
-
-export interface SourceLocationDetails {
-  address: string;
-  city: string;
-  country: string;
-  id: number;
-  map_ref: {};
-  name: string;
-  postal_code: number;
-  state: string;
 }
 
 export interface VehicleDetails {
