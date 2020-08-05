@@ -71,6 +71,7 @@ const TripAcceptPage = (
               trip.destination_location_details
             ]}
             goodsSegment={trip.goods_segment}
+            documents={trip.trip_details.documents}
           />
           <Flex style={{ flexDirection: "row", marginHorizontal: 25 }}>
             <StyledButton

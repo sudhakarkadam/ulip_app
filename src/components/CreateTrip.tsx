@@ -317,6 +317,7 @@ const CreateTrip = (props: Props) => {
                   lspList.filter(lsp => lsp.value === lspProvider)[0].label
                 }
                 places={allPlaces}
+                documents={[]}
               />
               <FlexRow m={5}>
                 <StyledButton

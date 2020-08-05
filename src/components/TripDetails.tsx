@@ -40,9 +40,10 @@ interface OwnProps {
   truckUnit?: string;
   lspProvider?: string;
   places?: Place[];
-  documents?: {
-    id: number;
+  documents: {
+    id: string;
     type: string;
+    url: string;
   }[];
   goodsSegment?: string;
 }
@@ -61,7 +62,7 @@ const TripDetails = (props: OwnProps) => {
   } = props;
 
   const [showModal, setModalState] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<number>();
+  const [selectedImage, setSelectedImage] = useState<string>();
 
   return (
     <ScrollView>

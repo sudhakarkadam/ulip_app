@@ -117,7 +117,16 @@ export interface GetTripsResponse {
   weight_unit: string;
 }
 
+interface Document {
+  id: string;
+  type: string;
+  url: string;
+}
+
 interface TripDetails {
+  documents: Document[];
+  ewb_number: string;
+  ewb_status: string;
   id: number;
   status: string;
 }
