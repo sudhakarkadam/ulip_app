@@ -29,6 +29,7 @@ const RejectTripModal = (props: OwnProps) => {
       </PrimaryText>
       <TextWrapper label={<TranslationText id="choose.reason" />}>
         <SelectComponent
+          placeholder="Choose a reason"
           data={props.rejectReasons.map(reason => ({
             label: reason,
             value: reason

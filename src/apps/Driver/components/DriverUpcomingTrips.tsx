@@ -22,6 +22,9 @@ import {
 import { ActivityIndicator } from "react-native";
 import { isLoading, isSuccess } from "../../../utils/actionCreator";
 import colors from "../../../theme/colors";
+import { useIsFocused } from "@react-navigation/native";
+import { Status } from "../../../models/DriverTrips";
+
 const { getDriverTrips, updateTrip, upload } = ActionCreators;
 const mapDispatchToProps = { getDriverTrips, updateTrip, upload };
 const mapStateToProps = (state: CommonState) => ({
@@ -32,27 +35,37 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector> & {
   navigation: StackNavigationProp<DriverHomeStackParamList, "TripList">;
+  status: Status[];
+  title?: string;
 };
 const UpcomingTrips: React.FC<Props> = ({
   getDriverTrips,
   phone,
   trips,
-  navigation
+  navigation,
+  status,
+  title
 }) => {
+  const focused = useIsFocused();
   useEffect(() => {
-    getDriverTrips(phone);
-  }, []);
+    getDriverTrips({
+      driverPhoneNumber: phone,
+      status
+    });
+  }, [focused]);
   return (
     <Page>
       <PageContent>
         <PrimaryHeaderText m={8}>
-          <TranslationText id="upcoming"></TranslationText>
+          {title || <TranslationText id="upcoming"></TranslationText>}
         </PrimaryHeaderText>
         <Flex>
           {isLoading(trips) && <ActivityIndicator />}
           {!isLoading(trips) && (!trips.data || trips.data.length === 0) && (
             <PrimaryText mx={8}>
-              <TranslationText id="no.upcoming.trips"></TranslationText>
+              {(title && `No ${title}`) || (
+                <TranslationText id="no.upcoming.trips"></TranslationText>
+              )}
             </PrimaryText>
           )}
           {isSuccess(trips) &&

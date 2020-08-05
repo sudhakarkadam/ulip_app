@@ -6,8 +6,10 @@ import { TripHome } from "./TripHome";
 import TripDetails from "./TripDetails";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import HomeSelected from "../../../images/home_selected.svg";
+import History from "../../../images/history_selected.svg";
+import HistoryBlur from "../../../images/history_blur.svg";
 import HomeBlur from "../../../images/home_blur.svg";
-import UpcomingTrips from "./DriverUpcomingTrips";
+import DriverTripsListing from "./DriverUpcomingTrips";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 import PODDetails from "../../../components/PODDetails";
 import { I18nContext } from "../../../components/InternationalisationProvider";
@@ -23,11 +25,14 @@ const HomeStack = () => {
       initialRouteName={"TripList"}
       screenOptions={HeaderOptions}
     >
-      <Stack.Screen
-        name="TripList"
-        options={{ title: translate("home") }}
-        component={UpcomingTrips}
-      ></Stack.Screen>
+      <Stack.Screen name="TripList" options={{ title: translate("home") }}>
+        {props => (
+          <DriverTripsListing
+            {...props}
+            status={["CREATED", "IN_TRANSIT", "REACHED", "TRIP_STARTED"]}
+          />
+        )}
+      </Stack.Screen>
       <Stack.Screen name="TripHome" component={TripHome} />
       <Stack.Screen name="TripDetails" component={TripDetails} />
       <Stack.Screen name="PODDetailsPage" component={PODDetails} />
@@ -48,6 +53,28 @@ const AccountsStack = () => {
   );
 };
 
+const PastTrips = () => {
+  const { translate } = useContext(I18nContext);
+  return (
+    <Stack.Navigator
+      initialRouteName={"TripList"}
+      screenOptions={HeaderOptions}
+    >
+      <Stack.Screen name="TripList" options={{ title: translate("home") }}>
+        {props => (
+          <DriverTripsListing
+            {...props}
+            title="Past trips"
+            status={["COMPLETED"]}
+          />
+        )}
+      </Stack.Screen>
+      <Stack.Screen name="TripHome" component={TripHome} />
+      <Stack.Screen name="TripDetails" component={TripDetails} />
+    </Stack.Navigator>
+  );
+};
+
 const Hometabs = () => {
   const { translate } = useContext(I18nContext);
   const tabs = [
@@ -57,6 +84,13 @@ const Hometabs = () => {
       component: HomeStack,
       activeImage: HomeSelected,
       inActiveImage: HomeBlur
+    },
+    {
+      name: "PastStack",
+      label: translate("history"),
+      component: PastTrips,
+      activeImage: History,
+      inActiveImage: HistoryBlur
     },
     {
       name: "Account",

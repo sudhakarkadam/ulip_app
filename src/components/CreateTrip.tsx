@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import colors from "../theme/colors";
-import { Flex, FlexRow, Text, Box, ScrollView } from "./@styled/BaseElements";
+import {
+  Flex,
+  FlexRow,
+  Text,
+  Box,
+  ScrollView,
+  TextInput
+} from "./@styled/BaseElements";
 import SelectComponent from "./SelectComponent";
 import CalendarComponent from "./CalendarComponent";
 import Input from "./InputComponent";
@@ -55,6 +62,7 @@ const TruckTypeComp = (props: {
     <Flex m={5}>
       <SelectComponent
         label="Logistics service provider"
+        placeholder="Choose an LSP"
         data={lspList}
         defaultValue={lspProvider}
         getSelectedValue={val => onChange(val, "lsp")}
@@ -120,9 +128,13 @@ const TruckTypeComp = (props: {
         </Flex>
       </FlexRow>
       <Flex mt={3}>
-        <Text color={`${colors.grays[5]}`} fontSize={1}>
+        <TextInput
+          keyboardType="number-pad"
+          color={`${colors.grays[5]}`}
+          fontSize={1}
+        >
           Required weight
-        </Text>
+        </TextInput>
       </Flex>
       <FlexRow justifyContent="space-between" mt={3}>
         <Flex flex={1} mr={3}>
@@ -139,6 +151,7 @@ const TruckTypeComp = (props: {
         </Flex>
         <Flex flex={2}>
           <SelectComponent
+            placeholder="Choose unit"
             getSelectedValue={val => onChange(val, "unit")}
             data={weightTypeList}
             defaultValue={weightUnit}
@@ -220,12 +233,14 @@ const CreateTrip = (props: Props) => {
                   <Flex m={5}>
                     <SelectComponent
                       label="From"
+                      placeholder="Select location"
                       getSelectedValue={val => setFromValue(val)}
                       data={LocationsList}
                       defaultValue={fromValue}
                     />
                     <Flex mt={3}>
                       <SelectComponent
+                        placeholder="Select location"
                         getSelectedValue={val => setToValue(val)}
                         label="To"
                         data={LocationsList}
@@ -248,6 +263,7 @@ const CreateTrip = (props: Props) => {
                     <SelectComponent
                       getSelectedValue={val => setGoodsType(val)}
                       label="Select goods type"
+                      placeholder="Select goods type"
                       data={goodsList}
                       defaultValue={goodsType}
                     />

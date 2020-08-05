@@ -28,7 +28,7 @@ import {
 } from "../models/ShipperApiModels";
 import RNFetch from "rn-fetch-blob";
 import { HeaderProvider } from "./Headers";
-import { DriverTrips, UpdateTripRequest } from "../models/DriverTrips";
+import { DriverTrips, Status, UpdateTripRequest } from "../models/DriverTrips";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
 // const BuildConfig = NativeModules.RNBuildConfig || {};
@@ -210,11 +210,17 @@ export default {
       }
     );
   },
-  getDriverTrips(driverPhoneNumber: string) {
+  getDriverTrips({
+    driverPhoneNumber,
+    status
+  }: {
+    driverPhoneNumber: string;
+    status: Status[];
+  }) {
     return http.get<{}, DriverTrips>(
       urls.getDriverTrips + driverPhoneNumber,
       {
-        status: ["CREATED", "TRIP_STARTED", "IN_TRANSIT", "REACHED"]
+        status
       },
       {
         headers: HeaderProvider.getHeaders()

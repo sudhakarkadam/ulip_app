@@ -74,7 +74,9 @@ const StyledText = styled.Text<TextProps>(
 export const Text = styled(StyledText)`
   font-family: Roboto-Regular;
 `;
-
+export const TextInput = styled.TextInput<TextProps>(
+  compose(space, color, layout, border, typography)
+);
 export const StyledActivityIndicator = styled.ActivityIndicator<
   ColorProps & SpaceProps
 >(compose(color, space));

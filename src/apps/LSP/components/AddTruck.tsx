@@ -99,6 +99,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
             <SelectComponent
               label={translate("gps.vendor")}
               getSelectedValue={val => setVendor(val)}
+              placeholder="Select GPS vendor"
               data={
                 appConfig.data?.gps_providers.map(provider => ({
                   label: provider,
@@ -113,6 +114,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
             <SelectComponent
               label={translate("truck.type")}
               getSelectedValue={val => setType(val)}
+              placeholder="Select a truck"
               data={
                 appConfig.data?.truck_types.map(type => ({
                   label: type,

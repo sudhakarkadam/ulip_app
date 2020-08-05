@@ -1,5 +1,5 @@
 export type DriverTrips = Root[];
-type Status =
+export type Status =
   | "CREATED"
   | "TRIP_STARTED"
   | "IN_TRANSIT"

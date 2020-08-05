@@ -40,6 +40,7 @@ export type Keys =
   | "reject"
   | "requests"
   | "requested"
+  | "history"
   | "required.weight"
   | "rice.grain.wheat"
   | "setup.required"
@@ -167,6 +168,8 @@ export type GetTranslationTextType<T> = T extends "are.you.sure"
   : T extends "requests"
   ? never
   : T extends "requested"
+  ? never
+  : T extends "history"
   ? never
   : T extends "required.weight"
   ? never

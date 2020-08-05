@@ -12,6 +12,7 @@ interface OwnProps {
   data: SelectItemType[];
   getSelectedValue: (val: string) => void;
   searchable?: boolean;
+  placeholder?: string;
 }
 
 const SelectComponent = (props: OwnProps) => {
@@ -26,6 +27,7 @@ const SelectComponent = (props: OwnProps) => {
       )}
       <DropDownPicker
         items={data}
+        placeholder={props.placeholder}
         defaultValue={selectedValue}
         style={{
           border: `1px solid ${colors.grays[2]}`,

@@ -46,6 +46,7 @@ const AcceptTripModal = (props: OwnProps) => {
       </TextWrapper>
       <TextWrapper label={<TranslationText id="choose.truck" />}>
         <SelectComponent
+          placeholder="Select a truck"
           data={(props.vehiclesList || []).map(vehicle => ({
             label: vehicle.truck_name,
             value: vehicle.vehicle_id?.toString()
