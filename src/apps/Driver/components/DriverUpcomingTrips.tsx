@@ -47,11 +47,14 @@ const UpcomingTrips: React.FC<Props> = ({
   title
 }) => {
   const focused = useIsFocused();
+
   useEffect(() => {
-    getDriverTrips({
-      driverPhoneNumber: phone,
-      status
-    });
+    if (focused) {
+      getDriverTrips({
+        driverPhoneNumber: phone,
+        status
+      });
+    }
   }, [focused]);
   return (
     <Page>
