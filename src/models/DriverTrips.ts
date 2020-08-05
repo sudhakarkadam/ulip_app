@@ -28,6 +28,7 @@ export interface Root {
   vehicle_details: VehicleDetails;
   weight_unit: string;
   weight: string;
+  tracking_request_id: string;
 }
 
 export interface DestinationLocationDetails {

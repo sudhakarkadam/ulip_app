@@ -50,15 +50,11 @@ const PODDetails = (props: Props) => {
     ewb = "1810000120234",
     deliveredDate,
     deliveredDateString = "30/07/2020",
-    deliveredTime = "12:30 PM",
-    shipper = {
-      name: "Nestle Warehouse",
-      address:
-        "ICC Chambers, Saki vihar rd, Muranjan wadi, Marol, Andheri East, Mumbai, Maharashtra 400072"
-    }
+    deliveredTime = "12:30 PM"
   } = props;
 
   const destination = props.trip?.destination_location_details;
+  const source = props.trip?.source_location_details;
   const pod = props.trip?.documents?.find((document: Document) => {
     return document?.type === "POD";
   });
@@ -126,10 +122,10 @@ const PODDetails = (props: Props) => {
           <Card style={{ paddingVertical: 7 }}>
             <PrimaryText>Shipper</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
-              {shipper?.name}
+              {source?.name}
             </PrimaryText>
             <PrimaryText style={{ fontSize: 12 }}>
-              {shipper?.address}
+              {source?.address}, {source?.city}, {source?.postal_code}
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>

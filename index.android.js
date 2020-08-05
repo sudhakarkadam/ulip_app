@@ -1,2 +1,2 @@
-import App from "./src/apps/Driver";
+import App from "./src";
 export default App;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { Dimensions } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
 import { Flex } from "../../../components/@styled/BaseElements";
@@ -7,15 +7,30 @@ import colors from "../../../theme/colors";
 import { AllApps } from "../../../models/CommonModel";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { renderTabBarLable } from "../../../components/NavHelper";
-import { RootStackParamList } from "./AuthenticatedFlow";
 import { Page, PageContent } from "../../../components/@styled/Page";
-import { useIsFocused } from "@react-navigation/native";
+import {
+  useIsFocused,
+  CompositeNavigationProp,
+  RouteProp
+} from "@react-navigation/native";
 
-type AllProps = StackScreenProps<RootStackParamList, "TripDetails"> &
-  StackScreenProps<RootStackParamList, "TripTracking">;
+import { TripStackList } from "./LSPTripStack";
+import { LSPAuthenticatedStackParamList } from "./LSPLanding";
 
-const Trips = (props: AllProps) => {
-  const [index, setIndex] = useState(0);
+type NavigationProps = CompositeNavigationProp<
+  StackNavigationProp<TripStackList, "Trips">,
+  StackNavigationProp<LSPAuthenticatedStackParamList>
+>;
+
+type RouteProps = RouteProp<TripStackList, "Trips">;
+
+interface Props {
+  navigation: NavigationProps;
+  route: RouteProps;
+}
+
+const Trips = (props: Props) => {
+  const [index, setIndex] = useState(props.route.params.activeIndex || 0);
   const [routes] = useState([
     { key: "UPCOMING", title: "UPCOMING" },
     { key: "ON-ROAD", title: "ON-ROAD" },
@@ -41,8 +56,10 @@ const Trips = (props: AllProps) => {
         <TripList
           listingMode={ListingModes.ON_ROAD}
           from={AllApps.LSP}
-          onRowClick={(id, _item) =>
-            props.navigation.push("TripTracking", { tripId: Number(id) })
+          onRowClick={(_, _item) =>
+            props.navigation.push("TripTracking", {
+              tripId: Number(_item.trip_details.id)
+            })
           }
           focused={useIsFocused()}
         />

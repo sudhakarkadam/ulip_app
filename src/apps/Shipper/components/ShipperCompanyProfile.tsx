@@ -17,27 +17,36 @@ const mapStateToProps = (state: CommonState) => ({
 const mapDispatchToProps = { saveCompanyProfile };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const location = {
-  address: "Sector 4, Rohini",
-  city: "Delhi",
-  country: "India",
-  map_ref: {},
-  name: "Delhi",
-  postal_code: 560035,
-  state: "Delhi"
-};
-
 const ShipperCompanyProfile = (props: Props) => {
   const userId = props.userInfo.user_details.find(
     role => role.profile.persona === props.userInfo.userPersona
   );
   return (
     <CompanyProfile
-      createCompanyCallback={async ({ name, regNumber }) => {
+      createCompanyCallback={async ({
+        name,
+        regNumber,
+        address,
+        city,
+        state,
+        postalCode,
+        lat,
+        lng
+      }) => {
         try {
           await props.saveCompanyProfile({
             name,
-            location: { ...location },
+            location: {
+              address,
+              city,
+              country: "India",
+              map_ref: {},
+              latitude: lat,
+              longitude: lng,
+              name,
+              postal_code: parseInt(postalCode, 10),
+              state
+            },
             userId: userId ? userId.profile.user_id : "",
             business_type: "SHIPPER",
             gst_in: regNumber

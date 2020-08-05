@@ -179,7 +179,7 @@ const LoginComponent = (props: ConnectedProps<typeof connector>) => {
                     setResendCycle(0);
                   } catch (err) {
                     ToastAndroid.show(
-                      `Error while sending OTP: ${err}`,
+                      `Error while sending OTP`,
                       ToastAndroid.SHORT
                     );
                   }

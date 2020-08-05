@@ -8,8 +8,8 @@ import {
   TouchableOpacity
 } from "./@styled/BaseElements";
 import colors from "../theme/colors";
-import Filter from "../images/sort.svg";
-import Sort from "../images/filter.svg";
+// import Filter from "../images/sort.svg";
+// import Sort from "../images/filter.svg";
 import {
   SecondaryText,
   SmallCapitalText,
@@ -190,10 +190,10 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                   </Text>
                 </Box>
               </FlexRow>
-              <Filter />
-              <Box pl={8}>
+              {/* <Filter /> */}
+              {/* <Box pl={8}>
                 <Sort />
-              </Box>
+              </Box> */}
             </FlexRow>
             <FlatList
               ListEmptyComponent={

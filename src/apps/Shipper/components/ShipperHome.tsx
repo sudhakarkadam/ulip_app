@@ -16,6 +16,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TripTracking from "../../../components/TripTracking";
 import AccountInactive from "../../../images/user-circle.svg";
 import AccountActive from "../../../images/user-circle-dark.svg";
+
+export type ShipperBottomTabList = {
+  HomeStack: undefined;
+  InTransitStack: undefined;
+  HistoryStack: undefined;
+  Account: undefined;
+};
 const tabs = [
   {
     name: "HomeStack",

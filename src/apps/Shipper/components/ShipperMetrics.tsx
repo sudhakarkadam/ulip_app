@@ -18,9 +18,13 @@ import BlockScreenLoader from "../../../components/BlockScreenLoader";
 import { TranslationText } from "../../../components/InternationalisationProvider";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import Road from "../../../images/road.svg";
+import Warehouse from "../../../images/warehouse.svg";
 import { CommonState } from "../../../reducers";
 import { HomeStackParamList } from "./HomeStack";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { CompositeNavigationProp } from "@react-navigation/native";
+import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { ShipperBottomTabList } from "./ShipperHome";
 
 const MetricBox = styled(TouchableOpacity)`
   background-color: ${({ theme }) => theme.colors.yellow};
@@ -40,6 +44,7 @@ const IconBox = styled(TouchableOpacity)`
   margin-horizontal: 12;
   justify-content: center;
   align-items: center;
+  width: 100px;
 `;
 
 const { getMetrics } = ActionCreators;
@@ -50,9 +55,17 @@ const mapStateToProps = (state: CommonState) => ({
 const mapDispatchToProps = { getMetrics };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
+type NavigationProps = CompositeNavigationProp<
+  StackNavigationProp<HomeStackParamList, "ShipperMetrics">,
+  BottomTabNavigationProp<ShipperBottomTabList>
+>;
+
+interface HomeMetricsProps {
+  navigation: NavigationProps;
+}
+
 const HomeMetrics = (
-  props: ConnectedProps<typeof connector> &
-    StackScreenProps<HomeStackParamList, "ShipperMetrics">
+  props: ConnectedProps<typeof connector> & HomeMetricsProps
 ) => {
   useEffect(() => {
     const profileCreated = props.user.data.user_details.find(
@@ -93,7 +106,7 @@ const HomeMetrics = (
                 />
               </PrimaryHeaderText>
             </MetricBox>
-            <MetricBox>
+            {/* <MetricBox>
               <PrimaryTextSmall>
                 {" "}
                 <TranslationText id="pending.literally" />
@@ -110,8 +123,10 @@ const HomeMetrics = (
                   }}
                 />
               </PrimaryHeaderText>
-            </MetricBox>
-            <MetricBox>
+            </MetricBox> */}
+            <MetricBox
+              onPress={() => props.navigation.navigate("InTransitStack")}
+            >
               <PrimaryTextSmall>
                 <TranslationText id="on.road" />
               </PrimaryTextSmall>
@@ -159,7 +174,7 @@ const HomeMetrics = (
 
             <IconBox onPress={() => props.navigation.navigate("WarehouseAdd")}>
               <Box mb={2}>
-                <Road />
+                <Warehouse />
               </Box>
               <PrimaryText style={{ fontSize: 10 }}>
                 <TranslationText id="add.warehouse"></TranslationText>

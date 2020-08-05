@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Icon, TouchableOpacity as Button } from "../@styled/BaseElements";
-import Tag from "../@styled/Tag";
+import { Icon, TouchableOpacity as Button } from "../@styled/BaseElements";
 import { Flex1, FlexRow } from "../@styled/Flex";
 import { TranslationText } from "../InternationalisationProvider";
 
@@ -13,11 +12,7 @@ interface TopBarProps {
   tripId: string;
   status?: string;
 }
-const TopBar: React.FC<TopBarProps> = ({
-  onBackPress = () => {},
-  tripId,
-  status = "ON-TIME"
-}) => (
+const TopBar: React.FC<TopBarProps> = ({ onBackPress = () => {}, tripId }) => (
   <FlexRow alignItems="center" mx={4} mt={5} zIndex={2} position="absolute">
     <Button
       height={40}
@@ -45,9 +40,6 @@ const TopBar: React.FC<TopBarProps> = ({
         </SecondaryLabel>
         <PrimaryText fontWeight="bold">TRIP-{tripId}</PrimaryText>
       </Flex1>
-      <Box>
-        <Tag text={status} type="success" />
-      </Box>
     </FlexRow>
   </FlexRow>
 );

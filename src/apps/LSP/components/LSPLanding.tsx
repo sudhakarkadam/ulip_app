@@ -8,14 +8,11 @@ import InTransitSelected from "../../../images/intransit_selected.svg";
 import InTransitBlur from "../../../images/intransit_blur.svg";
 import HistorySelected from "../../../images/history_selected.svg";
 import HistoryBlur from "../../../images/history_blur.svg";
-import Trips from "./Trips";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 
-import { Box, HeaderOptions } from "../../../components/@styled/BaseElements";
-import Search from "../../../images/search.svg";
-import Notification from "../../../images/notification.svg";
+import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import TripTracking from "../../../components/TripTracking";
@@ -27,18 +24,8 @@ import HomeStack from "./LSPHomeStack";
 import { useIsFocused } from "@react-navigation/native";
 import AccountInactive from "../../../images/user-circle.svg";
 import AccountActive from "../../../images/user-circle-dark.svg";
+import TripStack from "./LSPTripStack";
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
-
-const HeaderButtons = () => (
-  <Box pr={6} flexDirection="row">
-    <Box mr={7}>
-      <Notification />
-    </Box>
-    <Box mx={3}>
-      <Search />
-    </Box>
-  </Box>
-);
 
 const Stack = createStackNavigator();
 const History = (props: HistoryProps) => (
@@ -55,7 +42,7 @@ const History = (props: HistoryProps) => (
     </PageContent>
   </Page>
 );
-const LSPTripDetails = (props: HistoryProps) => {
+export const LSPTripDetails = (props: HistoryProps) => {
   const { tripDetails } = props.route.params;
   const tripData = tripDetails as GetTripsResponse;
   return (
@@ -80,41 +67,18 @@ const LSPTripDetails = (props: HistoryProps) => {
   );
 };
 
-const TripStack = () => {
-  return (
-    <Stack.Navigator initialRouteName={"Trips"} screenOptions={HeaderOptions}>
-      <Stack.Screen
-        name="Trips"
-        component={Trips}
-        options={{ title: "Trips", headerRight: HeaderButtons }}
-      />
-      <Stack.Screen
-        name="TripDetails"
-        component={LSPTripDetails}
-        options={{ title: "Trip", headerRight: HeaderButtons }}
-      />
-      <Stack.Screen
-        name="TripTracking"
-        component={TripTracking}
-        options={{
-          headerShown: false
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
 const HistoryStack = () => {
   return (
     <Stack.Navigator initialRouteName={"History"} screenOptions={HeaderOptions}>
       <Stack.Screen
         name="History"
         component={History}
-        options={{ title: "History", headerRight: HeaderButtons }}
+        options={{ title: "History" }}
       />
       <Stack.Screen
         name="TripDetails"
         component={LSPTripDetails}
-        options={{ title: "Trip", headerRight: HeaderButtons }}
+        options={{ title: "Trip" }}
       />
     </Stack.Navigator>
   );
@@ -131,6 +95,13 @@ const AccountsStack = () => {
       </Stack.Screen>
     </Stack.Navigator>
   );
+};
+
+export type LSPBottomTabList = {
+  HomeStack: undefined;
+  TripsStack: object;
+  HistoryStack: undefined;
+  Account: undefined;
 };
 
 const tabs = [
@@ -164,16 +135,19 @@ const tabs = [
   }
 ];
 
-export type LSPAuthenticatedStackParamList = {
-  MainBottomTab: undefined;
-  TruckSelect: undefined;
-};
-
-const MainStack = createStackNavigator<LSPAuthenticatedStackParamList>();
-
 const MainBottomTab: React.FC = () => {
   return <UlipBottomTab tabs={tabs}></UlipBottomTab>;
 };
+
+export type LSPAuthenticatedStackParamList = {
+  MainBottomTab: undefined;
+  TruckSelect: undefined;
+  TripTracking: {
+    tripId: number;
+  };
+};
+
+const MainStack = createStackNavigator<LSPAuthenticatedStackParamList>();
 
 const LSPLanding = () => {
   return (
@@ -186,6 +160,13 @@ const LSPLanding = () => {
         name="TruckSelect"
         component={TruckSelect}
       ></MainStack.Screen>
+      <MainStack.Screen
+        name="TripTracking"
+        component={TripTracking}
+        options={{
+          headerShown: false
+        }}
+      />
     </MainStack.Navigator>
   );
 };

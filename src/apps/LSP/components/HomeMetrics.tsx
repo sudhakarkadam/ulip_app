@@ -52,6 +52,7 @@ interface OwnProps {
   onRequestClick: () => void;
   focused: boolean;
   onTruckCreateClick: () => void;
+  onIntransitClick: () => void;
 }
 const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
   useEffect(() => {
@@ -93,9 +94,7 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
                 />
               </PrimaryHeaderText>
             </MetricBox>
-          </FlexRow>
-          <FlexRow height={100} mb={20}>
-            <MetricBox>
+            {/* <MetricBox>
               <PrimaryTextSmall>
                 {" "}
                 <TranslationText id="on.road" />
@@ -112,8 +111,8 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
                   }}
                 />
               </PrimaryHeaderText>
-            </MetricBox>
-            <MetricBox>
+            </MetricBox> */}
+            <MetricBox onPress={props.onIntransitClick}>
               <PrimaryTextSmall>
                 <TranslationText id="pending" />
               </PrimaryTextSmall>
@@ -124,7 +123,7 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
                   id="placeholder"
                   interpolations={{
                     value: (
-                      metrics.status_count_details.PENDING_POD || 0
+                      metrics.status_count_details.IN_PROGRESS || 0
                     ).toString()
                   }}
                 />

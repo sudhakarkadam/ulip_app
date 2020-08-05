@@ -48,11 +48,9 @@ const TripAcceptPage = (
       role => role.profile.persona === "LSP"
     );
 
-    if (!props.vehiclesList) {
-      props.getVehiclesList(
-        userPersonaDetails?.business_details?.business_id || ""
-      );
-    }
+    props.getVehiclesList(
+      userPersonaDetails?.business_details?.business_id || ""
+    );
   }, []);
 
   const returnToList = () => props.navigation.navigate("TripRequests", {});

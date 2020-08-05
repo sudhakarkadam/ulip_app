@@ -37,8 +37,10 @@ const Trips: React.FunctionComponent<Props> = props => {
         <TripList
           listingMode={ListingModes.ON_ROAD}
           from={AllApps.SHIPPER}
-          onRowClick={id => {
-            props.navigation.navigate("TripTracking", { tripId: +id });
+          onRowClick={(_, tsr) => {
+            props.navigation.navigate("TripTracking", {
+              tripId: tsr.trip_details.id
+            });
           }}
           focused={useIsFocused()}
         />

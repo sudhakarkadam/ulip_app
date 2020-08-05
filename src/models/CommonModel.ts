@@ -56,6 +56,8 @@ export interface LocationModel {
   name: string;
   postal_code: number;
   state: string;
+  latitude: number;
+  longitude: number;
 }
 
 export interface PerosnaDetails {
@@ -194,5 +196,7 @@ interface Location {
   state: string;
   country: string;
   postal_code: number;
+  latitude: number;
+  longitude: number;
   map_ref: {};
 }

@@ -1544,6 +1544,14 @@
     "@turf/helpers" "6.x"
     "@turf/invariant" "6.x"
 
+"@turf/bbox@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.npmjs.org/@turf/bbox/-/bbox-6.0.1.tgz#b966075771475940ee1c16be2a12cf389e6e923a"
+  integrity sha512-EGgaRLettBG25Iyx7VyUINsPpVj1x3nFQFiGS3ER8KCI1MximzNLsam3eXRabqQDjyAKyAE1bJ4EZEpGvspQxw==
+  dependencies:
+    "@turf/helpers" "6.x"
+    "@turf/meta" "6.x"
+
 "@turf/bearing@6.x":
   version "6.0.1"
   resolved "https://registry.npmjs.org/@turf/bearing/-/bearing-6.0.1.tgz#8da5d17092e571f170cde7bfb2e5b0d74923c92d"
@@ -1577,6 +1585,13 @@
   version "6.1.2"
   resolved "https://registry.npmjs.org/@turf/invariant/-/invariant-6.1.2.tgz#6013ed6219f9ac2edada9b31e1dfa5918eb0a2f7"
   integrity sha512-WU08Ph8j0J2jVGlQCKChXoCtI50BB3yEH21V++V0T4cR1T27HKCxkehV2sYMwTierfMBgjwSwDIsxnR4/2mWXg==
+  dependencies:
+    "@turf/helpers" "6.x"
+
+"@turf/meta@6.x":
+  version "6.0.2"
+  resolved "https://registry.npmjs.org/@turf/meta/-/meta-6.0.2.tgz#eb92951126d24a613ac1b7b99d733fcc20fd30cf"
+  integrity sha512-VA7HJkx7qF1l3+GNGkDVn2oXy4+QoLP6LktXAaZKjuT1JI0YESat7quUkbCMy4zP9lAUuvS4YMslLyTtr919FA==
   dependencies:
     "@turf/helpers" "6.x"
 
@@ -5680,10 +5695,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-mapmyindia-map-react-native-beta@0.0.6, mapmyindia-map-react-native-beta@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.npmjs.org/mapmyindia-map-react-native-beta/-/mapmyindia-map-react-native-beta-0.0.6.tgz#66dd47b687a6a319773bf66d1273698f1986f637"
-  integrity sha512-MImuyFrSNu2BDsP2bAQYEU53zTfY1yE03oFggKMI+haiVi77s5eEYp+EghzzAjy3wv5kD0oJVAY0A9fFah1gCg==
+mapmyindia-map-react-native-beta@0.0.8:
+  version "0.0.8"
+  resolved "https://registry.npmjs.org/mapmyindia-map-react-native-beta/-/mapmyindia-map-react-native-beta-0.0.8.tgz#73f3a550335bef33e7191a986a0d0d6941e27610"
+  integrity sha512-dYzcCxnpdJM00kpjtjsfbgzZqiLmdiWvW6ohL+onzIRxBaPqfE+ArT9CMxcVILYDoijR9vpndmtq/cOmFcaTJg==
   dependencies:
     "@mapbox/geo-viewport" ">= 0.4.0"
     "@turf/along" ">= 4.0.0 <7.0.0"
@@ -6073,12 +6088,13 @@ mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git#a60622465affd7dfe19ad095e0e2f5c98c1c941d":
+"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git#12dccaabd5bf0cfd8f9530c994c9d9327768688f":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/samvet/ulip-react-native-modules.git#a60622465affd7dfe19ad095e0e2f5c98c1c941d"
+  resolved "git+ssh://git@github.com/samvet/ulip-react-native-modules.git#12dccaabd5bf0cfd8f9530c994c9d9327768688f"
   dependencies:
+    "@turf/bbox" "^6.0.1"
     "@turf/helpers" "^6.1.4"
-    mapmyindia-map-react-native-beta "0.0.6"
+    mapmyindia-map-react-native-beta "0.0.8"
 
 moment@^2.24.0, moment@^2.27.0:
   version "2.27.0"

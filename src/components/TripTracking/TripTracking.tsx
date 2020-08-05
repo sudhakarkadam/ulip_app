@@ -1,10 +1,9 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { Text } from "../@styled/BaseElements";
-import Tag from "../@styled/Tag";
 import { Flex1, FlexRow, FlexCenter } from "../@styled/Flex";
 import ScrollBottomSheet from "react-native-scroll-bottom-sheet";
 import colors from "../../theme/colors";
@@ -17,21 +16,28 @@ import { cityLatLongs, currentLocations, hops } from "../../fixtures/MapMocks";
 import Button from "../@styled/StyledButton";
 import { TranslationText } from "../InternationalisationProvider";
 import { SecondaryLabel, PrimaryText } from "../@styled/Text";
+import ActionCreators from "../../actions/ActionCreators";
+import { useEffect } from "react";
+import { isLoading, isInit } from "../../utils/actionCreator";
+import BlockScreenLoader from "../BlockScreenLoader";
+import moment from "moment";
 
 const MapmyIndia = require("mmi-widget");
 
 const screen = Dimensions.get("window");
 const screenHeight = screen.height;
 
-const mapStateToProps = (state: CommonState, props: Props): TTDataProps => {
-  const trip = (state.trips.data?.transport_service_requests || []).find(
-    t => t.tsr_id === props.route.params.tripId
-  );
+const mapStateToProps = (state: CommonState): TTDataProps => {
+  // const trip = (state.trips.data?.transport_service_requests || []).find(
+  //   t => t.tsr_id === props.route.params.tripId
+  // );
+
+  const trip = state.driverTrip.data;
   const pickupCity = (trip?.source_location_details.city || "").toLowerCase();
   const dropCity = (
     trip?.destination_location_details.city || ""
   ).toLowerCase();
-  const delay = trip?.status;
+  const delay = trip?.trip_status;
 
   // @ts-ignore
   const source = cityLatLongs[pickupCity];
@@ -50,18 +56,26 @@ const mapStateToProps = (state: CommonState, props: Props): TTDataProps => {
     completedHops,
     status,
     pickupCity: pickupCity,
-    dropCity
+    dropCity,
+    trackingId: trip?.tracking_request_id || "",
+    driverTrip: state.driverTrip
   };
 };
 
-const connector = connect(mapStateToProps, null);
+const { getTripById } = ActionCreators;
+
+const mapDispatchToProps = { getTripById };
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const HeadBox: React.FC<{ bigText: string; smallText: string }> = ({
   bigText = "",
   smallText = ""
 }) => (
   <Flex1 alignItems="center">
-    <SecondaryLabel>{smallText}</SecondaryLabel>
+    <SecondaryLabel style={{ textTransform: "uppercase" }}>
+      {smallText}
+    </SecondaryLabel>
     <PrimaryText fontWeight="bold">{(bigText || "").toUpperCase()}</PrimaryText>
   </Flex1>
 );
@@ -104,7 +118,7 @@ const TripHead: React.FC<TripHead> = ({
   );
 };
 
-type Props = StackScreenProps<
+type ScreenProps = StackScreenProps<
   {
     TripTracking: {
       tripId: number;
@@ -112,24 +126,29 @@ type Props = StackScreenProps<
   },
   "TripTracking"
 >;
+type Props = ConnectedProps<typeof connector> & ScreenProps;
 
-const TripTracking: React.FC<Props & TTDataProps> = ({
+const TripTracking: React.FC<Props> = ({
   status,
   pickupCity,
   dropCity,
+  trackingId,
   ...props
 }) => {
-  const { navigation, route } = props;
+  const { navigation, route, driverTrip } = props;
   const { tripId } = route.params;
 
   const onBackPress = () => navigation.goBack();
 
-  const isTripNotTrackable =
-    !props.source ||
-    !props.destination ||
-    !props.currentLocation ||
-    !props.completedHops;
+  useEffect(() => {
+    props.getTripById(tripId + "");
+  }, []);
 
+  if (isLoading(driverTrip) || isInit(driverTrip)) {
+    return <BlockScreenLoader></BlockScreenLoader>;
+  }
+
+  const isTripNotTrackable = !pickupCity || !dropCity;
   if (isTripNotTrackable) {
     return (
       <Flex1 alignItems="center" justifyContent="center">
@@ -143,7 +162,6 @@ const TripTracking: React.FC<Props & TTDataProps> = ({
       </Flex1>
     );
   }
-
   const TrackingComponent = MapmyIndia.default.MapmyIndiaULIPTrip;
 
   return (
@@ -152,7 +170,7 @@ const TripTracking: React.FC<Props & TTDataProps> = ({
         <TopBar {...{ onBackPress, tripId: tripId.toString(), status }} />
         <TrackingComponent
           style={{ flex: 1 }}
-          requestType="2"
+          requestType={trackingId}
           vehicalType="truck"
           destinationLat={19.07609}
           destinationLng={72.877426}
@@ -165,16 +183,18 @@ const TripTracking: React.FC<Props & TTDataProps> = ({
           renderHandle={() => (
             <TripHead
               pickupCity={pickupCity}
-              pickUpEta="21 JUN, 3:00 AM"
+              pickUpEta={moment(driverTrip.data?.pickup_request_time).format(
+                "DD MMM, hh:mm a"
+              )}
               dropCity={dropCity}
-              dropEta="30 JUN, 6:00 PM"
+              dropEta="-- NA --"
             />
           )}
-          ListHeaderComponent={
-            <FlexRow bg="white" pt={4} px={3}>
-              <Tag text="LOCATIONS" />
-            </FlexRow>
-          }
+          // ListHeaderComponent={
+          //   <FlexRow bg="white" pt={4} px={3}>
+          //     <Tag text="LOCATIONS" />
+          //   </FlexRow>
+          // }
           data={props.completedHops || []}
           keyExtractor={item => item.name}
           renderItem={({ item, index }) => (

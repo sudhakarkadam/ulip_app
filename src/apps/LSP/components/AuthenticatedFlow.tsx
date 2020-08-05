@@ -113,22 +113,32 @@ const LSPCompanyProfile = (
     (role: PerosnaDetails) =>
       role.profile.persona === props.userInfo.userPersona
   );
-  const location = {
-    address: "Sector 4, Rohini",
-    city: "Delhi",
-    country: "loc_1",
-    map_ref: {},
-    name: "Delhi",
-    postal_code: 560035,
-    state: "Delhi"
-  };
   return (
     <CompanyProfile
-      createCompanyCallback={async ({ name, regNumber }) => {
+      createCompanyCallback={async ({
+        name,
+        regNumber,
+        address,
+        city,
+        state,
+        postalCode,
+        lat,
+        lng
+      }) => {
         try {
           await props.saveCompanyProfile({
             name,
-            location: { ...location },
+            location: {
+              address,
+              city,
+              country: "India",
+              map_ref: {},
+              latitude: lat,
+              longitude: lng,
+              name,
+              postal_code: parseInt(postalCode, 10),
+              state
+            },
             userId: userId ? userId.profile.user_id : "",
             business_type: "LSP",
             gst_in: regNumber

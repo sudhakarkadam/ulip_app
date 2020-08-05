@@ -1,3 +1,5 @@
+import { CommonState } from "../../reducers";
+
 export interface Location {
   name: string;
   expectedPickUpTime?: string;
@@ -33,7 +35,8 @@ export interface TripTrackingProps {
   dropCity: string;
   source: RouteLatLong;
   destination: RouteLatLong;
-  route?: RouteLatLong[];
   completedHops: CompletedHop[];
   currentLocation: CurrentLocation;
+  trackingId: string;
+  driverTrip: CommonState["driverTrip"];
 }
