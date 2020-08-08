@@ -69,10 +69,11 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
           address: "",
           city: "",
           state: "",
-          pinCode: ""
+          pinCode: "",
+          isLocationSet: false
         }}
         validate={values => {
-          const errors: Partial<typeof values> = {};
+          const errors: Partial<Record<keyof typeof values, string>> = {};
           if (!values.warehouseName) {
             errors.warehouseName = translate("errors.warehouseName");
           }
@@ -83,6 +84,10 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
 
           if (values.gstin && !gstinPattern.test(values.gstin)) {
             errors.gstin = translate("errors.gstin.invalid");
+          }
+
+          if (!values.isLocationSet) {
+            errors.isLocationSet = translate("errors.location");
           }
 
           if (!values.pinCode) {
@@ -127,7 +132,9 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
           handleChange,
           handleBlur,
           values,
-          touched
+          touched,
+          setFieldTouched,
+          setValues
         }) => (
           <>
             <Page>
@@ -161,7 +168,17 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                     )}
                     <Box mb={5}>
                       <TextWrapper label={translate("locate.on.map")}>
-                        <Box height={100}>
+                        <Box
+                          height={100}
+                          style={{
+                            borderWidth: 1,
+                            borderColor: "transparent",
+                            borderStyle: "solid",
+                            ...tomatoBorder(
+                              errors.isLocationSet && touched.isLocationSet
+                            )
+                          }}
+                        >
                           <Flex1 pointerEvents="none">
                             {!showPicker && (
                               <PlacePicker
@@ -171,7 +188,10 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                             )}
                           </Flex1>
                           <TouchableOpacity
-                            onPress={() => setPickerVisibility(true)}
+                            onPress={() => {
+                              setFieldTouched("isLocationSet", true);
+                              setPickerVisibility(true);
+                            }}
                             style={{
                               position: "absolute",
                               top: 0,
@@ -184,6 +204,9 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                         </Box>
                       </TextWrapper>
                     </Box>
+                    {errors.isLocationSet && touched.isLocationSet && (
+                      <ErrorText>{errors.isLocationSet}</ErrorText>
+                    )}
 
                     <Input
                       value={values.address}
@@ -253,10 +276,15 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                 <PlacePicker
                   {...locationProps}
                   resultCallback={(result: any) => {
-                    values.address = result.formatted_address;
-                    values.city = result.city;
-                    values.pinCode = result.pincode;
-                    values.state = result.state;
+                    setValues({
+                      address: result.formatted_address,
+                      city: result.city,
+                      pinCode: result.pincode,
+                      state: result.state,
+                      isLocationSet: true,
+                      warehouseName: values.warehouseName,
+                      gstin: values.gstin
+                    });
                     setLat(result.lat);
                     setLng(result.lng);
                     setPickerVisibility(false);

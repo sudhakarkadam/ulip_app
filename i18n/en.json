@@ -30,6 +30,7 @@
   "error": "Something went wrong",
   "errors.gstin": "Please enter GSTIN Number",
   "errors.gstin.invalid": "Invalid GSTIN Entered",
+  "errors.location": "Please select location",
   "errors.pinCode": "Please enter Pin Code",
   "errors.warehouseName": "Please enter the Warehouse Name",
   "eway.error": "Error occured while generating E-way bill.",

@@ -32,6 +32,7 @@ export type Keys =
   | "error"
   | "errors.gstin"
   | "errors.gstin.invalid"
+  | "errors.location"
   | "errors.pinCode"
   | "errors.warehouseName"
   | "eway.error"
@@ -192,6 +193,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "errors.gstin"
   ? never
   : T extends "errors.gstin.invalid"
+  ? never
+  : T extends "errors.location"
   ? never
   : T extends "errors.pinCode"
   ? never
