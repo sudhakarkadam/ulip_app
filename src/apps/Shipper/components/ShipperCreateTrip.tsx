@@ -5,11 +5,15 @@ import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 import { CommonState } from "../../../reducers";
 import CreateTrip from "../../../components/CreateTrip";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 import { HomeStackParamList } from "./HomeStack";
-import { Text } from "../../../components/@styled/BaseElements";
 import { Flex1 } from "../../../components/@styled/Flex";
 import { isLoading } from "../../../utils/actionCreator";
+import Warehouse from "../../../images/warehouse.svg";
+import { Box } from "../../../components/@styled/BaseElements";
+import { PrimaryText } from "../../../components/@styled/Text";
 import { CreateTripRequestModel } from "src/models/ShipperApiModels";
+import { IconBox } from "./ShipperMetrics";
 
 const { createTrip, getLspList, getBusinessSites } = ActionCreators;
 const mapStateToProps = (state: CommonState) => ({
@@ -78,7 +82,14 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
         />
       ) : (
         <Flex1 justifyContent="center" alignItems="center">
-          <Text>No results found</Text>
+          <IconBox onPress={() => props.navigation.navigate("WarehouseAdd")}>
+            <Box mb={2}>
+              <Warehouse />
+            </Box>
+            <PrimaryText style={{ fontSize: 10 }}>
+              <TranslationText id="add.warehouse"></TranslationText>
+            </PrimaryText>
+          </IconBox>
         </Flex1>
       )}
     </>

@@ -36,7 +36,7 @@ const MetricBox = styled(TouchableOpacity)`
   padding: 10px;
 `;
 
-const IconBox = styled(TouchableOpacity)`
+export const IconBox = styled(TouchableOpacity)`
   border-color: ${({ theme }) => theme.colors.yellow};
   border-width: 1;
   padding: 8px;
@@ -94,7 +94,7 @@ const HomeMetrics = (
                 <TranslationText id="requested" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
-                style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
+                style={{ fontWeight: "bold", fontSize: 30, marginTop: 6 }}
               >
                 <TranslationText
                   id="placeholder"
@@ -106,24 +106,25 @@ const HomeMetrics = (
                 />
               </PrimaryHeaderText>
             </MetricBox>
-            {/* <MetricBox>
+            <MetricBox
+              onPress={() => props.navigation.navigate("MainTripListing")}
+            >
               <PrimaryTextSmall>
-                {" "}
                 <TranslationText id="pending.literally" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
-                style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
+                style={{ fontWeight: "bold", fontSize: 30, marginTop: 8 }}
               >
                 <TranslationText
                   id="placeholder"
                   interpolations={{
                     value: (
-                      metrics.status_count_details.PENDING_POD || 0
+                      metrics.status_count_details.ACCEPTED || 0
                     ).toString()
                   }}
                 />
               </PrimaryHeaderText>
-            </MetricBox> */}
+            </MetricBox>
             <MetricBox
               onPress={() => props.navigation.navigate("InTransitStack")}
             >
@@ -131,7 +132,7 @@ const HomeMetrics = (
                 <TranslationText id="on.road" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
-                style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}
+                style={{ fontWeight: "bold", fontSize: 30, marginTop: 5 }}
               >
                 <TranslationText
                   id="placeholder"

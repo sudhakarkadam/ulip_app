@@ -223,6 +223,8 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                       onBlur={handleBlur("pinCode")}
                       style={tomatoBorder(errors.pinCode && touched.pinCode)}
                       label={translate("pincode")}
+                      keyboardType="numeric"
+                      maxLength={6}
                     />
                     {errors.pinCode && touched.pinCode && (
                       <ErrorText>{errors.pinCode}</ErrorText>

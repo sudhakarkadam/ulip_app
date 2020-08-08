@@ -240,6 +240,7 @@ const CreateTrip = (props: Props) => {
                       getSelectedValue={val => setFromValue(val)}
                       data={LocationsList}
                       defaultValue={fromValue}
+                      searchable={true}
                     />
                     <Flex mt={3}>
                       <SelectComponent
@@ -248,6 +249,7 @@ const CreateTrip = (props: Props) => {
                         label="To"
                         data={LocationsList}
                         defaultValue={toValue}
+                        searchable={true}
                       />
                     </Flex>
                   </Flex>

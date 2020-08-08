@@ -257,7 +257,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                         </FlexRow>
                         <FlexRow>
                           <PrimaryText>
-                            {item.source_location_details.city}
+                            {item.source_location_details.city ||
+                              item.source_location_details.state ||
+                              item.source_location_details.address}
                           </PrimaryText>
                           <Text
                             color={colors.grays[1]}
@@ -268,7 +270,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                             →
                           </Text>
                           <PrimaryText>
-                            {item.destination_location_details.city}
+                            {item.destination_location_details.city ||
+                              item.destination_location_details.state ||
+                              item.destination_location_details.address}
                           </PrimaryText>
                         </FlexRow>
                         <FlexRow>

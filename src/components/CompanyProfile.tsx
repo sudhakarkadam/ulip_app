@@ -64,6 +64,7 @@ const CompanyProfile = (props: OwnProps) => {
               </TextWrapper>
               <TextWrapper label={translate("registration.number")}>
                 <Input
+                  maxLength={20}
                   value={regNumber}
                   onChangeText={text => setRegNumber(text)}
                 />

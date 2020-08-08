@@ -93,14 +93,18 @@ const UpcomingTrips: React.FC<Props> = ({
                       >
                         <FlexRow style={{ alignItems: "center" }}>
                           <Text fontSize={16}>
-                            {t.source_location_details.city}
+                            {t.source_location_details.city ||
+                              t.source_location_details.state ||
+                              t.source_location_details.address}
                           </Text>
                           <Text fontSize={16} paddingBottom={2}>
                             {" "}
                             →{" "}
                           </Text>
                           <Text fontSize={16}>
-                            {t.destination_location_details.city}
+                            {t.destination_location_details.city ||
+                              t.destination_location_details.state ||
+                              t.destination_location_details.address}
                           </Text>
                         </FlexRow>
                         <Box mt={6} mb={2}>
