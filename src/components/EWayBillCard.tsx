@@ -185,7 +185,7 @@ const EWayBillCard = ({
                     })
                       .then(res => {
                         setLoading(false);
-                        if (res.type === "ADD_EWAYBILL_SUCCES") {
+                        if (res.type === "ADD_EWAYBILL_SUCCESS") {
                           setModal(false);
                           navigation?.goBack();
                         } else {

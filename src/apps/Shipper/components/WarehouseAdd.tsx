@@ -90,6 +90,18 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
             errors.isLocationSet = translate("errors.location");
           }
 
+          if (!values.address) {
+            errors.address = translate("errors.address");
+          }
+
+          if (!values.city) {
+            errors.city = translate("errors.city");
+          }
+
+          if (!values.state) {
+            errors.state = translate("errors.state");
+          }
+
           if (!values.pinCode) {
             errors.pinCode = translate("errors.pinCode");
           }

@@ -30,10 +30,16 @@ export type Keys =
   | "driver.details"
   | "driver.name"
   | "error"
+  | "errors.name"
+  | "errors.regNumber"
+  | "errors.regNumber.maxlength"
   | "errors.gstin"
   | "errors.gstin.invalid"
   | "errors.location"
   | "errors.pinCode"
+  | "errors.address"
+  | "errors.city"
+  | "errors.state"
   | "errors.warehouseName"
   | "eway.error"
   | "eway.loading"
@@ -190,6 +196,12 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "error"
   ? never
+  : T extends "errors.name"
+  ? never
+  : T extends "errors.regNumber"
+  ? never
+  : T extends "errors.regNumber.maxlength"
+  ? never
   : T extends "errors.gstin"
   ? never
   : T extends "errors.gstin.invalid"
@@ -197,6 +209,12 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "errors.location"
   ? never
   : T extends "errors.pinCode"
+  ? never
+  : T extends "errors.address"
+  ? never
+  : T extends "errors.city"
+  ? never
+  : T extends "errors.state"
   ? never
   : T extends "errors.warehouseName"
   ? never
