@@ -117,5 +117,19 @@
   "valid.upto": "Valid upto",
   "uploaded.docs": " Uploaded Documents",
   "verifying": "Verifying",
-  "warehouse.details": "Warehouse details"
+  "warehouse.details": "Warehouse details",
+  "errors.warehouseName": "Please enter the Warehouse Name",
+  "errors.gstin": "Please enter GSTIN Number",
+  "errors.gstin.invalid": "Invalid GSTIN Entered",
+  "errors.pinCode": "Please enter Pin Code",
+  "saved.warehouse": "Saved warehouse",
+  "save.warehouse": "Save Warehouse",
+  "save.warehouse.failed": "Failed to save warehouse",
+  "warehouse.name": "Warehouse name*",
+  "gstin.label": "GSTIN*",
+  "address": "Address",
+  "city": "City",
+  "state": "State",
+  "pincode": "Pin Code*",
+  "saving": "Saving..."
 }

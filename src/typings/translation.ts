@@ -116,7 +116,21 @@ export type Keys =
   | "valid.upto"
   | "uploaded.docs"
   | "verifying"
-  | "warehouse.details";
+  | "warehouse.details"
+  | "errors.warehouseName"
+  | "errors.gstin"
+  | "errors.gstin.invalid"
+  | "errors.pinCode"
+  | "saved.warehouse"
+  | "save.warehouse"
+  | "save.warehouse.failed"
+  | "warehouse.name"
+  | "gstin.label"
+  | "address"
+  | "city"
+  | "state"
+  | "pincode"
+  | "saving";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -348,5 +362,33 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "verifying"
   ? never
   : T extends "warehouse.details"
+  ? never
+  : T extends "errors.warehouseName"
+  ? never
+  : T extends "errors.gstin"
+  ? never
+  : T extends "errors.gstin.invalid"
+  ? never
+  : T extends "errors.pinCode"
+  ? never
+  : T extends "saved.warehouse"
+  ? never
+  : T extends "save.warehouse"
+  ? never
+  : T extends "save.warehouse.failed"
+  ? never
+  : T extends "warehouse.name"
+  ? never
+  : T extends "gstin.label"
+  ? never
+  : T extends "address"
+  ? never
+  : T extends "city"
+  ? never
+  : T extends "state"
+  ? never
+  : T extends "pincode"
+  ? never
+  : T extends "saving"
   ? never
   : never;
