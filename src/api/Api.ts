@@ -20,7 +20,8 @@ import {
   SaveTruckRequestModel,
   VehicleListDetails,
   UserPersonaTypes,
-  BusinessSitesResponse
+  BusinessSitesResponse,
+  AddEayBillRequest
 } from "../models/CommonModel";
 import {
   CreateTripRequestModel,
@@ -55,7 +56,9 @@ const urls = {
   updateTrip: (id: number | undefined) => `${endpoint}/ulip/trip/${id}/status`,
   upload: (id: number) => `${endpoint}/ulip/trip/${id}/document/upload`,
   acceptTrip: `${endpoint}/ulip/tsr/accept`,
-  rejectTrip: `${endpoint}/ulip/tsr/reject`
+  rejectTrip: `${endpoint}/ulip/tsr/reject`,
+  addEWayBill: (id?: number) => `${endpoint}/ulip/trip/ewaybill/${id}`,
+  generateEwayBill: `${endpoint}/ulip/trip/ewaybill/?accountNonExpired=true&accountNonLocked=true`
 };
 
 interface BusinessRole {
@@ -283,6 +286,22 @@ export default {
 
   rejectTrip: (payload: TripRejectRequest) => {
     return http.post<TripRejectRequest, {}>(urls.rejectTrip, payload, {
+      headers: HeaderProvider.getHeaders()
+    });
+  },
+
+  addEWayBill: (payload: AddEayBillRequest) => {
+    return http.put<AddEayBillRequest, {}>(
+      urls.addEWayBill(payload.tripId),
+      payload,
+      {
+        headers: HeaderProvider.getHeaders()
+      }
+    );
+  },
+
+  generateEwayBill: (payload: any) => {
+    return http.post<any, {}>(urls.generateEwayBill, payload, {
       headers: HeaderProvider.getHeaders()
     });
   },

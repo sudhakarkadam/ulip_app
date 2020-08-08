@@ -210,3 +210,8 @@ interface Location {
   longitude: number;
   map_ref: {};
 }
+
+export interface AddEayBillRequest {
+  tripId?: number;
+  ewb_number: string;
+}

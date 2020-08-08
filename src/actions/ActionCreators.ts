@@ -189,6 +189,22 @@ const ActionCreators = {
       actions.TRIP_REJECT_ERROR
     ],
     api.rejectTrip
+  ),
+  addEWayBill: createAsyncAction(
+    [
+      actions.ADD_EWAYBILL_REQUEST,
+      actions.ADD_EWAYBILL_SUCCESS,
+      actions.ADD_EWAYBILL_ERROR
+    ],
+    api.addEWayBill
+  ),
+  generateEwayBill: createAsyncAction(
+    [
+      actions.GENERATE_EWAYBILL_REQUEST,
+      actions.GENERATE_EWAYBILL_SUCCESS,
+      actions.GENERATE_EWAYBILL_ERROR
+    ],
+    api.generateEwayBill
   )
 };
 

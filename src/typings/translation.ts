@@ -50,6 +50,7 @@ export type Keys =
   | "india.prefix"
   | "it.will.be.enabled"
   | "lsp"
+  | "loading"
   | "locate.on.map"
   | "mobile.number"
   | "modify.request"
@@ -213,6 +214,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "it.will.be.enabled"
   ? { date: string }
   : T extends "lsp"
+  ? never
+  : T extends "loading"
   ? never
   : T extends "locate.on.map"
   ? never

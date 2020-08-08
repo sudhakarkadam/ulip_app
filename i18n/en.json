@@ -51,6 +51,7 @@
   "india.prefix": "+91 - ",
   "it.will.be.enabled": "It will be enabled on {{date}}",
   "lsp": "Logistics Service Provider",
+  "loading": "Loading...",
   "locate.on.map": "Locate on map",
   "mobile.number": "Mobile Number",
   "modify.request": "Modify Request",
@@ -81,7 +82,6 @@
   "raise.request": "Raise a request to logistic service provider.",
   "registration.number": "Registration number",
   "reject": "Reject",
-
   "requested": "Requested",
   "requests": "TRIPS TO ASSIGN",
   "required.weight": "Required Weight",

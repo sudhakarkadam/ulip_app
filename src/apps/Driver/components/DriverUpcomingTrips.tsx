@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { ScrollView } from "react-native";
 import {
   PrimaryHeaderText,
   PrimaryLabel,
@@ -59,69 +60,71 @@ const UpcomingTrips: React.FC<Props> = ({
   return (
     <Page>
       <PageContent>
-        <PrimaryHeaderText m={8}>
-          {title || <TranslationText id="upcoming"></TranslationText>}
-        </PrimaryHeaderText>
-        <Flex>
-          {isLoading(trips) && <ActivityIndicator />}
-          {!isLoading(trips) && (!trips.data || trips.data.length === 0) && (
-            <PrimaryText mx={8}>
-              {(title && `No ${title}`) || (
-                <TranslationText id="no.upcoming.trips"></TranslationText>
-              )}
-            </PrimaryText>
-          )}
-          {isSuccess(trips) &&
-            trips.data?.map(t => {
-              return (
-                <React.Fragment key={t.tsr_id}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate("TripHome", {
-                        id: t.trip_id.toString()
-                      })
-                    }
-                  >
-                    <Box
-                      m={6}
-                      marginTop={2}
-                      p={6}
-                      bg={colors.secondary}
-                      borderRadius={2}
+        <ScrollView>
+          <PrimaryHeaderText m={8}>
+            {title || <TranslationText id="upcoming"></TranslationText>}
+          </PrimaryHeaderText>
+          <Flex>
+            {isLoading(trips) && <ActivityIndicator />}
+            {!isLoading(trips) && (!trips.data || trips.data.length === 0) && (
+              <PrimaryText mx={8}>
+                {(title && `No ${title}`) || (
+                  <TranslationText id="no.upcoming.trips"></TranslationText>
+                )}
+              </PrimaryText>
+            )}
+            {isSuccess(trips) &&
+              trips.data?.map(t => {
+                return (
+                  <React.Fragment key={t.tsr_id}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate("TripHome", {
+                          id: t.trip_id.toString()
+                        })
+                      }
                     >
-                      <FlexRow style={{ alignItems: "center" }}>
-                        <Text fontSize={16}>
-                          {t.source_location_details.city}
-                        </Text>
-                        <Text fontSize={16} paddingBottom={2}>
-                          {" "}
-                          →{" "}
-                        </Text>
-                        <Text fontSize={16}>
-                          {t.destination_location_details.city}
-                        </Text>
-                      </FlexRow>
-                      <Box mt={6} mb={2}>
-                        <PrimaryLabel>
-                          <TranslationText id="pick.up.date"></TranslationText>
-                        </PrimaryLabel>
-                        <PrimaryHeaderText>
-                          <TranslationText
-                            id="placeholder"
-                            interpolations={{
-                              value: new Date(
-                                t.pickup_request_time
-                              ).toLocaleDateString()
-                            }}
-                          ></TranslationText>
-                        </PrimaryHeaderText>
+                      <Box
+                        m={6}
+                        marginTop={2}
+                        p={6}
+                        bg={colors.secondary}
+                        borderRadius={2}
+                      >
+                        <FlexRow style={{ alignItems: "center" }}>
+                          <Text fontSize={16}>
+                            {t.source_location_details.city}
+                          </Text>
+                          <Text fontSize={16} paddingBottom={2}>
+                            {" "}
+                            →{" "}
+                          </Text>
+                          <Text fontSize={16}>
+                            {t.destination_location_details.city}
+                          </Text>
+                        </FlexRow>
+                        <Box mt={6} mb={2}>
+                          <PrimaryLabel>
+                            <TranslationText id="pick.up.date"></TranslationText>
+                          </PrimaryLabel>
+                          <PrimaryHeaderText>
+                            <TranslationText
+                              id="placeholder"
+                              interpolations={{
+                                value: new Date(
+                                  t.pickup_request_time
+                                ).toLocaleDateString()
+                              }}
+                            ></TranslationText>
+                          </PrimaryHeaderText>
+                        </Box>
                       </Box>
-                    </Box>
-                  </TouchableOpacity>
-                </React.Fragment>
-              );
-            })}
-        </Flex>
+                    </TouchableOpacity>
+                  </React.Fragment>
+                );
+              })}
+          </Flex>
+        </ScrollView>
       </PageContent>
     </Page>
   );

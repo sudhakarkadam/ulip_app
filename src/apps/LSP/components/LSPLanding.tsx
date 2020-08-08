@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-interface */
 /* eslint-disable react/display-name */
 import React from "react";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
@@ -19,6 +19,7 @@ import TripTracking from "../../../components/TripTracking";
 import AccountsPage from "../../../components/AccountsPage";
 import TruckSelect from "./TruckSelect";
 import { RootStackParamList } from "./AuthenticatedFlow";
+import { TripStackList } from "./LSPTripStack";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import HomeStack from "./LSPHomeStack";
 import { useIsFocused } from "@react-navigation/native";
@@ -26,6 +27,9 @@ import AccountInactive from "../../../images/user-circle.svg";
 import AccountActive from "../../../images/user-circle-dark.svg";
 import TripStack from "./LSPTripStack";
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
+interface TripNavProps {
+  navigation?: StackNavigationProp<TripStackList, "EWayBillGenerationPage">;
+}
 
 const Stack = createStackNavigator();
 const History = (props: HistoryProps) => (
@@ -42,7 +46,7 @@ const History = (props: HistoryProps) => (
     </PageContent>
   </Page>
 );
-export const LSPTripDetails = (props: HistoryProps) => {
+export const LSPTripDetails = (props: HistoryProps & TripNavProps) => {
   const { tripDetails } = props.route.params;
   const tripData = tripDetails as GetTripsResponse;
   return (
@@ -62,6 +66,11 @@ export const LSPTripDetails = (props: HistoryProps) => {
             tripData.destination_location_details
           ]}
           goodsSegment={tripData.goods_segment}
+          showEwb
+          ewbStatus={tripData.trip_details?.ewb_status}
+          ewbNumber={tripData.trip_details?.ewb_number}
+          tripId={tripData.trip_details?.id}
+          navigation={props.navigation}
         />
       </PageContent>
     </Page>

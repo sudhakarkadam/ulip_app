@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { ConnectedProps, connect } from "react-redux";
 import styled from "styled-components/native";
 import { View, Modal } from "react-native";
 import { Text, Flex, FlexRow, FlexColumn, Box } from "./@styled/BaseElements";
@@ -10,14 +11,26 @@ import TickIcon from "../images/tick.svg";
 import { I18nContext, TranslationText } from "./InternationalisationProvider";
 import StyledButton from "./@styled/StyledButton";
 import Input from "./InputComponent";
+import ActionCreators from "../actions/ActionCreators";
+import { ToastAndroid } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { TripStackList } from "../apps/LSP/components/LSPTripStack";
+
+const { addEWayBill } = ActionCreators;
+const connector = connect(null, { addEWayBill });
+type EWayBillType = ConnectedProps<typeof connector>;
 
 interface EWayBillCardProps {
-  ewayBillObj: any;
+  ewbNumber?: string;
+  status?: string;
+  valipUpto?: string;
+  tripId?: number;
+  navigation?: StackNavigationProp<TripStackList, "EWayBillGenerationPage">;
 }
 
 const ewayStatusProps = (ewayBillStatus: any) => {
   switch (ewayBillStatus) {
-    case "loading":
+    case "IN_PROGRESS":
       return {
         backgroundColor: "rgba(255,204,0,0.1)",
         icon: <LoaderIcon />,
@@ -27,7 +40,7 @@ const ewayStatusProps = (ewayBillStatus: any) => {
         disableBtn: true,
         onPress: () => {}
       };
-    case "success":
+    case "CREATED":
       return {
         backgroundColor: "rgba(54,179,126,0.1)",
         icon: <TickIcon />,
@@ -36,7 +49,7 @@ const ewayStatusProps = (ewayBillStatus: any) => {
         borderColor: "#36B37E",
         disableBtn: true
       };
-    case "error":
+    case "ERROR":
       return {
         backgroundColor: "rgba(208,2,27,0.05)",
         icon: <ErrorIcon />,
@@ -77,14 +90,17 @@ const getGenerateEWBText = () => {
   );
 };
 
-const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
-  // ewayBillObj = {
-  //   status: 'success',
-  //   ewbNumber: '123456789012',
-  //   valipUpto: '26/08/2020, 12:00 PM'
-  // }
+const EWayBillCard = ({
+  status,
+  ewbNumber,
+  valipUpto,
+  addEWayBill,
+  tripId,
+  navigation
+}: EWayBillCardProps & EWayBillType) => {
   const { translate } = useContext(I18nContext);
-  const [ewayStatus] = useState(ewayStatusProps(ewayBillObj?.status));
+  const [loading, setLoading] = useState(false);
+  const [ewayStatus] = useState(ewayStatusProps(status));
   const [showModal, setModal] = useState(false);
   const [number, setNumber] = useState("");
   return (
@@ -117,20 +133,20 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
             </>
           )}
         </FlexRow>
-        <FlexRow width={"100%"}>
-          {ewayBillObj && ewayBillObj.ewbNumber && (
+        {ewbNumber && (
+          <FlexRow width={"100%"} pt={"16px"}>
             <TextWrapper label="EWB Number">
               <Text fontSize={"18px"} fontWeight={"bold"}>
-                {ewayBillObj.ewbNumber}
+                {ewbNumber}
               </Text>
             </TextWrapper>
-          )}
-        </FlexRow>
+          </FlexRow>
+        )}
         <FlexRow width={"100%"}>
-          {ewayBillObj && ewayBillObj.valipUpto && (
+          {valipUpto && (
             <TextWrapper label={translate("valid.upto")}>
               <Text fontSize={"18px"} fontWeight={"bold"}>
-                {ewayBillObj.valipUpto}
+                {valipUpto}
               </Text>
             </TextWrapper>
           )}
@@ -153,9 +169,40 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
                   <Input value={number} onChangeText={num => setNumber(num)} />
                 </TextWrapper>
                 <StyledButton
-                  title={<TranslationText id={"submit"}></TranslationText>}
+                  title={
+                    loading ? (
+                      <TranslationText id="loading" />
+                    ) : (
+                      <TranslationText id={"submit"}></TranslationText>
+                    )
+                  }
                   width={"150px"}
-                  onPress={() => {}}
+                  onPress={async () => {
+                    setLoading(true);
+                    await addEWayBill({
+                      ewb_number: number,
+                      tripId
+                    })
+                      .then(res => {
+                        setLoading(false);
+                        if (res.type === "ADD_EWAYBILL_SUCCES") {
+                          setModal(false);
+                          navigation?.goBack();
+                        } else {
+                          ToastAndroid.show(
+                            "Something went wrong. Please try again.",
+                            ToastAndroid.SHORT
+                          );
+                        }
+                      })
+                      .catch(() => {
+                        setLoading(false);
+                        ToastAndroid.show(
+                          "Something went wrong. Please try again.",
+                          ToastAndroid.SHORT
+                        );
+                      });
+                  }}
                 />
               </Box>
               <View
@@ -175,7 +222,10 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
                   variant="outline"
                   title={getGenerateEWBText()}
                   width={"100%"}
-                  onPress={() => {}}
+                  onPress={() => {
+                    setModal(false);
+                    navigation?.push("EWayBillGenerationPage", { tripId });
+                  }}
                 />
               </Box>
               <FlexRow
@@ -203,4 +253,4 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
   );
 };
 
-export default EWayBillCard;
+export default connector(EWayBillCard);

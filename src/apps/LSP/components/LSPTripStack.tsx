@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
 import Trips from "./Trips";
 import { LSPTripDetails } from "./LSPLanding";
+import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type TripStackList = {
@@ -10,6 +11,9 @@ export type TripStackList = {
     activeIndex?: number;
   };
   TripDetails: object;
+  EWayBillGenerationPage: {
+    tripId?: number;
+  };
 };
 
 const Stack = createStackNavigator<TripStackList>();
@@ -25,6 +29,13 @@ const TripStack = () => {
         name="TripDetails"
         component={LSPTripDetails}
         options={{ title: "Trip" }}
+      />
+      <Stack.Screen
+        name="EWayBillGenerationPage"
+        component={EWayBillGenerationPage}
+        options={{
+          headerShown: false
+        }}
       />
     </Stack.Navigator>
   );

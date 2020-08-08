@@ -11,6 +11,7 @@ import {
 import colors from "../theme/colors";
 import { PrimaryLightText, PrimaryText, PrimaryLabel } from "./@styled/Text";
 import { TripStamp, Place } from "./TripStamp";
+import EWayBillCard from "./EWayBillCard";
 import { TruckType } from "../models/CommonModel";
 import { Flex1Column, Flex1 } from "./@styled/Flex";
 import Tag from "./@styled/Tag";
@@ -20,6 +21,8 @@ import { TranslationText } from "./InternationalisationProvider";
 import ContainerTruck from "../images/containerTruck.svg";
 import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { TripStackList } from "../apps/LSP/components/LSPTripStack";
 
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
@@ -45,6 +48,11 @@ interface OwnProps {
     url: string;
   }[];
   goodsSegment?: string;
+  ewbStatus?: string;
+  ewbNumber?: string;
+  tripId?: number;
+  navigation?: StackNavigationProp<TripStackList, "EWayBillGenerationPage">;
+  showEwb?: boolean;
 }
 
 const TripDetails = (props: OwnProps) => {
@@ -57,7 +65,12 @@ const TripDetails = (props: OwnProps) => {
     places,
     lspProvider,
     pickupDateString,
-    documents = []
+    documents = [],
+    ewbStatus,
+    ewbNumber,
+    tripId,
+    navigation,
+    showEwb
   } = props;
 
   const [showModal, setModalState] = useState(false);
@@ -79,8 +92,18 @@ const TripDetails = (props: OwnProps) => {
           <PrimaryLightText style={{ textTransform: "uppercase" }}>
             <TranslationText id="trip.id"></TranslationText>
           </PrimaryLightText>
-          <PrimaryText style={{ fontWeight: "bold" }}>{id}</PrimaryText>
+          <PrimaryText style={{ fontWeight: "bold" }}>{tripId}</PrimaryText>
         </Card>
+      )}
+      {showEwb && navigation && (
+        <Box p={"16px"}>
+          <EWayBillCard
+            status={ewbStatus}
+            ewbNumber={ewbNumber}
+            tripId={tripId}
+            navigation={navigation}
+          />
+        </Box>
       )}
       <Card>{!!places && <TripStamp places={places} />}</Card>
       {!!lspProvider && (
