@@ -30,10 +30,6 @@ const SelectComponent = (props: OwnProps) => {
           getSelectedDate(day.dateString);
         }}
         monthFormat={"yyyy MM"}
-        onMonthChange={month => {
-          setDate({ [month.dateString]: { color: `${colors.greens[3]}` } });
-          getSelectedDate(month.dateString);
-        }}
         hideArrows={false}
         hideExtraDays={true}
         disableMonthChange={false}

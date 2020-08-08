@@ -99,7 +99,7 @@ export const listingConfig = {
     secondaryWidget: IconWidget.TRUCK
   },
   [ListingModes.PENDING]: {
-    title: "Active",
+    title: "Pending",
     secondaryWidget: IconWidget.LABEL,
     status: [RequestStatus.PENDING_POD]
   }
@@ -288,6 +288,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                             )}
                             {truckType === TruckType.OPEN && <OpenTruck />}
                             {truckType === TruckType.TRAILOR && (
+                              <TrailorTruck />
+                            )}
+                            {truckType === TruckType.TROLLEY && (
                               <TrailorTruck />
                             )}
                           </Box>

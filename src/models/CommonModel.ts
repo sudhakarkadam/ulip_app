@@ -100,7 +100,8 @@ export enum AllApps {
 export enum TruckType {
   OPEN = "OPEN",
   CONTAINER = "CONTAINER",
-  TRAILOR = "TRAILOR"
+  TRAILOR = "TRAILOR",
+  TROLLEY = "TROLLEY"
 }
 export interface GetTripsResponse {
   created_at: number;

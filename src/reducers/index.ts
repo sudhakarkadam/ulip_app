@@ -10,6 +10,7 @@ import actions from "../actions/Actions";
 import createReducer from "../utils/createReducer";
 import user from "./UserReducer";
 import HomeMetrics from "./HomeMetricsReducer";
+import activeActions from "./LoaderReducer";
 import { DriverTrips } from "../models/DriverTrips";
 
 import {
@@ -124,7 +125,8 @@ export const reducers = {
   driverTrips,
   driverTrip,
   vehiclesList,
-  businessSites
+  businessSites,
+  activeActions
 };
 
 export type CommonState = ReducerMappedState<typeof reducers>;

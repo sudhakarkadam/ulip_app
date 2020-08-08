@@ -136,6 +136,7 @@ const TripDetails = (props: OwnProps) => {
           {truckType === TruckType.CONTAINER && <ContainerTruck />}
           {truckType === TruckType.OPEN && <OpenTruck />}
           {truckType === TruckType.TRAILOR && <TrailorTruck />}
+          {truckType === TruckType.TROLLEY && <TrailorTruck />}
         </Box>
       </Card>
       <Card

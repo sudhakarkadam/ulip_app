@@ -16,6 +16,7 @@ import AuthenticatedFlowDriver from "./apps/Driver/components/AuthenticatedFlow"
 import SelectLanguage from "./components/SelectLanguage";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { UserPersonaTypes } from "./models/CommonModel";
+import BlockScreenLoader from "./components/BlockScreenLoader";
 
 const MapmyIndia = require("mmi-widget");
 
@@ -24,7 +25,8 @@ const NoLoginStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const mapStateToProps = (state: CommonState) => ({
   userInfo: state.user.data,
-  commonConfig: state.appConfig.data
+  commonConfig: state.appConfig.data,
+  activeActionsCount: state.activeActions.data
 });
 const { getAppConfigs } = ActionCreators;
 const mapDispatchToProps = { getAppConfigs };
@@ -135,6 +137,7 @@ const App: React.FC<ConnectedProps<typeof connector>> = props => {
   const isLanguageSelected = props.userInfo.language ? true : false;
   return (
     <NavigationContainer>
+      {props.activeActionsCount > 0 && <BlockScreenLoader />}
       {!isLoggedIn && <NoLoginStackNavigator />}
       {isLoggedIn && (
         <ConnectedDrawer
