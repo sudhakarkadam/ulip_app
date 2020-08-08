@@ -13,6 +13,14 @@ export const PrimaryText = styled(Text)`
   font-family: Roboto-Regular;
 `;
 
+export const ErrorText = styled(Text)`
+  color: tomato;
+  font-size: 12px;
+  font-family: Roboto-Regular;
+  margin-top: -12px;
+  margin-bottom: 6px;
+`;
+
 export const PrimaryLabel = styled(Text)`
   color: ${colors.lighter.primary};
   font-size: 14px;
