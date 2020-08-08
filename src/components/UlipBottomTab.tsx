@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 interface TabConfig {
   name: string;
-  label: string;
+  label: React.ReactNode;
   component: React.ComponentType<any>;
   activeImage: any;
   inActiveImage: any;

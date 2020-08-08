@@ -341,13 +341,6 @@ const Trip: React.FC<Props> = props => {
                           }
                           style={{ marginBottom: 10 }}
                         />
-                        <StyledButton
-                          variant="outline"
-                          height="30px"
-                          width="142px"
-                          title={"Documents"}
-                          onPress={() => {}}
-                        />
                       </FlexColumn>
                     </FlexRow>
                   </Card>

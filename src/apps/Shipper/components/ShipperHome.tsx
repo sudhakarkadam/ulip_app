@@ -16,6 +16,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import TripTracking from "../../../components/TripTracking";
 import AccountInactive from "../../../images/user-circle.svg";
 import AccountActive from "../../../images/user-circle-dark.svg";
+import { TranslationText } from "../../../components/InternationalisationProvider";
 
 export type ShipperBottomTabList = {
   HomeStack: undefined;
@@ -26,28 +27,28 @@ export type ShipperBottomTabList = {
 const tabs = [
   {
     name: "HomeStack",
-    label: "HOME",
+    label: <TranslationText id="home"></TranslationText>,
     component: HomeStack,
     activeImage: HomeSelected,
     inActiveImage: HomeBlur
   },
   {
     name: "InTransitStack",
-    label: "IN-TRANSIT",
+    label: <TranslationText id="in.transit"></TranslationText>,
     component: InTransitStack,
     activeImage: InTransitSelected,
     inActiveImage: InTransitBlur
   },
   {
     name: "HistoryStack",
-    label: "HISTORY",
+    label: <TranslationText id="history"></TranslationText>,
     component: HistoryStack,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
   },
   {
     name: "Account",
-    label: "ACCOUNT",
+    label: <TranslationText id="account"></TranslationText>,
     component: AccountsStack,
     activeImage: AccountActive,
     inActiveImage: AccountInactive

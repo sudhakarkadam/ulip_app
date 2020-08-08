@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ScrollView } from "react-native";
 import Input from "../components/InputComponent";
 import StyledButton from "../components/@styled/StyledButton";
@@ -13,6 +13,7 @@ import {
 import { PrimaryHeaderText, TextWrapper } from "./@styled/Text";
 import { Page, PageContent } from "./@styled/Page";
 import { useIsFocused } from "@react-navigation/native";
+import { I18nContext } from "./InternationalisationProvider";
 const MapmyIndia = require("mmi-widget");
 
 interface OwnProps {
@@ -31,6 +32,7 @@ interface OwnProps {
 const PlacePicker = MapmyIndia.default.MapmyIndiaPlacePicker;
 
 const CompanyProfile = (props: OwnProps) => {
+  const { translate } = useContext(I18nContext);
   const [name, setName] = useState("");
   const [regNumber, setRegNumber] = useState("");
   const [address, setAddress] = useState("");
@@ -57,16 +59,16 @@ const CompanyProfile = (props: OwnProps) => {
                   Company details
                 </PrimaryHeaderText>
               </Flex>
-              <TextWrapper label="Company name">
+              <TextWrapper label={translate("company.name")}>
                 <Input value={name} onChangeText={text => setName(text)} />
               </TextWrapper>
-              <TextWrapper label="Registration Number">
+              <TextWrapper label={translate("registration.number")}>
                 <Input
                   value={regNumber}
                   onChangeText={text => setRegNumber(text)}
                 />
               </TextWrapper>
-              <TextWrapper label="Locate on map">
+              <TextWrapper label={translate("locate.on.map")}>
                 <Flex height={200}>
                   <Box height={100}>
                     <Flex1 pointerEvents="none">
@@ -92,7 +94,7 @@ const CompanyProfile = (props: OwnProps) => {
               <Flex mt={10}>
                 <StyledButton
                   disabled={!name || !regNumber || !address || !lat || !lng}
-                  title="Save company"
+                  title={translate("save.company")}
                   fontSize={14}
                   onPress={() => {
                     props.createCompanyCallback({

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, ScrollView } from "react-native";
 import Input from "./InputComponent";
 import { Text, Flex, Box } from "./@styled/BaseElements";
 import { TextWrapper } from "./@styled/Text";
 import StyledButton from "./@styled/StyledButton";
 import { Page, PageContent } from "./@styled/Page";
-import { TranslationText } from "./InternationalisationProvider";
+import { I18nContext, TranslationText } from "./InternationalisationProvider";
 
 const EWayBillGenerationPage = () => {
+  const { translate } = useContext(I18nContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [transactionType, setTransactionType] = useState("");
@@ -35,13 +36,13 @@ const EWayBillGenerationPage = () => {
             <Text fontSize={"14px"} color={"#000066"}>
               <TranslationText id="must.have.ewb"></TranslationText>
             </Text>
-            <TextWrapper label="E-Waybill Username">
+            <TextWrapper label={translate("eway.username")}>
               <Input
                 value={username}
                 onChangeText={text => setUsername(text)}
               />
             </TextWrapper>
-            <TextWrapper label="E-Waybill Password">
+            <TextWrapper label={translate("eway.password")}>
               <Input
                 value={password}
                 onChangeText={text => setPassword(text)}

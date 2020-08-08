@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import colors from "../theme/colors";
 import {
   Flex,
@@ -23,6 +23,7 @@ import { PerosnaDetails, BusinessSite } from "../models/CommonModel";
 import ContainerTruck from "../images/containerTruck.svg";
 import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
+import { I18nContext } from "./InternationalisationProvider";
 
 interface SelectObj {
   value: string;
@@ -49,6 +50,7 @@ const TruckTypeComp = (props: {
   weightTypeList: SelectObj[];
   onChange: (val: string, type?: "lsp" | "unit" | "truckType") => void;
 }) => {
+  const { translate } = useContext(I18nContext);
   const {
     weight,
     onChange,
@@ -61,15 +63,15 @@ const TruckTypeComp = (props: {
   return (
     <Flex m={5}>
       <SelectComponent
-        label="Logistics service provider"
-        placeholder="Choose an LSP"
+        label={translate("lsp")}
+        placeholder={translate("choose.lsp")}
         data={lspList}
         defaultValue={lspProvider}
         getSelectedValue={val => onChange(val, "lsp")}
       />
       <Flex mt={3}>
         <Text color={`${colors.grays[5]}`} fontSize={1}>
-          Preference
+          {translate("preference")}
         </Text>
       </Flex>
       <FlexRow
@@ -88,7 +90,7 @@ const TruckTypeComp = (props: {
         >
           <Flex mb={3} ml={2}>
             <Text color={truckType === "OPEN" ? "white" : `${colors.black[1]}`}>
-              Open
+              {translate("open")}
             </Text>
           </Flex>
           <OpenTruck />
@@ -106,7 +108,7 @@ const TruckTypeComp = (props: {
             <Text
               color={truckType === "CONTAINER" ? "white" : `${colors.black[1]}`}
             >
-              Container
+              {translate("container")}
             </Text>
           </Flex>
           <ContainerTruck />
@@ -121,7 +123,7 @@ const TruckTypeComp = (props: {
             <Text
               color={truckType === "TROLLEY" ? "white" : `${colors.black[1]}`}
             >
-              Trolley
+              {translate("trolley")}
             </Text>
           </Flex>
           <TrailorTruck />
@@ -133,7 +135,7 @@ const TruckTypeComp = (props: {
           color={`${colors.grays[5]}`}
           fontSize={1}
         >
-          Required weight
+          {translate("required.weight")}{" "}
         </TextInput>
       </Flex>
       <FlexRow justifyContent="space-between" mt={3}>
@@ -151,7 +153,7 @@ const TruckTypeComp = (props: {
         </Flex>
         <Flex flex={2}>
           <SelectComponent
-            placeholder="Choose unit"
+            placeholder={translate("choose.unit")}
             getSelectedValue={val => onChange(val, "unit")}
             data={weightTypeList}
             defaultValue={weightUnit}
@@ -163,6 +165,7 @@ const TruckTypeComp = (props: {
 };
 
 const CreateTrip = (props: Props) => {
+  const { translate } = useContext(I18nContext);
   const LocationsList = props.businessSites.map(warehouse => ({
     ...warehouse,
     label: warehouse.warehouse_name,
@@ -232,15 +235,15 @@ const CreateTrip = (props: Props) => {
                 {tripStep === 0 ? (
                   <Flex m={5}>
                     <SelectComponent
-                      label="From"
-                      placeholder="Select location"
+                      label={translate("from")}
+                      placeholder={translate("select.location")}
                       getSelectedValue={val => setFromValue(val)}
                       data={LocationsList}
                       defaultValue={fromValue}
                     />
                     <Flex mt={3}>
                       <SelectComponent
-                        placeholder="Select location"
+                        placeholder={translate("select.location")}
                         getSelectedValue={val => setToValue(val)}
                         label="To"
                         data={LocationsList}
@@ -254,7 +257,7 @@ const CreateTrip = (props: Props) => {
                     <CalendarComponent
                       defaultDate={pickupDate}
                       getSelectedDate={val => setPickUpDate(val)}
-                      label="Pickup date"
+                      label={translate("pick.up.date")}
                     />
                   </Flex>
                 ) : null}
@@ -262,8 +265,8 @@ const CreateTrip = (props: Props) => {
                   <Flex flex={1} m={5}>
                     <SelectComponent
                       getSelectedValue={val => setGoodsType(val)}
-                      label="Select goods type"
-                      placeholder="Select goods type"
+                      label={translate("select.goods.type")}
+                      placeholder={translate("select.goods.type")}
                       data={goodsList}
                       defaultValue={goodsType}
                     />
@@ -299,7 +302,9 @@ const CreateTrip = (props: Props) => {
             <Flex width="98%" position="absolute" bottom={1} m={2}>
               <StyledButton
                 disabled={tripStep === 3 && !weight}
-                title={tripStep === 3 ? "preview" : "next"}
+                title={
+                  tripStep === 3 ? translate("preview") : translate("next")
+                }
                 onPress={handleNextClick}
               />
             </Flex>
@@ -321,14 +326,14 @@ const CreateTrip = (props: Props) => {
               />
               <FlexRow m={5}>
                 <StyledButton
-                  title="Modify Request"
+                  title={translate("modify.request")}
                   variant="outline"
                   onPress={() => setTripStep(0)}
                   style={{ flex: 1 }}
                 />
                 <Box width={10}></Box>
                 <StyledButton
-                  title="Send Request"
+                  title={translate("send.request")}
                   style={{ flex: 1 }}
                   onPress={handleNextClick}
                 />

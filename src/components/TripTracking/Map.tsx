@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { View, StyleSheet, Dimensions, Text } from "react-native";
@@ -13,7 +13,7 @@ import {
   CurrentLocation,
   CompletedHop
 } from "./TripTracking.model";
-
+import { I18nContext } from "../InternationalisationProvider";
 const LATITUDE = 28.364063;
 const LONGITUDE = 78.6677428;
 const screen = Dimensions.get("window");
@@ -34,6 +34,7 @@ const Map: React.FC<MapProps> = ({
   hops,
   currentLocation
 }) => {
+  const { translate } = useContext(I18nContext);
   const IndiaLatlongs = {
     latitude: LATITUDE,
     longitude: LONGITUDE,
@@ -78,7 +79,10 @@ const Map: React.FC<MapProps> = ({
         //onLayout={fitToScreen}
       >
         {currentLocation && (
-          <Marker coordinate={currentLocation} title="Truck Current Location">
+          <Marker
+            coordinate={currentLocation}
+            title={translate("truck.location")}
+          >
             <Icon source={trackTruck} style={{ height: 22, width: 22 }} />
           </Marker>
         )}
@@ -111,15 +115,7 @@ const Map: React.FC<MapProps> = ({
           apikey="AIzaSyD4xiKN6XL_h_bbreIaH5Q-Qcwb7NUrjt8"
           strokeWidth={3}
           optimizeWaypoints
-          onStart={params =>
-            console.log(
-              `Started routing between "${params.origin}" and "${params.destination}"`
-            )
-          }
           onReady={result => {
-            console.log(`Distance: ${result.distance} km`);
-            console.log(`Duration: ${result.duration} min.`);
-
             mapView.current.fitToCoordinates(result.coordinates, {
               edgePadding: {
                 right: screen.width / 20,

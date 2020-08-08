@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components/native";
 import { View, Modal } from "react-native";
 import { Text, Flex, FlexRow, FlexColumn, Box } from "./@styled/BaseElements";
@@ -7,7 +7,7 @@ import InfoIcon from "../images/info.svg";
 import LoaderIcon from "../images/loader.svg";
 import ErrorIcon from "../images/errorInfo.svg";
 import TickIcon from "../images/tick.svg";
-import { TranslationText } from "./InternationalisationProvider";
+import { I18nContext, TranslationText } from "./InternationalisationProvider";
 import StyledButton from "./@styled/StyledButton";
 import Input from "./InputComponent";
 
@@ -83,6 +83,7 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
   //   ewbNumber: '123456789012',
   //   valipUpto: '26/08/2020, 12:00 PM'
   // }
+  const { translate } = useContext(I18nContext);
   const [ewayStatus] = useState(ewayStatusProps(ewayBillObj?.status));
   const [showModal, setModal] = useState(false);
   const [number, setNumber] = useState("");
@@ -127,7 +128,7 @@ const EWayBillCard = ({ ewayBillObj }: EWayBillCardProps) => {
         </FlexRow>
         <FlexRow width={"100%"}>
           {ewayBillObj && ewayBillObj.valipUpto && (
-            <TextWrapper label="Valid Upto">
+            <TextWrapper label={translate("valid.upto")}>
               <Text fontSize={"18px"} fontWeight={"bold"}>
                 {ewayBillObj.valipUpto}
               </Text>
