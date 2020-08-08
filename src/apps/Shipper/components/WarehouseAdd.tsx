@@ -90,9 +90,45 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
           }
           return errors;
         }}
-        onSubmit={() => {}}
+        onSubmit={async values => {
+          try {
+            await saveWarehouse({
+              business_id: id,
+              gstin: values.gstin,
+              warehouse_name: values.warehouseName,
+              location: {
+                address: values.address,
+                city: values.city,
+                country: "India",
+                map_ref: {},
+                latitude: lat,
+                longitude: lng,
+                name: values.warehouseName,
+                postal_code: parseInt(values.pinCode, 10),
+                state: values.state
+              }
+            });
+            ToastAndroid.show(translate("saved.warehouse"), ToastAndroid.SHORT);
+            navigation.goBack();
+          } catch {
+            ToastAndroid.show(
+              translate("save.warehouse.failed"),
+              ToastAndroid.SHORT
+            );
+          } finally {
+            setLoading(false);
+          }
+        }}
       >
-        {({ errors, isSubmitting, handleBlur, handleChange, values }) => (
+        {({
+          errors,
+          isSubmitting,
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+          touched
+        }) => (
           <>
             <Page>
               <PageContent>
@@ -105,20 +141,24 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                       value={values.warehouseName}
                       onChangeText={handleChange("warehouseName")}
                       onBlur={handleBlur("warehouseName")}
-                      style={tomatoBorder(errors.warehouseName)}
+                      style={tomatoBorder(
+                        errors.warehouseName && touched.warehouseName
+                      )}
                       label={translate("warehouse.name")}
                     />
-                    {errors.warehouseName && (
+                    {errors.warehouseName && touched.warehouseName && (
                       <ErrorText>{errors.warehouseName}</ErrorText>
                     )}
                     <Input
                       value={values.gstin}
-                      onBlur={handleBlur("gstin")}
                       onChangeText={handleChange("gstin")}
-                      style={tomatoBorder(errors.gstin)}
+                      onBlur={handleBlur("gstin")}
+                      style={tomatoBorder(errors.gstin && touched.gstin)}
                       label={translate("gstin.label")}
                     />
-                    {errors.gstin && <ErrorText>{errors.gstin}</ErrorText>}
+                    {errors.gstin && touched.gstin && (
+                      <ErrorText>{errors.gstin}</ErrorText>
+                    )}
                     <Box mb={5}>
                       <TextWrapper label={translate("locate.on.map")}>
                         <Box height={100}>
@@ -147,47 +187,49 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
 
                     <Input
                       value={values.address}
-                      onBlur={handleBlur("address")}
                       onChangeText={handleChange("address")}
+                      onBlur={handleBlur("address")}
                       label={translate("address")}
                       numberOfLines={3}
-                      style={tomatoBorder(errors.address)}
+                      style={tomatoBorder(errors.address && touched.address)}
                       multiline={true}
                     />
-                    {errors.address && <ErrorText>{errors.address}</ErrorText>}
+                    {errors.address && touched.address && (
+                      <ErrorText>{errors.address}</ErrorText>
+                    )}
                     <Input
                       value={values.city}
-                      onBlur={handleBlur("city")}
                       onChangeText={handleChange("city")}
-                      style={tomatoBorder(errors.city)}
+                      onBlur={handleBlur("city")}
+                      style={tomatoBorder(errors.city && touched.city)}
                       label={translate("city")}
                     />
-                    {errors.city && <ErrorText>{errors.city}</ErrorText>}
+                    {errors.city && touched.city && (
+                      <ErrorText>{errors.city}</ErrorText>
+                    )}
                     <Input
                       value={values.state}
-                      onBlur={handleBlur("state")}
                       onChangeText={handleChange("state")}
-                      style={tomatoBorder(errors.state)}
+                      onBlur={handleBlur("state")}
+                      style={tomatoBorder(errors.state && touched.state)}
                       label={translate("state")}
                     />
-                    {errors.state && <ErrorText>{errors.state}</ErrorText>}
+                    {errors.state && touched.state && (
+                      <ErrorText>{errors.state}</ErrorText>
+                    )}
                     <Input
                       value={values.pinCode}
-                      onBlur={handleBlur("pinCode")}
                       onChangeText={handleChange("pinCode")}
-                      style={tomatoBorder(errors.pinCode)}
+                      onBlur={handleBlur("pinCode")}
+                      style={tomatoBorder(errors.pinCode && touched.pinCode)}
                       label={translate("pincode")}
                     />
-                    {errors.pinCode && <ErrorText>{errors.pinCode}</ErrorText>}
+                    {errors.pinCode && touched.pinCode && (
+                      <ErrorText>{errors.pinCode}</ErrorText>
+                    )}
                     <Flex mt={10}>
                       <StyledButton
-                        disabled={
-                          !values.warehouseName ||
-                          !gstinPattern.test(values.gstin) ||
-                          !values.pinCode ||
-                          loading ||
-                          isSubmitting
-                        }
+                        disabled={loading || isSubmitting}
                         title={
                           loading ? (
                             <TranslationText id="saving"></TranslationText>
@@ -197,39 +239,7 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                         }
                         fontSize={14}
                         loading={isSubmitting}
-                        onPress={async () => {
-                          setLoading(true);
-                          try {
-                            await saveWarehouse({
-                              business_id: id,
-                              gstin: values.gstin,
-                              warehouse_name: values.warehouseName,
-                              location: {
-                                address: values.address,
-                                city: values.city,
-                                country: "India",
-                                map_ref: {},
-                                latitude: lat,
-                                longitude: lng,
-                                name: values.warehouseName,
-                                postal_code: parseInt(values.pinCode, 10),
-                                state: values.state
-                              }
-                            });
-                            ToastAndroid.show(
-                              translate("saved.warehouse"),
-                              ToastAndroid.SHORT
-                            );
-                            navigation.goBack();
-                          } catch {
-                            ToastAndroid.show(
-                              translate("save.warehouse.failed"),
-                              ToastAndroid.SHORT
-                            );
-                          } finally {
-                            setLoading(false);
-                          }
-                        }}
+                        onPress={handleSubmit}
                       />
                     </Flex>
                   </Box>
