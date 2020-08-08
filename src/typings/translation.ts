@@ -6,18 +6,20 @@ export type Keys =
   | "accounts"
   | "add.now"
   | "add.warehouse"
+  | "address"
   | "are.you.sure"
   | "capture.pop"
-  | "container"
   | "choose.language"
-  | "choose.reason"
-  | "choose.unit"
-  | "choose.truck"
   | "choose.lsp"
+  | "choose.reason"
+  | "choose.truck"
+  | "choose.unit"
+  | "city"
   | "close"
   | "company.name"
   | "company.setup"
   | "confirm"
+  | "container"
   | "continue"
   | "create.trip"
   | "current.profile"
@@ -28,12 +30,16 @@ export type Keys =
   | "driver.details"
   | "driver.name"
   | "error"
+  | "errors.gstin"
+  | "errors.gstin.invalid"
+  | "errors.pinCode"
+  | "errors.warehouseName"
   | "eway.error"
   | "eway.loading"
+  | "eway.password"
   | "eway.pending"
   | "eway.success"
   | "eway.username"
-  | "eway.password"
   | "failed.to.fetch.trip.details"
   | "from"
   | "generate.ewb"
@@ -41,23 +47,24 @@ export type Keys =
   | "go.to.map"
   | "gps.id"
   | "gps.vendor"
+  | "gstin.label"
   | "history"
   | "home"
   | "i.am.driver"
-  | "in.transit"
   | "i.am.lsp"
   | "i.am.shipper"
+  | "in.transit"
   | "india.prefix"
   | "it.will.be.enabled"
-  | "lsp"
   | "loading"
   | "locate.on.map"
+  | "lsp"
   | "mobile.number"
   | "modify.request"
   | "must.have.ewb"
+  | "next"
   | "no.business.id"
   | "no.trips"
-  | "next"
   | "no.upcoming.trips"
   | "on.road"
   | "open"
@@ -71,14 +78,15 @@ export type Keys =
   | "pending.literally"
   | "pick.up.date"
   | "pick.up.point"
+  | "pincode"
   | "placeholder"
   | "please.wait"
   | "preference"
   | "preview"
   | "profile.setup"
   | "proof.of.delivery.tnc.received"
-  | "reached"
   | "raise.request"
+  | "reached"
   | "registration.number"
   | "reject"
   | "requested"
@@ -86,51 +94,43 @@ export type Keys =
   | "required.weight"
   | "resend"
   | "rice.grain.wheat"
-  | "save.truck"
   | "save.company"
-  | "setup.required"
-  | "send.request"
-  | "select.location"
+  | "save.truck"
+  | "save.warehouse"
+  | "save.warehouse.failed"
+  | "saved.warehouse"
+  | "saving"
   | "select.goods.type"
+  | "select.location"
+  | "send.request"
+  | "setup.required"
   | "signature"
-  | "start.trip"
   | "start"
+  | "start.trip"
+  | "state"
   | "submit"
   | "swipe.to.start"
   | "tell.us.about"
   | "this.helps.to.personalize"
   | "trip.details"
   | "trip.id"
-  | "trolley"
   | "trip.tracking.not.available"
+  | "trolley"
   | "truck.details"
+  | "truck.location"
   | "truck.name"
   | "truck.number"
   | "truck.save.error"
   | "truck.save.success"
-  | "truck.location"
   | "truck.type"
   | "trucks"
   | "try.again"
   | "upcoming"
-  | "valid.upto"
   | "uploaded.docs"
+  | "valid.upto"
   | "verifying"
   | "warehouse.details"
-  | "errors.warehouseName"
-  | "errors.gstin"
-  | "errors.gstin.invalid"
-  | "errors.pinCode"
-  | "saved.warehouse"
-  | "save.warehouse"
-  | "save.warehouse.failed"
-  | "warehouse.name"
-  | "gstin.label"
-  | "address"
-  | "city"
-  | "state"
-  | "pincode"
-  | "saving";
+  | "warehouse.name";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -141,21 +141,23 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "add.warehouse"
   ? never
+  : T extends "address"
+  ? never
   : T extends "are.you.sure"
   ? never
   : T extends "capture.pop"
   ? never
-  : T extends "container"
-  ? never
   : T extends "choose.language"
+  ? never
+  : T extends "choose.lsp"
   ? never
   : T extends "choose.reason"
   ? never
-  : T extends "choose.unit"
-  ? never
   : T extends "choose.truck"
   ? never
-  : T extends "choose.lsp"
+  : T extends "choose.unit"
+  ? never
+  : T extends "city"
   ? never
   : T extends "close"
   ? never
@@ -164,6 +166,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "company.setup"
   ? never
   : T extends "confirm"
+  ? never
+  : T extends "container"
   ? never
   : T extends "continue"
   ? never
@@ -185,17 +189,25 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "error"
   ? never
+  : T extends "errors.gstin"
+  ? never
+  : T extends "errors.gstin.invalid"
+  ? never
+  : T extends "errors.pinCode"
+  ? never
+  : T extends "errors.warehouseName"
+  ? never
   : T extends "eway.error"
   ? never
   : T extends "eway.loading"
+  ? never
+  : T extends "eway.password"
   ? never
   : T extends "eway.pending"
   ? never
   : T extends "eway.success"
   ? never
   : T extends "eway.username"
-  ? never
-  : T extends "eway.password"
   ? never
   : T extends "failed.to.fetch.trip.details"
   ? never
@@ -211,27 +223,29 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "gps.vendor"
   ? never
+  : T extends "gstin.label"
+  ? never
   : T extends "history"
   ? never
   : T extends "home"
   ? never
   : T extends "i.am.driver"
   ? never
-  : T extends "in.transit"
-  ? never
   : T extends "i.am.lsp"
   ? never
   : T extends "i.am.shipper"
+  ? never
+  : T extends "in.transit"
   ? never
   : T extends "india.prefix"
   ? never
   : T extends "it.will.be.enabled"
   ? { date: string }
-  : T extends "lsp"
-  ? never
   : T extends "loading"
   ? never
   : T extends "locate.on.map"
+  ? never
+  : T extends "lsp"
   ? never
   : T extends "mobile.number"
   ? never
@@ -239,11 +253,11 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "must.have.ewb"
   ? never
+  : T extends "next"
+  ? never
   : T extends "no.business.id"
   ? never
   : T extends "no.trips"
-  ? never
-  : T extends "next"
   ? never
   : T extends "no.upcoming.trips"
   ? never
@@ -271,6 +285,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "pick.up.point"
   ? never
+  : T extends "pincode"
+  ? never
   : T extends "placeholder"
   ? { value: string }
   : T extends "please.wait"
@@ -283,9 +299,9 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "proof.of.delivery.tnc.received"
   ? never
-  : T extends "reached"
-  ? never
   : T extends "raise.request"
+  ? never
+  : T extends "reached"
   ? never
   : T extends "registration.number"
   ? never
@@ -301,23 +317,33 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "rice.grain.wheat"
   ? never
-  : T extends "save.truck"
-  ? never
   : T extends "save.company"
   ? never
-  : T extends "setup.required"
+  : T extends "save.truck"
   ? never
-  : T extends "send.request"
+  : T extends "save.warehouse"
   ? never
-  : T extends "select.location"
+  : T extends "save.warehouse.failed"
+  ? never
+  : T extends "saved.warehouse"
+  ? never
+  : T extends "saving"
   ? never
   : T extends "select.goods.type"
   ? never
+  : T extends "select.location"
+  ? never
+  : T extends "send.request"
+  ? never
+  : T extends "setup.required"
+  ? never
   : T extends "signature"
+  ? never
+  : T extends "start"
   ? never
   : T extends "start.trip"
   ? never
-  : T extends "start"
+  : T extends "state"
   ? never
   : T extends "submit"
   ? never
@@ -331,11 +357,13 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "trip.id"
   ? never
-  : T extends "trolley"
-  ? never
   : T extends "trip.tracking.not.available"
   ? never
+  : T extends "trolley"
+  ? never
   : T extends "truck.details"
+  ? never
+  : T extends "truck.location"
   ? never
   : T extends "truck.name"
   ? never
@@ -345,8 +373,6 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "truck.save.success"
   ? never
-  : T extends "truck.location"
-  ? never
   : T extends "truck.type"
   ? never
   : T extends "trucks"
@@ -355,40 +381,14 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "upcoming"
   ? never
-  : T extends "valid.upto"
-  ? never
   : T extends "uploaded.docs"
+  ? never
+  : T extends "valid.upto"
   ? never
   : T extends "verifying"
   ? never
   : T extends "warehouse.details"
   ? never
-  : T extends "errors.warehouseName"
-  ? never
-  : T extends "errors.gstin"
-  ? never
-  : T extends "errors.gstin.invalid"
-  ? never
-  : T extends "errors.pinCode"
-  ? never
-  : T extends "saved.warehouse"
-  ? never
-  : T extends "save.warehouse"
-  ? never
-  : T extends "save.warehouse.failed"
-  ? never
   : T extends "warehouse.name"
-  ? never
-  : T extends "gstin.label"
-  ? never
-  : T extends "address"
-  ? never
-  : T extends "city"
-  ? never
-  : T extends "state"
-  ? never
-  : T extends "pincode"
-  ? never
-  : T extends "saving"
   ? never
   : never;
