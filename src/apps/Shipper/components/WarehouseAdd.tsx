@@ -145,7 +145,7 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
                       navigation.goBack();
                     } catch {
                       ToastAndroid.show(
-                        "Failed to save warehouse",
+                        "Same GSTIN Warehouse already present",
                         ToastAndroid.SHORT
                       );
                     } finally {

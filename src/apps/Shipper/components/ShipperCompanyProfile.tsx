@@ -51,10 +51,16 @@ const ShipperCompanyProfile = (props: Props) => {
             business_type: "SHIPPER",
             gst_in: regNumber
           });
-          props.navigation.navigate("MainTripListing");
-          ToastAndroid.show("Company profile Created", ToastAndroid.SHORT);
+          props.navigation.navigate("ShipperMetrics");
+          ToastAndroid.show(
+            "Company profile created successfully",
+            ToastAndroid.SHORT
+          );
         } catch {
-          ToastAndroid.show("Error while creating profile", ToastAndroid.SHORT);
+          ToastAndroid.show(
+            "Error while creating company profile",
+            ToastAndroid.SHORT
+          );
         }
       }}
     />

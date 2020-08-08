@@ -3,6 +3,7 @@ import {
   createStackNavigator,
   StackScreenProps
 } from "@react-navigation/stack";
+import { ToastAndroid } from "react-native";
 import CompanyProfile from "../../../components/CompanyProfile";
 import PersonProfile from "../../../components/PersonProfile";
 import { Flex, HeaderOptions } from "../../../components/@styled/BaseElements";
@@ -56,9 +57,16 @@ const LSPPersonProfile = (
           loginId,
           persona: userInfo.userPersona
         });
+        ToastAndroid.show(
+          "Personal profile created successfully",
+          ToastAndroid.SHORT
+        );
         props.navigation.navigate("CreateProfile");
       } catch {
-        console.log("error");
+        ToastAndroid.show(
+          "Error while creating profile. Please try again",
+          ToastAndroid.SHORT
+        );
       }
     }}
   />
@@ -143,9 +151,16 @@ const LSPCompanyProfile = (
             business_type: "LSP",
             gst_in: regNumber
           });
+          ToastAndroid.show(
+            "Company profile created successfully",
+            ToastAndroid.SHORT
+          );
           props.navigation.navigate("HomeMetrics");
         } catch {
-          console.log("error");
+          ToastAndroid.show(
+            "Error while creating company profile",
+            ToastAndroid.SHORT
+          );
         }
       }}
     />

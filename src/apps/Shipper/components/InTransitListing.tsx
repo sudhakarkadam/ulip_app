@@ -39,7 +39,7 @@ const Trips: React.FunctionComponent<Props> = props => {
           from={AllApps.SHIPPER}
           onRowClick={(_, tsr) => {
             props.navigation.navigate("TripTracking", {
-              tripId: tsr.trip_details.id
+              tripId: tsr.trip_details?.id || -1
             });
           }}
           focused={useIsFocused()}

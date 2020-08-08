@@ -301,7 +301,11 @@ const CreateTrip = (props: Props) => {
             </Flex>
             <Flex width="98%" position="absolute" bottom={1} m={2}>
               <StyledButton
-                disabled={tripStep === 3 && !weight}
+                disabled={
+                  (tripStep === 3 && !weight) ||
+                  (tripStep === 0 &&
+                    (!fromValue || !toValue || fromValue === toValue))
+                }
                 title={
                   tripStep === 3 ? translate("preview") : translate("next")
                 }

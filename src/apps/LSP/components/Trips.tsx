@@ -58,7 +58,7 @@ const Trips = (props: Props) => {
           from={AllApps.LSP}
           onRowClick={(_, _item) =>
             props.navigation.push("TripTracking", {
-              tripId: Number(_item.trip_details.id)
+              tripId: Number(_item.trip_details?.id)
             })
           }
           focused={useIsFocused()}

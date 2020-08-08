@@ -60,7 +60,7 @@ export const LSPTripDetails = (props: HistoryProps & TripNavProps) => {
           truckType={tripData.truck_type_preference}
           truckWeight={tripData.weight + ""}
           truckUnit={tripData.weight_unit}
-          documents={tripData.trip_details.documents}
+          documents={tripData.trip_details?.documents || []}
           places={[
             tripData.source_location_details,
             tripData.destination_location_details

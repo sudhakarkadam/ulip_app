@@ -110,7 +110,7 @@ export interface GetTripsResponse {
   pickup_request_time: number;
   source_location_details: LocationDetails;
   status: RequestStatus;
-  trip_details: TripDetails;
+  trip_details?: TripDetails;
   truck_type_preference: string;
   tsr_id: number;
   updated_at: number;

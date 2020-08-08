@@ -29,7 +29,7 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
             tripData.destination_location_details
           ]}
           goodsSegment={tripData.goods_segment}
-          documents={tripData.trip_details.documents}
+          documents={tripData.trip_details?.documents || []}
         />
       </PageContent>
     </Page>

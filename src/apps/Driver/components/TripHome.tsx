@@ -174,12 +174,14 @@ const Trip: React.FC<Props> = props => {
       } else {
         return (
           <>
-            <Text color="#7A869A">
-              <TranslationText
-                id="it.will.be.enabled"
-                interpolations={{ date: tripStartDate }}
-              />
-            </Text>
+            {today < tripStartDate && (
+              <Text color="#7A869A">
+                <TranslationText
+                  id="it.will.be.enabled"
+                  interpolations={{ date: tripStartDate }}
+                />
+              </Text>
+            )}
             <StyledButton
               width="100%"
               height="50"
