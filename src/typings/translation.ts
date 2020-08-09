@@ -155,7 +155,12 @@ export type Keys =
   | "errors.ewb.act_from_state_code"
   | "errors.ewb.ship_to_state"
   | "errors.ewb.consignor_pincode"
-  | "errors.ewb.transporter_id";
+  | "errors.ewb.transporter_id"
+  | "errors.truckNumber"
+  | "errors.truckName"
+  | "errors.gpsVendor"
+  | "errors.gpsId"
+  | "errors.truckType";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -465,5 +470,15 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "errors.ewb.consignor_pincode"
   ? never
   : T extends "errors.ewb.transporter_id"
+  ? never
+  : T extends "errors.truckNumber"
+  ? never
+  : T extends "errors.truckName"
+  ? never
+  : T extends "errors.gpsVendor"
+  ? never
+  : T extends "errors.gpsId"
+  ? never
+  : T extends "errors.truckType"
   ? never
   : never;

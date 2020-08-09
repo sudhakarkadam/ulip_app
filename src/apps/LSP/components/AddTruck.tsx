@@ -4,7 +4,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { FlexColumn, Flex } from "../../../components/@styled/BaseElements";
 import {
   PrimaryHeaderText,
-  TextWrapper
+  TextWrapper,
+  ErrorText
 } from "../../../components/@styled/Text";
 import colors from "../../../theme/colors";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
@@ -18,6 +19,8 @@ import { ToastAndroid } from "react-native";
 import { HomeStackParamList } from "./LSPHomeStack";
 import { StackScreenProps } from "@react-navigation/stack";
 import { CommonState } from "../../../reducers";
+import { Formik } from "formik";
+import { tomatoBorder } from "../../../utils/tomatoBorder";
 
 const mapStateToProps = (state: CommonState) => ({
   trips: state.trips,
@@ -27,22 +30,25 @@ const mapStateToProps = (state: CommonState) => ({
 const { saveTruck } = ActionCreators;
 const mapDispatchToProps = { saveTruck };
 
+interface FormVals {
+  truckNumber: string;
+  truckName: string;
+  gpsVendor: string;
+  gpsId: string;
+  truckType: string;
+}
+
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 type AddTruckProps = StackScreenProps<HomeStackParamList, "AddTruck">;
 
 const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
-  const [vendor, setVendor] = useState("");
-  const [gpsId, setGpsId] = useState("");
-  const [type, setType] = useState("");
   const [loading, setLoading] = useState(false);
   const { translate } = useContext(i18n);
   const { appConfig, user } = props;
 
-  const fireSaveTruck = async () => {
+  const fireSaveTruck = async (values: FormVals) => {
     const profileCreated = user.data.user_details.find(
       role => role.profile.persona === "LSP"
     );
@@ -53,12 +59,12 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
         business_id: businessCreated?.business_id || "",
         vehicle_details: [
           {
-            device_id: gpsId,
+            device_id: values.gpsId,
             device_type: "GPS",
-            truck_name: name,
-            truck_number: number,
-            truck_type: type,
-            tsp_id: vendor
+            truck_name: values.truckName,
+            truck_number: values.truckNumber,
+            truck_type: values.truckType,
+            tsp_id: values.gpsVendor
           }
         ]
       });
@@ -74,65 +80,140 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
     <Page>
       <PageContent>
         <ScrollView>
-          <FlexColumn p={6} backgroundColor="white" height="100%">
-            <Flex mb={10}>
-              <PrimaryHeaderText
-                color={`${colors.black[2]}`}
-                fontSize={4}
-                fontWeight={700}
-              >
-                {translate("truck.details")}
-              </PrimaryHeaderText>
-            </Flex>
-            <TextWrapper label={translate("truck.number")}>
-              <Input
-                value={number}
-                onChangeText={text => {
-                  setNumber(text);
-                  if (name === number) setName(text);
-                }}
-              />
-            </TextWrapper>
-            <TextWrapper label={translate("truck.name")}>
-              <Input value={name} onChangeText={text => setName(text)} />
-            </TextWrapper>
-            <SelectComponent
-              label={translate("gps.vendor")}
-              getSelectedValue={val => setVendor(val)}
-              placeholder="Select GPS vendor"
-              data={
-                appConfig.data?.gps_providers.map(provider => ({
-                  label: provider,
-                  value: provider
-                })) || []
+          <Formik
+            initialValues={{
+              truckNumber: "",
+              truckName: "",
+              gpsVendor: "",
+              gpsId: "",
+              truckType: ""
+            }}
+            validate={values => {
+              const errors: Partial<Record<keyof typeof values, string>> = {};
+              if (!values.truckNumber) {
+                errors.truckNumber = translate("errors.truckNumber");
               }
-              defaultValue=""
-            />
-            <TextWrapper label={translate("gps.id")}>
-              <Input value={gpsId} onChangeText={text => setGpsId(text)} />
-            </TextWrapper>
-            <SelectComponent
-              label={translate("truck.type")}
-              getSelectedValue={val => setType(val)}
-              placeholder="Select a truck"
-              data={
-                appConfig.data?.truck_types.map(type => ({
-                  label: type,
-                  value: type
-                })) || []
+
+              if (!values.truckName) {
+                errors.truckName = translate("errors.truckName");
               }
-              defaultValue=""
-            />
-            <Flex mt={10}>
-              <StyledButton
-                disabled={!number || !vendor || !gpsId || !type}
-                title={translate("save.truck")}
-                fontSize={14}
-                onPress={fireSaveTruck}
-                loading={loading}
-              />
-            </Flex>
-          </FlexColumn>
+
+              if (!values.gpsVendor) {
+                errors.gpsVendor = translate("errors.gpsVendor");
+              }
+
+              if (!values.gpsId) {
+                errors.gpsId = translate("errors.gpsId");
+              }
+
+              if (!values.truckType) {
+                errors.truckType = translate("errors.truckType");
+              }
+
+              return errors;
+            }}
+            onSubmit={values => fireSaveTruck(values)}
+          >
+            {({
+              errors,
+              isSubmitting,
+              handleSubmit,
+              handleChange,
+              handleBlur,
+              values,
+              touched,
+              setFieldValue
+            }) => (
+              <FlexColumn p={6} backgroundColor="white" height="100%">
+                <Flex mb={10}>
+                  <PrimaryHeaderText
+                    color={`${colors.black[2]}`}
+                    fontSize={4}
+                    fontWeight={700}
+                  >
+                    {translate("truck.details")}
+                  </PrimaryHeaderText>
+                </Flex>
+                <TextWrapper label={translate("truck.number")}>
+                  <Input
+                    value={values.truckNumber}
+                    onChangeText={handleChange("truckNumber")}
+                    onBlur={args => {
+                      handleBlur("truckNumber")(args);
+                      setFieldValue("truckName", values.truckNumber);
+                    }}
+                    style={tomatoBorder(
+                      errors.truckNumber && touched.truckNumber
+                    )}
+                  />
+                  {errors.truckNumber && touched.truckNumber && (
+                    <ErrorText>{errors.truckNumber}</ErrorText>
+                  )}
+                </TextWrapper>
+                <TextWrapper label={translate("truck.name")}>
+                  <Input
+                    value={values.truckName}
+                    onChangeText={handleChange("truckName")}
+                    onBlur={handleBlur("truckName")}
+                    style={tomatoBorder(errors.truckName && touched.truckName)}
+                  />
+                  {errors.truckName && touched.truckName && (
+                    <ErrorText>{errors.truckName}</ErrorText>
+                  )}
+                </TextWrapper>
+                <SelectComponent
+                  label={translate("gps.vendor")}
+                  getSelectedValue={val => setFieldValue("gpsVendor", val)}
+                  placeholder="Select GPS vendor"
+                  data={
+                    appConfig.data?.gps_providers.map(provider => ({
+                      label: provider,
+                      value: provider
+                    })) || []
+                  }
+                  defaultValue=""
+                />
+                {errors.gpsVendor && touched.gpsVendor && (
+                  <ErrorText>{errors.gpsVendor}</ErrorText>
+                )}
+                <TextWrapper label={translate("gps.id")}>
+                  <Input
+                    value={values.gpsId}
+                    onChangeText={handleChange("gpsId")}
+                    onBlur={handleBlur("gpsId")}
+                    style={tomatoBorder(errors.gpsId && touched.gpsId)}
+                  />
+                  {errors.gpsId && touched.gpsId && (
+                    <ErrorText>{errors.gpsId}</ErrorText>
+                  )}
+                </TextWrapper>
+                <SelectComponent
+                  label={translate("truck.type")}
+                  getSelectedValue={val => setFieldValue("truckType", val)}
+                  placeholder="Select a truck"
+                  data={
+                    appConfig.data?.truck_types.map(type => ({
+                      label: type,
+                      value: type
+                    })) || []
+                  }
+                  defaultValue=""
+                />
+                {errors.truckType && touched.truckType && (
+                  <ErrorText>{errors.truckType}</ErrorText>
+                )}
+                <Flex mt={10}>
+                  <StyledButton
+                    disabled={loading || isSubmitting}
+                    title={translate("save.truck")}
+                    fontSize={14}
+                    onPress={handleSubmit}
+                    loading={isSubmitting}
+                  />
+                </Flex>
+              </FlexColumn>
+            )}
+          </Formik>
         </ScrollView>
       </PageContent>
     </Page>

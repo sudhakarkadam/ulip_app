@@ -153,5 +153,10 @@
   "errors.ewb.act_from_state_code": "Please enter Billing from state code",
   "errors.ewb.ship_to_state": "Please enter ship to state code",
   "errors.ewb.consignor_pincode": "Please enter consignor pincode",
-  "errors.ewb.transporter_id": "Please enter transporter id"
+  "errors.ewb.transporter_id": "Please enter transporter id",
+  "errors.truckNumber": "Please enter Truck Number",
+  "errors.truckName": "Please enter Truck Name",
+  "errors.gpsVendor": "Please select GPS Vendor",
+  "errors.gpsId": "Please enter GPS ID",
+  "errors.truckType": "Please select Truck Type"
 }
