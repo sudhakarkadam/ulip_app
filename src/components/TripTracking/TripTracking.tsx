@@ -1,10 +1,10 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import { connect, ConnectedProps } from "react-redux";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 
 import { Text } from "../@styled/BaseElements";
-import { Flex1, FlexRow, FlexCenter } from "../@styled/Flex";
+import { Flex, Flex1, FlexRow, FlexCenter } from "../@styled/Flex";
 import ScrollBottomSheet from "react-native-scroll-bottom-sheet";
 import colors from "../../theme/colors";
 import TopBar from "./TopBar";
@@ -21,6 +21,8 @@ import { useEffect } from "react";
 import { isLoading, isInit } from "../../utils/actionCreator";
 import BlockScreenLoader from "../BlockScreenLoader";
 import moment from "moment";
+import EWayBillCard from "../EWayBillCard";
+import { TripStackList } from "../../apps/LSP/components/LSPTripStack";
 
 const MapmyIndia = require("mmi-widget");
 
@@ -85,36 +87,54 @@ interface TripHead {
   dropCity: string;
   pickUpEta: string;
   dropEta: string;
+  ewbStatus?: string;
+  ewbNumber?: string;
+  tripId: number;
+  navigation?: StackNavigationProp<TripStackList, "EWayBillGenerationPage">;
 }
 const TripHead: React.FC<TripHead> = ({
   pickupCity,
   dropCity,
   pickUpEta,
-  dropEta
+  dropEta,
+  ewbStatus,
+  ewbNumber,
+  tripId,
+  navigation
 }) => {
   return (
-    <FlexRow
-      bg="white"
-      justifyContent="center"
-      alignItems="center"
-      p={3}
-      py={4}
-      style={{
-        elevation: 5
-      }}
-      borderTopLeftRadius={20}
-      borderTopRightRadius={20}
-      borderBottomWidth={1}
-      borderBottomColor={colors.grays[2]}
-    >
-      <HeadBox bigText={pickupCity} smallText={pickUpEta} />
-      <FlexCenter>
-        <Text color="black.0" px={2} fontSize={40} lineHeight="40px">
-          →
-        </Text>
-      </FlexCenter>
-      <HeadBox bigText={dropCity} smallText={dropEta} />
-    </FlexRow>
+    <Flex>
+      <FlexRow
+        bg="white"
+        justifyContent="center"
+        alignItems="center"
+        p={3}
+        py={4}
+        style={{
+          elevation: 5
+        }}
+        borderTopLeftRadius={20}
+        borderTopRightRadius={20}
+        borderBottomWidth={1}
+        borderBottomColor={colors.grays[2]}
+      >
+        <HeadBox bigText={pickupCity} smallText={pickUpEta} />
+        <FlexCenter>
+          <Text color="black.0" px={2} fontSize={40} lineHeight="40px">
+            →
+          </Text>
+        </FlexCenter>
+        <HeadBox bigText={dropCity} smallText={dropEta} />
+      </FlexRow>
+      <FlexRow bg="white" width={"100%"}>
+        <EWayBillCard
+          status={ewbStatus}
+          ewbNumber={ewbNumber}
+          tripId={tripId}
+          navigation={navigation}
+        />
+      </FlexRow>
+    </Flex>
   );
 };
 
@@ -126,7 +146,12 @@ type ScreenProps = StackScreenProps<
   },
   "TripTracking"
 >;
-type Props = ConnectedProps<typeof connector> & ScreenProps;
+
+interface TripNavProps {
+  navigation?: StackNavigationProp<TripStackList, "EWayBillGenerationPage">;
+}
+
+type Props = ConnectedProps<typeof connector> & ScreenProps & TripNavProps;
 
 const TripTracking: React.FC<Props> = ({
   status,
@@ -136,6 +161,7 @@ const TripTracking: React.FC<Props> = ({
   ...props
 }) => {
   const { navigation, route, driverTrip } = props;
+  const { ewb_status, ewb_number } = driverTrip?.data || {};
   const { tripId } = route.params;
 
   const onBackPress = () => navigation.goBack();
@@ -188,6 +214,10 @@ const TripTracking: React.FC<Props> = ({
               )}
               dropCity={dropCity}
               dropEta="-- NA --"
+              navigation={navigation}
+              tripId={tripId}
+              ewbNumber={ewb_number}
+              ewbStatus={ewb_status}
             />
           )}
           // ListHeaderComponent={

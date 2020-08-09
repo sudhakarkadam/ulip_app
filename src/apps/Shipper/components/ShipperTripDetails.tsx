@@ -1,5 +1,5 @@
 import React from "react";
-import { StackScreenProps } from "@react-navigation/stack";
+import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import { HomeStackParamList } from "./HomeStack";
 import { GetTripsResponse } from "../../../models/CommonModel";
@@ -10,7 +10,15 @@ type ShipperTripDetailsProps = StackScreenProps<
   "ShipperTripDetails"
 >;
 
-const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
+interface TripNavProps {
+  disableEWB?: boolean;
+  navigation?: StackNavigationProp<
+    HomeStackParamList,
+    "EWayBillGenerationPage"
+  >;
+}
+
+const ShipperTripDetails = (props: ShipperTripDetailsProps & TripNavProps) => {
   const { data } = props.route.params;
   const tripData = JSON.parse(data) as GetTripsResponse;
   return (
@@ -30,6 +38,11 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps) => {
           ]}
           goodsSegment={tripData.goods_segment}
           documents={tripData.trip_details?.documents || []}
+          showEwb={!props.disableEWB}
+          navigation={props.navigation}
+          ewbNumber={tripData.trip_details?.ewb_number}
+          ewbStatus={tripData.trip_details?.ewb_status}
+          tripId={tripData.trip_details?.id}
         />
       </PageContent>
     </Page>

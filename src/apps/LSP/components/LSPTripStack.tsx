@@ -33,9 +33,7 @@ const TripStack = () => {
       <Stack.Screen
         name="EWayBillGenerationPage"
         component={EWayBillGenerationPage}
-        options={{
-          headerShown: false
-        }}
+        options={{ title: "Generate E-way bill" }}
       />
     </Stack.Navigator>
   );

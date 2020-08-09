@@ -34,6 +34,7 @@ export const driverTrips: DriverTrips = [
     trip_status: "COMPLETED",
     documents: [],
     tracking_request_id: "123",
+    ewb_status: "IN_PROGRESS",
     vehicle_details: {
       business_id: "string",
       device_id: "string",

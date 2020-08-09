@@ -224,7 +224,7 @@ const EWayBillCard = ({
                   width={"100%"}
                   onPress={() => {
                     setModal(false);
-                    navigation?.push("EWayBillGenerationPage", { tripId });
+                    navigation?.navigate("EWayBillGenerationPage", { tripId });
                   }}
                 />
               </Box>

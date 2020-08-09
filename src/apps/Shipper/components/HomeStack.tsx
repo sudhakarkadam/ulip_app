@@ -11,6 +11,7 @@ import ShipperTripDetails from "./ShipperTripDetails";
 import MainTripListing from "./MainTripListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
+import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
 import { PerosnaDetails } from "../../../models/CommonModel";
 import WarehoueseAdd from "./WarehouseAdd";
 import ShipperMetrics from "./ShipperMetrics";
@@ -23,6 +24,9 @@ export type HomeStackParamList = {
   ShipperTripDetails: { data: string };
   WarehouseAdd: undefined;
   ShipperMetrics: undefined;
+  EWayBillGenerationPage: {
+    tripId?: number;
+  };
 };
 
 const mapStateToProps = (state: CommonState) => ({
@@ -92,6 +96,11 @@ const HomeStack = (props: OwnProps) => {
             name="WarehouseAdd"
             component={WarehoueseAdd}
             options={{ title: "Add Warehouse" }}
+          />
+          <Stack.Screen
+            name="EWayBillGenerationPage"
+            component={EWayBillGenerationPage}
+            options={{ title: "Generate E-way bill" }}
           />
         </Stack.Navigator>
       )}

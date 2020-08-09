@@ -21,7 +21,7 @@ const HistoryStack = () => {
       />
       <Stack.Screen
         name="ShipperTripDetails"
-        component={ShipperTripDetails}
+        component={props => <ShipperTripDetails disableEWB {...props} />}
         options={{ title: "Trip Details" }}
       />
     </Stack.Navigator>

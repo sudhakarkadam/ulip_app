@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { View, ScrollView } from "react-native";
 import Input from "./InputComponent";
@@ -6,7 +6,7 @@ import { Text, Flex, Box } from "./@styled/BaseElements";
 import { TextWrapper } from "./@styled/Text";
 import StyledButton from "./@styled/StyledButton";
 import { Page, PageContent } from "./@styled/Page";
-
+import { Formik } from "formik";
 import ActionCreators from "../actions/ActionCreators";
 import { CommonState } from "../reducers";
 import SelectComponent from "./SelectComponent";
@@ -14,6 +14,8 @@ import { ToastAndroid } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { TripStackList } from "../apps/LSP/components/LSPTripStack";
 import { I18nContext, TranslationText } from "./InternationalisationProvider";
+import { tomatoBorder } from "../utils/tomatoBorder";
+
 type OwnProps = StackScreenProps<TripStackList, "EWayBillGenerationPage">;
 
 const transactionSubTypes = [
@@ -43,260 +45,421 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
   const { userPersona } = props.user || {};
   const { tripId: trip_id } = props.route.params;
   const login_type = userPersona === "LSP" ? "TRANSPORTER" : "TAX_PAYER";
-  const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [user_gst, setUserGst] = useState("");
-  const [transaction_type, setTransactionType] = useState("");
-  const [transaction_sub_type, setTransactionSubType] = useState("");
-  const [supplier_gstn, setSupplierGst] = useState("");
-  const [recipient_gstn, setRecipientGst] = useState("URP");
-  const [delivery_pincode, setDeliveryPincode] = useState("");
-  const [invoice_number, setInvoiceNum] = useState("");
-  const [invoice_date, setDate] = useState("");
-  const [total_value, setTotalValue] = useState("");
-  const [hsn_code, setHsnCode] = useState("");
-  const [vehicle_number, setVehicleNum] = useState("");
-  const [from_state_code, setFromStateCode] = useState("");
-  const [to_state_code, setToStateCode] = useState("");
-  const [act_from_state_code, setDispatchFromState] = useState("");
-  const [ship_to_state, setShipToState] = useState("");
-  const [consignor_pincode, setConsignorPincode] = useState("");
-  const [transporter_id, setTransporterId] = useState("");
   return (
-    <Page>
-      <PageContent>
-        <ScrollView>
-          <Flex m={20} p={"16px"} backgroundColor={"white"}>
-            <Text
-              fontSize={"24px"}
-              fontWeight={"bold"}
-              color={"#000066"}
-              pb={"16px"}
-            >
-              <TranslationText id="details"></TranslationText>
-            </Text>
-            <Text pb={"12px"} fontSize={"14px"} color={"#000066"}>
-              <TranslationText id="must.have.ewb"></TranslationText>
-            </Text>
-            <TextWrapper label={translate("eway.username")}>
-              <Input
-                value={username}
-                onChangeText={text => setUsername(text)}
-              />
-            </TextWrapper>
-            <TextWrapper label={translate("eway.password")}>
-              <Input
-                value={password}
-                onChangeText={text => setPassword(text)}
-                textContentType={"password"}
-                secureTextEntry={true}
-              />
-            </TextWrapper>
-            {userPersona === "LSP" && (
-              <TextWrapper label="User GST Number">
-                <Input
-                  value={user_gst}
-                  onChangeText={text => setUserGst(text)}
-                />
-              </TextWrapper>
-            )}
-            <View
-              style={{
-                borderBottomColor: "#EFF0F2",
-                borderBottomWidth: 1
-              }}
-            />
-            <Box p={1} />
-            <View
-              style={{
-                borderBottomColor: "#EFF0F2",
-                borderBottomWidth: 1
-              }}
-            />
-            <Box p={3} />
+    <Formik
+      initialValues={{
+        username: "",
+        password: "",
+        user_gst: "",
+        transaction_type: "",
+        transaction_sub_type: "",
+        supplier_gstn: "",
+        recipient_gstn: "URP",
+        delivery_pincode: "",
+        invoice_number: "",
+        invoice_date: "",
+        total_value: "",
+        hsn_code: "",
+        vehicle_number: "",
+        from_state_code: "",
+        to_state_code: "",
+        act_from_state_code: "",
+        ship_to_state: "",
+        consignor_pincode: "",
+        transporter_id: ""
+      }}
+      validate={values => {
+        const errors: Partial<Record<keyof typeof values, string>> = {};
+        if (!values.username) {
+          errors.username = translate("errors.ewb.username");
+        }
 
-            <TextWrapper label="Transaction type">
-              <SelectComponent
-                data={["INBOUND", "OUTBOUND"].map(type => ({
-                  label: type,
-                  value: type
-                }))}
-                defaultValue={""}
-                getSelectedValue={val => setTransactionType(val)}
-              />
-            </TextWrapper>
+        if (!values.password) {
+          errors.password = translate("errors.ewb.password");
+        }
 
-            <TextWrapper label="Transaction sub-type">
-              <SelectComponent
-                data={transactionSubTypes.map(type => ({
-                  label: type,
-                  value: type
-                }))}
-                defaultValue={""}
-                getSelectedValue={val => setTransactionSubType(val)}
-              />
-            </TextWrapper>
+        if (!values.transaction_type) {
+          errors.transaction_type = translate("errors.ewb.transactionType");
+        }
 
-            <TextWrapper label="Supplier’s GSTIN">
-              <Input
-                value={supplier_gstn}
-                onChangeText={text => setSupplierGst(text)}
-              />
-            </TextWrapper>
+        if (!values.transaction_sub_type) {
+          errors.transaction_sub_type = translate(
+            "errors.ewb.transaction_sub_type"
+          );
+        }
 
-            <TextWrapper label="Recipient’s GSTIN">
-              <Input
-                value={recipient_gstn}
-                onChangeText={text => setRecipientGst(text)}
-              />
-            </TextWrapper>
+        if (!values.supplier_gstn) {
+          errors.supplier_gstn = translate("errors.ewb.supplier_gstn");
+        }
 
-            <TextWrapper label="Delivery Pincode">
-              <Input
-                value={delivery_pincode}
-                onChangeText={text => setDeliveryPincode(text)}
-              />
-            </TextWrapper>
+        if (!values.recipient_gstn) {
+          errors.recipient_gstn = translate("errors.ewb.recipient_gstn");
+        }
 
-            <TextWrapper label="Invoice number">
-              <Input
-                value={invoice_number}
-                onChangeText={text => setInvoiceNum(text)}
-              />
-            </TextWrapper>
+        if (!values.delivery_pincode) {
+          errors.delivery_pincode = translate("errors.ewb.delivery_pincode");
+        }
 
-            <TextWrapper label="Invoice date">
-              <Input
-                value={invoice_date}
-                onChangeText={text => setDate(text)}
-              />
-            </TextWrapper>
+        if (!values.invoice_number) {
+          errors.invoice_number = translate("errors.ewb.invoice_number");
+        }
 
-            <TextWrapper label="Total Value">
-              <Input
-                value={total_value}
-                onChangeText={text => setTotalValue(text)}
-              />
-            </TextWrapper>
+        if (!values.invoice_date) {
+          errors.invoice_date = translate("errors.ewb.invoice_date");
+        }
 
-            <TextWrapper label="HSN Code">
-              <Input value={hsn_code} onChangeText={text => setHsnCode(text)} />
-            </TextWrapper>
+        if (!values.total_value) {
+          errors.total_value = translate("errors.ewb.total_value");
+        }
 
-            <TextWrapper label="Vehicle number">
-              <Input
-                value={vehicle_number}
-                onChangeText={text => setVehicleNum(text)}
-              />
-            </TextWrapper>
+        if (!values.hsn_code) {
+          errors.hsn_code = translate("errors.ewb.hsn_code");
+        }
 
-            <TextWrapper label="From Billing State">
-              <Input
-                value={from_state_code}
-                onChangeText={text => setFromStateCode(text)}
-              />
-            </TextWrapper>
+        if (!values.vehicle_number) {
+          errors.vehicle_number = translate("errors.ewb.vehicle_number");
+        }
 
-            <TextWrapper label="To Billing State">
-              <Input
-                value={to_state_code}
-                onChangeText={text => setToStateCode(text)}
-              />
-            </TextWrapper>
+        if (!values.from_state_code) {
+          errors.from_state_code = translate("errors.ewb.from_state_code");
+        }
 
-            <TextWrapper label="Dispatch from state">
-              <Input
-                value={act_from_state_code}
-                onChangeText={text => setDispatchFromState(text)}
-              />
-            </TextWrapper>
+        if (!values.to_state_code) {
+          errors.to_state_code = translate("errors.ewb.to_state_code");
+        }
 
-            <TextWrapper label="Ship To State">
-              <Input
-                value={ship_to_state}
-                onChangeText={text => setShipToState(text)}
-              />
-            </TextWrapper>
+        if (!values.act_from_state_code) {
+          errors.act_from_state_code = translate(
+            "errors.ewb.act_from_state_code"
+          );
+        }
 
-            <TextWrapper label="Bill From Pincode">
-              <Input
-                value={consignor_pincode}
-                onChangeText={text => setConsignorPincode(text)}
-              />
-            </TextWrapper>
+        if (!values.ship_to_state) {
+          errors.ship_to_state = translate("errors.ewb.ship_to_state");
+        }
 
-            <TextWrapper label="Transporter Id">
-              <Input
-                value={transporter_id}
-                onChangeText={text => setTransporterId(text)}
-              />
-            </TextWrapper>
+        if (!values.consignor_pincode) {
+          errors.consignor_pincode = translate("errors.ewb.consignor_pincode");
+        }
 
-            <StyledButton
-              width={"100%"}
-              title={
-                <Text>
-                  {!loading ? (
-                    <>
-                      <TranslationText id="continue" />{" "}
-                      <Text fontSize={5}>&#8594;</Text>
-                    </>
-                  ) : (
-                    <TranslationText id="loading" />
+        if (!values.transporter_id) {
+          errors.transporter_id = translate("errors.ewb.transporter_id");
+        }
+
+        return errors;
+      }}
+      onSubmit={async values => {
+        await props
+          .generateEwayBill({
+            trip_id,
+            username: values.username,
+            password: values.password,
+            user_gst: values.user_gst || values.supplier_gstn,
+            login_type: login_type,
+            transaction_type: values.transaction_type,
+            transaction_sub_type: values.transaction_sub_type,
+            supplier_gstn: values.supplier_gstn,
+            recipient_gstn: values.recipient_gstn,
+            delivery_pincode: values.delivery_pincode,
+            invoice_number: values.invoice_number,
+            invoice_date: values.invoice_date,
+            total_value: values.total_value,
+            hsn_code: values.hsn_code,
+            vehicle_number: values.vehicle_number,
+            from_state_code: values.from_state_code,
+            to_state_code: values.to_state_code,
+            act_from_state_code: values.act_from_state_code,
+            ship_to_state: values.ship_to_state,
+            consignor_pincode: values.consignor_pincode,
+            transporter_id: values.transporter_id
+          })
+          .then(res => {
+            if (res.type === "GENERATE_EWAYBILL_SUCCESS") {
+              props.navigation?.goBack();
+            } else {
+              ToastAndroid.show(
+                "Something went wrong. Please try again.",
+                ToastAndroid.SHORT
+              );
+            }
+          })
+          .catch(() => {
+            ToastAndroid.show(
+              "Something went wrong. Please try again.",
+              ToastAndroid.SHORT
+            );
+          });
+      }}
+    >
+      {({
+        errors,
+        isSubmitting,
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        values,
+        touched
+      }) => {
+        return (
+          <Page>
+            <PageContent>
+              <ScrollView>
+                <Flex m={20} p={"16px"} backgroundColor={"white"}>
+                  <Text
+                    fontSize={"24px"}
+                    fontWeight={"bold"}
+                    color={"#000066"}
+                    pb={"16px"}
+                  >
+                    <TranslationText id="details"></TranslationText>
+                  </Text>
+                  <Text pb={"12px"} fontSize={"14px"} color={"#000066"}>
+                    <TranslationText id="must.have.ewb"></TranslationText>
+                  </Text>
+                  <TextWrapper label={translate("eway.username")}>
+                    <Input
+                      value={values.username}
+                      onChangeText={handleChange("username")}
+                      onBlur={handleBlur("username")}
+                      style={tomatoBorder(errors.username && touched.username)}
+                    />
+                  </TextWrapper>
+                  <TextWrapper label={translate("eway.password")}>
+                    <Input
+                      value={values.password}
+                      onChangeText={handleChange("password")}
+                      onBlur={handleBlur("password")}
+                      style={tomatoBorder(errors.password && touched.password)}
+                      textContentType={"password"}
+                      secureTextEntry={true}
+                    />
+                  </TextWrapper>
+                  {userPersona === "LSP" && (
+                    <TextWrapper label="User GST Number">
+                      <Input
+                        value={values.user_gst}
+                        onChangeText={handleChange("user_gst")}
+                        onBlur={handleBlur("user_gst")}
+                        style={tomatoBorder(
+                          errors.user_gst && touched.user_gst
+                        )}
+                      />
+                    </TextWrapper>
                   )}
-                </Text>
-              }
-              onPress={async () => {
-                setLoading(true);
-                await props
-                  .generateEwayBill({
-                    trip_id,
-                    username,
-                    password,
-                    user_gst,
-                    login_type,
-                    transaction_type,
-                    transaction_sub_type,
-                    supplier_gstn,
-                    recipient_gstn,
-                    delivery_pincode,
-                    invoice_number,
-                    invoice_date,
-                    total_value,
-                    hsn_code,
-                    vehicle_number,
-                    from_state_code,
-                    to_state_code,
-                    act_from_state_code,
-                    ship_to_state,
-                    consignor_pincode,
-                    transporter_id
-                  })
-                  .then(res => {
-                    setLoading(false);
-                    if (res.type === "GENERATE_EWAYBILL_SUCCESS") {
-                      props.navigation?.goBack();
-                    } else {
-                      ToastAndroid.show(
-                        "Something went wrong. Please try again.",
-                        ToastAndroid.SHORT
-                      );
+                  <View
+                    style={{
+                      borderBottomColor: "#EFF0F2",
+                      borderBottomWidth: 1
+                    }}
+                  />
+                  <Box p={1} />
+                  <View
+                    style={{
+                      borderBottomColor: "#EFF0F2",
+                      borderBottomWidth: 1
+                    }}
+                  />
+                  <Box p={3} />
+
+                  <TextWrapper label="Transaction type">
+                    <SelectComponent
+                      data={["INBOUND", "OUTBOUND"].map(type => ({
+                        label: type,
+                        value: type
+                      }))}
+                      defaultValue={""}
+                      getSelectedValue={handleChange("transaction_type")}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Transaction sub-type">
+                    <SelectComponent
+                      data={transactionSubTypes.map(type => ({
+                        label: type,
+                        value: type
+                      }))}
+                      defaultValue={""}
+                      getSelectedValue={handleChange("transaction_sub_type")}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Supplier’s GSTIN">
+                    <Input
+                      value={values.supplier_gstn}
+                      onChangeText={handleChange("supplier_gstn")}
+                      onBlur={handleBlur("supplier_gstn")}
+                      style={tomatoBorder(
+                        errors.supplier_gstn && touched.supplier_gstn
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Recipient’s GSTIN">
+                    <Input
+                      value={values.recipient_gstn}
+                      onChangeText={handleChange("recipient_gstn")}
+                      onBlur={handleBlur("recipient_gstn")}
+                      style={tomatoBorder(
+                        errors.recipient_gstn && touched.recipient_gstn
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Delivery Pincode">
+                    <Input
+                      value={values.delivery_pincode}
+                      onChangeText={handleChange("delivery_pincode")}
+                      onBlur={handleBlur("delivery_pincode")}
+                      style={tomatoBorder(
+                        errors.delivery_pincode && touched.delivery_pincode
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Invoice number">
+                    <Input
+                      value={values.invoice_number}
+                      onChangeText={handleChange("invoice_number")}
+                      onBlur={handleBlur("invoice_number")}
+                      style={tomatoBorder(
+                        errors.invoice_number && touched.invoice_number
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Invoice date">
+                    <Input
+                      value={values.invoice_date}
+                      onChangeText={handleChange("invoice_date")}
+                      onBlur={handleBlur("invoice_date")}
+                      style={tomatoBorder(
+                        errors.invoice_date && touched.invoice_date
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Total Value">
+                    <Input
+                      value={values.total_value}
+                      onChangeText={handleChange("total_value")}
+                      onBlur={handleBlur("total_value")}
+                      style={tomatoBorder(
+                        errors.total_value && touched.total_value
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="HSN Code">
+                    <Input
+                      value={values.hsn_code}
+                      onChangeText={handleChange("hsn_code")}
+                      onBlur={handleBlur("hsn_code")}
+                      style={tomatoBorder(errors.hsn_code && touched.hsn_code)}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Vehicle number">
+                    <Input
+                      value={values.vehicle_number}
+                      onChangeText={handleChange("vehicle_number")}
+                      onBlur={handleBlur("vehicle_number")}
+                      style={tomatoBorder(
+                        errors.vehicle_number && touched.vehicle_number
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="From Billing State">
+                    <Input
+                      value={values.from_state_code}
+                      onChangeText={handleChange("from_state_code")}
+                      onBlur={handleBlur("from_state_code")}
+                      style={tomatoBorder(
+                        errors.from_state_code && touched.from_state_code
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="To Billing State">
+                    <Input
+                      value={values.to_state_code}
+                      onChangeText={handleChange("to_state_code")}
+                      onBlur={handleBlur("to_state_code")}
+                      style={tomatoBorder(
+                        errors.to_state_code && touched.to_state_code
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Dispatch from state">
+                    <Input
+                      value={values.act_from_state_code}
+                      onChangeText={handleChange("act_from_state_code")}
+                      onBlur={handleBlur("act_from_state_code")}
+                      style={tomatoBorder(
+                        errors.act_from_state_code &&
+                          touched.act_from_state_code
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Ship To State">
+                    <Input
+                      value={values.ship_to_state}
+                      onChangeText={handleChange("ship_to_state")}
+                      onBlur={handleBlur("ship_to_state")}
+                      style={tomatoBorder(
+                        errors.ship_to_state && touched.ship_to_state
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Bill From Pincode">
+                    <Input
+                      value={values.consignor_pincode}
+                      onChangeText={handleChange("consignor_pincode")}
+                      onBlur={handleBlur("consignor_pincode")}
+                      style={tomatoBorder(
+                        errors.consignor_pincode && touched.consignor_pincode
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <TextWrapper label="Transporter Id">
+                    <Input
+                      value={values.transporter_id}
+                      onChangeText={handleChange("transporter_id")}
+                      onBlur={handleBlur("transporter_id")}
+                      style={tomatoBorder(
+                        errors.transporter_id && touched.transporter_id
+                      )}
+                    />
+                  </TextWrapper>
+
+                  <StyledButton
+                    disabled={isSubmitting}
+                    width={"100%"}
+                    title={
+                      <Text>
+                        {!isSubmitting ? (
+                          <>
+                            <TranslationText id="continue" />{" "}
+                            <Text fontSize={5}>&#8594;</Text>
+                          </>
+                        ) : (
+                          <TranslationText id="loading" />
+                        )}
+                      </Text>
                     }
-                  })
-                  .catch(() => {
-                    setLoading(false);
-                    ToastAndroid.show(
-                      "Something went wrong. Please try again.",
-                      ToastAndroid.SHORT
-                    );
-                  });
-              }}
-            />
-          </Flex>
-        </ScrollView>
-      </PageContent>
-    </Page>
+                    onPress={handleSubmit}
+                  />
+                </Flex>
+              </ScrollView>
+            </PageContent>
+          </Page>
+        );
+      }}
+    </Formik>
   );
 };
 

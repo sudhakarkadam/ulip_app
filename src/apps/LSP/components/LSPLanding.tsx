@@ -28,6 +28,7 @@ import AccountActive from "../../../images/user-circle-dark.svg";
 import TripStack from "./LSPTripStack";
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
 interface TripNavProps {
+  disableEWB?: boolean;
   navigation?: StackNavigationProp<TripStackList, "EWayBillGenerationPage">;
 }
 
@@ -66,7 +67,7 @@ export const LSPTripDetails = (props: HistoryProps & TripNavProps) => {
             tripData.destination_location_details
           ]}
           goodsSegment={tripData.goods_segment}
-          showEwb
+          showEwb={!props.disableEWB}
           ewbStatus={tripData.trip_details?.ewb_status}
           ewbNumber={tripData.trip_details?.ewb_number}
           tripId={tripData.trip_details?.id}
@@ -87,7 +88,7 @@ const HistoryStack = () => {
       />
       <Stack.Screen
         name="TripDetails"
-        component={LSPTripDetails}
+        component={props => <LSPTripDetails disableEWB {...props} />}
         options={{ title: "Trip" }}
       />
     </Stack.Navigator>

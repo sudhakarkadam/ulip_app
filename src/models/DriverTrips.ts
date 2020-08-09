@@ -29,6 +29,8 @@ export interface Root {
   weight_unit: string;
   weight: string;
   tracking_request_id: string;
+  ewb_status: string;
+  ewb_number?: string;
 }
 
 export interface LocationDetails {

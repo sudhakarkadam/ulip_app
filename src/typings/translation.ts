@@ -137,7 +137,25 @@ export type Keys =
   | "valid.upto"
   | "verifying"
   | "warehouse.details"
-  | "warehouse.name";
+  | "warehouse.name"
+  | "errors.ewb.username"
+  | "errors.ewb.password"
+  | "errors.ewb.transactionType"
+  | "errors.ewb.transaction_sub_type"
+  | "errors.ewb.supplier_gstn"
+  | "errors.ewb.recipient_gstn"
+  | "errors.ewb.delivery_pincode"
+  | "errors.ewb.invoice_number"
+  | "errors.ewb.invoice_date"
+  | "errors.ewb.total_value"
+  | "errors.ewb.hsn_code"
+  | "errors.ewb.vehicle_number"
+  | "errors.ewb.from_state_code"
+  | "errors.ewb.to_state_code"
+  | "errors.ewb.act_from_state_code"
+  | "errors.ewb.ship_to_state"
+  | "errors.ewb.consignor_pincode"
+  | "errors.ewb.transporter_id";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -411,5 +429,41 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "warehouse.details"
   ? never
   : T extends "warehouse.name"
+  ? never
+  : T extends "errors.ewb.username"
+  ? never
+  : T extends "errors.ewb.password"
+  ? never
+  : T extends "errors.ewb.transactionType"
+  ? never
+  : T extends "errors.ewb.transaction_sub_type"
+  ? never
+  : T extends "errors.ewb.supplier_gstn"
+  ? never
+  : T extends "errors.ewb.recipient_gstn"
+  ? never
+  : T extends "errors.ewb.delivery_pincode"
+  ? never
+  : T extends "errors.ewb.invoice_number"
+  ? never
+  : T extends "errors.ewb.invoice_date"
+  ? never
+  : T extends "errors.ewb.total_value"
+  ? never
+  : T extends "errors.ewb.hsn_code"
+  ? never
+  : T extends "errors.ewb.vehicle_number"
+  ? never
+  : T extends "errors.ewb.from_state_code"
+  ? never
+  : T extends "errors.ewb.to_state_code"
+  ? never
+  : T extends "errors.ewb.act_from_state_code"
+  ? never
+  : T extends "errors.ewb.ship_to_state"
+  ? never
+  : T extends "errors.ewb.consignor_pincode"
+  ? never
+  : T extends "errors.ewb.transporter_id"
   ? never
   : never;
