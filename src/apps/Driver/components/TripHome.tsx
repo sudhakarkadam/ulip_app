@@ -214,16 +214,17 @@ const Trip: React.FC<Props> = props => {
             <StyledButton
               height="50"
               width="50%"
+              disabled={loading}
               title={
                 !loading ? (
                   <TranslationText id="capture.pop"></TranslationText>
                 ) : (
-                  <Text>Loading...</Text>
+                  <Text>Upoading...</Text>
                 )
               }
               onPress={() => {
                 setLoading(true);
-                capture(123, "POP", async d => {
+                capture(Math.random() * 1000000000000, "POP", async d => {
                   await props.upload({
                     file: d,
                     id: trip.trip_id
