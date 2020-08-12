@@ -30,16 +30,39 @@ export type Keys =
   | "driver.details"
   | "driver.name"
   | "error"
-  | "errors.name"
-  | "errors.regNumber"
-  | "errors.regNumber.maxlength"
+  | "errors.address"
+  | "errors.city"
+  | "errors.ewb.act_from_state_code"
+  | "errors.ewb.consignor_pincode"
+  | "errors.ewb.delivery_pincode"
+  | "errors.ewb.from_state_code"
+  | "errors.ewb.hsn_code"
+  | "errors.ewb.invoice_date"
+  | "errors.ewb.invoice_number"
+  | "errors.ewb.password"
+  | "errors.ewb.recipient_gstn"
+  | "errors.ewb.ship_to_state"
+  | "errors.ewb.supplier_gstn"
+  | "errors.ewb.to_state_code"
+  | "errors.ewb.total_value"
+  | "errors.ewb.transactionType"
+  | "errors.ewb.transaction_sub_type"
+  | "errors.ewb.transporter_id"
+  | "errors.ewb.username"
+  | "errors.ewb.vehicle_number"
+  | "errors.gpsId"
+  | "errors.gpsVendor"
   | "errors.gstin"
   | "errors.gstin.invalid"
   | "errors.location"
+  | "errors.name"
   | "errors.pinCode"
-  | "errors.address"
-  | "errors.city"
+  | "errors.regNumber"
+  | "errors.regNumber.maxlength"
   | "errors.state"
+  | "errors.truckName"
+  | "errors.truckNumber"
+  | "errors.truckType"
   | "errors.warehouseName"
   | "eway.error"
   | "eway.loading"
@@ -137,30 +160,7 @@ export type Keys =
   | "valid.upto"
   | "verifying"
   | "warehouse.details"
-  | "warehouse.name"
-  | "errors.ewb.username"
-  | "errors.ewb.password"
-  | "errors.ewb.transactionType"
-  | "errors.ewb.transaction_sub_type"
-  | "errors.ewb.supplier_gstn"
-  | "errors.ewb.recipient_gstn"
-  | "errors.ewb.delivery_pincode"
-  | "errors.ewb.invoice_number"
-  | "errors.ewb.invoice_date"
-  | "errors.ewb.total_value"
-  | "errors.ewb.hsn_code"
-  | "errors.ewb.vehicle_number"
-  | "errors.ewb.from_state_code"
-  | "errors.ewb.to_state_code"
-  | "errors.ewb.act_from_state_code"
-  | "errors.ewb.ship_to_state"
-  | "errors.ewb.consignor_pincode"
-  | "errors.ewb.transporter_id"
-  | "errors.truckNumber"
-  | "errors.truckName"
-  | "errors.gpsVendor"
-  | "errors.gpsId"
-  | "errors.truckType";
+  | "warehouse.name";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -219,11 +219,49 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "error"
   ? never
-  : T extends "errors.name"
+  : T extends "errors.address"
   ? never
-  : T extends "errors.regNumber"
+  : T extends "errors.city"
   ? never
-  : T extends "errors.regNumber.maxlength"
+  : T extends "errors.ewb.act_from_state_code"
+  ? never
+  : T extends "errors.ewb.consignor_pincode"
+  ? never
+  : T extends "errors.ewb.delivery_pincode"
+  ? never
+  : T extends "errors.ewb.from_state_code"
+  ? never
+  : T extends "errors.ewb.hsn_code"
+  ? never
+  : T extends "errors.ewb.invoice_date"
+  ? never
+  : T extends "errors.ewb.invoice_number"
+  ? never
+  : T extends "errors.ewb.password"
+  ? never
+  : T extends "errors.ewb.recipient_gstn"
+  ? never
+  : T extends "errors.ewb.ship_to_state"
+  ? never
+  : T extends "errors.ewb.supplier_gstn"
+  ? never
+  : T extends "errors.ewb.to_state_code"
+  ? never
+  : T extends "errors.ewb.total_value"
+  ? never
+  : T extends "errors.ewb.transactionType"
+  ? never
+  : T extends "errors.ewb.transaction_sub_type"
+  ? never
+  : T extends "errors.ewb.transporter_id"
+  ? never
+  : T extends "errors.ewb.username"
+  ? never
+  : T extends "errors.ewb.vehicle_number"
+  ? never
+  : T extends "errors.gpsId"
+  ? never
+  : T extends "errors.gpsVendor"
   ? never
   : T extends "errors.gstin"
   ? never
@@ -231,13 +269,21 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "errors.location"
   ? never
+  : T extends "errors.name"
+  ? never
   : T extends "errors.pinCode"
   ? never
-  : T extends "errors.address"
+  : T extends "errors.regNumber"
   ? never
-  : T extends "errors.city"
+  : T extends "errors.regNumber.maxlength"
   ? never
   : T extends "errors.state"
+  ? never
+  : T extends "errors.truckName"
+  ? never
+  : T extends "errors.truckNumber"
+  ? never
+  : T extends "errors.truckType"
   ? never
   : T extends "errors.warehouseName"
   ? never
@@ -434,51 +480,5 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "warehouse.details"
   ? never
   : T extends "warehouse.name"
-  ? never
-  : T extends "errors.ewb.username"
-  ? never
-  : T extends "errors.ewb.password"
-  ? never
-  : T extends "errors.ewb.transactionType"
-  ? never
-  : T extends "errors.ewb.transaction_sub_type"
-  ? never
-  : T extends "errors.ewb.supplier_gstn"
-  ? never
-  : T extends "errors.ewb.recipient_gstn"
-  ? never
-  : T extends "errors.ewb.delivery_pincode"
-  ? never
-  : T extends "errors.ewb.invoice_number"
-  ? never
-  : T extends "errors.ewb.invoice_date"
-  ? never
-  : T extends "errors.ewb.total_value"
-  ? never
-  : T extends "errors.ewb.hsn_code"
-  ? never
-  : T extends "errors.ewb.vehicle_number"
-  ? never
-  : T extends "errors.ewb.from_state_code"
-  ? never
-  : T extends "errors.ewb.to_state_code"
-  ? never
-  : T extends "errors.ewb.act_from_state_code"
-  ? never
-  : T extends "errors.ewb.ship_to_state"
-  ? never
-  : T extends "errors.ewb.consignor_pincode"
-  ? never
-  : T extends "errors.ewb.transporter_id"
-  ? never
-  : T extends "errors.truckNumber"
-  ? never
-  : T extends "errors.truckName"
-  ? never
-  : T extends "errors.gpsVendor"
-  ? never
-  : T extends "errors.gpsId"
-  ? never
-  : T extends "errors.truckType"
   ? never
   : never;
