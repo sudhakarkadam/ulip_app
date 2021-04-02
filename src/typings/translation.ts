@@ -62,6 +62,7 @@ export type Keys =
   | "errors.state"
   | "errors.truckName"
   | "errors.truckNumber"
+  | "errors.truckNumberInvalid"
   | "errors.truckType"
   | "errors.warehouseName"
   | "eway.error"

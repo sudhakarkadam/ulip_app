@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { Page, PageContent } from "../../../components/@styled/Page";
-import { ScrollView } from "react-native-gesture-handler";
 import { FlexColumn, Flex } from "../../../components/@styled/BaseElements";
 import {
   PrimaryHeaderText,
@@ -15,12 +14,13 @@ import SelectComponent from "../../../components/SelectComponent";
 
 import ActionCreators from "../../../actions/ActionCreators";
 import { connect, ConnectedProps } from "react-redux";
-import { ToastAndroid } from "react-native";
+import { ToastAndroid, ScrollView } from "react-native";
 import { HomeStackParamList } from "./LSPHomeStack";
 import { StackScreenProps } from "@react-navigation/stack";
 import { CommonState } from "../../../reducers";
 import { Formik } from "formik";
 import { tomatoBorder } from "../../../utils/tomatoBorder";
+import { vehicleRegex } from "../../../utils/constants";
 
 const mapStateToProps = (state: CommonState) => ({
   trips: state.trips,
@@ -43,12 +43,23 @@ type ReduxProps = ConnectedProps<typeof connector>;
 
 type AddTruckProps = StackScreenProps<HomeStackParamList, "AddTruck">;
 
+type setFieldErrorType = (field: string, message: string) => void;
+
+type setSubmittingType = (isSubmitting: boolean) => void;
+
 const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
   const [loading, setLoading] = useState(false);
+  const [vaahanError, setVaahanError] = useState("");
   const { translate } = useContext(i18n);
+  const scrollViewRef = useRef<ScrollView>(null);
+  const trucksNotInVahan = useRef<string[]>([]);
   const { appConfig, user } = props;
 
-  const fireSaveTruck = async (values: FormVals) => {
+  const fireSaveTruck = async (
+    values: FormVals,
+    setFieldError: setFieldErrorType,
+    setSubmitting: setSubmittingType
+  ) => {
     const profileCreated = user.data.user_details.find(
       role => role.profile.persona === "LSP"
     );
@@ -71,15 +82,32 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
       setLoading(false);
       ToastAndroid.show(translate("truck.save.success"), ToastAndroid.LONG);
       props.navigation.goBack();
-    } catch {
+    } catch ({
+      payload: {
+        res: {
+          response: { type, message }
+        }
+      }
+    }) {
+      let errorMessage = translate("truck.save.error");
+      if (type === "TRUCK_NO_NOT_VALID") {
+        errorMessage = message;
+        setFieldError("truckNumber", errorMessage);
+        setVaahanError(errorMessage);
+        trucksNotInVahan.current.push(values.truckNumber);
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+      }
       setLoading(false);
-      ToastAndroid.show(translate("truck.save.error"), ToastAndroid.LONG);
+      ToastAndroid.show(errorMessage, ToastAndroid.LONG);
+    } finally {
+      setSubmitting(false);
     }
   };
+
   return (
     <Page>
       <PageContent>
-        <ScrollView>
+        <ScrollView ref={scrollViewRef}>
           <Formik
             initialValues={{
               truckNumber: "",
@@ -92,6 +120,12 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
               const errors: Partial<Record<keyof typeof values, string>> = {};
               if (!values.truckNumber) {
                 errors.truckNumber = translate("errors.truckNumber");
+              } else if (!vehicleRegex.test(values.truckNumber)) {
+                errors.truckNumber = translate("errors.truckNumberInvalid");
+              } else if (
+                trucksNotInVahan.current.includes(values.truckNumber)
+              ) {
+                errors.truckNumber = vaahanError;
               }
 
               if (!values.truckName) {
@@ -112,7 +146,9 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
 
               return errors;
             }}
-            onSubmit={values => fireSaveTruck(values)}
+            onSubmit={(values, { setFieldError, setSubmitting }) => {
+              fireSaveTruck(values, setFieldError, setSubmitting);
+            }}
           >
             {({
               errors,
