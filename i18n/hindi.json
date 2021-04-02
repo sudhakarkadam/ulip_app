@@ -32,6 +32,7 @@
   "errors.gstin.invalid": "अमान्य GSTIN प्रवेश किया",
   "errors.pinCode": "पिन कोड दर्ज करें",
   "errors.warehouseName": "गोदाम नाम दर्ज करें",
+  "errors.truckNumberInvalid": "कृपया मान्य ट्रक नंबर दर्ज करें",
   "eway.error": "ई-वे बिल बनाते वक्त कुछ गड़बड़ी हुई है",
   "eway.loading": "ई-वे बिल बनाया जा रहा है…",
   "eway.password": "ई बिलटी पासवर्ड",

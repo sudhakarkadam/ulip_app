@@ -60,6 +60,7 @@
   "errors.state": "Please enter state",
   "errors.truckName": "Please enter Truck Name",
   "errors.truckNumber": "Please enter Truck Number",
+  "errors.truckNumberInvalid": "Please enter valid truck number",
   "errors.truckType": "Please select Truck Type",
   "errors.warehouseName": "Please enter the Warehouse Name",
   "eway.error": "Error occured while generating E-way bill",

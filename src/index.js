@@ -10,6 +10,10 @@ import SplashScreen from "./components/SplashScreen";
 import { InternationalisationProvider } from "./components/InternationalisationProvider";
 import theme from "./theme";
 
+if (__DEV__) {
+  import("./ReactotronConfig").then(() => console.log("Reactotron Configured"));
+}
+
 const ConnectedApp = () => {
   return (
     <InternationalisationProvider>
