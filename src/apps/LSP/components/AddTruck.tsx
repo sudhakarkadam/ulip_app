@@ -170,7 +170,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
                     {translate("truck.details")}
                   </PrimaryHeaderText>
                 </Flex>
-                <TextWrapper label={translate("truck.number")}>
+                <TextWrapper showTooltip label={translate("truck.number")}>
                   <Input
                     value={values.truckNumber}
                     onChangeText={handleChange("truckNumber")}
