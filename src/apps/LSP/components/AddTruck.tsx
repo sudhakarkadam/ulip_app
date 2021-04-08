@@ -89,16 +89,14 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
         }
       }
     }) {
-      let errorMessage = translate("truck.save.error");
       if (type === "TRUCK_NO_NOT_VALID") {
-        errorMessage = message;
-        setFieldError("truckNumber", errorMessage);
-        setVaahanError(errorMessage);
+        setFieldError("truckNumber", message);
+        setVaahanError(message);
         trucksNotInVahan.current.push(values.truckNumber);
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
       }
       setLoading(false);
-      ToastAndroid.show(errorMessage, ToastAndroid.LONG);
+      ToastAndroid.show(message, ToastAndroid.LONG);
     } finally {
       setSubmitting(false);
     }

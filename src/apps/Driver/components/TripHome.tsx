@@ -47,25 +47,6 @@ const Card = styled(Flex)`
   border-right-color: #ffffff;
 `;
 
-const capture = (
-  document_id: number,
-  document_type: Blob | string,
-  callback: (data: FormData) => void
-) => {
-  ImagePicker.showImagePicker(options, data => {
-    const fd = new FormData();
-    fd.append("file", {
-      // @ts-ignore
-      uri: data.uri,
-      type: data.type || "",
-      name: data.fileName
-    });
-    fd.append("document_type", document_type);
-    fd.append("document_id", document_id as any);
-    callback(fd);
-  });
-};
-
 const { getTripById, updateTrip, upload } = ActionCreators;
 const mapDispatchToProps = { getTripById, updateTrip, upload };
 const mapStateToProps = (state: CommonState) => ({
@@ -123,6 +104,29 @@ const Trip: React.FC<Props> = props => {
 
   if (isLoading(props.trip) || isInit(props.trip)) return <ActivityIndicator />;
 
+  const capture = (
+    document_id: number,
+    document_type: Blob | string,
+    callback: (data: FormData) => void
+  ) => {
+    ImagePicker.showImagePicker(options, data => {
+      if (data.didCancel) {
+        setLoading(false);
+        return;
+      }
+      const fd = new FormData();
+      fd.append("file", {
+        // @ts-ignore
+        uri: data.uri,
+        type: data.type || "",
+        name: data.fileName
+      });
+      fd.append("document_type", document_type);
+      fd.append("document_id", document_id as any);
+      callback(fd);
+    });
+  };
+
   // const trips = driverTrips || props.trips.data;
   const trip = props.trip.data;
   if (!trip)
@@ -137,7 +141,10 @@ const Trip: React.FC<Props> = props => {
     );
 
   const openDirections = () => {
-    const location = trip.destination_location_details;
+    let location = trip.destination_location_details;
+    if (trip.trip_status === "TRIP_STARTED") {
+      location = trip.source_location_details;
+    }
     MapmyIndiaDirection.open({
       destination: {
         latitude: location.latitude,
