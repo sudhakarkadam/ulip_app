@@ -91,32 +91,6 @@
   "uploaded.docs": "பதிவேற்றிய ஆவணங்கள்",
   "verifying": "சரிபார்க்கிறது",
   "warehouse.details": "கிடங்கின் விவரங்கள்",
-<<<<<<< HEAD
-
-   //neeraj
-   "personal.details": "Personal Details",
-   "create.profile": "Create Profile",
-   "profile.fullName": "Full Name",
-   "profile.save.profile": "Save Profile",
-   "step.one": "Step 1",
-   "step.two": "Step 2",
-   "add.company": "Add Company",
-   "company.details": "Company Details",
-   "search.for.an.item": "Search for an item",
-   "not.found": "Not Found",
-   "gstin": "GSTIN",
-   "completed": "Completed",
-   "no.entries": "No Entries",
-   "intransit": "In-Transit",
-   "onroad": "On-Road",
-   "active": "Active",
-   "to": "To",
-   "kilogram": "Kg",
-   "ton": "",
-   "largeCase.pending" : "PENDING",
-  "ewb.number":"",
-  "eway.bill.details":""
-=======
   "vehicle.not.valid": "Vehicle Number is not valid. Please enter a valid vehicle number",
  "vehicle.not.truck": "Vehicle Number is not of Truck. You cannot proceed further",
  "vehicle.not.registered": "Vehicle number is not registered with Vahaan. You cannot proceed further",
@@ -201,5 +175,4 @@
  "shipper": "Shipper",
  "past.trips": "Past trips",
  "delivery.receipt": "Delivery receipt"
->>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
 }
