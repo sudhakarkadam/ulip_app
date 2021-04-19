@@ -83,7 +83,7 @@ const PODDetails = (props: Props) => {
               }}
             >
               <FlexRow>
-                <PrimaryText>{<TranslationText id="ewb"/>}: </PrimaryText>
+                <PrimaryText>{<TranslationText id="ewb" />}: </PrimaryText>
                 <PrimaryText style={{ fontWeight: "bold" }}>{ewb}</PrimaryText>
               </FlexRow>
               {/* TODO: Make this button smaller */}
@@ -92,7 +92,7 @@ const PODDetails = (props: Props) => {
                   variant="outline"
                   height="20px"
                   width="172px"
-                  title={<TranslationText id="delivery.receipt"/>}
+                  title={<TranslationText id="delivery.receipt" />}
                   onPress={() => {}}
                   style={{ paddingBottom: 15 }}
                 />
@@ -100,7 +100,7 @@ const PODDetails = (props: Props) => {
             </Card>
           )}
           <Card style={{ paddingVertical: 7 }}>
-            <PrimaryText>{<TranslationText id="delivered.on"/>}</PrimaryText>
+            <PrimaryText>{<TranslationText id="delivered.on" />}</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
               {moment(
                 deliveredDateString || deliveredDate,
@@ -111,7 +111,9 @@ const PODDetails = (props: Props) => {
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>
-            <PrimaryText>{<TranslationText id="delivery.address"/>}</PrimaryText>
+            <PrimaryText>
+              {<TranslationText id="delivery.address" />}
+            </PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
               {destination?.name}
             </PrimaryText>
@@ -121,7 +123,7 @@ const PODDetails = (props: Props) => {
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>
-            <PrimaryText>{<TranslationText id="shipper"/>}</PrimaryText>
+            <PrimaryText>{<TranslationText id="shipper" />}</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
               {source?.name}
             </PrimaryText>
@@ -130,13 +132,15 @@ const PODDetails = (props: Props) => {
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>
-            <PrimaryText>{<TranslationText id="received.by"/>}</PrimaryText>
+            <PrimaryText>{<TranslationText id="received.by" />}</PrimaryText>
             <PrimaryText style={{ fontWeight: "bold", fontSize: 16 }}>
               {pod && pod.id}
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7, borderBottomColor: "#ffffff" }}>
-            <PrimaryText>{<TranslationText id="receiver.signature"/>}</PrimaryText>
+            <PrimaryText>
+              {<TranslationText id="receiver.signature" />}
+            </PrimaryText>
             {pod && (
               <View style={{ paddingTop: 50 }}>
                 <Image
@@ -157,7 +161,7 @@ const PODDetails = (props: Props) => {
             }}
           >
             <StyledButton
-              title={<TranslationText id="add.signature"/>}
+              title={<TranslationText id="add.signature" />}
               fontSize={14}
               onPress={() => {
                 props.navigation.navigate("SignatureUpload");

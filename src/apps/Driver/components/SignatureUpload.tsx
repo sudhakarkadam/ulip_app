@@ -44,7 +44,11 @@ const SignatureUpload: React.FC<Props> = props => {
     //@ts-ignore
     signRef?.current?.saveImage();
   };
-  const SubmitText = !loading ? <Text>{<TranslationText id="submit"/>}</Text> : <Text>{<TranslationText id="loading"/>}...</Text>;
+  const SubmitText = !loading ? (
+    <Text>{<TranslationText id="submit" />}</Text>
+  ) : (
+    <Text>{<TranslationText id="loading" />}...</Text>
+  );
 
   const onDragEvent = () => {
     setSignstate(true);
@@ -83,7 +87,7 @@ const SignatureUpload: React.FC<Props> = props => {
     <Page>
       <PageContent>
         <Flex m={20} p={16} backgroundColor={"white"} height={"80%"}>
-          <TextWrapper label={<TranslationText id="receivers.name"/>}>
+          <TextWrapper label={<TranslationText id="receivers.name" />}>
             <Input value={name} onChangeText={text => setName(text)} />
           </TextWrapper>
           <Text>

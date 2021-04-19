@@ -10,7 +10,7 @@ import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
 import SignatureUpload from "./SignatureUpload";
 import PODDetails from "../../../components/PODDetails";
-import { I18nContext} from "../../../components/InternationalisationProvider";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -80,7 +80,7 @@ const AuthenticatedFlow = (props: OwnProps) => {
       <Stack.Screen
         name="PODDetailsPage"
         component={PODDetails}
-        options={{ title: translate("proof.of.delivery")}}
+        options={{ title: translate("proof.of.delivery") }}
       />
       <Stack.Screen
         name="SignatureUpload"
