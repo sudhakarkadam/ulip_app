@@ -246,7 +246,7 @@ const CreateTrip = (props: Props) => {
                       <SelectComponent
                         placeholder={translate("select.location")}
                         getSelectedValue={val => setToValue(val)}
-                        label="To"
+                        label={translate("to")}
                         data={LocationsList}
                         defaultValue={toValue}
                         searchable={true}

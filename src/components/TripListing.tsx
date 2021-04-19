@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -33,6 +33,7 @@ import ContainerTruck from "../images/containerTruck.svg";
 import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
 import { TranslationText } from "./InternationalisationProvider";
+import { I18nContext } from "../components/InternationalisationProvider";
 
 const profile = require("../images/40px.png");
 
@@ -63,6 +64,7 @@ export const listingConfig = {
   [ListingModes.UPCOMING]: {
     default: {
       title: <TranslationText id="upcoming.trips" />,
+
       primaryWidget: IconWidget.CALENDAR,
       secondaryWidget: IconWidget.LABEL,
       status: [RequestStatus.ACCEPTED, RequestStatus.CREATED]
@@ -84,7 +86,7 @@ export const listingConfig = {
     }
   },
   [ListingModes.ACTIVE]: {
-    title: "Active",
+    title: <TranslationText id="active" />,
     status: [RequestStatus.PENDING_POD],
     secondaryWidget: IconWidget.LABEL
   },
@@ -161,6 +163,8 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
   if (config.default) {
     config = { ...config.default, ...(config[from] || {}) };
   }
+
+  const { translate } = useContext(I18nContext);
   return (
     <>
       {isLoading(props.trips) && <BlockScreenLoader />}
@@ -313,7 +317,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                             bg={colors.grays[2]}
                           >
                             {item.status === RequestStatus.CREATED
-                              ? "⚠ PENDING"
+                              ? "⚠ " + translate("largeCase.pending")
                               : item.status}
                           </Text>
                         </Box>

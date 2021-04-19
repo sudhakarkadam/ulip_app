@@ -3,6 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import InTransitListing from "./InTransitListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
+import { useContext } from "react";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type IntransitStackParams = {
@@ -11,8 +13,8 @@ export type IntransitStackParams = {
 };
 
 const Stack = createStackNavigator<IntransitStackParams>();
-
 const InTransitStack = () => {
+  const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator
       initialRouteName="InTransitListing"
@@ -22,13 +24,15 @@ const InTransitStack = () => {
         name="InTransitListing"
         component={InTransitListing}
         options={{
-          title: "In-Transit"
+          title: translate("intransit")
         }}
       />
       <Stack.Screen
         name="CreateTrip"
         component={ShipperCreateTrip}
-        options={{ title: "Create Trip" }}
+        options={{
+          title: translate("create.trip")
+        }}
       />
     </Stack.Navigator>
   );

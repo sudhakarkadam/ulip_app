@@ -15,6 +15,9 @@ import EWayBillGenerationPage from "../../../components/EWayBillGenerationPage";
 import { PerosnaDetails } from "../../../models/CommonModel";
 import WarehoueseAdd from "./WarehouseAdd";
 import ShipperMetrics from "./ShipperMetrics";
+import { useContext } from "react";
+import { I18nContext } from "../../../components/InternationalisationProvider";
+
 export type HomeStackParamList = {
   CreateProfile: undefined;
   PersonProfile: undefined;
@@ -44,6 +47,7 @@ const HomeStack = (props: OwnProps) => {
   );
   const personVerified = profileCreated?.profile.name;
   const comapnyVerified = profileCreated?.business_details;
+  const { translate } = useContext(I18nContext);
   return (
     <>
       {!personVerified || !comapnyVerified ? (
@@ -54,17 +58,17 @@ const HomeStack = (props: OwnProps) => {
           <Stack.Screen
             name="CreateProfile"
             component={ShipperCreateProfile}
-            options={{ title: "Home" }}
+            options={{ title: translate("home") }}
           />
           <Stack.Screen
             name="PersonProfile"
             component={ShipperPersonProfile}
-            options={{ title: "Create Profile" }}
+            options={{ title: translate("create.profile") }}
           />
           <Stack.Screen
             name="CompanyProfile"
             component={ShipperCompanyProfile}
-            options={{ title: "Add Company" }}
+            options={{ title: translate("add.company") }}
           />
         </Stack.Navigator>
       ) : (
@@ -75,32 +79,32 @@ const HomeStack = (props: OwnProps) => {
           <Stack.Screen
             name="ShipperMetrics"
             component={ShipperMetrics}
-            options={{ title: "Home" }}
+            options={{ title: translate("home") }}
           />
           <Stack.Screen
             name="MainTripListing"
             component={MainTripListing}
-            options={{ title: "Home" }}
+            options={{ title: translate("home") }}
           />
           <Stack.Screen
             name="ShipperTripDetails"
             component={ShipperTripDetails}
-            options={{ title: "Trip Details" }}
+            options={{ title: translate("trip.details") }}
           />
           <Stack.Screen
             name="CreateTrip"
             component={ShipperCreateTrip}
-            options={{ title: "Create Trip" }}
+            options={{ title: translate("create.trip") }}
           />
           <Stack.Screen
             name="WarehouseAdd"
             component={WarehoueseAdd}
-            options={{ title: "Add Warehouse" }}
+            options={{ title: translate("add.warehouse") }}
           />
           <Stack.Screen
             name="EWayBillGenerationPage"
             component={EWayBillGenerationPage}
-            options={{ title: "Generate E-way bill" }}
+            options={{ title: translate("generate.ewb") }}
           />
         </Stack.Navigator>
       )}

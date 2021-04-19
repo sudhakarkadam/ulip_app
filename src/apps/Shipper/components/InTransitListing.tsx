@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Flex } from "../../../components/@styled/BaseElements";
 import colors from "../../../theme/colors";
@@ -14,6 +14,7 @@ import {
 } from "@react-navigation/native";
 import { IntransitStackParams } from "./InTransitStack";
 import { ShipperAuthenticatedStackParamList } from "./ShipperHome";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 
 type NavigationProps = CompositeNavigationProp<
   StackNavigationProp<IntransitStackParams, "InTransitListing">,
@@ -26,9 +27,10 @@ interface Props {
 
 const Trips: React.FunctionComponent<Props> = props => {
   const [index, setIndex] = useState(0);
+  const { translate } = useContext(I18nContext);
   const [routes] = useState([
-    { key: "ON-ROAD", title: "ON-ROAD" },
-    { key: "ACTIVE", title: "ACTIVE" }
+    { key: "ON-ROAD", title: translate("onroad") },
+    { key: "ACTIVE", title: translate("active") }
   ]);
 
   const OnRoad = () => (

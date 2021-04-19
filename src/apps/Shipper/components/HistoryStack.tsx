@@ -3,10 +3,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HistoryListing from "./HistoryListing";
 import ShipperTripDetails from "./ShipperTripDetails";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
+import { useContext } from "react";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 
 const Stack = createStackNavigator();
 
 const HistoryStack = () => {
+  const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator
       initialRouteName="HistoryListing"
@@ -16,7 +19,7 @@ const HistoryStack = () => {
         name="HistoryListing"
         component={HistoryListing}
         options={{
-          title: "History"
+          title: translate("history")
         }}
       />
       <Stack.Screen
