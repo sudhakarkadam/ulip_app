@@ -102,7 +102,6 @@ const LightSubText: React.FC<{ fontSize?: number }> = ({
 );
 
 const getLabel = (index: number, item: Place | CrossedPlace) => {
-<<<<<<< Updated upstream
   const label =
     index === 0 ? (
       <Label>
@@ -113,9 +112,6 @@ const getLabel = (index: number, item: Place | CrossedPlace) => {
         <TranslationText id="to"></TranslationText>
       </Label>
     );
-=======
-  const label = index === 0 ? <Label>{<TranslationText id="from"/>}</Label> : <Label>{<TranslationText id="to"/>}</Label>;
->>>>>>> Stashed changes
   return item.tag ? (
     <>
       <FlexVerticallyCenter flexDirection="row" justifyContent="space-around">
