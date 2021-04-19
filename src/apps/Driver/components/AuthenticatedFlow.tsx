@@ -52,7 +52,10 @@ const AuthenticatedFlow = (props: OwnProps) => {
         component={DriverCreateProfile}
         options={{ title: translate("home") }}
       />
-      <Stack.Screen name="PersonProfile" options={{ title: translate("create.profile") }}>
+      <Stack.Screen
+        name="PersonProfile"
+        options={{ title: translate("create.profile") }}
+      >
         {navigationProps => (
           <PersonProfile
             userInfo={props.userInfo}
