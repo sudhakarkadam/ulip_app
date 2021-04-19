@@ -31,17 +31,21 @@ const ShipperCreateProfile = (props: AllProps) => {
       <PageContent>
         {!personVerified && (
           <CardComp
-            cardHeading="STEP 1"
+            cardHeading={translate("step.one")}
             taskHeading={translate("profile.setup")}
+            clickLabel={translate("start")}
             imgSrc={personIcon}
-            taskClickCallback={() => props.navigation.navigate("PersonProfile")}
+            taskClickCallback={() => {
+              props.navigation.navigate("PersonProfile");
+            }}
           ></CardComp>
         )}
         <Flex mt={3} />
         {!comapnyVerified && (
           <CardComp
-            cardHeading="STEP 2"
+            cardHeading={translate("step.two")}
             taskHeading={translate("company.setup")}
+            clickLabel={translate("start")}
             imgSrc={personIcon}
             taskClickCallback={() =>
               props.navigation.navigate("CompanyProfile")

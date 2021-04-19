@@ -103,6 +103,7 @@ const EWayBillCard = ({
   const [ewayStatus] = useState(ewayStatusProps(status));
   const [showModal, setModal] = useState(false);
   const [number, setNumber] = useState("");
+
   return (
     <>
       <Card
@@ -135,7 +136,7 @@ const EWayBillCard = ({
         </FlexRow>
         {ewbNumber && (
           <FlexRow width={"100%"} pt={"16px"}>
-            <TextWrapper label="EWB Number">
+            <TextWrapper label={translate("ewb.number")}>
               <Text fontSize={"18px"} fontWeight={"bold"}>
                 {ewbNumber}
               </Text>
@@ -163,9 +164,9 @@ const EWayBillCard = ({
             <Flex width={"100%"}>
               <Box pb={"30px"}>
                 <Text color={"#000066"} fontSize={"18px"} fontWeight={"bold"}>
-                  E-Way bill details
+                  <TranslationText id="eway.bill.details" />
                 </Text>
-                <TextWrapper label="EWB Number">
+                <TextWrapper label={translate("ewb.number")}>
                   <Input value={number} onChangeText={num => setNumber(num)} />
                 </TextWrapper>
                 <StyledButton

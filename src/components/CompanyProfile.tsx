@@ -13,7 +13,7 @@ import {
 import { PrimaryHeaderText, TextWrapper, ErrorText } from "./@styled/Text";
 import { Page, PageContent } from "./@styled/Page";
 import { useIsFocused } from "@react-navigation/native";
-import { I18nContext } from "./InternationalisationProvider";
+import { I18nContext, TranslationText } from "./InternationalisationProvider";
 import { Formik } from "formik";
 import { tomatoBorder } from "../utils/tomatoBorder";
 const MapmyIndia = require("mmi-widget");
@@ -125,7 +125,7 @@ const CompanyProfile = (props: OwnProps) => {
                           fontSize={4}
                           fontWeight={700}
                         >
-                          Company details
+                          <TranslationText id="company.details"></TranslationText>
                         </PrimaryHeaderText>
                       </Flex>
                       <TextWrapper label={translate("company.name")}>

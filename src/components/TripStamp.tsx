@@ -12,6 +12,7 @@ import DestinationIcon from "../images/location.svg";
 import TrailerIcon from "../images/trailer.svg";
 import CheckIcon from "../images/tick.svg";
 import { Location } from "../models/DriverTrips";
+import { TranslationText } from "./InternationalisationProvider";
 
 export interface Place {
   name: string;
@@ -101,7 +102,16 @@ const LightSubText: React.FC<{ fontSize?: number }> = ({
 );
 
 const getLabel = (index: number, item: Place | CrossedPlace) => {
-  const label = index === 0 ? <Label>From</Label> : <Label>To</Label>;
+  const label =
+    index === 0 ? (
+      <Label>
+        <TranslationText id="from"></TranslationText>
+      </Label>
+    ) : (
+      <Label>
+        <TranslationText id="to"></TranslationText>
+      </Label>
+    );
   return item.tag ? (
     <>
       <FlexVerticallyCenter flexDirection="row" justifyContent="space-around">

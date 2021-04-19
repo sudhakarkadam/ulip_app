@@ -161,7 +161,90 @@ export type Keys =
   | "valid.upto"
   | "verifying"
   | "warehouse.details"
-  | "warehouse.name";
+  | "warehouse.name"
+  | "proof.of.delivery"
+  | "add.company"
+  | "eway.dispatch.from.state"
+  | "shipper"
+  | "eway.to.billing.state"
+  | "home.requests"
+  | "eway.receipt.gstin"
+  | "not.found"
+  | "eway.from.billing.state"
+  | "create.profile"
+  | "eway.bill.details"
+  | "vehicle.not.registered"
+  | "eway.user.gst"
+  | "receiver.signature"
+  | "profile.start"
+  | "eway.invoice.number"
+  | "uploading"
+  | "select.proof"
+  | "delivered.on"
+  | "eway.invoice.date"
+  | "company.profile"
+  | "received.by"
+  | "add.signature"
+  | "created"
+  | "pod.details.page"
+  | "active"
+  | "completed"
+  | "trip.success.created"
+  | "accept"
+  | "vehicle.not.truck"
+  | "no.entries"
+  | "generate.eway.bill"
+  | "eway.vehicle.number"
+  | "TON"
+  | "past.trips"
+  | "close.button"
+  | "ewb.number"
+  | "eway.delivery.pincode"
+  | "company.details"
+  | "intransit"
+  | "receivers.name"
+  | "add.truck"
+  | "reject.button"
+  | "starting"
+  | "eway.transported.id"
+  | "step.two"
+  | "details.button"
+  | "upcoming.trips"
+  | "delivery.receipt"
+  | "eway.total.value"
+  | "truck.request"
+  | "vahaan.not.available"
+  | "eway.ship.to.state"
+  | "trip.details"
+  | "gstin"
+  | "search.for.an.item"
+  | "largeCase.pending"
+  | "step.one"
+  | "onroad"
+  | "no.past.trips"
+  | "eway.transaction"
+  | "eway.supplier.gstin"
+  | "trip.rejected"
+  | "select.transaction.subtype"
+  | "vehicle.not.valid"
+  | "personal.details"
+  | "your.location"
+  | "KG"
+  | "full.name"
+  | "profile.save"
+  | "collect.pod"
+  | "select.item"
+  | "save.profile"
+  | "eway.bill.from.pincode"
+  | "delivery.address"
+  | "select.truck"
+  | "format.vehicle"
+  | "select.gps.vendor"
+  | "submit.button"
+  | "ewb"
+  | "trips"
+  | "to"
+  | "eway.hsn.code";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -283,6 +366,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "errors.truckName"
   ? never
   : T extends "errors.truckNumber"
+  ? never
+  : T extends "errors.truckNumberInvalid"
   ? never
   : T extends "errors.truckType"
   ? never
@@ -481,5 +566,171 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "warehouse.details"
   ? never
   : T extends "warehouse.name"
+  ? never
+  : T extends "proof.of.delivery"
+  ? never
+  : T extends "add.company"
+  ? never
+  : T extends "eway.dispatch.from.state"
+  ? never
+  : T extends "shipper"
+  ? never
+  : T extends "eway.to.billing.state"
+  ? never
+  : T extends "home.requests"
+  ? never
+  : T extends "eway.receipt.gstin"
+  ? never
+  : T extends "not.found"
+  ? never
+  : T extends "eway.from.billing.state"
+  ? never
+  : T extends "create.profile"
+  ? never
+  : T extends "eway.bill.details"
+  ? never
+  : T extends "vehicle.not.registered"
+  ? never
+  : T extends "eway.user.gst"
+  ? never
+  : T extends "receiver.signature"
+  ? never
+  : T extends "profile.start"
+  ? never
+  : T extends "eway.invoice.number"
+  ? never
+  : T extends "uploading"
+  ? never
+  : T extends "select.proof"
+  ? never
+  : T extends "delivered.on"
+  ? never
+  : T extends "eway.invoice.date"
+  ? never
+  : T extends "company.profile"
+  ? never
+  : T extends "received.by"
+  ? never
+  : T extends "add.signature"
+  ? never
+  : T extends "created"
+  ? never
+  : T extends "pod.details.page"
+  ? never
+  : T extends "active"
+  ? never
+  : T extends "completed"
+  ? never
+  : T extends "trip.success.created"
+  ? never
+  : T extends "accept"
+  ? never
+  : T extends "vehicle.not.truck"
+  ? never
+  : T extends "no.entries"
+  ? never
+  : T extends "generate.eway.bill"
+  ? never
+  : T extends "eway.vehicle.number"
+  ? never
+  : T extends "TON"
+  ? never
+  : T extends "past.trips"
+  ? never
+  : T extends "close.button"
+  ? never
+  : T extends "ewb.number"
+  ? never
+  : T extends "eway.delivery.pincode"
+  ? never
+  : T extends "company.details"
+  ? never
+  : T extends "intransit"
+  ? never
+  : T extends "receivers.name"
+  ? never
+  : T extends "add.truck"
+  ? never
+  : T extends "reject.button"
+  ? never
+  : T extends "starting"
+  ? never
+  : T extends "eway.transported.id"
+  ? never
+  : T extends "step.two"
+  ? never
+  : T extends "details.button"
+  ? never
+  : T extends "upcoming.trips"
+  ? never
+  : T extends "delivery.receipt"
+  ? never
+  : T extends "eway.total.value"
+  ? never
+  : T extends "truck.request"
+  ? never
+  : T extends "vahaan.not.available"
+  ? never
+  : T extends "eway.ship.to.state"
+  ? never
+  : T extends "trip.details"
+  ? never
+  : T extends "gstin"
+  ? never
+  : T extends "search.for.an.item"
+  ? never
+  : T extends "largeCase.pending"
+  ? never
+  : T extends "step.one"
+  ? never
+  : T extends "onroad"
+  ? never
+  : T extends "no.past.trips"
+  ? never
+  : T extends "eway.transaction"
+  ? never
+  : T extends "eway.supplier.gstin"
+  ? never
+  : T extends "trip.rejected"
+  ? never
+  : T extends "select.transaction.subtype"
+  ? never
+  : T extends "vehicle.not.valid"
+  ? never
+  : T extends "personal.details"
+  ? never
+  : T extends "your.location"
+  ? never
+  : T extends "KG"
+  ? never
+  : T extends "full.name"
+  ? never
+  : T extends "profile.save"
+  ? never
+  : T extends "collect.pod"
+  ? never
+  : T extends "select.item"
+  ? never
+  : T extends "save.profile"
+  ? never
+  : T extends "eway.bill.from.pincode"
+  ? never
+  : T extends "delivery.address"
+  ? never
+  : T extends "select.truck"
+  ? never
+  : T extends "format.vehicle"
+  ? never
+  : T extends "select.gps.vendor"
+  ? never
+  : T extends "submit.button"
+  ? never
+  : T extends "ewb"
+  ? never
+  : T extends "trips"
+  ? never
+  : T extends "to"
+  ? never
+  : T extends "eway.hsn.code"
   ? never
   : never;

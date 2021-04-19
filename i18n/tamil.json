@@ -89,5 +89,29 @@
   "upcoming": "எதிர்கால பயணங்கள்",
   "uploaded.docs": "பதிவேற்றிய ஆவணங்கள்",
   "verifying": "சரிபார்க்கிறது",
-  "warehouse.details": "கிடங்கின் விவரங்கள்"
+  "warehouse.details": "கிடங்கின் விவரங்கள்",
+
+   //neeraj
+   "personal.details": "Personal Details",
+   "create.profile": "Create Profile",
+   "profile.fullName": "Full Name",
+   "profile.save.profile": "Save Profile",
+   "step.one": "Step 1",
+   "step.two": "Step 2",
+   "add.company": "Add Company",
+   "company.details": "Company Details",
+   "search.for.an.item": "Search for an item",
+   "not.found": "Not Found",
+   "gstin": "GSTIN",
+   "completed": "Completed",
+   "no.entries": "No Entries",
+   "intransit": "In-Transit",
+   "onroad": "On-Road",
+   "active": "Active",
+   "to": "To",
+   "kilogram": "Kg",
+   "ton": "",
+   "largeCase.pending" : "PENDING",
+  "ewb.number":"",
+  "eway.bill.details":""
 }
