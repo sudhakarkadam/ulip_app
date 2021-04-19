@@ -17,7 +17,6 @@ interface OwnProps {
   userInfo: UserDataModel | null;
 }
 
-
 const PersonProfile = (props: OwnProps) => {
   const { translate } = useContext(I18nContext);
   return (
@@ -54,7 +53,8 @@ const PersonProfile = (props: OwnProps) => {
             <Flex1 p={6} mt={4} backgroundColor="white">
               <Flex mb={5}>
                 <PrimaryHeaderText>
-                  <TranslationText id="personal.details"></TranslationText></PrimaryHeaderText>
+                  <TranslationText id="personal.details"></TranslationText>
+                </PrimaryHeaderText>
               </Flex>
 
               <Input

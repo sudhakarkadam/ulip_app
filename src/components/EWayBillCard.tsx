@@ -164,8 +164,8 @@ const EWayBillCard = ({
             <Flex width={"100%"}>
               <Box pb={"30px"}>
                 <Text color={"#000066"} fontSize={"18px"} fontWeight={"bold"}>
-                  <TranslationText id="eway.bill.details"/>
-                  </Text>
+                  <TranslationText id="eway.bill.details" />
+                </Text>
                 <TextWrapper label={translate("ewb.number")}>
                   <Input value={number} onChangeText={num => setNumber(num)} />
                 </TextWrapper>

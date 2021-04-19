@@ -62,7 +62,7 @@ enum IconWidget {
 export const listingConfig = {
   [ListingModes.UPCOMING]: {
     default: {
-      title: <TranslationText id="upcoming.trips"/>,
+      title: <TranslationText id="upcoming.trips" />,
       primaryWidget: IconWidget.CALENDAR,
       secondaryWidget: IconWidget.LABEL,
       status: [RequestStatus.ACCEPTED, RequestStatus.CREATED]
@@ -75,7 +75,7 @@ export const listingConfig = {
   },
   [ListingModes.ON_ROAD]: {
     default: {
-      title: <TranslationText id="on.road"/>,
+      title: <TranslationText id="on.road" />,
       status: [RequestStatus.IN_PROGRESS],
       secondaryWidget: IconWidget.CALENDAR
     },
@@ -89,18 +89,18 @@ export const listingConfig = {
     secondaryWidget: IconWidget.LABEL
   },
   [ListingModes.COMPLETED]: {
-    title: <TranslationText id="completed"/>,
+    title: <TranslationText id="completed" />,
     status: [RequestStatus.COMPLETED],
     secondaryWidget: IconWidget.LABEL
   },
   [ListingModes.PENDING_REQUESTS]: {
-    title: <TranslationText id="requests"/>,
+    title: <TranslationText id="requests" />,
     status: [RequestStatus.CREATED],
     primaryWidget: IconWidget.CALENDAR,
     secondaryWidget: IconWidget.TRUCK
   },
   [ListingModes.PENDING]: {
-    title: <TranslationText id="pending"/>,
+    title: <TranslationText id="pending" />,
     secondaryWidget: IconWidget.LABEL,
     status: [RequestStatus.PENDING_POD]
   }
@@ -200,7 +200,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
               ListEmptyComponent={
                 <Box p={6}>
                   <SecondaryText>
-                    <TranslationText id="no.entries"/>
+                    <TranslationText id="no.entries" />
                   </SecondaryText>
                 </Box>
               }

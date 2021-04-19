@@ -88,7 +88,7 @@ const HistoryStack = () => {
       <Stack.Screen
         name="History"
         component={History}
-        options={{ title: translate("history")}}
+        options={{ title: translate("history") }}
       />
       <Stack.Screen
         name="TripDetails"
@@ -106,7 +106,10 @@ const AccountsStack = () => {
       initialRouteName={"AccountsPage"}
       screenOptions={HeaderOptions}
     >
-      <Stack.Screen name="AccountsPage" options={{ title: translate("accounts") }}>
+      <Stack.Screen
+        name="AccountsPage"
+        options={{ title: translate("accounts") }}
+      >
         {() => <AccountsPage persona="LSP" />}
       </Stack.Screen>
     </Stack.Navigator>
@@ -120,7 +123,6 @@ export type LSPBottomTabList = {
   Account: undefined;
 };
 const tabs = [
-  
   {
     name: "HomeStack",
     label: <TranslationText id="home"></TranslationText>,

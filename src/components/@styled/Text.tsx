@@ -103,8 +103,9 @@ export const TextWrapper = ({
   const getTooltipTemplate = () => {
     return (
       <Flex>
-        <Text><TranslationText id="format.vehicle"/>
-          </Text>
+        <Text>
+          <TranslationText id="format.vehicle" />
+        </Text>
         {vehicleFormats.map((val, index) => (
           <Text key={index}>{val}</Text>
         ))}

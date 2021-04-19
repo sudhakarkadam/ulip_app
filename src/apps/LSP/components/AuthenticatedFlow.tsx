@@ -90,7 +90,7 @@ const LSPCreateProfile = (
             <CardComp
               cardHeading={translate("step.one")}
               taskHeading={translate("profile.setup")}
-              clickLabel ={translate("profile.start")}
+              clickLabel={translate("profile.start")}
               imgSrc={personIcon}
               taskClickCallback={() =>
                 props.navigation.navigate("PersonProfile")
@@ -102,7 +102,7 @@ const LSPCreateProfile = (
             <CardComp
               cardHeading={translate("step.two")}
               taskHeading={translate("company.setup")}
-              clickLabel ={translate("profile.start")}
+              clickLabel={translate("profile.start")}
               imgSrc={personIcon}
               taskClickCallback={() =>
                 props.navigation.navigate("CompanyProfile")
@@ -192,7 +192,7 @@ const AuthenticatedFlow = (props: ConnectedProps<typeof connector>) => {
           <Stack.Screen
             name="CreateProfile"
             component={ConnectedLSPCreateProfile}
-            options={{ title: translate("create.profile")}}
+            options={{ title: translate("create.profile") }}
           />
           <Stack.Screen
             name="PersonProfile"

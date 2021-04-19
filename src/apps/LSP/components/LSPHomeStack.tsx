@@ -102,7 +102,7 @@ const HomeStack = () => {
       <Stack.Screen
         name="HomeMetricsComponent"
         component={HomeMetricsComponent}
-        options={{ title: translate("home")  }}
+        options={{ title: translate("home") }}
       />
       <Stack.Screen
         name="TripAcceptPage"
@@ -112,7 +112,7 @@ const HomeStack = () => {
       <Stack.Screen
         name="AddTruck"
         component={AddTruck}
-        options={{ title: translate("add.truck")}}
+        options={{ title: translate("add.truck") }}
       />
     </Stack.Navigator>
   );
