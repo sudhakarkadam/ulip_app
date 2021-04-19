@@ -22,7 +22,7 @@ const TripStack = () => {
   const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator initialRouteName={"Trips"} screenOptions={HeaderOptions}>
-      <Stack.Screen 
+      <Stack.Screen
         name="Trips"
         component={Trips}
         options={{ title: translate("trips") }}
