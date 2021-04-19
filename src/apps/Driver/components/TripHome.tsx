@@ -28,7 +28,10 @@ import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
-import { I18nContext, TranslationText } from "../../../components/InternationalisationProvider";
+import {
+  I18nContext,
+  TranslationText
+} from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
 const MapmyIndia = require("mmi-widget");
 const options = {
@@ -79,9 +82,8 @@ const SwipeActions = (
           fontWeight: "bold",
           transform: [{ translateX: translate }]
         }}
-        
       >
-      <TranslationText id="starting"/>
+        <TranslationText id="starting" />
       </Animated.Text>
     </View>
   );
@@ -227,11 +229,7 @@ const Trip: React.FC<Props> = props => {
                 !loading ? (
                   <TranslationText id="capture.pop"></TranslationText>
                 ) : (
-<<<<<<< Updated upstream
-                  <Text>Uploading...</Text>
-=======
                   <Text>{translate("uploading")}</Text>
->>>>>>> Stashed changes
                 )
               }
               onPress={() => {
