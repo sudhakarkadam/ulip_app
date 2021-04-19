@@ -33,6 +33,7 @@ const HomeStack = () => {
           />
         )}
       </Stack.Screen>
+<<<<<<< Updated upstream
 
       <Stack.Screen
         name="TripHome"
@@ -41,6 +42,11 @@ const HomeStack = () => {
       />
       <Stack.Screen name="TripDetails" component={TripDetails} />
       <Stack.Screen name="PODDetailsPage" component={PODDetails} />
+=======
+      <Stack.Screen name="TripHome" component={TripHome} options={{ title: translate("trip.home")}}/>
+      <Stack.Screen name="TripDetails" component={TripDetails} options={{ title: translate("trip.details")}} />
+      <Stack.Screen name="PODDetailsPage" component={PODDetails} options={{ title: translate("pod.details.page")}}/>
+>>>>>>> Stashed changes
     </Stack.Navigator>
   );
 };
@@ -69,17 +75,22 @@ const PastTrips = () => {
         {props => (
           <DriverTripsListing
             {...props}
-            title="Past trips"
+            title={translate("past.trips")}
             status={["COMPLETED"]}
           />
         )}
       </Stack.Screen>
+<<<<<<< Updated upstream
       <Stack.Screen
         name="TripHome"
         component={TripHome}
         options={{ title: translate("create.profile") }}
       />
       <Stack.Screen name="TripDetails" component={TripDetails} />
+=======
+      <Stack.Screen name="TripHome" component={TripHome} options={{ title: translate("trip.home")}} />
+      <Stack.Screen name="TripDetails" component={TripDetails} options={{ title: translate("trip.details")}} />
+>>>>>>> Stashed changes
     </Stack.Navigator>
   );
 };

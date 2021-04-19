@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import PersonProfile from "../../../components/PersonProfile";
 import DriverCreateProfile from "./DriverCreateProfile";
@@ -10,6 +10,7 @@ import { HeaderOptions } from "../../../components/@styled/BaseElements";
 
 import SignatureUpload from "./SignatureUpload";
 import PODDetails from "../../../components/PODDetails";
+import { I18nContext} from "../../../components/InternationalisationProvider";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type DriverHomeStackParamList = {
@@ -36,6 +37,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type OwnProps = ConnectedProps<typeof connector>;
 
 const AuthenticatedFlow = (props: OwnProps) => {
+  const { translate } = useContext(I18nContext);
   const profileCreated = props.userInfo.user_details.find(
     role => role.profile.persona === "DRIVER"
   );
@@ -78,12 +80,12 @@ const AuthenticatedFlow = (props: OwnProps) => {
       <Stack.Screen
         name="PODDetailsPage"
         component={PODDetails}
-        options={{ title: "Proof of delivery" }}
+        options={{ title: translate("proof.of.delivery")}}
       />
       <Stack.Screen
         name="SignatureUpload"
         component={SignatureUpload}
-        options={{ title: "Add Signature" }}
+        options={{ title: translate("add.signature") }}
       />
     </Stack.Navigator>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ScrollView,
   ActivityIndicator,
@@ -28,10 +28,9 @@ import { ConnectedProps, connect } from "react-redux";
 import { isLoading, isInit } from "../../../utils/actionCreator";
 import { StickyBottom } from "../../../components/StickyBottom";
 import { CommonState } from "../../../reducers";
-import { TranslationText } from "../../../components/InternationalisationProvider";
+import { I18nContext, TranslationText } from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
 const MapmyIndia = require("mmi-widget");
-
 const options = {
   title: "Select proof",
   storageOptions: {
@@ -80,8 +79,9 @@ const SwipeActions = (
           fontWeight: "bold",
           transform: [{ translateX: translate }]
         }}
+        
       >
-        STARTING...
+      <TranslationText id="starting"/>
       </Animated.Text>
     </View>
   );
@@ -97,6 +97,7 @@ const getStartText = () => {
 
 const Trip: React.FC<Props> = props => {
   const getTrip = () => props.getTripById(props.route.params.id);
+  const { translate } = useContext(I18nContext);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     getTrip();
@@ -226,7 +227,11 @@ const Trip: React.FC<Props> = props => {
                 !loading ? (
                   <TranslationText id="capture.pop"></TranslationText>
                 ) : (
+<<<<<<< Updated upstream
                   <Text>Uploading...</Text>
+=======
+                  <Text>{translate("uploading")}</Text>
+>>>>>>> Stashed changes
                 )
               }
               onPress={() => {
@@ -283,7 +288,7 @@ const Trip: React.FC<Props> = props => {
         <StyledButton
           width="100%"
           height="50px"
-          title="Collect POD"
+          title={translate("collect.pod")}
           onPress={() => {
             props.navigation.navigate("PODDetailsPage");
           }}
@@ -309,7 +314,6 @@ const Trip: React.FC<Props> = props => {
               const isReached =
                 t.item.trip_status === "REACHED" ||
                 t.item.trip_status === "COMPLETED";
-
               return (
                 <Flex mt={4}>
                   <Card>
@@ -320,7 +324,7 @@ const Trip: React.FC<Props> = props => {
                           fontSize={20}
                           fontWeight={"bold"}
                         >
-                          Trip Details
+                          {translate("trip.details")}
                         </Text>
                         <Flex style={{ paddingVertical: 25 }}>
                           <PrimaryText>
@@ -345,7 +349,7 @@ const Trip: React.FC<Props> = props => {
                           variant="outline"
                           height="30px"
                           width="122px"
-                          title={"Details"}
+                          title={translate("details")}
                           onPress={() =>
                             props.navigation.navigate("TripDetails")
                           }
@@ -361,7 +365,7 @@ const Trip: React.FC<Props> = props => {
                         ...(isStarted || isInTransit || isReached
                           ? [
                               {
-                                name: "Your location",
+                                name: translate("your.location"),
                                 relativeDistance: 23,
                                 // @ts-ignore
                                 crossed: true
@@ -379,7 +383,7 @@ const Trip: React.FC<Props> = props => {
                           ? [
                               {
                                 ...convert(trip.source_location_details),
-                                tag: "Pickup Point"
+                                tag: translate("pick.up.point")
                               }
                             ]
                           : []),
@@ -399,7 +403,7 @@ const Trip: React.FC<Props> = props => {
                                 ...convert(trip.destination_location_details),
                                 // @ts-ignore
                                 crossed: true,
-                                tag: "Destination Point"
+                                tag: translate("destination.point")
                               }
                             ]
                           : [convert(trip.destination_location_details)])

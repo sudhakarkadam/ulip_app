@@ -1,132 +1,323 @@
 {
+
   "accept.terms": "जारी रखने पर, आप हमारी शर्तों और गोपनीयता नीति से सहमत होंगे",
+
   "account": "अकाउंट",
+
   "accounts": "हिसाब किताब",
+
   "add.now": "अब जोड़ें",
+
   "add.warehouse": "गोदाम जोड़ें",
+
   "address": "पता",
+
   "are.you.sure": "क्या आप इसके बारे में निश्चित है?",
+
   "capture.pop": "\"डिलीवरी का सबूत\" कैप्चर करें",
+
   "choose.language": "अपनी भाषा बदलें",
+
   "choose.lsp": "LSP चुनें",
+
   "choose.reason": "कारण चुनें",
+
   "choose.truck": "ट्रक चुनें",
+
   "choose.unit": "यूनिट चुनें",
+<<<<<<< Updated upstream
   "city": "शहर",
+=======
+
+  "city": "शहर",
+
+>>>>>>> Stashed changes
   "close": "बंद करें",
+
   "company.name": "कंपनी का नाम",
+<<<<<<< Updated upstream
   "company.setup": "कंपनी सेटअप",
+=======
+
+  "company.setup": "कंपनी सेटअप",
+
+>>>>>>> Stashed changes
   "confirm": "पुष्टि करें",
+
   "container": "पात्र",
+
   "continue": "जारी रखें",
+
   "create.trip": "ट्रिप की योजना करें",
+
   "current.profile": "वर्तमान प्रोफाइल",
+
   "destination.point": "गंतव्य बिंदु",
+
   "details": "जानकारी",
+<<<<<<< Updated upstream
   "do.not.have.ewb": "अगर आपके पास ई-वे बिल नंबर नहीं है तो",
+=======
+
+  "do.not.have.ewb": "अगर आपके पास ई-वे बिल नंबर नहीं है तो",
+
+>>>>>>> Stashed changes
   "does.not.exist": "यह मौजूद नहीं है",
+
   "driver.details": "ड्राइवर की जानकारी",
+
   "driver.name": "ड्राइवर का नाम",
+
   "error": "कुछ गड़बड़ी हुई है",
+
   "errors.gstin": "GSTIN संख्या दर्ज करें",
+
   "errors.gstin.invalid": "अमान्य GSTIN प्रवेश किया",
+
   "errors.pinCode": "पिन कोड दर्ज करें",
+
   "errors.warehouseName": "गोदाम नाम दर्ज करें",
+
   "errors.truckNumberInvalid": "कृपया मान्य ट्रक नंबर दर्ज करें",
+
   "eway.error": "ई-वे बिल बनाते वक्त कुछ गड़बड़ी हुई है",
+
   "eway.loading": "ई-वे बिल बनाया जा रहा है…",
+
   "eway.password": "ई बिलटी पासवर्ड",
+
   "eway.pending": "ट्रिप का ई-वे बिल बाकी है",
+
   "eway.success": "ट्रिप का ई- वे बिल जोड़ दिया गया है",
+
   "eway.username": "ई-यात्री की सूची उपयोगकर्ता नाम",
+
   "failed.to.fetch.trip.details": "ट्रिप की जानकारी नहीं मिल सकी",
+
   "from": "से",
+
   "generate.ewb": "ई-वे बिल बनाए",
+
   "go.back": "पीछे जाएं",
+
   "go.to.map": "मैप पर जाएं",
+<<<<<<< Updated upstream
   "gps.id": "जीपीएस आईडी",
   "gps.vendor": "जीपीएस वेंडर",
   "gstin.label": "जीएसटीआईएन *",
+=======
+
+  "gps.id": "जीपीएस आईडी",
+
+  "gps.vendor": "जीपीएस वेंडर",
+
+  "gstin.label": "जीएसटीआईएन *",
+
+>>>>>>> Stashed changes
   "history": "पिछली जानकारी",
+
   "home": "होम",
+
   "i.am.driver": "मैं ड्राइवर हूँ",
+<<<<<<< Updated upstream
   "i.am.lsp": "मैं लॉजिस्टिक्स प्रोवाइडर हूँ",
+=======
+
+  "i.am.lsp": "मैं लॉजिस्टिक्स प्रोवाइडर हूँ",
+
+>>>>>>> Stashed changes
   "i.am.shipper": "मैं शिपर हूं",
+
   "in.transit": "ट्रांजिट ट्रिप में",
+
   "india.prefix": "+91 - ",
+
   "it.will.be.enabled": "यह {{date}} को शुरू हो जायेगा",
+
   "loading": "लोड हो रहा है...",
+<<<<<<< Updated upstream
   "locate.on.map": "नक्शे पर पता लगाएँ",
+=======
+
+  "locate.on.map": "मानचित्र पर पता लगाएँ",
+
+>>>>>>> Stashed changes
   "lsp": "लॉजिस्टिक्स सर्विस प्रोवाइडर",
+
   "mobile.number": "मोबाइल नंबर",
+<<<<<<< Updated upstream
   "modify.request": "अनुरोध संशोधित करें",
   "must.have.ewb": "ई-वे बिल बनाने के लिए आपके पास ई-वे उपयोगकर्ता नाम होना चाहिए",
+=======
+
+  "modify.request": "संशोधित अनुरोध",
+
+  "must.have.ewb": "बिल बनाने करने के लिए आपके पास ई-वे क्रेडेंशियल होने चाहिए ",
+
+>>>>>>> Stashed changes
   "next": "आगे",
+
   "no.business.id": "कारोबार की आईडी नहीं मिली",
+
   "no.trips": "कोई ट्रिप नहीं",
+
   "no.upcoming.trips": "कोई आगामी ट्रिप नहीं",
+
   "on.road": "लाइव ट्रैकिंग",
+
   "open": "खुला हुआ",
+<<<<<<< Updated upstream
   "other.profiles": "अन्य प्रोफाइल",
   "otp.not.received": "OTP प्राप्त नहीं हुआ?",
   "otp.resend.failed": "फिर से OTP नहीं भेज पा रहे",
   "otp.resent": "OTP को पुनः भेजें",
+=======
+
+  "other.profiles": "दूसरी प्रोफ़ाइल",
+
+  "otp.not.received": "OTP नहीं मिला ?",
+
+  "otp.resend.failed": "फिर से OTP नहीं भेज पा रहे",
+
+  "otp.resent": "OTP फिर से भेज दिया",
+
+>>>>>>> Stashed changes
   "otp.sent": "एक OTP भेजा गया है",
+
   "otp.verified": "{{phoneNumber}} के लिए OTP की सफलतापूर्वक पुष्टि कर ली गई है",
+<<<<<<< Updated upstream
   "pending": "लंबित",
+=======
+
+  "pending": "बकाया",
+
+>>>>>>> Stashed changes
   "pending.literally": "विचाराधीन",
+
   "pick.up.date": "पिकअप की तारीख",
+
   "pick.up.point": "पिकअप पॉइंट",
+
   "pincode": "पिन कोड*",
+
   "placeholder": "{{value}}",
+<<<<<<< Updated upstream
   "please.wait": "कृपया प्रतीक्षा करें",
+=======
+
+  "please.wait": "इंतजार करें",
+
+>>>>>>> Stashed changes
   "preference": "पसंद",
+
   "preview": "पूर्वावलोकन",
+
   "profile.setup": "प्रोफइल सेटअप",
+<<<<<<< Updated upstream
   "proof.of.delivery.tnc.received": "मैंने माल प्राप्त कर लिया है और  मैं नियम और शर्तों से सहमत हूँ",
   "raise.request": "लॉजिस्टिक सेवा प्रदाता के लिए अनुरोध करें।",
+=======
+
+  "proof.of.delivery.tnc.received": "मुझे सामान मिल गया है और मैं नियम और शर्तों से सहमत हूं",
+
+  "raise.request": "रसद सेवा प्रदाता के लिए एक अनुरोध उठाएँ।",
+
+>>>>>>> Stashed changes
   "reached": "पहुंच गए",
+
   "registration.number": "पंजीकरण संख्या",
+<<<<<<< Updated upstream
   "reject": "अस्वीकार करें!",
   "requested": "अनुरोध किया",
   "requests": "ट्रिप नियुक्त करें",
+=======
+
+  "reject": "मना करें",
+
+  "requested": "अनुरोध किये गए",
+
+  "requests": "असाइन करने के लिए ट्रिप",
+
+>>>>>>> Stashed changes
   "required.weight": "आवश्यक वजन",
-  "resend": "फिर से भेजें",
+
+  "resend": "पुन: भेजें",
+
   "rice.grain.wheat": "चावल/अनाज/गेहूं",
-  "save.company": "सहेजें कंपनी",
+
+  "save.company": "कंपनी सेव करें",
+
   "save.truck": "ट्रक सेव करें",
-  "save.warehouse": "सहेजें गोदाम",
-  "save.warehouse.failed": "गोदाम सहेजने में विफल",
-  "saved.warehouse": "सहेजी गयी गोदाम",
-  "saving": "सहेजा जा रहा है ...",
-  "select.goods.type": "माल प्रकार चुनें पर",
+
+  "save.warehouse": "गोदाम सेव करें",
+
+  "save.warehouse.failed": "गोदाम को सेव करने में विफल",
+
+  "saved.warehouse": "सेव्ड गोदाम",
+
+  "saving": "सेव किया जा रहा है ...",
+
+  "select.goods.type": "माल प्रकार का चयन करें",
+
   "select.location": "स्थान चुनें",
+
   "send.request": "अनुरोध भेजा",
-  "setup.required": "आवश्यक सेटअप",
+
+  "setup.required": "सेटअप आवश्यक है",
+
   "signature": "हस्ताक्षर",
+
   "start": "शुरू",
+
   "start.trip": "ट्रिप शुरू करें",
+
   "state": "राज्य",
+
   "submit": "जमा करें",
+
   "swipe.to.start": "ट्रिप शुरू करने के लिए स्वाइप करें",
+<<<<<<< Updated upstream
   "tell.us.about": "हमें अपने बारे में बताएं",
   "this.helps.to.personalize": "यह हमें आपके अनुभव को व्यक्तिगत बनाने में मदद करता है",
+=======
+
+  "tell.us.about": "आप अपने बारे में बताएं",
+
+  "this.helps.to.personalize": "यह हमें आपके अनुभव को निजीकृत करने में मदद करता है",
+
+>>>>>>> Stashed changes
   "trip.id": "ट्रिप आईडी",
+
   "trip.tracking.not.available": "ट्रिप ट्रैकिंग फिलहाल उपलब्ध नहीं है",
+
   "trolley": "ट्राली",
-  "truck.details": "ट्रक की जानकारी",
+
+  "truck.details": "ट्रक का विवरण",
+
   "truck.location": "ट्रक वर्तमान स्थान",
+
   "truck.name": "ट्रक का नाम",
+
   "truck.number": "ट्रक का नंबर",
-  "truck.save.error": "ट्रक' को सेव करते वक्त गड़बड़ी हुई",
-  "truck.save.success": "ट्रक' सफलतापूर्वक सेव हो गया",
+
+  "truck.save.error": "ट्रक को सेव करने  के दौरान त्रुटि हुई",
+
+  "truck.save.success": "ट्रक सफलतापूर्वक सेव हो गया",
+
   "truck.type": "ट्रक का प्रकार",
+
   "trucks": "ट्रक",
-  "try.again": "फिर से कोशिश करें",
+
+  "try.again": "पुनः प्रयास करें",
+
   "upcoming": "आगामी ट्रिप्स",
+
   "uploaded.docs": "अपलोड किये गए डॉक्यूमेंट",
+
   "valid.upto": "तक वैध है",
+
   "verifying": "पुष्टि की जा रही है",
+<<<<<<< Updated upstream
   "warehouse.details": "गोदाम की जानकारी",
   "warehouse.name": "गोदाम नाम",
 
@@ -216,3 +407,179 @@
   
 }
 
+=======
+
+  "warehouse.details": "गोदाम का विवरण",
+
+  "warehouse.name": "गोदाम का नाम",
+
+  "vehicle.not.valid": "वाहन संख्या मान्य नहीं है। कृपया एक मान्य वाहन नंबर दर्ज करें।",
+
+  "vehicle.not.truck": "वाहन का नंबर ट्रक का नहीं है। आप आगे नहीं बढ़ सकते।",
+
+  "vehicle.not.registered": "वाहन संख्या 'वाहन' के साथ पंजीकृत नहीं है। आप आगे नहीं बढ़ सकते",
+
+  "vahaan.not.available": "'वाहन' सेवा उपलब्ध नहीं है।",
+
+  "upcoming.trips": "आगामी ट्रिप",
+
+  "truck.request": "ट्रक अनुरोध",
+
+  "trips": "ट्रिप्स",
+
+  "trip.success.created": "",
+
+  "trip.rejected": "",
+
+  "to": "तक",
+
+  "step.two": "चरण 2",
+
+  "select.truck": "ट्रक का चयन करें",
+
+  "select.transaction.subtype": "",
+
+  "select.item": "",
+
+  "select.gps.vendor": "जीपीएस विक्रेता का चयन करें",
+
+  "save.profile": "प्रोफाइल सेव करें",
+
+  "profile.start": "शुरू करे",
+
+  "personal.details": "व्यक्तिगत जानकारी",
+
+  "no.entries": "कुछ नहीं मिला",
+
+  "home.requests": "असाइन करने के लिए ट्रिप",
+
+  "generate.eway.bill": "ई-वे बिल बनाए",
+
+  "full.name": "पूरा नाम",
+
+  "format.vehicle": "वाहन संख्या के प्रारूप",
+
+  "ewb": "ई-वे बिल",
+
+  "ewb.number": "ई-वे बिल नंबर",
+
+  "eway.vehicle.number": "",
+
+  "eway.user.gst": "",
+
+  "eway.transported.id": "",
+
+  "eway.transaction": "",
+
+  "eway.total.value": "",
+
+  "eway.to.billing.state": "",
+
+  "eway.supplier.gstin": "",
+
+  "eway.ship.to.state": "",
+
+  "eway.receipt.gstin": "",
+
+  "eway.invoice.number": "",
+
+  "eway.invoice.date": "",
+
+  "eway.hsn.code": "",
+
+  "eway.from.billing.state": "",
+
+  "eway.dispatch.from.state": "",
+
+  "eway.delivery.pincode": "",
+
+  "eway.bill.from.pincode": "",
+
+  "eway.bill.details": "ई-वे बिल विवरण",
+
+  "created": "",
+
+  "completed": "समाप्त ट्रिप्स",
+
+  "company.profile": "कंपनी का प्रोफाइल",
+
+  "add.truck": "ट्रक जोड़ें",
+
+  "accept": "स्वीकार",
+
+  "add.signature": "हस्ताक्षर जोड़ें",
+
+  "your.location": "आपका स्थान",
+
+  "uploading": "",
+
+  "trip.details": "ट्रिप की विवरण",
+
+  "TON": "",
+
+  "submit.button": "जमा करें",
+
+  "step.one": "चरण 1",
+
+  "starting": "",
+
+  "select.proof": "प्रमाण का चयन करें",
+
+  "search.for.an.item": "खोजें",
+
+  "receiver.signature": "प्राप्तिकर्ता हस्ताक्षर",
+
+  "proof.of.delivery": "",
+
+  "profile.save": "प्रोफाइल सेव करें",
+
+  "pod.details.page": " पी ओ डी विवरण पृष्ठ",
+
+  "onroad": "ट्रिप्स सड़क पर",
+
+  "not.found": "Not Found",
+
+  "largeCase.pending": "लंबित ट्रिप्स",
+
+  "KG": "किलोग्राम",
+
+  "intransit": "ट्रिप्स रास्ते में",
+
+  "gstin": "GSTIN",
+
+  "details.button": "जानकारी",
+
+  "delivery.address": "",
+
+  "delivered.on": "वितरण तिथि",
+
+  "company.details": "कंपनी का विवरण",
+
+  "collect.pod": "",
+
+  "close.button": "बंद करे",
+
+  "add.company": "कंपनी जोड़ें",
+
+  "active": "सक्रिय ट्रिप्स",
+
+  "reject.button": "अस्वीकार",
+
+  "receivers.name": "",
+
+  "received.by": "",
+
+  "no.past.trips": "",
+
+  "create.profile": "प्रोफ़ाइल बनाए",
+
+  "shipper": "शिप्पर",
+
+  "past.trips": "पिछली यात्राएँ",
+
+  "delivery.receipt": "डिलीवरी रसीद",
+
+  "trip.home":"ट्रिप होम"
+
+}
+>>>>>>> Stashed changes
