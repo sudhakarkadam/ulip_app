@@ -88,8 +88,9 @@ const LSPCreateProfile = (
         <Flex>
           {!personVerified && (
             <CardComp
-              cardHeading="STEP 1"
+              cardHeading={translate("step.one")}
               taskHeading={translate("profile.setup")}
+              clickLabel ={translate("profile.start")}
               imgSrc={personIcon}
               taskClickCallback={() =>
                 props.navigation.navigate("PersonProfile")
@@ -99,8 +100,9 @@ const LSPCreateProfile = (
           <Flex mt={3} />
           {!comapnyVerified && (
             <CardComp
-              cardHeading="STEP 2"
+              cardHeading={translate("step.two")}
               taskHeading={translate("company.setup")}
+              clickLabel ={translate("profile.start")}
               imgSrc={personIcon}
               taskClickCallback={() =>
                 props.navigation.navigate("CompanyProfile")
@@ -175,6 +177,7 @@ const AuthenticatedFlow = (props: ConnectedProps<typeof connector>) => {
   );
   const personVerified = profileCreated?.profile.name;
   const comapnyVerified = profileCreated?.business_details;
+  const { translate } = useContext(I18nContext);
   return (
     <>
       {personVerified && comapnyVerified ? (
@@ -189,17 +192,17 @@ const AuthenticatedFlow = (props: ConnectedProps<typeof connector>) => {
           <Stack.Screen
             name="CreateProfile"
             component={ConnectedLSPCreateProfile}
-            options={{ title: "Create Profile" }}
+            options={{ title: translate("create.profile")}}
           />
           <Stack.Screen
             name="PersonProfile"
             component={ConnectedLSPPersonProfile}
-            options={{ title: "Create Profile" }}
+            options={{ title: translate("create.profile") }}
           />
           <Stack.Screen
             name="CompanyProfile"
             component={ConnectedCompanyProfile}
-            options={{ title: "Company Profile" }}
+            options={{ title: translate("create.profile") }}
           />
         </Stack.Navigator>
       )}

@@ -9,7 +9,7 @@ import {
 import colors from "../../../theme/colors";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import Input from "../../../components/InputComponent";
-import { i18n } from "../../../components/InternationalisationProvider";
+import { i18n, TranslationText } from "../../../components/InternationalisationProvider";
 import SelectComponent from "../../../components/SelectComponent";
 
 import ActionCreators from "../../../actions/ActionCreators";
@@ -21,6 +21,8 @@ import { CommonState } from "../../../reducers";
 import { Formik } from "formik";
 import { tomatoBorder } from "../../../utils/tomatoBorder";
 import { vehicleRegex } from "../../../utils/constants";
+import { I18nContext } from "../../../components/InternationalisationProvider";
+
 
 const mapStateToProps = (state: CommonState) => ({
   trips: state.trips,
@@ -90,13 +92,42 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
       }
     }) {
       if (type === "TRUCK_NO_NOT_VALID") {
-        setFieldError("truckNumber", message);
-        setVaahanError(message);
-        trucksNotInVahan.current.push(values.truckNumber);
-        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+        if(message === "vehicle.not.valid"){
+          setFieldError("truckNumber", translate("vehicle.not.valid"));
+          setVaahanError(translate("vehicle.not.valid"));    
+          trucksNotInVahan.current.push(values.truckNumber);
+          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+          ToastAndroid.show(translate("vehicle.not.valid"), ToastAndroid.LONG);
+        }else if(message === "vehicle.not.truck"){
+          setFieldError("truckNumber", translate("vehicle.not.truck"));
+          setVaahanError(translate("vehicle.not.truck"));    
+          trucksNotInVahan.current.push(values.truckNumber);
+          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+          ToastAndroid.show(translate("vehicle.not.truck"), ToastAndroid.LONG);
+        }else if(message === "vehicle.not.registered"){
+          setFieldError("truckNumber", translate("vehicle.not.registered"));
+          setVaahanError(translate("vehicle.not.registered"));    
+          trucksNotInVahan.current.push(values.truckNumber);
+          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+          ToastAndroid.show(translate("vehicle.not.registered"), ToastAndroid.LONG);
+        }else if(message === "vahaan.not.available"){
+          setFieldError("truckNumber", translate("vahaan.not.available"));
+          setVaahanError(translate("vahaan.not.available"));    
+          trucksNotInVahan.current.push(values.truckNumber);
+          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+          ToastAndroid.show(translate("vahaan.not.available"), ToastAndroid.LONG);
+        }
+        else{
+          setFieldError("truckNumber", message);
+          setVaahanError(message);    
+          trucksNotInVahan.current.push(values.truckNumber);
+          scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true });
+          ToastAndroid.show(message, ToastAndroid.LONG);
+        }
+        
       }
       setLoading(false);
-      ToastAndroid.show(message, ToastAndroid.LONG);
+      
     } finally {
       setSubmitting(false);
     }
@@ -198,7 +229,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
                 <SelectComponent
                   label={translate("gps.vendor")}
                   getSelectedValue={val => setFieldValue("gpsVendor", val)}
-                  placeholder="Select GPS vendor"
+                  placeholder={translate("select.gps.vendor")}
                   data={
                     appConfig.data?.gps_providers.map(provider => ({
                       label: provider,
@@ -224,7 +255,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
                 <SelectComponent
                   label={translate("truck.type")}
                   getSelectedValue={val => setFieldValue("truckType", val)}
-                  placeholder="Select a truck"
+                  placeholder={translate("select.truck")}
                   data={
                     appConfig.data?.truck_types.map(type => ({
                       label: type,
@@ -255,3 +286,4 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
 };
 
 export default connector(AddTruck);
+

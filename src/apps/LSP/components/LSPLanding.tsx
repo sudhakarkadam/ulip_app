@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/prefer-interface */
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { useContext } from "react";
 import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
@@ -26,6 +26,9 @@ import { useIsFocused } from "@react-navigation/native";
 import AccountInactive from "../../../images/user-circle.svg";
 import AccountActive from "../../../images/user-circle-dark.svg";
 import TripStack from "./LSPTripStack";
+import { TranslationText } from "../../../components/InternationalisationProvider";
+import { I18nContext } from "../../../components/InternationalisationProvider";
+
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
 interface TripNavProps {
   disableEWB?: boolean;
@@ -79,29 +82,31 @@ export const LSPTripDetails = (props: HistoryProps & TripNavProps) => {
 };
 
 const HistoryStack = () => {
+  const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator initialRouteName={"History"} screenOptions={HeaderOptions}>
       <Stack.Screen
         name="History"
         component={History}
-        options={{ title: "History" }}
+        options={{ title: translate("history")}}
       />
       <Stack.Screen
         name="TripDetails"
         component={props => <LSPTripDetails disableEWB {...props} />}
-        options={{ title: "Trip" }}
+        options={{ title: translate("trips") }}
       />
     </Stack.Navigator>
   );
 };
 
 const AccountsStack = () => {
+  const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator
       initialRouteName={"AccountsPage"}
       screenOptions={HeaderOptions}
     >
-      <Stack.Screen name="AccountsPage" options={{ title: "Accounts" }}>
+      <Stack.Screen name="AccountsPage" options={{ title: translate("accounts") }}>
         {() => <AccountsPage persona="LSP" />}
       </Stack.Screen>
     </Stack.Navigator>
@@ -114,32 +119,32 @@ export type LSPBottomTabList = {
   HistoryStack: undefined;
   Account: undefined;
 };
-
 const tabs = [
+  
   {
     name: "HomeStack",
-    label: "HOME",
+    label: <TranslationText id="home"></TranslationText>,
     component: HomeStack,
     activeImage: HomeSelected,
     inActiveImage: HomeBlur
   },
   {
     name: "TripsStack",
-    label: "TRIPS",
+    label: <TranslationText id="trips"></TranslationText>,
     component: TripStack,
     activeImage: InTransitSelected,
     inActiveImage: InTransitBlur
   },
   {
     name: "HistoryStack",
-    label: "HISTORY",
+    label: <TranslationText id="history"></TranslationText>,
     component: HistoryStack,
     activeImage: HistorySelected,
     inActiveImage: HistoryBlur
   },
   {
     name: "Account",
-    label: "ACCOUNT",
+    label: <TranslationText id="account"></TranslationText>,
     component: AccountsStack,
     activeImage: AccountActive,
     inActiveImage: AccountInactive

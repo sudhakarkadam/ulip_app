@@ -16,6 +16,8 @@ import {
 
 import { TripStackList } from "./LSPTripStack";
 import { LSPAuthenticatedStackParamList } from "./LSPLanding";
+import { I18nContext } from "../../../components/InternationalisationProvider";
+import { useContext } from "react";
 
 type NavigationProps = CompositeNavigationProp<
   StackNavigationProp<TripStackList, "Trips">,
@@ -31,10 +33,11 @@ interface Props {
 
 const Trips = (props: Props) => {
   const [index, setIndex] = useState(props.route.params?.activeIndex || 0);
+  const { translate } = useContext(I18nContext);
   const [routes] = useState([
-    { key: "UPCOMING", title: "UPCOMING" },
-    { key: "ON-ROAD", title: "ON-ROAD" },
-    { key: "PENDING", title: "PENDING" }
+    { key: "UPCOMING", title: translate("upcoming") },
+    { key: "ON-ROAD", title: translate("on.road") },
+    { key: "PENDING", title: translate("pending") }
   ]);
   const Upcoming = () => (
     <Page>

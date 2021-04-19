@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Input from "../components/InputComponent";
 import StyledButton from "../components/@styled/StyledButton";
 import { Flex } from "./@styled/BaseElements";
@@ -10,13 +10,16 @@ import { ErrorText } from "./@styled/Text";
 import { Page, PageContent } from "./@styled/Page";
 import { Formik } from "formik";
 import { tomatoBorder } from "../utils/tomatoBorder";
+import { I18nContext, TranslationText } from "./InternationalisationProvider";
 
 interface OwnProps {
   createProfileCallback: (data: { name: string }) => void;
   userInfo: UserDataModel | null;
 }
 
+
 const PersonProfile = (props: OwnProps) => {
+  const { translate } = useContext(I18nContext);
   return (
     <Page>
       <PageContent>
@@ -50,19 +53,20 @@ const PersonProfile = (props: OwnProps) => {
           }) => (
             <Flex1 p={6} mt={4} backgroundColor="white">
               <Flex mb={5}>
-                <PrimaryHeaderText>Personal details</PrimaryHeaderText>
+                <PrimaryHeaderText>
+                  <TranslationText id="personal.details"></TranslationText></PrimaryHeaderText>
               </Flex>
 
               <Input
                 onBlur={handleBlur("name")}
                 value={values.name}
                 onChangeText={handleChange("name")}
-                label="Full name"
+                label={translate("full.name")}
                 style={tomatoBorder(errors.name)}
               />
               {errors.name && <ErrorText>{errors.name}</ErrorText>}
               <Input
-                label="Mobile number"
+                label={translate("mobile.number")}
                 editable={false}
                 onChangeText={handleChange("phone_number")}
                 onBlur={handleBlur("phone_number")}
@@ -71,7 +75,7 @@ const PersonProfile = (props: OwnProps) => {
               <Flex mt={5}>
                 <StyledButton
                   disabled={isSubmitting}
-                  title="Save profile"
+                  title={translate("save.profile")}
                   fontSize={14}
                   loading={isSubmitting}
                   onPress={handleSubmit}

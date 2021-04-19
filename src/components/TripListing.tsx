@@ -32,6 +32,7 @@ import { CommonState } from "../reducers";
 import ContainerTruck from "../images/containerTruck.svg";
 import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
+import { TranslationText } from "./InternationalisationProvider";
 
 const profile = require("../images/40px.png");
 
@@ -61,7 +62,7 @@ enum IconWidget {
 export const listingConfig = {
   [ListingModes.UPCOMING]: {
     default: {
-      title: "Upcoming trips",
+      title: <TranslationText id="upcoming.trips"/>,
       primaryWidget: IconWidget.CALENDAR,
       secondaryWidget: IconWidget.LABEL,
       status: [RequestStatus.ACCEPTED, RequestStatus.CREATED]
@@ -74,7 +75,7 @@ export const listingConfig = {
   },
   [ListingModes.ON_ROAD]: {
     default: {
-      title: "On-Road",
+      title: <TranslationText id="on.road"/>,
       status: [RequestStatus.IN_PROGRESS],
       secondaryWidget: IconWidget.CALENDAR
     },
@@ -88,18 +89,18 @@ export const listingConfig = {
     secondaryWidget: IconWidget.LABEL
   },
   [ListingModes.COMPLETED]: {
-    title: "Completed",
+    title: <TranslationText id="completed"/>,
     status: [RequestStatus.COMPLETED],
     secondaryWidget: IconWidget.LABEL
   },
   [ListingModes.PENDING_REQUESTS]: {
-    title: "Requests",
+    title: <TranslationText id="requests"/>,
     status: [RequestStatus.CREATED],
     primaryWidget: IconWidget.CALENDAR,
     secondaryWidget: IconWidget.TRUCK
   },
   [ListingModes.PENDING]: {
-    title: "Pending",
+    title: <TranslationText id="pending"/>,
     secondaryWidget: IconWidget.LABEL,
     status: [RequestStatus.PENDING_POD]
   }
@@ -198,7 +199,9 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
             <FlatList
               ListEmptyComponent={
                 <Box p={6}>
-                  <SecondaryText>No entries</SecondaryText>
+                  <SecondaryText>
+                    <TranslationText id="no.entries"/>
+                  </SecondaryText>
                 </Box>
               }
               data={data}

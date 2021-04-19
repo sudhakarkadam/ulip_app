@@ -153,7 +153,7 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
               <Box mb={2}>
                 <LSPIcon />
               </Box>
-              <PrimaryText style={{ fontSize: 10 }}>ADD TRUCK</PrimaryText>
+              <PrimaryText style={{ fontSize: 10 }}><TranslationText id="add.truck"></TranslationText></PrimaryText>
             </IconBox>
           </FlexRow>
         </FlexColumn>
