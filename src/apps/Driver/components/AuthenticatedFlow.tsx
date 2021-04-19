@@ -50,9 +50,9 @@ const AuthenticatedFlow = (props: OwnProps) => {
       <Stack.Screen
         name="CreateProfile"
         component={DriverCreateProfile}
-        options={{ title: "Home" }}
+        options={{ title: translate("home") }}
       />
-      <Stack.Screen name="PersonProfile" options={{ title: "Create Profile" }}>
+      <Stack.Screen name="PersonProfile" options={{ title: translate("create.profile") }}>
         {navigationProps => (
           <PersonProfile
             userInfo={props.userInfo}
