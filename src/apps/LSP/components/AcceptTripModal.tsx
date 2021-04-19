@@ -10,6 +10,8 @@ import { TranslationText } from "../../../components/InternationalisationProvide
 import { VehicleListDetails } from "../../../models/CommonModel";
 import ActionCreators from "../../../actions/ActionCreators";
 import { ConnectedProps, connect } from "react-redux";
+import { I18nContext } from "../../../components/InternationalisationProvider";
+import { useContext } from "react";
 
 const { acceptTrip } = ActionCreators;
 const connector = connect(null, { acceptTrip });
@@ -27,6 +29,7 @@ const AcceptTripModal = (props: OwnProps) => {
   const [driverName, setDriverName] = useState("");
   const [driverMobile, setDriverMobile] = useState("");
   const [truck, setTruck] = useState("");
+  const { translate } = useContext(I18nContext);
 
   return (
     <Flex>
@@ -46,7 +49,7 @@ const AcceptTripModal = (props: OwnProps) => {
       </TextWrapper>
       <TextWrapper label={<TranslationText id="choose.truck" />}>
         <SelectComponent
-          placeholder="Select a truck"
+          placeholder={translate("select.truck")}
           data={(props.vehiclesList || []).map(vehicle => ({
             label: vehicle.truck_name,
             value: vehicle.vehicle_id?.toString()
@@ -57,13 +60,13 @@ const AcceptTripModal = (props: OwnProps) => {
       </TextWrapper>
       <FlexRow mt={4}>
         <StyledButton
-          title="Close"
+          title={translate("close")}
           style={{ flex: 1 }}
           variant={"outline"}
           onPress={props.onClose}
         />
         <StyledButton
-          title="Accept"
+          title={translate("accept")}
           style={{ flex: 1 }}
           onPress={() =>
             props

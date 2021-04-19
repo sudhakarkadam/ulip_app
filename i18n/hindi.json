@@ -11,7 +11,11 @@
   "choose.lsp": "LSP चुनें",
   "choose.reason": "कारण चुनें",
   "choose.truck": "ट्रक चुनें",
+<<<<<<< HEAD
   "choose.unit": "इकाई चुनें",
+=======
+  "choose.unit": "यूनिट चुनें",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "city": "शहर",
   "close": "बंद करें",
   "company.name": "कंपनी का नाम",
@@ -22,8 +26,13 @@
   "create.trip": "ट्रिप बनाएं",
   "current.profile": "वर्तमान प्रोफाइल",
   "destination.point": "गंतव्य बिंदु",
+<<<<<<< HEAD
   "details": "विवरण",
   "do.not.have.ewb": "यदि आपके पास ई वे बिल नंबर नहीं है, तो ",
+=======
+  "details": "जानकारी",
+  "do.not.have.ewb": "अगर आपके पास ई-वे बिल नंबर नहीं है तो",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "does.not.exist": "यह मौजूद नहीं है",
   "driver.details": "ड्राइवर का विवरण",
   "driver.name": "ड्राइवर का नाम",
@@ -44,52 +53,60 @@
   "generate.ewb": "ई-वे बिल बनाए",
   "go.back": "पीछे जाएं",
   "go.to.map": "मैप पर जाएं",
+<<<<<<< HEAD
   "gps.id": "GPS आईडी",
+=======
+  "gps.id": "जीपीएस आईडी",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "gps.vendor": "जीपीएस वेंडर",
   "gstin.label": "जीएसटीआईएन *",
   "history": "पिछली जानकारी",
   "home": "होम",
   "i.am.driver": "मैं ड्राइवर हूँ",
   "i.am.lsp": "मैं लॉजिस्टिक्स प्रोवाइडर हूँ",
+<<<<<<< HEAD
   "i.am.shipper": "मैं शिप्पर  हूं",
+=======
+  "i.am.shipper": "मैं शिपर हूं",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "in.transit": "ट्रांजिट ट्रिप में",
   "india.prefix": "+91 - ",
   "it.will.be.enabled": "यह {{date}} को शुरू हो जायेगा",
   "loading": "लोड हो रहा है...",
-  "locate.on.map": "मानचित्र पर पता लगाएँ",
+  "locate.on.map": "नक्शे पर पता लगाएँ",
   "lsp": "लॉजिस्टिक्स सर्विस प्रोवाइडर",
   "mobile.number": "मोबाइल नंबर",
-  "modify.request": "संशोधित अनुरोध",
-  "must.have.ewb": "बिल बनाने करने के लिए आपके पास ई-वे क्रेडेंशियल होने चाहिए ",
+  "modify.request": "अनुरोध संशोधित करें",
+  "must.have.ewb": "ई-वे बिल बनाने के लिए आपके पास ई-वे उपयोगकर्ता नाम होना चाहिए",
   "next": "आगे",
   "no.business.id": "कारोबार की आईडी नहीं मिली",
   "no.trips": "कोई ट्रिप नहीं",
   "no.upcoming.trips": "कोई आगामी ट्रिप नहीं",
   "on.road": "लाइव ट्रैकिंग",
   "open": "खुला हुआ",
-  "other.profiles": "दूसरी प्रोफ़ाइल",
-  "otp.not.received": "OTP नहीं मिला ?",
+  "other.profiles": "अन्य प्रोफाइल",
+  "otp.not.received": "OTP प्राप्त नहीं हुआ?",
   "otp.resend.failed": "फिर से OTP नहीं भेज पा रहे",
-  "otp.resent": "OTP फिर से भेज दिया",
+  "otp.resent": "OTP को पुनः भेजें",
   "otp.sent": "एक OTP भेजा गया है",
   "otp.verified": "{{phoneNumber}} के लिए OTP की सफलतापूर्वक पुष्टि कर ली गई है",
-  "pending": "बकाया",
+  "pending": "लंबित",
   "pending.literally": "विचाराधीन",
   "pick.up.date": "पिकअप की तारीख",
   "pick.up.point": "पिकअप पॉइंट",
   "pincode": "पिन कोड*",
   "placeholder": "{{value}}",
-  "please.wait": "इंतजार करें",
+  "please.wait": "कृपया प्रतीक्षा करें",
   "preference": "पसंद",
   "preview": "पूर्वावलोकन",
   "profile.setup": "प्रोफइल सेटअप",
-  "proof.of.delivery.tnc.received": "मुझे सामान मिल गया है और मैं नियम और शर्तों से सहमत हूं",
-  "raise.request": "रसद सेवा प्रदाता के लिए एक अनुरोध उठाएँ।",
+  "proof.of.delivery.tnc.received": "मैंने माल प्राप्त कर लिया है और  मैं नियम और शर्तों से सहमत हूँ",
+  "raise.request": "लॉजिस्टिक सेवा प्रदाता के लिए अनुरोध करें।",
   "reached": "पहुंच गए",
   "registration.number": "पंजीकरण संख्या",
-  "reject": "मना करें",
-  "requested": "अनुरोध किये गए",
-  "requests": "असाइन करने के लिए ट्रिप",
+  "reject": "अस्वीकार करें!",
+  "requested": "अनुरोध किया",
+  "requests": "ट्रिप नियुक्त करें",
   "required.weight": "आवश्यक वजन",
   "resend": "फिर से भेजें",
   "rice.grain.wheat": "चावल/अनाज/गेहूं",
@@ -129,6 +146,10 @@
   "verifying": "पुष्टि की जा रही है",
   "warehouse.details": "गोदाम की जानकारी",
   "warehouse.name": "गोदाम नाम",
+<<<<<<< HEAD
+=======
+
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "vehicle.not.valid": "वाहन संख्या मान्य नहीं है। कृपया एक मान्य वाहन नंबर दर्ज करें।",
   "vehicle.not.truck": "वाहन का नंबर ट्रक का नहीं है। आप आगे नहीं बढ़ सकते।",
   "vehicle.not.registered": "वाहन संख्या 'वाहन' के साथ पंजीकृत नहीं है। आप आगे नहीं बढ़ सकते",
@@ -182,7 +203,11 @@
   "trip.details": "यात्रा विवरण",
   "TON": "",
   "submit.button": "जमा करें",
+<<<<<<< HEAD
   "step.one": "चरण 1",
+=======
+  "step.one": "चरण 1",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "starting": "",
   "select.proof": "प्रमाण का चयन करें",
   "search.for.an.item": "खोजें",
@@ -190,20 +215,36 @@
   "proof.of.delivery": "",
   "profile.save": "प्रोफाइल सेव करें",
   "pod.details.page": " पी ओ डी विवरण पृष्ठ",
+<<<<<<< HEAD
   "onroad": "ट्रिप्स सड़क पर",
   "not.found": "Not Found",
   "largeCase.pending": "लंबित ट्रिप्स",
   "KG": "किलोग्राम",
   "intransit": "ट्रिप्स रास्ते में",
+=======
+  "onroad": "ट्रिप्स सड़क पर",
+  "not.found": "Not Found",
+  "largeCase.pending": "लंबित ट्रिप्स",
+  "KG": "किलोग्राम",
+  "intransit": "ट्रिप्स रास्ते में",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "gstin": "GSTIN",
   "details.button": "जानकारी",
   "delivery.address": "",
   "delivered.on": "वितरण तिथि",
+<<<<<<< HEAD
   "company.details": "कंपनी का विवरण",
   "collect.pod": "",
   "close.button": "बंद करे",
   "add.company": "कंपनी जोड़ें",
   "active": "सक्रिय ट्रिप्स",
+=======
+  "company.details": "कंपनी का विवरण",
+  "collect.pod": "",
+  "close.button": "बंद करे",
+  "add.company": "कंपनी जोड़ें",
+  "active": "सक्रिय ट्रिप्स",
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
   "reject.button": "अस्वीकार",
   "receivers.name": "",
   "received.by": "",
@@ -212,4 +253,9 @@
   "shipper": "शिप्पर",
   "past.trips": "पिछली यात्राएँ",
   "delivery.receipt": "डिलीवरी रसीद"
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 31cb07534b1ad650efddf797d741f1ff462f9260
 }
+

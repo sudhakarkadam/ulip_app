@@ -226,7 +226,7 @@ const Trip: React.FC<Props> = props => {
                 !loading ? (
                   <TranslationText id="capture.pop"></TranslationText>
                 ) : (
-                  <Text>Upoading...</Text>
+                  <Text>Uploading...</Text>
                 )
               }
               onPress={() => {

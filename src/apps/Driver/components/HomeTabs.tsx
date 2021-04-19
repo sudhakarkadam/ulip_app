@@ -33,7 +33,12 @@ const HomeStack = () => {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen name="TripHome" component={TripHome} />
+
+      <Stack.Screen
+        name="TripHome"
+        component={TripHome}
+        options={{ title: translate("create.profile") }}
+      />
       <Stack.Screen name="TripDetails" component={TripDetails} />
       <Stack.Screen name="PODDetailsPage" component={PODDetails} />
     </Stack.Navigator>
@@ -69,7 +74,11 @@ const PastTrips = () => {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen name="TripHome" component={TripHome} />
+      <Stack.Screen
+        name="TripHome"
+        component={TripHome}
+        options={{ title: translate("create.profile") }}
+      />
       <Stack.Screen name="TripDetails" component={TripDetails} />
     </Stack.Navigator>
   );

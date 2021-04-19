@@ -15,6 +15,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { LSPAuthenticatedStackParamList } from "./LSPLanding";
 import { HomeStackParamList } from "./LSPHomeStack";
+import { I18nContext } from "../../../components/InternationalisationProvider";
+import { useContext } from "react";
 const { getVehiclesList, acceptTrip, rejectTrip } = CommonActionCreators;
 
 type NavigationProps = CompositeNavigationProp<
@@ -55,6 +57,7 @@ const TripAcceptPage = (
 
   const returnToList = () => props.navigation.navigate("TripRequests", {});
   // const openTruckSelect = () => props.navigation.push("TruckSelect");
+  const { translate } = useContext(I18nContext);
 
   return (
     <Page>
@@ -75,7 +78,7 @@ const TripAcceptPage = (
           />
           <Flex style={{ flexDirection: "row", marginHorizontal: 25 }}>
             <StyledButton
-              title="Reject"
+              title={translate("reject")}
               variant="outline"
               style={{ flex: 1 }}
               onPress={() => {
@@ -91,7 +94,7 @@ const TripAcceptPage = (
               }}
             />
             <StyledButton
-              title="Accept"
+              title={translate("accept")}
               style={{ flex: 1 }}
               onPress={() => {
                 props.showModal(
