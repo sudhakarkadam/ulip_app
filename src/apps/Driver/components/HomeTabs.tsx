@@ -81,22 +81,6 @@ const PastTrips = () => {
           />
         )}
       </Stack.Screen>
-      <Stack.Screen
-        name="TripHome"
-        component={TripHome}
-        options={{ title: translate("create.profile") }}
-      />
-      <Stack.Screen name="TripDetails" component={TripDetails} />
-      <Stack.Screen
-        name="TripHome"
-        component={TripHome}
-        options={{ title: translate("trip.home") }}
-      />
-      <Stack.Screen
-        name="TripDetails"
-        component={TripDetails}
-        options={{ title: translate("trip.details") }}
-      />
     </Stack.Navigator>
   );
 };
