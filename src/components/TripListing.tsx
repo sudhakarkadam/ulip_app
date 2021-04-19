@@ -63,7 +63,9 @@ enum IconWidget {
 export const listingConfig = {
   [ListingModes.UPCOMING]: {
     default: {
-      title: <TranslationText id="upcoming" />,
+
+      title: <TranslationText id="upcoming.trips" />,
+
       primaryWidget: IconWidget.CALENDAR,
       secondaryWidget: IconWidget.LABEL,
       status: [RequestStatus.ACCEPTED, RequestStatus.CREATED]

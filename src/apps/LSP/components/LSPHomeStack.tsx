@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   createStackNavigator,
   StackScreenProps,
@@ -19,6 +19,7 @@ import {
 import AddTruck from "./AddTruck";
 import { LSPBottomTabList } from "./LSPLanding";
 import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
+import { I18nContext } from "../../../components/InternationalisationProvider";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface
 export type HomeStackParamList = {
@@ -87,6 +88,7 @@ const TripRequests: React.FC<TripRequestsProps> = (
 const Stack = createStackNavigator<HomeStackParamList>();
 
 const HomeStack = () => {
+  const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator
       initialRouteName={"HomeMetricsComponent"}
@@ -95,22 +97,22 @@ const HomeStack = () => {
       <Stack.Screen
         name="TripRequests"
         component={TripRequests}
-        options={{ title: "Home" }}
+        options={{ title: translate("home") }}
       />
       <Stack.Screen
         name="HomeMetricsComponent"
         component={HomeMetricsComponent}
-        options={{ title: "Home" }}
+        options={{ title: translate("home") }}
       />
       <Stack.Screen
         name="TripAcceptPage"
         component={TripAccept}
-        options={{ title: "Truck Request" }}
+        options={{ title: translate("truck.request") }}
       />
       <Stack.Screen
         name="AddTruck"
         component={AddTruck}
-        options={{ title: "Add Truck" }}
+        options={{ title: translate("add.truck") }}
       />
     </Stack.Navigator>
   );

@@ -13,6 +13,7 @@ import { vehicleFormats } from "../../utils/constants";
 
 // @ts-ignore
 import trackTruck from "../../images/question-mark.png";
+import { TranslationText } from "../InternationalisationProvider";
 
 // export const PrimaryText = styled(Text)`
 //   color: ${colors.blues[0]};
@@ -102,7 +103,9 @@ export const TextWrapper = ({
   const getTooltipTemplate = () => {
     return (
       <Flex>
-        <Text>Formats of Vehicle No.</Text>
+        <Text>
+          <TranslationText id="format.vehicle" />
+        </Text>
         {vehicleFormats.map((val, index) => (
           <Text key={index}>{val}</Text>
         ))}
