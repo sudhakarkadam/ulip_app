@@ -19,7 +19,7 @@
         {
           "type": "String",
           "fieldName": "APP_BASE_URL",
-          "value": "http://10.0.2.2:48080"
+          "value": "http://20.40.44.155"
         },
         {
           "type": "String",
@@ -40,7 +40,7 @@
         {
           "type": "String",
           "fieldName": "APP_BASE_URL",
-          "value": "http://10.0.2.2:48080/ulip"
+          "value": "http://20.40.44.155/ulip"
         },
         {
           "type": "String",
