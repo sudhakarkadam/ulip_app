@@ -34,6 +34,7 @@ import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
 import { TranslationText } from "./InternationalisationProvider";
 import { I18nContext } from "../components/InternationalisationProvider";
+import { Keys } from "src/typings/translation";
 
 const profile = require("../images/40px.png");
 
@@ -77,7 +78,7 @@ export const listingConfig = {
   },
   [ListingModes.ON_ROAD]: {
     default: {
-      title: <TranslationText id="on.road" />,
+      title: <TranslationText id="onroad" />,
       status: [RequestStatus.IN_PROGRESS],
       secondaryWidget: IconWidget.CALENDAR
     },
@@ -102,7 +103,7 @@ export const listingConfig = {
     secondaryWidget: IconWidget.TRUCK
   },
   [ListingModes.PENDING]: {
-    title: <TranslationText id="pending" />,
+    title: <TranslationText id="largeCase.pending" />,
     secondaryWidget: IconWidget.LABEL,
     status: [RequestStatus.PENDING_POD]
   }
@@ -318,7 +319,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                           >
                             {item.status === RequestStatus.CREATED
                               ? "⚠ " + translate("largeCase.pending")
-                              : item.status}
+                              : translate((item.status as unknown) as Keys)}
                           </Text>
                         </Box>
                       )}
@@ -326,7 +327,7 @@ const TripListing: React.FunctionComponent<OwnProps & ReduxProps> = props => {
                         <Box>
                           <SmallCapitalText textAlign={"center"}>
                             {
-                              ["ON-TIME", "DELAY"][
+                              [translate("on.time"), translate("delay")][
                                 Math.floor(Math.random() * 2)
                               ]
                             }
