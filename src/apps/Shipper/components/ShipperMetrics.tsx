@@ -129,7 +129,7 @@ const HomeMetrics = (
               onPress={() => props.navigation.navigate("InTransitStack")}
             >
               <PrimaryTextSmall>
-                <TranslationText id="on.road" />
+                <TranslationText id="onroad" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
                 style={{ fontWeight: "bold", fontSize: 30, marginTop: 5 }}

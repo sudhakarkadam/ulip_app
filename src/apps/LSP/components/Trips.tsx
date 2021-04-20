@@ -36,8 +36,8 @@ const Trips = (props: Props) => {
   const { translate } = useContext(I18nContext);
   const [routes] = useState([
     { key: "UPCOMING", title: translate("upcoming") },
-    { key: "ON-ROAD", title: translate("on.road") },
-    { key: "PENDING", title: translate("pending") }
+    { key: "ON-ROAD", title: translate("onroad") },
+    { key: "PENDING", title: translate("largeCase.pending") }
   ]);
   const Upcoming = () => (
     <Page>
