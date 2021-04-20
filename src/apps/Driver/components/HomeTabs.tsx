@@ -53,12 +53,13 @@ const HomeStack = () => {
 };
 
 const AccountsStack = () => {
+  const { translate } = useContext(I18nContext);
   return (
     <Stack.Navigator
       initialRouteName={"AccountsPage"}
       screenOptions={HeaderOptions}
     >
-      <Stack.Screen name="AccountsPage" options={{ title: "Home" }}>
+      <Stack.Screen name="AccountsPage" options={{ title: translate("home") }}>
         {() => <AccountsPage persona="DRIVER" />}
       </Stack.Screen>
     </Stack.Navigator>

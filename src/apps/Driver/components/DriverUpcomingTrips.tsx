@@ -68,7 +68,7 @@ const UpcomingTrips: React.FC<Props> = ({
             {isLoading(trips) && <ActivityIndicator />}
             {!isLoading(trips) && (!trips.data || trips.data.length === 0) && (
               <PrimaryText mx={8}>
-                {(title && `No ${title}`) || (
+                {(title && <TranslationText id="no.upcoming.trips"/>) || (
                   <TranslationText id="no.upcoming.trips"></TranslationText>
                 )}
               </PrimaryText>
