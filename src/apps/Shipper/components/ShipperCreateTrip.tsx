@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { ToastAndroid, ActivityIndicator } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
 import { connect, ConnectedProps } from "react-redux";
 import ActionCreators from "../../../actions/ActionCreators";
 import { CommonState } from "../../../reducers";
 import CreateTrip from "../../../components/CreateTrip";
-import { TranslationText } from "../../../components/InternationalisationProvider";
+import {
+  I18nContext,
+  TranslationText
+} from "../../../components/InternationalisationProvider";
 import { HomeStackParamList } from "./HomeStack";
 import { Flex1 } from "../../../components/@styled/Flex";
 import { isLoading } from "../../../utils/actionCreator";
@@ -58,6 +61,7 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
       </Flex1>
     );
   }
+  const { translate } = useContext(I18nContext);
   return (
     <>
       {Array.isArray(lspList) &&
@@ -76,7 +80,10 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
           createTripCallback={async (data: CreateTripRequestModel) => {
             await props.createTrip(data);
             props.navigation.navigate("MainTripListing");
-            ToastAndroid.show("Trip Successfully Created", ToastAndroid.SHORT);
+            ToastAndroid.show(
+              translate("trip.success.created"),
+              ToastAndroid.SHORT
+            );
             return;
           }}
         />
