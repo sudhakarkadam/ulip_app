@@ -183,5 +183,7 @@
   "ACCEPTED": "ACCEPTED",
   "REJECTED": "REJECTED",
   "IN_PROGRESS": "IN_PROGRESS",
-  "PENDING_POD": "PENDING_POD"
+  "PENDING_POD": "PENDING_POD",
+  "onroadcamel": "On-Road",
+  "requests.camel": "Trips To Assign"
 }

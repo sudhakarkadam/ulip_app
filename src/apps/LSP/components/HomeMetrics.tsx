@@ -79,7 +79,7 @@ const HomeMetrics = (props: OwnProps & ConnectedProps<typeof connector>) => {
           <FlexRow height={100} mb={20}>
             <MetricBox onPress={props.onRequestClick}>
               <PrimaryTextSmall>
-                <TranslationText id="requests" />
+                <TranslationText id="requests.camel" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
                 style={{ fontWeight: "bold", fontSize: 30, marginTop: 7 }}

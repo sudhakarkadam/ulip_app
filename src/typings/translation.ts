@@ -245,8 +245,9 @@ export type Keys =
   | "eway.hsn.code"
   | "trip.home"
   | "on.time"
-  | "delay";
-
+  | "delay"
+  | "onroadcamel"
+  | "requests.camel";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -740,5 +741,9 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "on.time"
   ? never
   : T extends "delay"
+  ? never
+  : T extends "onroadcamel"
+  ? never
+  : T extends "requests.camel"
   ? never
   : never;
