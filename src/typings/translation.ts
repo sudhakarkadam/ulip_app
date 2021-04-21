@@ -246,6 +246,7 @@ export type Keys =
   | "trip.home"
   | "on.time"
   | "delay";
+
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
