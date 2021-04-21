@@ -204,7 +204,7 @@ export type Keys =
   | "add.truck"
   | "reject.button"
   | "starting"
-  | "eway.transported.id"
+  | "eway.transporter.id"
   | "step.two"
   | "details.button"
   | "upcoming.trips"
@@ -246,6 +246,7 @@ export type Keys =
   | "trip.home"
   | "on.time"
   | "delay";
+
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -656,7 +657,7 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "starting"
   ? never
-  : T extends "eway.transported.id"
+  : T extends "eway.transporter.id"
   ? never
   : T extends "step.two"
   ? never
