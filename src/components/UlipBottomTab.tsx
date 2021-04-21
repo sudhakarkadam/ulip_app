@@ -37,9 +37,9 @@ const UlipBottomTab: React.FC<IOwnProps> = ({ tabs }) => {
               },
               tabBarLabel: ({ focused }) =>
                 focused ? (
-                  <PrimaryText>{tab.label}</PrimaryText>
+                  <PrimaryText numberOfLines={1}>{tab.label}</PrimaryText>
                 ) : (
-                  <LightText>{tab.label}</LightText>
+                  <LightText numberOfLines={1}>{tab.label}</LightText>
                 )
             }}
           ></Tab.Screen>
