@@ -74,7 +74,7 @@ const UpcomingTrips: React.FC<Props> = ({
               </PrimaryText>
             )}
             {isSuccess(trips) &&
-              trips.data?.map(t => {
+              trips.data?.reverse().map(t => {
                 return (
                   <React.Fragment key={t.tsr_id}>
                     <TouchableOpacity

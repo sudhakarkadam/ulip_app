@@ -222,5 +222,6 @@
   "IN_PROGRESS": "IN_PROGRESS",
   "PENDING_POD": "लंबित पी ओ डी",
   "onroadcamel": "ट्रिप्स सड़क पर",
-  "requests.camel": "ट्रिप नियुक्त करें"
+  "requests.camel": "ट्रिप नियुक्त करें",
+  "choose.a.reason": "कोई कारण चुनें"
 }

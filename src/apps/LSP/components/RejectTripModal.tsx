@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Flex, FlexRow } from "../../../components/@styled/BaseElements";
 import { PrimaryText, TextWrapper } from "../../../components/@styled/Text";
 import SelectComponent from "../../../components/SelectComponent";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import { ToastAndroid } from "react-native";
-import { TranslationText } from "../../../components/InternationalisationProvider";
+import {
+  TranslationText,
+  I18nContext
+} from "../../../components/InternationalisationProvider";
 import ActionCreators from "../../../actions/ActionCreators";
 import { ConnectedProps, connect } from "react-redux";
 
@@ -22,6 +25,7 @@ interface OwnProps {
 
 const RejectTripModal = (props: OwnProps) => {
   const [reason, setReason] = useState("");
+  const { translate } = useContext(I18nContext);
   return (
     <Flex>
       <PrimaryText>
@@ -29,7 +33,7 @@ const RejectTripModal = (props: OwnProps) => {
       </PrimaryText>
       <TextWrapper label={<TranslationText id="choose.reason" />}>
         <SelectComponent
-          placeholder="Choose a reason"
+          placeholder={translate("choose.a.reason")}
           data={props.rejectReasons.map(reason => ({
             label: reason,
             value: reason
