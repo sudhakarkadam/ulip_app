@@ -83,7 +83,7 @@ const AuthenticatedFlow = (props: OwnProps) => {
       <Stack.Screen
         name="PODDetailsPage"
         component={PODDetails}
-        options={{ title: translate("proof.of.delivery") }}
+        options={{ title: translate("pod.details") }}
       />
       <Stack.Screen
         name="SignatureUpload"

@@ -160,7 +160,6 @@ export type Keys =
   | "verifying"
   | "warehouse.details"
   | "warehouse.name"
-  | "proof.of.delivery"
   | "add.company"
   | "eway.dispatch.from.state"
   | "shipper"
@@ -184,7 +183,7 @@ export type Keys =
   | "received.by"
   | "add.signature"
   | "created"
-  | "pod.details.page"
+  | "pod.details"
   | "active"
   | "completed"
   | "trip.success.created"
@@ -570,8 +569,6 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "warehouse.name"
   ? never
-  : T extends "proof.of.delivery"
-  ? never
   : T extends "add.company"
   ? never
   : T extends "eway.dispatch.from.state"
@@ -618,7 +615,7 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "created"
   ? never
-  : T extends "pod.details.page"
+  : T extends "pod.details"
   ? never
   : T extends "active"
   ? never

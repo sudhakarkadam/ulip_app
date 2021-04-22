@@ -46,7 +46,7 @@ const HomeStack = () => {
       <Stack.Screen
         name="PODDetailsPage"
         component={PODDetails}
-        options={{ title: translate("pod.details.page") }}
+        options={{ title: translate("pod.details") }}
       />
     </Stack.Navigator>
   );
