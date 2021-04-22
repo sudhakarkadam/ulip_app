@@ -247,7 +247,8 @@ export type Keys =
   | "on.time"
   | "delay"
   | "onroadcamel"
-  | "requests.camel";
+  | "requests.camel"
+  | "choose.a.reason";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -745,5 +746,7 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "onroadcamel"
   ? never
   : T extends "requests.camel"
+  ? never
+  : T extends "choose.a.reason"
   ? never
   : never;

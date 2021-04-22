@@ -267,6 +267,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                         label: type,
                         value: type
                       }))}
+                      placeholder={translate("select.item")}
                       defaultValue={""}
                       getSelectedValue={handleChange("transaction_type")}
                     />
@@ -278,6 +279,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                         label: type,
                         value: type
                       }))}
+                      placeholder={translate("select.item")}
                       defaultValue={""}
                       getSelectedValue={handleChange("transaction_sub_type")}
                     />
