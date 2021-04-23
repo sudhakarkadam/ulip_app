@@ -6112,9 +6112,9 @@ mkdirp@^0.5.1, mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-"mmi-widget@git+ssh://git@github.com/samvet/ulip-react-native-modules.git#5f0766bcdc3f44cf0c496be5ecde9b4ed809b00b":
+"mmi-widget@git+https://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:x-oauth-basic@github.com/samvet/ulip-react-native-modules.git#5f0766bcdc3f44cf0c496be5ecde9b4ed809b00b":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/samvet/ulip-react-native-modules.git#5f0766bcdc3f44cf0c496be5ecde9b4ed809b00b"
+  resolved "git+https://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:x-oauth-basic@github.com/samvet/ulip-react-native-modules.git#5f0766bcdc3f44cf0c496be5ecde9b4ed809b00b"
   dependencies:
     "@turf/bbox" "^6.0.1"
     "@turf/helpers" "^6.1.4"
