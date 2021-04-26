@@ -235,7 +235,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
                   {userPersona === "LSP" && (
-                    <TextWrapper label="User GST Number">
+                    <TextWrapper label={translate("eway.user.gst")}>
                       <Input
                         value={values.user_gst}
                         onChangeText={handleChange("user_gst")}
@@ -261,7 +261,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                   />
                   <Box p={3} />
 
-                  <TextWrapper label="Transaction type">
+                  <TextWrapper label={translate("eway.transaction")}>
                     <SelectComponent
                       data={["INBOUND", "OUTBOUND"].map(type => ({
                         label: type,
@@ -273,7 +273,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Transaction sub-type">
+                  <TextWrapper label={translate("eway.transaction.subtype")}>
                     <SelectComponent
                       data={transactionSubTypes.map(type => ({
                         label: type,
@@ -285,7 +285,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Supplier’s GSTIN">
+                  <TextWrapper label={translate("eway.supplier.gstin")}>
                     <Input
                       value={values.supplier_gstn}
                       onChangeText={handleChange("supplier_gstn")}
@@ -296,7 +296,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Recipient’s GSTIN">
+                  <TextWrapper label={translate("eway.receipt.gstin")}>
                     <Input
                       value={values.recipient_gstn}
                       onChangeText={handleChange("recipient_gstn")}
@@ -307,7 +307,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Delivery Pincode">
+                  <TextWrapper label={translate("eway.delivery.pincode")}>
                     <Input
                       value={values.delivery_pincode}
                       onChangeText={handleChange("delivery_pincode")}
@@ -318,7 +318,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Invoice number">
+                  <TextWrapper label={translate("eway.invoice.number")}>
                     <Input
                       value={values.invoice_number}
                       onChangeText={handleChange("invoice_number")}
@@ -329,7 +329,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Invoice date">
+                  <TextWrapper label={translate("eway.invoice.date")}>
                     <Input
                       value={values.invoice_date}
                       onChangeText={handleChange("invoice_date")}
@@ -340,7 +340,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Total Value">
+                  <TextWrapper label={translate("eway.total.value")}>
                     <Input
                       value={values.total_value}
                       onChangeText={handleChange("total_value")}
@@ -351,7 +351,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="HSN Code">
+                  <TextWrapper label={translate("eway.hsn.code")}>
                     <Input
                       value={values.hsn_code}
                       onChangeText={handleChange("hsn_code")}
@@ -360,7 +360,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Vehicle number">
+                  <TextWrapper label={translate("eway.vehicle.number")}>
                     <Input
                       value={values.vehicle_number}
                       onChangeText={handleChange("vehicle_number")}
@@ -371,7 +371,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="From Billing State">
+                  <TextWrapper label={translate("eway.from.billing.state")}>
                     <Input
                       value={values.from_state_code}
                       onChangeText={handleChange("from_state_code")}
@@ -382,7 +382,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="To Billing State">
+                  <TextWrapper label={translate("eway.to.billing.state")}>
                     <Input
                       value={values.to_state_code}
                       onChangeText={handleChange("to_state_code")}
@@ -393,7 +393,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Dispatch from state">
+                  <TextWrapper label={translate("eway.dispatch.from.state")}>
                     <Input
                       value={values.act_from_state_code}
                       onChangeText={handleChange("act_from_state_code")}
@@ -405,7 +405,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Ship To State">
+                  <TextWrapper label={translate("eway.ship.to.state")}>
                     <Input
                       value={values.ship_to_state}
                       onChangeText={handleChange("ship_to_state")}
@@ -416,7 +416,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Bill From Pincode">
+                  <TextWrapper label={translate("eway.bill.from.pincode")}>
                     <Input
                       value={values.consignor_pincode}
                       onChangeText={handleChange("consignor_pincode")}
@@ -427,7 +427,7 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
                     />
                   </TextWrapper>
 
-                  <TextWrapper label="Transporter Id">
+                  <TextWrapper label={translate("eway.transporter.id")}>
                     <Input
                       value={values.transporter_id}
                       onChangeText={handleChange("transporter_id")}

@@ -220,6 +220,7 @@ export type Keys =
   | "onroad"
   | "no.past.trips"
   | "eway.transaction"
+  | "eway.transaction.subtype"
   | "eway.supplier.gstin"
   | "trip.rejected"
   | "select.transaction.subtype"
@@ -689,6 +690,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "no.past.trips"
   ? never
   : T extends "eway.transaction"
+  ? never
+  : T extends "eway.transaction.subtype"
   ? never
   : T extends "eway.supplier.gstin"
   ? never

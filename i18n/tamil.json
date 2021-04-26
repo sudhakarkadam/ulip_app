@@ -122,6 +122,7 @@
   "eway.user.gst": "",
   "eway.transported.id": "",
   "eway.transaction": "",
+  "eway.transaction.subtype": "",
   "eway.total.value": "",
   "eway.to.billing.state": "",
   "eway.supplier.gstin": "",
