@@ -259,6 +259,6 @@
   "choose.a.reason": "Choose a reason",
   "trip.successfully.accepted":"Trip Successfully Accepted",
   "trip.successfully.rejected":"Trip Successfully Rejected",
-  "something.went wrong.please.try.again.later":"कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
-  "something.went wrong.please.try.again":"कुछ गलत हो गया। कृपया पुन: प्रयास करें |"
+  "something.went wrong.please.try.again.later":"Something went wrong. Please try again later.",
+  "something.went wrong.please.try.again":"Something went wrong. Please try again."
 }
