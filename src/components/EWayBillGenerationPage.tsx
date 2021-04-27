@@ -178,14 +178,14 @@ const EWayBillGenerationPage = (props: EWayBillGenerateType & OwnProps) => {
               props.navigation?.goBack();
             } else {
               ToastAndroid.show(
-                "Something went wrong. Please try again.",
+                translate("something.went wrong.please.try.again"),
                 ToastAndroid.SHORT
               );
             }
           })
           .catch(() => {
             ToastAndroid.show(
-              "Something went wrong. Please try again.",
+              translate("something.went wrong.please.try.again"),
               ToastAndroid.SHORT
             );
           });

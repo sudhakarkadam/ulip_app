@@ -248,7 +248,11 @@ export type Keys =
   | "delay"
   | "onroadcamel"
   | "requests.camel"
-  | "choose.a.reason";
+  | "choose.a.reason"
+  | "trip.successfully.accepted"
+  | "trip.successfully.rejected"
+  | "something.went wrong.please.try.again.later"
+  | "something.went wrong.please.try.again";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -748,5 +752,13 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "requests.camel"
   ? never
   : T extends "choose.a.reason"
+  ? never
+  : T extends "trip.successfully.accepted"
+  ? never
+  : T extends "trip.successfully.rejected"
+  ? never
+  : T extends "something.went wrong.please.try.again.later"
+  ? never
+  : T extends "something.went wrong.please.try.again"
   ? never
   : never;

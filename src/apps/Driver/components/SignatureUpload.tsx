@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { ConnectedProps, connect } from "react-redux";
 import { StyleSheet, View, CheckBox } from "react-native";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
@@ -18,7 +18,10 @@ import SignatureCapture, {
 } from "react-native-signature-capture";
 import ActionCreators from "../../../actions/ActionCreators";
 import { Page, PageContent } from "../../../components/@styled/Page";
-import { TranslationText } from "../../../components/InternationalisationProvider";
+import {
+  I18nContext,
+  TranslationText
+} from "../../../components/InternationalisationProvider";
 import { CommonState } from "../../../reducers";
 import { ToastAndroid } from "react-native";
 
@@ -40,6 +43,7 @@ const SignatureUpload: React.FC<Props> = props => {
   const [loading, setLoading] = useState(false);
   const [signed, setSignstate] = useState(false);
   const [checked, setCheckbox] = useState(false);
+  const { translate } = useContext(I18nContext);
   const saveSign = () => {
     //@ts-ignore
     signRef?.current?.saveImage();
@@ -70,7 +74,7 @@ const SignatureUpload: React.FC<Props> = props => {
           props.navigation.navigate("PODDetailsPage");
         } else {
           ToastAndroid.show(
-            "Something went wrong. Please try again.",
+            translate("something.went wrong.please.try.again"),
             ToastAndroid.SHORT
           );
         }
@@ -78,7 +82,7 @@ const SignatureUpload: React.FC<Props> = props => {
       .catch(() => {
         setLoading(false);
         ToastAndroid.show(
-          "Something went wrong. Please try again.",
+          translate("something.went wrong.please.try.again"),
           ToastAndroid.SHORT
         );
       });

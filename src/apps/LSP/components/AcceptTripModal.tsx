@@ -79,14 +79,14 @@ const AcceptTripModal = (props: OwnProps) => {
               .then(() => {
                 props.onClose();
                 ToastAndroid.show(
-                  "Trip Successfully Accepted",
+                  translate("trip.successfully.accepted"),
                   ToastAndroid.SHORT
                 );
                 props.returningScreen();
               })
               .catch(() => {
                 ToastAndroid.show(
-                  "Something went wrong. Please try again later.",
+                  translate("something.went wrong.please.try.again.later"),
                   ToastAndroid.SHORT
                 );
               })

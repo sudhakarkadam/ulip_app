@@ -191,7 +191,7 @@ const EWayBillCard = ({
                           navigation?.goBack();
                         } else {
                           ToastAndroid.show(
-                            "Something went wrong. Please try again.",
+                            translate("something.went wrong.please.try.again"),
                             ToastAndroid.SHORT
                           );
                         }
@@ -199,7 +199,7 @@ const EWayBillCard = ({
                       .catch(() => {
                         setLoading(false);
                         ToastAndroid.show(
-                          "Something went wrong. Please try again.",
+                          translate("something.went wrong.please.try.again"),
                           ToastAndroid.SHORT
                         );
                       });
