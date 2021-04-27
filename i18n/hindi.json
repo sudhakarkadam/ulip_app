@@ -6,7 +6,7 @@
   "add.warehouse": "गोदाम जोड़ें",
   "address": "पता",
   "are.you.sure": "क्या आप इसके बारे में निश्चित है?",
-  "capture.pop": "\"वितरण का प्रमाण\" लीजिये",
+  "capture.pop": "वितरण का प्रमाण",
   "choose.language": "अपनी भाषा चुनिए",
   "choose.lsp": "LSP चुनें",
   "choose.reason": "कारण चुनें",
@@ -191,7 +191,7 @@
   "receiver.signature": "प्राप्तिकर्ता हस्ताक्षर",
   "proof.of.delivery": "डिलीवरी प्रूफ",
   "profile.save": "प्रोफाइल सेव करें",
-  "pod.details": " पी ओ डी विवरण",
+  "pod.details": "पी ओ डी विवरण",
   "onroad": "ट्रिप्स सड़क पर",
   "not.found": "कुछ नहीं मिला",
   "largeCase.pending": "लंबित ट्रिप्स",
@@ -225,5 +225,9 @@
   "PENDING_POD": "लंबित पी ओ डी",
   "onroadcamel": "ट्रिप्स सड़क पर",
   "requests.camel": "ट्रिप नियुक्त करें",
-  "choose.a.reason": "कोई कारण चुनें"
+  "choose.a.reason": "कोई कारण चुनें",
+  "trip.successfully.accepted":"ट्रिप सफलतापूर्वक स्वीकृत हो गई",
+  "trip.successfully.rejected":"ट्रिप सफलतापूर्वक अस्वीकृतहो गई",
+  "something.went wrong.please.try.again.later":"कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
+  "something.went wrong.please.try.again":"कुछ गलत हो गया। कृपया पुन: प्रयास करें |"
 }

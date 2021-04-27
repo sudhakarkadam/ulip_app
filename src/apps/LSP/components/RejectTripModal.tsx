@@ -59,14 +59,14 @@ const RejectTripModal = (props: OwnProps) => {
               .then(() => {
                 props.onClose();
                 ToastAndroid.show(
-                  "Trip Successfully Rejected",
+                  translate("trip.successfully.rejected"),
                   ToastAndroid.SHORT
                 );
                 props.returningScreen();
               })
               .catch(() => {
                 ToastAndroid.show(
-                  "Something went wrong. Please try again later.",
+                  translate("something.went wrong.please.try.again.later"),
                   ToastAndroid.SHORT
                 );
               })
