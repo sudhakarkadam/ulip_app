@@ -90,7 +90,7 @@ const HomeMetrics = (
             <MetricBox
               onPress={() => props.navigation.navigate("MainTripListing")}
             >
-              <PrimaryTextSmall>
+              <PrimaryTextSmall numberOfLines={1}>
                 <TranslationText id="requested" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
@@ -109,7 +109,7 @@ const HomeMetrics = (
             <MetricBox
               onPress={() => props.navigation.navigate("MainTripListing")}
             >
-              <PrimaryTextSmall>
+              <PrimaryTextSmall numberOfLines={1}>
                 <TranslationText id="pending.literally" />
               </PrimaryTextSmall>
               <PrimaryHeaderText
@@ -128,7 +128,7 @@ const HomeMetrics = (
             <MetricBox
               onPress={() => props.navigation.navigate("InTransitStack")}
             >
-              <PrimaryTextSmall>
+              <PrimaryTextSmall numberOfLines={1}>
                 <TranslationText id="onroadcamel" />
               </PrimaryTextSmall>
               <PrimaryHeaderText

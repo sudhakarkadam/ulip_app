@@ -12,7 +12,7 @@ export const renderTabBarLable: Props<Route>["renderLabel"] = ({
   const bg = focused ? colors.secondary : "transparent";
   return (
     <Box bg={bg} border={`1px solid ${bg}`} py={2} px={4} borderRadius={25}>
-      <Text color={color} fontSize={16}>
+      <Text color={color} fontSize={14} numberOfLines={1}>
         {route.title}
       </Text>
     </Box>
