@@ -34,11 +34,11 @@ interface Props {
 const Trips = (props: Props) => {
   const [index, setIndex] = useState(props.route.params?.activeIndex || 0);
   const { translate } = useContext(I18nContext);
-  const [routes] = useState([
+  const routes = [
     { key: "UPCOMING", title: translate("upcoming") },
     { key: "ON-ROAD", title: translate("onroad") },
     { key: "PENDING", title: translate("largeCase.pending") }
-  ]);
+  ];
   const Upcoming = () => (
     <Page>
       <PageContent>

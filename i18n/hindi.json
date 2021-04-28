@@ -226,8 +226,9 @@
   "onroadcamel": "ट्रिप्स सड़क पर",
   "requests.camel": "ट्रिप नियुक्त करें",
   "choose.a.reason": "कोई कारण चुनें",
-  "trip.successfully.accepted":"ट्रिप सफलतापूर्वक स्वीकृत हो गई",
-  "trip.successfully.rejected":"ट्रिप सफलतापूर्वक अस्वीकृतहो गई",
-  "something.went wrong.please.try.again.later":"कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
-  "something.went wrong.please.try.again":"कुछ गलत हो गया। कृपया पुन: प्रयास करें |"
+  "trip.successfully.accepted": "ट्रिप सफलतापूर्वक स्वीकृत हो गई",
+  "trip.successfully.rejected": "ट्रिप सफलतापूर्वक अस्वीकृतहो गई",
+  "something.went wrong.please.try.again.later": "कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
+  "something.went wrong.please.try.again": "कुछ गलत हो गया। कृपया पुन: प्रयास करें |",
+  "change.language": "भाषा बदलें"
 }

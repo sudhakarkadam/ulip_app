@@ -18,6 +18,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { UserPersonaTypes } from "./models/CommonModel";
 import BlockScreenLoader from "./components/BlockScreenLoader";
 
+import { I18nContext } from "./components/InternationalisationProvider";
+
 const MapmyIndia = require("mmi-widget");
 
 const AuthenticatedStack = createStackNavigator();
@@ -104,12 +106,14 @@ class DrawerNavigator extends React.Component<
       getAppConfigs({});
     }
   }
+  static contextType = I18nContext;
+  context!: React.ContextType<typeof I18nContext>;
   render() {
     const { isLanguageSelected, userPersona } = this.props;
-
+    const { translate } = this.context;
     return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Home">
+        <Drawer.Screen name="Home" options={{ title: translate("home") }}>
           {() => (
             <AuthenticatedStackNavigator
               isLanguageSelected={isLanguageSelected}
@@ -117,7 +121,10 @@ class DrawerNavigator extends React.Component<
             />
           )}
         </Drawer.Screen>
-        <Drawer.Screen name="Change Language">
+        <Drawer.Screen
+          name="Change Language"
+          options={{ title: translate("change.language") }}
+        >
           {({ navigation }) => (
             <SelectLanguage
               next={() => navigation.navigate("Home")}
