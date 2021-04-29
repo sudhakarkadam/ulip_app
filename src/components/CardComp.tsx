@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, ImageSourcePropType } from "react-native";
+import { handleEnableDisable } from "../utils/Helper";
 import StyledButton from "../components/@styled/StyledButton";
 import colors from "../theme/colors";
 import { FlexRow, Text, FlexColumn } from "./@styled/BaseElements";
@@ -12,6 +13,7 @@ interface OwnProps {
   imgSrc?: ImageSourcePropType;
   taskHeading?: string;
   clickLabel?: string;
+  isDisable?: boolean;
 }
 
 const CardComp = (props: OwnProps) => {
@@ -20,10 +22,18 @@ const CardComp = (props: OwnProps) => {
     imgSrc,
     taskHeading,
     clickLabel,
-    taskClickCallback
+    taskClickCallback,
+    isDisable
   } = props;
+
   return (
-    <FlexColumn p={6} backgroundColor="white" height={140}>
+    <FlexColumn
+      p={6}
+      backgroundColor="white"
+      height={140}
+      opacity={handleEnableDisable(isDisable).opacity}
+      pointerEvents={handleEnableDisable(isDisable).pointerEvents}
+    >
       <FlexRow>
         <Text color={`${colors.black[1]}`}>{cardHeading || "STEP 1"}</Text>
       </FlexRow>
