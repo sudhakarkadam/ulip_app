@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Dimensions } from "react-native";
 import { TabView, TabBar } from "react-native-tab-view";
@@ -17,7 +17,6 @@ import {
 import { TripStackList } from "./LSPTripStack";
 import { LSPAuthenticatedStackParamList } from "./LSPLanding";
 import { I18nContext } from "../../../components/InternationalisationProvider";
-import { useContext } from "react";
 
 type NavigationProps = CompositeNavigationProp<
   StackNavigationProp<TripStackList, "Trips">,
@@ -121,7 +120,6 @@ const Trips = (props: Props) => {
               if (routes[index].key === route.key) return <Pending />;
               return null;
             }
-            // return <Pending />;
             case "ON-ROAD": {
               if (routes[index].key === route.key) return <OnRoad />;
               return null;

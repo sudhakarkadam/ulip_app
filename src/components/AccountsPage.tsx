@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 import { Text, Flex, FlexRow, Box } from "./@styled/BaseElements";
 import { UserDataModel, UserPersonaTypes } from "../models/CommonModel";
 const personIcon = require("../images/sample-profile.png");
-//const driverIcon = require("../images/driver.svg");
+
 import DriverIcon from "../images/driver.svg";
 import LSPIcon from "../images/lsp.svg";
 import ShipperIcon from "../images/shipper.svg";

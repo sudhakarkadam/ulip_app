@@ -96,7 +96,6 @@ const Trips: React.FunctionComponent<Props> = props => {
               if (routes[index].key === route.key) return <Active />;
               return null;
             }
-            // return <Pending />;
             case "ON-ROAD": {
               if (routes[index].key === route.key) return <OnRoad />;
               return null;

@@ -15,10 +15,6 @@ import { vehicleFormats } from "../../utils/constants";
 import trackTruck from "../../images/question-mark.png";
 import { TranslationText } from "../InternationalisationProvider";
 
-// export const PrimaryText = styled(Text)`
-//   color: ${colors.blues[0]};
-// `;
-
 export const PrimaryText = styled(Text)`
   color: ${colors.primary};
   font-size: 16px;
@@ -69,12 +65,6 @@ export const SmallCapitalText = styled(Text)`
   font-size: 12px;
   font-family: Roboto-Regular;
 `;
-// export const PrimaryLabel = styled(PrimaryText)`
-//   color: ${colors.primary};
-//   font-weight: bold;
-//   font-size: 16px;
-//   text-transform: capitalize;
-// `;
 
 export const LightText = styled(Text)`
   color: ${colors.grays[1]};

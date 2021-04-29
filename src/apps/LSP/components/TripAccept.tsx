@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Flex, ScrollView } from "../../../components/@styled/BaseElements";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 import withModal, {
@@ -16,7 +16,7 @@ import { Page, PageContent } from "../../../components/@styled/Page";
 import { LSPAuthenticatedStackParamList } from "./LSPLanding";
 import { HomeStackParamList } from "./LSPHomeStack";
 import { I18nContext } from "../../../components/InternationalisationProvider";
-import { useContext } from "react";
+
 const { getVehiclesList, acceptTrip, rejectTrip } = CommonActionCreators;
 
 type NavigationProps = CompositeNavigationProp<
@@ -56,7 +56,6 @@ const TripAcceptPage = (
   }, []);
 
   const returnToList = () => props.navigation.navigate("TripRequests", {});
-  // const openTruckSelect = () => props.navigation.push("TruckSelect");
   const { translate } = useContext(I18nContext);
 
   return (
