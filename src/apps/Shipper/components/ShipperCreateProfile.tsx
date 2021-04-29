@@ -50,6 +50,7 @@ const ShipperCreateProfile = (props: AllProps) => {
             taskClickCallback={() =>
               props.navigation.navigate("CompanyProfile")
             }
+            isDisable={personVerified ? false : true}
           ></CardComp>
         )}
       </PageContent>
