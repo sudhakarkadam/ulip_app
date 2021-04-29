@@ -1,0 +1,1 @@
+s 2tsX6hrsrc/components/CardComp.tsx
