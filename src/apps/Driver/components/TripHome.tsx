@@ -291,6 +291,7 @@ const Trip: React.FC<Props> = props => {
         />
       );
     }
+    return null;
   };
 
   return (
