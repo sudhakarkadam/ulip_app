@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -6,7 +6,6 @@ import Login from "./components/LoginComponent";
 import { connect, ConnectedProps } from "react-redux";
 import { CommonState } from "./reducers";
 
-import { useEffect } from "react";
 import { HeaderProvider } from "./api/Headers";
 import UserPersona from "./components/UserPersona";
 import ActionCreators from "./actions/ActionCreators";
@@ -30,8 +29,7 @@ const mapStateToProps = (state: CommonState) => ({
   commonConfig: state.appConfig.data,
   activeActionsCount: state.activeActions.data
 });
-const { getAppConfigs } = ActionCreators;
-const mapDispatchToProps = { getAppConfigs };
+const mapDispatchToProps = { getAppConfigs: ActionCreators.getAppConfigs };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 interface Props {

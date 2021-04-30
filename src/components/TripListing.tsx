@@ -8,8 +8,6 @@ import {
   TouchableOpacity
 } from "./@styled/BaseElements";
 import colors from "../theme/colors";
-// import Filter from "../images/sort.svg";
-// import Sort from "../images/filter.svg";
 import {
   SecondaryText,
   SmallCapitalText,

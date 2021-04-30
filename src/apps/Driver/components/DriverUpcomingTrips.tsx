@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, ActivityIndicator } from "react-native";
 import {
   PrimaryHeaderText,
   PrimaryLabel,
@@ -20,14 +20,12 @@ import {
   TouchableOpacity,
   FlexRow
 } from "../../../components/@styled/BaseElements";
-import { ActivityIndicator } from "react-native";
 import { isLoading, isSuccess } from "../../../utils/actionCreator";
 import colors from "../../../theme/colors";
 import { useIsFocused } from "@react-navigation/native";
 import { Status } from "../../../models/DriverTrips";
 
-const { getDriverTrips, updateTrip, upload } = ActionCreators;
-const mapDispatchToProps = { getDriverTrips, updateTrip, upload };
+const mapDispatchToProps = { getDriverTrips: ActionCreators.getDriverTrips };
 const mapStateToProps = (state: CommonState) => ({
   trips: state.driverTrips,
   phone: state.user.data.phone_number

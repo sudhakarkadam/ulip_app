@@ -45,10 +45,6 @@ const Map: React.FC<MapProps> = ({
   // @ts-ignore
   const mapView = useRef<MapView>({});
 
-  // const fitToScreen = useCallback(() => {
-  //   mapRef.current.fitToCoordinates(routeCoordinates);
-  // }, [mapRef.current]);
-
   const { latitude, longitude, latitudeDelta, longitudeDelta } = IndiaLatlongs;
 
   return (
