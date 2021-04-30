@@ -1,1 +1,0 @@
-	 2jsXhrbabel.config.js

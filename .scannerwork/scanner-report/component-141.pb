@@ -1,1 +1,0 @@
-ç 2tsXãhrsrc/components/@styled/Text.tsx

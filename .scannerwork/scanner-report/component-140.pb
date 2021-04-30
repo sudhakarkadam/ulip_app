@@ -1,1 +1,0 @@
-Œ 2tsXihr src/components/@styled/Modal.tsx

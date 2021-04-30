@@ -1,1 +1,0 @@
-U 2tsXhrsrc/typings/svg.d.ts

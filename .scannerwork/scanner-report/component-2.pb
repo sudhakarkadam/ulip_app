@@ -1,1 +1,0 @@
- 2jsXhrreact-native.config.js

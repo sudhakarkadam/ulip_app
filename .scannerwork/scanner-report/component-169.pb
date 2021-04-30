@@ -1,1 +1,0 @@
-© 2tsX5hr2src/apps/Shipper/components/ShipperTripDetails.tsx

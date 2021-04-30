@@ -1,1 +1,0 @@
-| 2tsX+hr1src/components/TripTracking/TripTracking.model.ts

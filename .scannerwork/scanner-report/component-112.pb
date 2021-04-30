@@ -1,1 +1,0 @@
-p 2tsXährsrc/components/CreateTrip.tsx

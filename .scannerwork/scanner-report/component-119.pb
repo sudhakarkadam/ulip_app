@@ -1,1 +1,0 @@
-w 2tsX²hrsrc/components/PODDetails.tsx
