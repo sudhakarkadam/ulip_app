@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import InTransitListing from "./InTransitListing";
 import ShipperCreateTrip from "./ShipperCreateTrip";
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
-import { useContext } from "react";
 import { I18nContext } from "../../../components/InternationalisationProvider";
 
 // eslint-disable-next-line @typescript-eslint/prefer-interface

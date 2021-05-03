@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Flex, FlexRow } from "../../../components/@styled/BaseElements";
 import { PrimaryText, TextWrapper } from "../../../components/@styled/Text";
 import Input from "../../../components/InputComponent";
@@ -6,12 +6,13 @@ import SelectComponent from "../../../components/SelectComponent";
 import StyledButton from "../../../components/@styled/StyledButton/StyledButton";
 
 import { ToastAndroid } from "react-native";
-import { TranslationText } from "../../../components/InternationalisationProvider";
+import {
+  TranslationText,
+  I18nContext
+} from "../../../components/InternationalisationProvider";
 import { VehicleListDetails } from "../../../models/CommonModel";
 import ActionCreators from "../../../actions/ActionCreators";
 import { ConnectedProps, connect } from "react-redux";
-import { I18nContext } from "../../../components/InternationalisationProvider";
-import { useContext } from "react";
 
 const { acceptTrip } = ActionCreators;
 const connector = connect(null, { acceptTrip });

@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/prefer-interface */
 /* eslint-disable react/display-name */
 import React, { useContext } from "react";
-import { StackScreenProps, StackNavigationProp } from "@react-navigation/stack";
+import {
+  StackScreenProps,
+  StackNavigationProp,
+  createStackNavigator
+} from "@react-navigation/stack";
 import HomeSelected from "../../../images/home_selected.svg";
 import HomeBlur from "../../../images/home_blur.svg";
 import InTransitSelected from "../../../images/intransit_selected.svg";
@@ -13,21 +17,21 @@ import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
 import UlipBottomTab from "../../../components/UlipBottomTab";
 
 import { HeaderOptions } from "../../../components/@styled/BaseElements";
-import { createStackNavigator } from "@react-navigation/stack";
 import TripDetails from "../../../components/TripDetails";
 import TripTracking from "../../../components/TripTracking";
 import AccountsPage from "../../../components/AccountsPage";
 import TruckSelect from "./TruckSelect";
 import { RootStackParamList } from "./AuthenticatedFlow";
-import { TripStackList } from "./LSPTripStack";
+import TripStack, { TripStackList } from "./LSPTripStack";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import HomeStack from "./LSPHomeStack";
 import { useIsFocused } from "@react-navigation/native";
 import AccountInactive from "../../../images/user-circle.svg";
 import AccountActive from "../../../images/user-circle-dark.svg";
-import TripStack from "./LSPTripStack";
-import { TranslationText } from "../../../components/InternationalisationProvider";
-import { I18nContext } from "../../../components/InternationalisationProvider";
+import {
+  TranslationText,
+  I18nContext
+} from "../../../components/InternationalisationProvider";
 
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
 interface TripNavProps {

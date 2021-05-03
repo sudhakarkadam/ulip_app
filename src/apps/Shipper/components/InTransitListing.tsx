@@ -25,7 +25,7 @@ interface Props {
   navigation: NavigationProps;
 }
 
-const Trips: React.FunctionComponent<Props> = props => {
+const InTransitListing: React.FunctionComponent<Props> = props => {
   const [index, setIndex] = useState(0);
   const { translate } = useContext(I18nContext);
   const [routes] = useState([
@@ -110,4 +110,4 @@ const Trips: React.FunctionComponent<Props> = props => {
     </Flex>
   );
 };
-export default Trips;
+export default InTransitListing;
