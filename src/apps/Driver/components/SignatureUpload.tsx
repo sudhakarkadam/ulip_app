@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import { ConnectedProps, connect } from "react-redux";
-import { StyleSheet, View, CheckBox } from "react-native";
+import { StyleSheet, View, CheckBox, ToastAndroid } from "react-native";
 import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import { DriverHomeStackParamList } from "./AuthenticatedFlow";
 import Input from "../../../components/InputComponent";
@@ -23,7 +23,6 @@ import {
   TranslationText
 } from "../../../components/InternationalisationProvider";
 import { CommonState } from "../../../reducers";
-import { ToastAndroid } from "react-native";
 
 const { upload, specialUpload, getTripById } = ActionCreators;
 const mapDispatchToProps = { upload, specialUpload, getTripById };

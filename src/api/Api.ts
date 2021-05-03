@@ -1,4 +1,3 @@
-// import { NativeModules } from "react-native";
 import http from "../utils/http";
 import {
   SendOtpRequest,
@@ -32,7 +31,6 @@ import { HeaderProvider } from "./Headers";
 import { DriverTrips, Status, UpdateTripRequest } from "../models/DriverTrips";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
-// const BuildConfig = NativeModules.RNBuildConfig || {};
 const endpoint = "http://20.40.44.155";
 
 const urls = {

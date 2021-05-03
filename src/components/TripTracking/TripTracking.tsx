@@ -30,10 +30,6 @@ const screen = Dimensions.get("window");
 const screenHeight = screen.height;
 
 const mapStateToProps = (state: CommonState): TTDataProps => {
-  // const trip = (state.trips.data?.transport_service_requests || []).find(
-  //   t => t.tsr_id === props.route.params.tripId
-  // );
-
   const trip = state.driverTrip.data;
   const pickupCity = (trip?.source_location_details.city || "").toLowerCase();
   const dropCity = (

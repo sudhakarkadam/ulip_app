@@ -272,7 +272,6 @@ export default class ConfirmationCodeInput extends Component<
       const code = newCodeArr.join("");
       isVerifyingInput = true;
       onFulfill(code).then(status => {
-        // onFulfill(status);
         !status && this.clear();
       });
       this._blur(this.state.currentIndex);

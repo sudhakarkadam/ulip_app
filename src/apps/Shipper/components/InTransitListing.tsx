@@ -25,7 +25,7 @@ interface Props {
   navigation: NavigationProps;
 }
 
-const Trips: React.FunctionComponent<Props> = props => {
+const InTransitListing: React.FunctionComponent<Props> = props => {
   const [index, setIndex] = useState(0);
   const { translate } = useContext(I18nContext);
   const [routes] = useState([
@@ -96,7 +96,6 @@ const Trips: React.FunctionComponent<Props> = props => {
               if (routes[index].key === route.key) return <Active />;
               return null;
             }
-            // return <Pending />;
             case "ON-ROAD": {
               if (routes[index].key === route.key) return <OnRoad />;
               return null;
@@ -111,4 +110,4 @@ const Trips: React.FunctionComponent<Props> = props => {
     </Flex>
   );
 };
-export default Trips;
+export default InTransitListing;

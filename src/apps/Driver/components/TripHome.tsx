@@ -130,7 +130,6 @@ const Trip: React.FC<Props> = props => {
     });
   };
 
-  // const trips = driverTrips || props.trips.data;
   const trip = props.trip.data;
   if (!trip)
     return (
@@ -198,7 +197,6 @@ const Trip: React.FC<Props> = props => {
               title={<TranslationText id="start.trip"></TranslationText>}
               style={{ opacity: 0.6 }}
               disabled={true}
-              onPress={() => {}}
             />
           </>
         );
@@ -293,7 +291,7 @@ const Trip: React.FC<Props> = props => {
         />
       );
     }
-    return;
+    return null;
   };
 
   return (

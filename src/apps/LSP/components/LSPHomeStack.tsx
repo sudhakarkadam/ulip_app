@@ -10,8 +10,6 @@ import HomeMetrics from "./HomeMetrics";
 import { Page, PageContent } from "../../../components/@styled/Page";
 import { TripList, ListingModes } from "../../../components/TripListing";
 import { AllApps, GetTripsResponse } from "../../../models/CommonModel";
-// import Search from "../../../images/search.svg";
-// import Notification from "../../../images/notification.svg";
 import {
   useIsFocused,
   CompositeNavigationProp
@@ -73,17 +71,6 @@ const TripRequests: React.FC<TripRequestsProps> = (
     </Page>
   );
 };
-
-// const HeaderButtons = () => (
-//   <Box pr={6} flexDirection="row">
-//     <Box mr={7}>
-//       <Notification />
-//     </Box>
-//     <Box mx={3}>
-//       <Search />
-//     </Box>
-//   </Box>
-// );
 
 const Stack = createStackNavigator<HomeStackParamList>();
 
