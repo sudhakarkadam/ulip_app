@@ -1,4 +1,5 @@
 import { stringifyQueryParams } from "./urlUtils";
+import store from "../store";
 
 export interface Http {
   get<T, U>(
@@ -69,7 +70,8 @@ function fireRequest<T>(
     ...config,
     headers: {
       ...defaultHeaders,
-      ...config.headers
+      ...config.headers,
+      "Accept-Language": store.getState().user.data.language || "en"
     }
   };
 
