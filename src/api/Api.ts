@@ -31,7 +31,8 @@ import { HeaderProvider } from "./Headers";
 import { DriverTrips, Status, UpdateTripRequest } from "../models/DriverTrips";
 import { TripAcceptRequest, TripRejectRequest } from "../models/TripAcceptance";
 
-const endpoint = "http://20.40.44.155";
+// const BuildConfig = NativeModules.RNBuildConfig || {};
+const endpoint = "http://10.0.2.2:48080";
 
 const urls = {
   sendOtp: `${endpoint}/ulip/user/login`,
