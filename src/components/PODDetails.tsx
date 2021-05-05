@@ -48,10 +48,9 @@ type Props = OwnProps &
 
 const PODDetails = (props: Props) => {
   const {
-    ewb = "1810000120234",
+    ewb = "301061848340",
     deliveredDate,
-    deliveredDateString = new Date(),
-    deliveredTime = "12:30 PM"
+    deliveredDateString = new Date()
   } = props;
 
   const destination = props.trip?.destination_location_details;
@@ -105,9 +104,7 @@ const PODDetails = (props: Props) => {
               {moment(
                 deliveredDateString || deliveredDate,
                 moment?.defaultFormatUtc
-              ).format("DD/MM/YYYY")}
-              {", "}
-              {deliveredTime}
+              ).format("DD/MM/YYYY, hh:mm a")}
             </PrimaryText>
           </Card>
           <Card style={{ paddingVertical: 7 }}>
