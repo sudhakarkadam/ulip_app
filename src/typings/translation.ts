@@ -170,7 +170,6 @@ export type Keys =
   | "eway.from.billing.state"
   | "create.profile"
   | "eway.bill.details"
-  | "vehicle.not.registered"
   | "eway.user.gst"
   | "receiver.signature"
   | "profile.start"
@@ -188,7 +187,6 @@ export type Keys =
   | "completed"
   | "trip.success.created"
   | "accept"
-  | "vehicle.not.truck"
   | "no.entries"
   | "generate.eway.bill"
   | "eway.vehicle.number"
@@ -210,7 +208,6 @@ export type Keys =
   | "delivery.receipt"
   | "eway.total.value"
   | "truck.request"
-  | "vahaan.not.available"
   | "eway.ship.to.state"
   | "trip.details"
   | "gstin"
@@ -224,7 +221,6 @@ export type Keys =
   | "eway.supplier.gstin"
   | "trip.rejected"
   | "select.transaction.subtype"
-  | "vehicle.not.valid"
   | "personal.details"
   | "your.location"
   | "KG"
@@ -596,8 +592,6 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "eway.bill.details"
   ? never
-  : T extends "vehicle.not.registered"
-  ? never
   : T extends "eway.user.gst"
   ? never
   : T extends "receiver.signature"
@@ -631,8 +625,6 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "trip.success.created"
   ? never
   : T extends "accept"
-  ? never
-  : T extends "vehicle.not.truck"
   ? never
   : T extends "no.entries"
   ? never
@@ -676,8 +668,6 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "truck.request"
   ? never
-  : T extends "vahaan.not.available"
-  ? never
   : T extends "eway.ship.to.state"
   ? never
   : T extends "trip.details"
@@ -703,8 +693,6 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "trip.rejected"
   ? never
   : T extends "select.transaction.subtype"
-  ? never
-  : T extends "vehicle.not.valid"
   ? never
   : T extends "personal.details"
   ? never
