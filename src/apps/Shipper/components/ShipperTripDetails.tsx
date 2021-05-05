@@ -4,6 +4,7 @@ import TripDetails from "../../../components/TripDetails";
 import { HomeStackParamList } from "./HomeStack";
 import { GetTripsResponse } from "../../../models/CommonModel";
 import { Page, PageContent } from "../../../components/@styled/Page";
+import moment from "moment";
 
 type ShipperTripDetailsProps = StackScreenProps<
   HomeStackParamList,
