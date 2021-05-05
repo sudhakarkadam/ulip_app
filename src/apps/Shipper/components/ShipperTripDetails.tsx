@@ -26,9 +26,10 @@ const ShipperTripDetails = (props: ShipperTripDetailsProps & TripNavProps) => {
       <PageContent>
         <TripDetails
           id={tripData.tsr_id + ""}
-          pickupDateString={new Date(
-            tripData.pickup_request_time
-          ).toLocaleDateString()}
+          pickupDateString={moment(
+            new Date(tripData.pickup_request_time),
+            moment.defaultFormatUtc
+          ).format("DD/MM/YYYY")}
           truckType={tripData.truck_type_preference}
           truckWeight={tripData.weight + ""}
           truckUnit={tripData.weight_unit}
