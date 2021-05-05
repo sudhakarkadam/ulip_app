@@ -50,7 +50,7 @@ const PODDetails = (props: Props) => {
   const {
     ewb = "1810000120234",
     deliveredDate,
-    deliveredDateString = "30/07/2020",
+    deliveredDateString = new Date(),
     deliveredTime = "12:30 PM"
   } = props;
 

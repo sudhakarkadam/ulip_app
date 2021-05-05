@@ -32,6 +32,7 @@ import {
   TranslationText,
   I18nContext
 } from "../../../components/InternationalisationProvider";
+import moment from "moment";
 
 type HistoryProps = StackScreenProps<RootStackParamList, "TripDetails">;
 interface TripNavProps {
@@ -62,9 +63,10 @@ export const LSPTripDetails = (props: HistoryProps & TripNavProps) => {
       <PageContent>
         <TripDetails
           id={tripData.tsr_id + ""}
-          pickupDateString={new Date(
-            tripData.pickup_request_time
-          ).toLocaleDateString()}
+          pickupDateString={moment(
+            new Date(tripData.pickup_request_time),
+            moment.defaultFormatUtc
+          ).format("DD/MM/YYYY")}
           truckType={tripData.truck_type_preference}
           truckWeight={tripData.weight + ""}
           truckUnit={tripData.weight_unit}

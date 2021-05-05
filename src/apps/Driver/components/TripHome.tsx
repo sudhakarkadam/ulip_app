@@ -33,6 +33,7 @@ import {
   TranslationText
 } from "../../../components/InternationalisationProvider";
 import { PageContent, Page } from "../../../components/@styled/Page";
+import moment from "moment";
 const MapmyIndia = require("mmi-widget");
 const options = {
   title: "Select proof",
@@ -158,10 +159,13 @@ const Trip: React.FC<Props> = props => {
   };
 
   const bottomSheetContent = () => {
-    const today = new Date().toLocaleDateString();
-    const tripStartDate = new Date(
-      trip.pickup_request_time
-    ).toLocaleDateString();
+    const today = moment(new Date(), moment.defaultFormatUtc).format(
+      "DD/MM/YYYY"
+    );
+    const tripStartDate = moment(
+      new Date(trip.pickup_request_time),
+      moment.defaultFormatUtc
+    ).format("DD/MM/YYYY");
     if (trip.trip_status === "CREATED") {
       if (today === tripStartDate) {
         return (
@@ -332,9 +336,10 @@ const Trip: React.FC<Props> = props => {
                             <TranslationText
                               id="placeholder"
                               interpolations={{
-                                value: new Date(
-                                  trip.pickup_request_time
-                                ).toLocaleDateString()
+                                value: moment(
+                                  new Date(trip.pickup_request_time),
+                                  moment.defaultFormatUtc
+                                ).format("DD/MM/YYYY")
                               }}
                             />
                           </PrimaryText>

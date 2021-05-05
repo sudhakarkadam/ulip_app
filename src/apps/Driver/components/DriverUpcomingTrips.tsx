@@ -24,6 +24,7 @@ import { isLoading, isSuccess } from "../../../utils/actionCreator";
 import colors from "../../../theme/colors";
 import { useIsFocused } from "@react-navigation/native";
 import { Status } from "../../../models/DriverTrips";
+import moment from "moment";
 
 const mapDispatchToProps = { getDriverTrips: ActionCreators.getDriverTrips };
 const mapStateToProps = (state: CommonState) => ({
@@ -113,9 +114,10 @@ const UpcomingTrips: React.FC<Props> = ({
                             <TranslationText
                               id="placeholder"
                               interpolations={{
-                                value: new Date(
-                                  t.pickup_request_time
-                                ).toLocaleDateString()
+                                value: moment(
+                                  new Date(t.pickup_request_time),
+                                  moment.defaultFormatUtc
+                                ).format("DD/MM/YYYY")
                               }}
                             ></TranslationText>
                           </PrimaryHeaderText>
