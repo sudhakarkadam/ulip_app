@@ -226,5 +226,7 @@
   "trip.successfully.rejected": "ट्रिप सफलतापूर्वक अस्वीकृतहो गई",
   "something.went wrong.please.try.again.later": "कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
   "something.went wrong.please.try.again": "कुछ गलत हो गया। कृपया पुन: प्रयास करें |",
-  "change.language": "भाषा बदलें"
+  "change.language": "भाषा बदलें",
+  "upload.eway.bill": "अपलोड ई-वे बिल",
+  "eway.bill.uploaded": "ई-वे बिल अपलोडेड"
 }

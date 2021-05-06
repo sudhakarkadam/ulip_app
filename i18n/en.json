@@ -257,5 +257,7 @@
   "trip.successfully.rejected": "Trip Successfully Rejected",
   "something.went wrong.please.try.again.later": "Something went wrong. Please try again later.",
   "something.went wrong.please.try.again": "Something went wrong. Please try again.",
-  "change.language": "Change Language"
+  "change.language": "Change Language",
+  "upload.eway.bill": "Upload E-way bill",
+  "eway.bill.uploaded": "E-way bill Uploaded"
 }

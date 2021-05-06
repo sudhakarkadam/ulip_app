@@ -32,6 +32,7 @@
     "react-native": "0.61.5",
     "react-native-android-location-enabler": "^1.2.1",
     "react-native-calendars": "^1.300.0",
+    "react-native-document-picker": "^5.0.3",
     "react-native-dropdown-picker": "^3.0.5",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-image-picker": "^2.3.1",
