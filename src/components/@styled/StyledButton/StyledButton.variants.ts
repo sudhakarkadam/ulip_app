@@ -25,6 +25,12 @@ export const type = (props: any) =>
       text: {
         ...common,
         backgroundColor: "transparent"
+      },
+      disable: {
+        ...common,
+        bg: props.appearance,
+        borderColor: props.appearance,
+        opacity: 0.5
       }
     }
   } as VariantArgs);

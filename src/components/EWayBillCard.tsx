@@ -15,9 +15,11 @@ import ActionCreators from "../actions/ActionCreators";
 import { ToastAndroid } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TripStackList } from "../apps/LSP/components/LSPTripStack";
+import DocumentPicker from "react-native-document-picker";
+import RNFetchBlob from "rn-fetch-blob";
 
-const { addEWayBill } = ActionCreators;
-const connector = connect(null, { addEWayBill });
+const { addEWayBill, specialUpload } = ActionCreators;
+const connector = connect(null, { addEWayBill, specialUpload });
 type EWayBillType = ConnectedProps<typeof connector>;
 
 interface EWayBillCardProps {
@@ -96,13 +98,67 @@ const EWayBillCard = ({
   valipUpto,
   addEWayBill,
   tripId,
-  navigation
+  navigation,
+  specialUpload
 }: EWayBillCardProps & EWayBillType) => {
   const { translate } = useContext(I18nContext);
   const [loading, setLoading] = useState(false);
   const [ewayStatus] = useState(ewayStatusProps(status));
   const [showModal, setModal] = useState(false);
   const [number, setNumber] = useState("");
+  const [ewayAttachmentData, setEwayAttachmentData] = useState({});
+  const isDisable =
+    number && Object.keys(ewayAttachmentData).length != 0 ? false : true;
+  const ewayBillUploadText =
+    Object.keys(ewayAttachmentData).length != 0
+      ? translate("eway.bill.uploaded")
+      : translate("upload.eway.bill");
+
+  const browseAndPickSingleFile = async () => {
+    try {
+      const result = await DocumentPicker.pick({
+        type: [DocumentPicker.types.pdf]
+      });
+
+      setLoading(true);
+      setEwayAttachmentData({
+        fileData: RNFetchBlob.wrap(result.uri),
+        document_type: "EWAYBILL",
+        document_id: result.name,
+        id: tripId,
+        fileName: result.name
+      });
+      setLoading(false);
+    } catch (err) {
+      ToastAndroid.show(
+        translate("something.went wrong.please.try.again"),
+        ToastAndroid.SHORT
+      );
+    }
+  };
+
+  const uploadEwayBill = () => {
+    return specialUpload(ewayAttachmentData)
+      .then(res => {
+        if (res.type === "SPECIAL_UPLOAD_SUCCESS") {
+          ToastAndroid.show(
+            translate("eway.bill.uploaded"),
+            ToastAndroid.SHORT
+          );
+        } else {
+          ToastAndroid.show(
+            translate("something.went wrong.please.try.again"),
+            ToastAndroid.SHORT
+          );
+        }
+      })
+      .catch(err => {
+        ToastAndroid.show(
+          translate("something.went wrong.please.try.again"),
+          ToastAndroid.SHORT
+        );
+      });
+  };
 
   return (
     <>
@@ -170,41 +226,55 @@ const EWayBillCard = ({
                   <Input value={number} onChangeText={num => setNumber(num)} />
                 </TextWrapper>
                 <StyledButton
-                  title={
-                    loading ? (
-                      <TranslationText id="loading" />
-                    ) : (
-                      <TranslationText id={"submit"}></TranslationText>
-                    )
-                  }
-                  width={"150px"}
-                  onPress={async () => {
-                    setLoading(true);
-                    await addEWayBill({
-                      ewb_number: number,
-                      tripId
-                    })
-                      .then(res => {
-                        setLoading(false);
-                        if (res.type === "ADD_EWAYBILL_SUCCESS") {
-                          setModal(false);
-                          navigation?.goBack();
-                        } else {
+                  variant="outline"
+                  title={ewayBillUploadText}
+                  width={"100%"}
+                  onPress={browseAndPickSingleFile}
+                />
+                <FlexRow justifyContent={"center"} paddingTop={2}>
+                  <StyledButton
+                    disabled={isDisable}
+                    variant={isDisable ? "disable" : "default"}
+                    title={
+                      loading ? (
+                        <TranslationText id="loading" />
+                      ) : (
+                        <TranslationText id={"submit"}></TranslationText>
+                      )
+                    }
+                    width={"150px"}
+                    onPress={async () => {
+                      setLoading(true);
+
+                      await uploadEwayBill();
+                      await addEWayBill({
+                        ewb_number: number,
+                        tripId
+                      })
+                        .then(res => {
+                          setLoading(false);
+                          if (res.type === "ADD_EWAYBILL_SUCCESS") {
+                            setModal(false);
+                            navigation?.goBack();
+                          } else {
+                            ToastAndroid.show(
+                              translate(
+                                "something.went wrong.please.try.again"
+                              ),
+                              ToastAndroid.SHORT
+                            );
+                          }
+                        })
+                        .catch(() => {
+                          setLoading(false);
                           ToastAndroid.show(
                             translate("something.went wrong.please.try.again"),
                             ToastAndroid.SHORT
                           );
-                        }
-                      })
-                      .catch(() => {
-                        setLoading(false);
-                        ToastAndroid.show(
-                          translate("something.went wrong.please.try.again"),
-                          ToastAndroid.SHORT
-                        );
-                      });
-                  }}
-                />
+                        });
+                    }}
+                  />
+                </FlexRow>
               </Box>
               <View
                 style={{

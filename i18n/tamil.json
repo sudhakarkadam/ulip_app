@@ -183,8 +183,10 @@
   "onroadcamel": "On-Road",
   "requests.camel": "Trips To Assign",
   "choose.a.reason": "Choose a reason",
-  "trip.successfully.accepted":"Trip Successfully Accepted",
-  "trip.successfully.rejected":"Trip Successfully Rejected",
-  "something.went wrong.please.try.again.later":"कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
-  "something.went wrong.please.try.again":"कुछ गलत हो गया। कृपया पुन: प्रयास करें |"
+  "trip.successfully.accepted": "Trip Successfully Accepted",
+  "trip.successfully.rejected": "Trip Successfully Rejected",
+  "something.went wrong.please.try.again.later": "कुछ गलत हो गया। बाद में पुन: प्रयास करें |",
+  "something.went wrong.please.try.again": "कुछ गलत हो गया। कृपया पुन: प्रयास करें |",
+  "upload.eway.bill": "Upload E-way bill",
+  "eway.bill.uploaded": "E-way bill Uploaded"
 }

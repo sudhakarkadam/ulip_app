@@ -249,7 +249,9 @@ export type Keys =
   | "trip.successfully.rejected"
   | "something.went wrong.please.try.again.later"
   | "something.went wrong.please.try.again"
-  | "change.language";
+  | "change.language"
+  | "upload.eway.bill"
+  | "eway.bill.uploaded";
 export type GetTranslationTextType<T> = T extends "accept.terms"
   ? never
   : T extends "account"
@@ -751,5 +753,9 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "something.went wrong.please.try.again"
   ? never
   : T extends "change.language"
+  ? never
+  : T extends "upload.eway.bill"
+  ? never
+  : T extends "eway.bill.uploaded"
   ? never
   : never;
