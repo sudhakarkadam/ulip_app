@@ -153,6 +153,7 @@ const EWayBillCard = ({
         }
       })
       .catch(err => {
+        console.log("err=>" + err);
         ToastAndroid.show(
           translate("something.went wrong.please.try.again"),
           ToastAndroid.SHORT
