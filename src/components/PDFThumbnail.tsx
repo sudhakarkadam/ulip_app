@@ -4,29 +4,31 @@ import RNFetch from "rn-fetch-blob";
 
 import { Image } from "./@styled/BaseElements";
 
-const imageUrl = "http://samples.leanpub.com/thereactnativebook-sample.pdf";
+interface PdfThumbnailProps {
+  pdfLink: string;
+}
 
-const PDFThumbnail = () => {
+const PDFThumbnail = ({ pdfLink }: PdfThumbnailProps) => {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
     const createThumbnail = async () => {
       const res = await RNFetch.config({ fileCache: true }).fetch(
         "GET",
-        imageUrl
+        pdfLink
       );
       const { uri } = await PdfThumbnail.generate(res.path(), 0);
       setUrl(uri);
     };
 
     createThumbnail();
-  }, []);
+  }, [pdfLink]);
 
   return (
     <Image
       source={{ uri: url }}
       resizeMethod="resize"
-      style={{ width: 100, height: 100 }}
+      style={{ width: 95, height: 95 }}
     />
   );
 };

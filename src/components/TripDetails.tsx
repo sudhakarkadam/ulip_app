@@ -78,7 +78,7 @@ const TripDetails = (props: OwnProps) => {
   const [showModal, setModalState] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
 
-  const isPdf = () => selectedImage.includes(".pdf");
+  const isPdf = (img: string) => img.includes(".pdf");
 
   const getModalContent = () => {
     let elem = (
@@ -91,10 +91,27 @@ const TripDetails = (props: OwnProps) => {
       />
     );
 
-    if (isPdf()) {
-      elem = <Pdf source={{ uri: selectedImage }} style={{ flex: 1 }} />;
+    if (isPdf(selectedImage)) {
+      elem = (
+        <Pdf source={{ uri: selectedImage, cache: true }} style={{ flex: 1 }} />
+      );
     }
 
+    return elem;
+  };
+
+  const getDocumentTemplate = (url: string) => {
+    let elem = (
+      <Image
+        source={{ uri: url }}
+        resizeMethod="resize"
+        style={{ width: 95, height: 95 }}
+      />
+    );
+
+    if (isPdf(url)) {
+      elem = <PDFThumbnail pdfLink={url} />;
+    }
     return elem;
   };
 
@@ -236,30 +253,9 @@ const TripDetails = (props: OwnProps) => {
                   setModalState(!showModal);
                 }}
               >
-                <Image
-                  source={{
-                    uri: document.url
-                  }}
-                  resizeMethod="resize"
-                  style={{ width: 100, height: 100 }}
-                />
+                {getDocumentTemplate(document.url)}
               </TouchableOpacity>
             ))}
-            {/* Remove after testing eway-bill pdf show flow */}
-            <TouchableOpacity
-              key={123}
-              mx="3"
-              my="3"
-              onPress={() => {
-                setSelectedImage(
-                  "http://samples.leanpub.com/thereactnativebook-sample.pdf"
-                );
-                setModalState(!showModal);
-              }}
-            >
-              <PDFThumbnail />
-            </TouchableOpacity>
-            {/* Remove after testing eway-bill pdf show flow */}
           </FlexRow>
         )}
       </Card>
