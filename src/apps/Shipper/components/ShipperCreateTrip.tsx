@@ -32,6 +32,8 @@ type CreateTripProps = StackScreenProps<HomeStackParamList, "CreateTrip"> &
   ConnectedProps<typeof connector>;
 
 const ShipperCreateTrip = (props: CreateTripProps) => {
+  const { translate } = useContext(I18nContext);
+
   const userPersonaDetails = props.userInfo.user_details.find(
     role => role.profile.persona === "SHIPPER"
   );
@@ -61,7 +63,7 @@ const ShipperCreateTrip = (props: CreateTripProps) => {
       </Flex1>
     );
   }
-  const { translate } = useContext(I18nContext);
+
   return (
     <>
       {Array.isArray(lspList) &&
