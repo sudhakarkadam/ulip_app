@@ -23,6 +23,8 @@ import TrailorTruck from "../images/trailorTruck.svg";
 import OpenTruck from "../images/openTruck.svg";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { TripStackList } from "../apps/LSP/components/LSPTripStack";
+import PDFThumbnail from "./PDFThumbnail";
+import Pdf from "react-native-pdf";
 
 const Card = styled(Flex)`
   border-bottom-color: ${colors.grays[1]};
@@ -74,7 +76,44 @@ const TripDetails = (props: OwnProps) => {
   } = props;
 
   const [showModal, setModalState] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string>();
+  const [selectedImage, setSelectedImage] = useState<string>("");
+
+  const isPdf = (img: string) => img.includes(".pdf");
+
+  const getModalContent = () => {
+    let elem = (
+      <Image
+        source={{
+          uri: selectedImage
+        }}
+        resizeMode="contain"
+        style={{ width: "100%", height: "100%" }}
+      />
+    );
+
+    if (isPdf(selectedImage)) {
+      elem = (
+        <Pdf source={{ uri: selectedImage, cache: true }} style={{ flex: 1 }} />
+      );
+    }
+
+    return elem;
+  };
+
+  const getDocumentTemplate = (url: string) => {
+    let elem = (
+      <Image
+        source={{ uri: url }}
+        resizeMethod="resize"
+        style={{ width: 95, height: 95 }}
+      />
+    );
+
+    if (isPdf(url)) {
+      elem = <PDFThumbnail pdfLink={url} />;
+    }
+    return elem;
+  };
 
   return (
     <ScrollView>
@@ -214,13 +253,7 @@ const TripDetails = (props: OwnProps) => {
                   setModalState(!showModal);
                 }}
               >
-                <Image
-                  source={{
-                    uri: document.url
-                  }}
-                  resizeMethod="resize"
-                  style={{ width: 100, height: 100 }}
-                />
+                {getDocumentTemplate(document.url)}
               </TouchableOpacity>
             ))}
           </FlexRow>
@@ -238,15 +271,7 @@ const TripDetails = (props: OwnProps) => {
               <PrimaryText fontSize="6">X</PrimaryText>
             </TouchableOpacity>
           </Flex>
-          <Flex1 width="100%">
-            <Image
-              source={{
-                uri: selectedImage
-              }}
-              resizeMode="contain"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Flex1>
+          <Flex1 width="100%">{getModalContent()}</Flex1>
         </Flex1>
       </Modal>
     </ScrollView>

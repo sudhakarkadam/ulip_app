@@ -43,7 +43,6 @@ const TripAcceptPage = (
   props: OwnProps & IWithModalInjectedProps & ConnectedProps<typeof connector>
 ) => {
   const trip = props.route.params.tripDetails;
-  if (!trip) return null;
 
   useEffect(() => {
     const userPersonaDetails = props.userInfo.user_details.find(
@@ -57,6 +56,8 @@ const TripAcceptPage = (
 
   const returnToList = () => props.navigation.navigate("TripRequests", {});
   const { translate } = useContext(I18nContext);
+
+  if (!trip) return null;
 
   return (
     <Page>
