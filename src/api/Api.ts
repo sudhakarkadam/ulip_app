@@ -1,3 +1,4 @@
+// import { NativeModules } from "react-native";
 import http from "../utils/http";
 import {
   SendOtpRequest,
@@ -258,7 +259,11 @@ export default {
         ...HeaderProvider.getHeaders()
       },
       [
-        { name: "file", filename: "sig.jpeg", data: args.fileData },
+        {
+          name: "file",
+          filename: args.fileName || "sig.jpeg",
+          data: args.fileData
+        },
         { name: "document_format", data: args.document_format },
         { name: "document_type", data: args.document_type },
         { name: "document_id", data: args.document_id }
