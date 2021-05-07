@@ -1,6 +1,10 @@
 import React, { useState, useContext, useRef } from "react";
 import { Page, PageContent } from "../../../components/@styled/Page";
-import { FlexColumn, Flex } from "../../../components/@styled/BaseElements";
+import {
+  FlexColumn,
+  Flex,
+  FlexRow
+} from "../../../components/@styled/BaseElements";
 import {
   PrimaryHeaderText,
   TextWrapper,
@@ -25,7 +29,8 @@ import { vehicleRegex } from "../../../utils/constants";
 const mapStateToProps = (state: CommonState) => ({
   trips: state.trips,
   user: state.user,
-  appConfig: state.appConfig
+  appConfig: state.appConfig,
+  weightTypes: state.appConfig.data?.weight_types || []
 });
 const { saveTruck } = ActionCreators;
 const mapDispatchToProps = { saveTruck };
@@ -53,7 +58,7 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
   const { translate } = useContext(i18n);
   const scrollViewRef = useRef<ScrollView>(null);
   const trucksNotInVahan = useRef<string[]>([]);
-  const { appConfig, user } = props;
+  const { appConfig, user, weightTypes } = props;
 
   const fireSaveTruck = async (
     values: FormVals,
@@ -107,6 +112,9 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
     }
   };
 
+  const getWeightTypesList = () =>
+    weightTypes.map(type => ({ label: type, value: type }));
+
   return (
     <Page>
       <PageContent>
@@ -117,7 +125,9 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
               truckName: "",
               gpsVendor: "",
               gpsId: "",
-              truckType: ""
+              truckType: "",
+              capacity: "",
+              unit: weightTypes[0]
             }}
             validate={values => {
               const errors: Partial<Record<keyof typeof values, string>> = {};
@@ -241,6 +251,30 @@ const AddTruck: React.FC<ReduxProps & AddTruckProps> = props => {
                 {errors.truckType && touched.truckType && (
                   <ErrorText>{errors.truckType}</ErrorText>
                 )}
+                <TextWrapper label={translate("required.weight")}>
+                  <FlexRow justifyContent="space-between">
+                    <Flex flex={1} mr={3}>
+                      <Input
+                        style={{
+                          backgroundColor: "white",
+                          height: 46,
+                          borderRadius: 3,
+                          borderColor: colors.grays[1]
+                        }}
+                        value={values.capacity}
+                        onChangeText={handleChange("capacity")}
+                      />
+                    </Flex>
+                    <Flex flex={2}>
+                      <SelectComponent
+                        placeholder={translate("choose.unit")}
+                        getSelectedValue={val => setFieldValue("unit", val)}
+                        data={getWeightTypesList()}
+                        defaultValue={values.unit}
+                      />
+                    </Flex>
+                  </FlexRow>
+                </TextWrapper>
                 <Flex mt={10}>
                   <StyledButton
                     disabled={loading || isSubmitting}
