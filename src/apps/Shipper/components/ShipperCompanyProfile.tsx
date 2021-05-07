@@ -52,15 +52,21 @@ const ShipperCompanyProfile = (props: Props) => {
             gst_in: regNumber
           });
           props.navigation.navigate("ShipperMetrics");
-          ToastAndroid.show(
-            "Company profile created successfully",
-            ToastAndroid.SHORT
-          );
-        } catch {
-          ToastAndroid.show(
-            "Error while creating company profile",
-            ToastAndroid.SHORT
-          );
+        } catch ({
+          payload: {
+            res: {
+              response: { type, message }
+            }
+          }
+        }) {
+          if (type === "REGISTERATION_NUMBER_ALREADY_EXISTS") {
+            ToastAndroid.show(message, ToastAndroid.LONG);
+          } else {
+            ToastAndroid.show(
+              "Company profile created successfully",
+              ToastAndroid.SHORT
+            );
+          }
         }
       }}
     />

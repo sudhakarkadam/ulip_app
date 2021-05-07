@@ -33,6 +33,7 @@
   "errors.pinCode": "कृपया पिन कोड दर्ज करें",
   "errors.warehouseName": "कृपया गोदाम का नाम दर्ज करें",
   "errors.truckNumberInvalid": "कृपया मान्य ट्रक नंबर दर्ज करें",
+  "errors.pinCodeInvalid": "कृपया मान्य पिन कोड दर्ज करें",
   "eway.error": "ई-वे बिल जेनरेट करते समय त्रुटि आई",
   "eway.loading": "ई-वे बिल बनने की प्रक्रिया में है ...",
   "eway.password": "ई-वे बिल पासवर्ड",

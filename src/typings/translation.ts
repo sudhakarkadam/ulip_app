@@ -61,6 +61,7 @@ export type Keys =
   | "errors.truckName"
   | "errors.truckNumber"
   | "errors.truckNumberInvalid"
+  | "errors.pinCodeInvalid"
   | "errors.truckType"
   | "errors.warehouseName"
   | "eway.error"
@@ -375,6 +376,8 @@ export type GetTranslationTextType<T> = T extends "accept.terms"
   : T extends "errors.truckNumber"
   ? never
   : T extends "errors.truckNumberInvalid"
+  ? never
+  : T extends "errors.pinCodeInvalid"
   ? never
   : T extends "errors.truckType"
   ? never
