@@ -259,5 +259,6 @@
   "something.went wrong.please.try.again": "Something went wrong. Please try again.",
   "change.language": "Change Language",
   "upload.eway.bill": "Upload E-way bill",
-  "eway.bill.uploaded": "E-way bill Uploaded"
+  "eway.bill.uploaded": "E-way bill Uploaded",
+  "errors.pinCodeInvalid": "Please enter valid pin code"
 }

@@ -21,6 +21,7 @@ import { HomeStackParamList } from "./HomeStack";
 import { Formik } from "formik";
 import { tomatoBorder } from "../../../utils/tomatoBorder";
 import { I18nContext } from "../../../components/InternationalisationProvider";
+import { pincodeRegex } from "../../../utils/constants";
 
 const gstinPattern = new RegExp(
   /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9][A-Z][0-9]$/
@@ -105,6 +106,10 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
           if (!values.pinCode) {
             errors.pinCode = translate("errors.pinCode");
           }
+
+          if (!pincodeRegex.test(values.pinCode)) {
+            errors.pinCode = translate("errors.pinCodeInvalid");
+          }
           return errors;
         }}
         onSubmit={async values => {
@@ -127,11 +132,24 @@ const WarehouseAdd: React.FC<ConnectedProps<typeof connector> &
             });
             ToastAndroid.show(translate("saved.warehouse"), ToastAndroid.SHORT);
             navigation.goBack();
-          } catch {
-            ToastAndroid.show(
-              translate("save.warehouse.failed"),
-              ToastAndroid.SHORT
-            );
+          } catch ({
+            payload: {
+              res: {
+                response: { type, message }
+              }
+            }
+          }) {
+            if (
+              type === "GSTIN_NUMBER_ALREADY_EXISTS" ||
+              type === "PIN_CODE_INVALID"
+            ) {
+              ToastAndroid.show(message, ToastAndroid.LONG);
+            } else {
+              ToastAndroid.show(
+                translate("save.warehouse.failed"),
+                ToastAndroid.SHORT
+              );
+            }
           } finally {
             setLoading(false);
           }
